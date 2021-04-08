@@ -1,0 +1,57 @@
+{
+  "extends": "airbnb-typescript",
+  "plugins": ["import", "react-hooks"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "error",
+    "import/no-unresolved": "error",
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ]
+      }
+    ],
+    "lines-between-class-members": 0,
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignorePattern": "^import\\s.+\\sfrom\\s.+;$",
+        "ignoreStrings": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "no-trailing-spaces": "error",
+    "no-console": 0,
+    "arrow-parens": ["error", "as-needed"],
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-one-expression-per-line": "off",
+    "react/require-default-props": "off",
+    "global-require": 0
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "env": {
+    "browser": true
+  }
+}
