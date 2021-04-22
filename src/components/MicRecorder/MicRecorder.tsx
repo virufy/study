@@ -31,6 +31,13 @@ interface MicRecorderProps {
   recordingFile: any;
 }
 
+const baseConfig = {
+  usingMediaRecorder: false,
+  sampleRate: 44100,
+  manualEncoderId: 'flac', // wav / mp3 / flac
+  processorBufferSize: 4096, // 4096 flac / 2048 wav
+};
+
 export interface RecorderServiceType {
   config: {
     broadcastAudioProcessEvents: boolean; // default: false
@@ -93,7 +100,7 @@ const MicRecorder = ({
     const { detail } = e;
     const { recording } = detail;
     const blob = await fetch(recording.blobUrl).then(r => r.blob());
-    const fileName = 'Filename.wav';
+    const fileName = `Filename.${baseConfig.manualEncoderId}`;
     const file = FileHelper.blobToFile(blob, fileName);
     const humanReadableSize = FileHelper.sizeAsHuman(file.size, true);
 
@@ -103,9 +110,7 @@ const MicRecorder = ({
   // Effects
   React.useEffect(() => {
     recordingService.current = new RecorderService({
-      usingMediaRecorder: false,
-      sampleRate: 44100, // 44100 // 22050
-      manualEncoderId: 'wav', // wav / mp3
+      ...baseConfig,
       onRecording: onNewRecording,
       onAudioProcesss: onAudioProcess,
     }) as RecorderServiceType;
