@@ -5,6 +5,7 @@
 
 import EncoderWav from './encoder-wav-worker';
 import EncoderMp3 from './encoder-mp3-worker';
+import EncoderFlac from './encoder-flac-worker';
 // import EncoderOgg from './encoder-ogg-worker';
 
 export default class RecorderService {
@@ -126,13 +127,21 @@ export default class RecorderService {
           { baseUrl, sampleRate: this.audioCtx.sampleRate },
         ]);
         this.encoderMimeType = 'audio/mpeg';
+      } else if (this.config.manualEncoderId === 'flac') {
+        this.encoderWorker = this.createWorker(EncoderFlac);
+        const baseUrl = `${document.location.protocol}//${document.location.host}`;
+        this.encoderWorker.postMessage([
+          'init',
+          { baseUrl, sampleRate: this.audioCtx.sampleRate },
+        ]);
+        this.encoderMimeType = 'audio/flac';
       } else {
         this.encoderWorker = this.createWorker(EncoderWav);
         this.encoderMimeType = 'audio/wav';
       }
       this.encoderWorker.addEventListener('message', e => {
         const event = new Event('dataavailable');
-        if (this.config.manualEncoderId === 'ogg') {
+        if (this.config.manualEncoderId === 'ogg' || this.config.manualEncoderId === 'flac') {
           event.data = e.data;
         } else {
           event.data = new Blob(e.data, { type: this.encoderMimeType });
