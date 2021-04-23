@@ -27,10 +27,10 @@
     "paragraph3": "Al marcar las casillas que aparecen a continuación, usted otorga su consentimiento explícito, libre e informado a Virufy para que recopile, procese y comparta su información para los fines indicados anteriormente y como se indica con mayor detalle en nuestra <1>Política de Privacidad</1>. Puede imprimir una copia de este Formulario de Consentimiento para sus registros personales accediendo a <3>este archivo PDF</3>.", 
     "paragraph3_brazil": "Si se encuentra dentro del territorio nacional brasileño, y para los efectos de la Ley General de Protección de Datos Personales (\"LGPD\"), el \"consentimiento\", en su pronunciamiento libre, informado e inequívoco, será la base legal sobre la cual procesamos la información personal.",
     "certify": "Certifico que tengo al menos 18 años y estoy de acuerdo con los términos del Formulario de Consentimiento.",
-    "agree": "Acepto los términos de la <1>Política de Privacidad</1> de Virufy.",
+    "agree": "He leído, entendido y acepto los términos de la <1>Política de Privacidad</1> de Virufy.",
     "detection": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para la investigación y compilación de un conjunto de datos necesarios para el desarrollo de algoritmos de inteligencia artificial para la detección de COVID-19 basada en dispositivos.",
     "signs": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para entrenar algoritmos de inteligencia artificial para analizar grabaciones de audio para determinar mejor los signos de COVID-19.",
-    "collection": "Por la presente, doy mi consentimiento expreso para la recogida y el tratamiento de mis datos personales, biométricos y de salud.",
+    "collection": "Por la presente, doy mi consentimiento expreso para la recogida, el tratamiento y la transferencia de mis datos personales, biométricos y de salud.",
     "pleaseConfirm": "Por favor, confirme lo siguiente:",
     "nextButton": "Siguiente",
     "jumpToBottom": "Saltar al final"

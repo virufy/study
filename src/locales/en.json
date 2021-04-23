@@ -27,10 +27,10 @@
     "paragraph3": "By checking the below boxes, you are granting your explicit, freely given, and informed consent to Virufy to collect, process, and share your information for the purposes indicated above and as provided in greater detail in our <1>Privacy Policy</1>. You can print a copy of this Consent Form for your personal records by accessing <3>this PDF file</3>.",
     "paragraph3_brazil": "If you are located inside Brazilian national territory, and for the purposes of the General Personal Data Protection Law (\"LGPD\"), \"consent\", in its free, informed, and unequivocal pronouncement, will be the legal basis on which we process sensitive personal data.",
     "certify": "I certify that I am at least 18 years old and agree to the terms of the Consent Form.",
-    "agree": "I agree to the terms of the Virufy <1>Privacy Policy<1>.",
+    "agree": "I have read, understand and agree to the terms of Virufy <1>Privacy Policy</1>.",
     "detection": "I hereby acknowledge and agree that processing shall be done for the purposes indicated above and, in particular but without limitation, for research and compiling a dataset needed for the development of artificial intelligence algorithms for device-based COVID-19 detection.",
     "signs": "I hereby acknowledge and agree that processing shall be done for the purposes indicated above and, in particular but without limitation, for training artificial intelligence algorithms to analyze cough audio recordings to better determine signs of COVID-19.",
-    "collection": "I hereby expressly consent to the collection and processing of my personal information, biometric information, and health data.",
+    "collection": "I hereby expressly consent to the collection, processing and transfer of my personal, biometric and health data.",
     "pleaseConfirm": "Please confirm the following:",
     "nextButton": "Next",
     "jumpToBottom": "Jump To Bottom"

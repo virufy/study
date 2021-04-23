@@ -47,8 +47,16 @@ import {
 const schema = Yup.object().shape({
   agreedConsentTerms: Yup.boolean().required().default(false).oneOf([true]),
   agreedPolicyTerms: Yup.boolean().required().default(false).oneOf([true]),
-  agreedCovidDetection: Yup.boolean().required().default(false).oneOf([true]),
-  agreedTrainingArtificial: Yup.boolean().required().default(false).oneOf([true]),
+  agreedCovidDetection: Yup.boolean().when('$country', {
+    is: 'Colombia',
+    then: Yup.boolean().notRequired(),
+    otherwise: Yup.boolean().required().default(false).oneOf([true]),
+  }),
+  agreedTrainingArtificial: Yup.boolean().when('$country', {
+    is: 'Colombia',
+    then: Yup.boolean().notRequired(),
+    otherwise: Yup.boolean().required().default(false).oneOf([true]),
+  }),
   agreeCollectionAndProcessingInfo: Yup.boolean().required().default(false).oneOf([true]),
 });
 
@@ -65,17 +73,22 @@ const Step3 = (p: Wizard.StepProps) => {
   const { state, action } = useStateMachine(updateAction(p.storeKey));
 
   const store = state?.[p.storeKey];
+
+  const currentCountry: PrivacyPolicyCountry = state.welcome.country;
   const {
     control, handleSubmit, formState,
   } = useForm({
     defaultValues: store,
     resolver: yupResolver(schema),
+    context: {
+      country: currentCountry,
+    },
     mode: 'onChange',
   });
   const { errors, isValid } = formState;
   const history = useHistory();
   const { isLoadingFile, file: consentFormContent } = useEmbeddedFile(
-    buildConsentFilePath(state.welcome.country, state.welcome.language),
+    buildConsentFilePath(currentCountry, state.welcome.language),
   );
 
   const onSubmit = async (values: Step3Type) => {
@@ -104,7 +117,6 @@ const Step3 = (p: Wizard.StepProps) => {
   }, [doBack, setDoGoBack]);
 
   const { t } = useTranslation();
-  const currentCountry: PrivacyPolicyCountry = state.welcome.country;
   const p3MarginBottom = (width && width > 560 ? 50 : 27);
 
   return (
@@ -185,47 +197,51 @@ const Step3 = (p: Wizard.StepProps) => {
           )}
         />
 
-        <Controller
-          control={control}
-          name="agreedCovidDetection"
-          defaultValue={false}
-          render={({ onChange, value, name }) => (
-            <Checkbox
-              id="Step2-DetectionCovid"
-              label={(
-                <Trans i18nKey="consent:detection">
-                  I hereby acknowledge and agree that processing shall be done for the purposes indicated above and, in
-                  particular but without limitation, for research and compiling a dataset needed for the development of
-                  artificial intelligence algorithms for device-based COVID-19 detection.
-                </Trans>
+        {currentCountry !== 'Colombia' && (
+          <>
+            <Controller
+              control={control}
+              name="agreedCovidDetection"
+              defaultValue={false}
+              render={({ onChange, value, name }) => (
+                <Checkbox
+                  id="Step2-DetectionCovid"
+                  label={(
+                    <Trans i18nKey="consent:detection">
+                      I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                      and, in particular but without limitation, for research and compiling a dataset needed for the
+                      development of artificial intelligence algorithms for device-based COVID-19 detection.
+                    </Trans>
               )}
-              name={name}
-              onChange={e => onChange(e.target.checked)}
-              value={value}
+                  name={name}
+                  onChange={e => onChange(e.target.checked)}
+                  value={value}
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          control={control}
-          name="agreedTrainingArtificial"
-          defaultValue={false}
-          render={({ onChange, value, name }) => (
-            <Checkbox
-              id="Step2-TrainingArtificial"
-              label={(
-                <Trans i18nKey="consent:signs">
-                  I hereby acknowledge and agree that processing shall be done for the purposes indicated above and, in
-                  particular but without limitation, for training artificial intelligence algorithms to analyze cough
-                  audio recordings to better determine signs of COVID-19.
-                </Trans>
+            <Controller
+              control={control}
+              name="agreedTrainingArtificial"
+              defaultValue={false}
+              render={({ onChange, value, name }) => (
+                <Checkbox
+                  id="Step2-TrainingArtificial"
+                  label={(
+                    <Trans i18nKey="consent:signs">
+                      I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                      and, in particular but without limitation, for training artificial intelligence algorithms to
+                      analyze cough audio recordings to better determine signs of COVID-19.
+                    </Trans>
               )}
-              name={name}
-              onChange={e => onChange(e.target.checked)}
-              value={value}
+                  name={name}
+                  onChange={e => onChange(e.target.checked)}
+                  value={value}
+                />
+              )}
             />
-          )}
-        />
+          </>
+        )}
 
         <Controller
           control={control}
