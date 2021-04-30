@@ -121,7 +121,7 @@ export default class RecorderService {
     if (!this.config.usingMediaRecorder) {
       if (this.config.manualEncoderId === 'mp3') {
         this.encoderWorker = this.createWorker(EncoderMp3);
-        const baseUrl = `${document.location.protocol}//${document.location.host}`;
+        const baseUrl = process.env.PUBLIC_URL;
         this.encoderWorker.postMessage([
           'init',
           { baseUrl, sampleRate: this.audioCtx.sampleRate },
@@ -129,7 +129,7 @@ export default class RecorderService {
         this.encoderMimeType = 'audio/mpeg';
       } else if (this.config.manualEncoderId === 'flac') {
         this.encoderWorker = this.createWorker(EncoderFlac);
-        const baseUrl = `${document.location.protocol}//${document.location.host}`;
+        const baseUrl = process.env.PUBLIC_URL;
         this.encoderWorker.postMessage([
           'init',
           { baseUrl, sampleRate: this.audioCtx.sampleRate },

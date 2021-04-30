@@ -103,20 +103,20 @@ const Step2 = (p: Wizard.StepProps) => {
           <picture>
             <source
               srcSet={
-                `${require('assets/images/supporters/h4r-logo@2x.png')} 2x`
-                + `, ${require('assets/images/supporters/h4r-logo@3x.png')} 3x`
+                `${require('assets/images/h4r-logo@2x.png')} 2x`
+                + `, ${require('assets/images/h4r-logo@3x.png')} 3x`
               }
             />
-            <img src={require('assets/images/supporters/h4r-logo.png')} alt="Stanford - Hacking 4 Recovery" />
+            <img src={require('assets/images/h4r-logo.png')} alt="Stanford - Hacking 4 Recovery" />
           </picture>
           <picture>
             <source
               srcSet={
-                `${require('assets/images/supporters/OYW_blue@2x.png')} 2x`
-                + `, ${require('assets/images/supporters/OYW_blue@3x.png')} 3x`
+                `${require('assets/images/OYW_blue@2x.png')} 2x`
+                + `, ${require('assets/images/OYW_blue@3x.png')} 3x`
               }
             />
-            <img src={require('assets/images/supporters/OYW_blue.png')} alt="One Young World" />
+            <img src={require('assets/images/OYW_blue.png')} alt="One Young World" />
           </picture>
         </SupportersLogos>
       </WelcomeContent>
