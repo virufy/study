@@ -3,6 +3,7 @@
 /* global Flac */
 
 export default function () {
+  importScripts(`${process.env.PUBLIC_URL || 'https://virufy.org/study'}/workers/encoders/libflac.dev.js`); // eslint-disable-line
   let flacEncoder;
   let CHANNELS = 1;
   let SAMPLERATE = 44100;
@@ -39,9 +40,8 @@ export default function () {
 
   function init(config) {
     let finalConfig = config;
-    importScripts(`${config.baseUrl}/workers/encoders/libflac.dev.js`); // eslint-disable-line
+
     if (!finalConfig) {
-      // eslint-disable-next-line no-param-reassign
       finalConfig = {
         bps: BPS, channels: CHANNELS, samplerate: SAMPLERATE, compression: COMPRESSION,
       };

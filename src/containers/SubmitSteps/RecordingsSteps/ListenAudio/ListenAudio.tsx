@@ -103,8 +103,24 @@ const ListenAudio = ({
       clearTimeout(refTimer.current);
     };
 
-    const fnLoad = (e: any) => {
-      setDuration(e.target.duration);
+    const fnLoad = async (e: any) => {
+      const audioDuration: number = await new Promise(resolver => {
+        if (e.target.duration !== Infinity) {
+          resolver(e.target.duration);
+        }
+        const tempFn = () => {
+          e.target.pause();
+          e.target.volume = 1;
+          e.target.currentTime = 0;
+          resolver(e.target.duration);
+          e.target.removeEventListener('durationchange', tempFn);
+        };
+
+        e.target.addEventListener('durationchange', tempFn);
+        e.target.volume = 0;
+        e.target.currentTime = 24 * 60 * 60; // Unprobable time
+      });
+      setDuration(audioDuration);
     };
 
     if (refAudio.current) {
