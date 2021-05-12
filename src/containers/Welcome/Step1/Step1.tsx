@@ -33,7 +33,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 // Styles
 import {
   WelcomeLogo, WelcomeLogoText, WelcomeNote, WelcomeTitle, WelcomeContent, WelcomeSubtitle, WelcomeStyledForm,
-  WelcomeRequiredFieldText, RegionContainer,
+  WelcomeRequiredFieldText, RegionContainer, WelcomeInput,
 } from '../style';
 
 const schema = Yup.object().shape({
@@ -44,6 +44,7 @@ const schema = Yup.object().shape({
     then: Yup.string().required(),
     else: Yup.string(),
   }),
+  patientId: Yup.string().notRequired(),
 }).defined();
 
 type Step1Type = Yup.InferType<typeof schema>;
@@ -204,6 +205,30 @@ const Step1 = (p: Wizard.StepProps) => {
                 </Dropdown>
               </RegionContainer>
             ) : <></>)}
+          />
+
+          <WelcomeSubtitle
+            mt={width && width > 560 ? 50 : 32}
+            mb={width && width > 560 ? 50 : 16}
+            fontWeight={400}
+            textAlign={width && width > 560 ? 'center' : 'left'}
+          >
+            {t('main:patientId', 'If you are part of a clinical study, please enter your patient ID:')}
+          </WelcomeSubtitle>
+          <Controller
+            control={control}
+            name="patientId"
+            defaultValue=""
+            render={({ onChange, value, name }) => (
+              <WelcomeInput
+                name={name}
+                value={value}
+                onChange={onChange}
+                type="text"
+                placeholder={t('main:enterPatientId', 'Enter your patient ID')}
+                autoComplete="Off"
+              />
+            )}
           />
 
           <WelcomeNote>

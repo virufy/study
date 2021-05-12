@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 // Form
 import { useStateMachine } from 'little-state-machine';
@@ -17,10 +17,6 @@ import { scrollToTop } from 'helper/scrollHelper';
 import { updateAction } from 'utils/wizard';
 
 // Images
-import CoughLeftPNG from 'assets/images/cough-left.png';
-import CoughRightPNG from 'assets/images/cough-right.png';
-import SocialDistancingPNG from 'assets/images/social-distancing.png';
-import PhoneMicPNG from 'assets/images/phone-mic.png';
 import Record from './Record';
 
 // Styles
@@ -28,12 +24,8 @@ import {
   MainContainer,
   Text,
   TextSpeech,
-  TopImage,
-  TopImageContainerSpeech,
-  TopImageSpeech,
-  BottomImagesContainer,
-  BottomImageLeft,
-  BottomImageRight,
+  CoughLeft,
+  SocialDistancing,
   InstructionTitle,
 } from './style';
 
@@ -109,22 +101,20 @@ const Introduction = ({
           isCoughLogic ? (
             <>
               <Text>
-                {t('recordingsIntroduction:recordCough.intro1')}
+                <Trans i18nKey="recordingsIntroduction:recordCough.intro1">
+                  Find a <strong>quiet environment</strong> at least <strong>20 ft (6m)</strong>
+                  away from others and wear a cloth or surgical mask. If you are feeling ill, please sit down.
+                </Trans>
               </Text>
-              <TopImage
-                src={SocialDistancingPNG}
-              />
+              <SocialDistancing />
               <Text>
-                {t('recordingsIntroduction:recordCough.intro2')}
+                <Trans i18nKey="recordingsIntroduction:recordCough.intro2">
+                  Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and
+                  <strong>do not obstruct</strong>
+                  or cover your device with plastic. Do not cough violently or too forcefully.
+                </Trans>
               </Text>
-              <BottomImagesContainer>
-                <BottomImageLeft
-                  src={PhoneMicPNG}
-                />
-                <BottomImageRight
-                  src={CoughLeftPNG}
-                />
-              </BottomImagesContainer>
+              <CoughLeft />
             </>
           ) : (
             <>
@@ -132,11 +122,7 @@ const Introduction = ({
                 {t('recordingsIntroduction:recordSpeech.intro1')}
               </TextSpeech>
               <FullWidthDiv>
-                <TopImageContainerSpeech>
-                  <TopImageSpeech
-                    src={CoughRightPNG}
-                  />
-                </TopImageContainerSpeech>
+                <CoughLeft />
               </FullWidthDiv>
             </>
           )

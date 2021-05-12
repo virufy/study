@@ -31,6 +31,7 @@ export async function doSubmit({
       language,
       country,
       region,
+      patientId,
 
       agreedConsentTerms,
       agreedPolicyTerms,
@@ -66,6 +67,10 @@ export async function doSubmit({
     body.append('country', country);
     if (region) {
       body.append('region', region);
+    }
+
+    if (patientId) {
+      body.append('patientId', patientId);
     }
 
     if (window.sourceCampaign) {
