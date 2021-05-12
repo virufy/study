@@ -224,7 +224,7 @@ export default class RecorderService {
     this.outputGainNode.connect(this.destinationNode);
 
     if (this.config.usingMediaRecorder) {
-      this.mediaRecorder = new MediaRecorder(this.destinationNode.stream, { mimeType: 'audio/wav' });
+      this.mediaRecorder = new MediaRecorder(this.destinationNode.stream, { mimeType: this.encoderMimeType });
       this.mediaRecorder.addEventListener('dataavailable', evt => this._onDataAvailable(evt));
       this.mediaRecorder.addEventListener('error', evt => this._onError(evt));
 

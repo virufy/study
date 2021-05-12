@@ -120,6 +120,7 @@ const ListenAudio = ({
         e.target.volume = 0;
         e.target.currentTime = 24 * 60 * 60; // Unprobable time
       });
+      e.target.volume = 1;
       setDuration(audioDuration);
     };
 
