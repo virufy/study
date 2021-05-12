@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { colors } from 'theme';
 import { BlackText } from 'components/Texts';
 
+import { ReactComponent as SocialDistancingSVG } from 'assets/images/social-distancing.svg';
+import { ReactComponent as CoughLeftSVG } from 'assets/images/cough-left.svg';
+
 export const MainContainer = styled.div``;
 
 export const InstructionTitle = styled.div`
@@ -99,5 +102,29 @@ export const BottomImageRight = styled.img`
   @media screen and (${props => props.theme.breakpoints.tablet}) {
     width: 184px;
     height: 240px;
+  }
+`;
+
+export const SocialDistancing = styled(SocialDistancingSVG)`
+  width: 192px;
+  height: 96px;
+  margin: 0 auto 22px;
+  display: block;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}) {
+    width: 205px;
+    height: 140px;
+  }
+`;
+
+export const CoughLeft = styled(CoughLeftSVG)`
+  width: 88px;
+  height: 96px;
+  margin: 0 auto;
+  display: block;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}) {
+    width: 126px;
+    height: 158px;
   }
 `;

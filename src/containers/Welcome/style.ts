@@ -173,6 +173,28 @@ export const WelcomeStyledFormAlternative = styled.form`
     }
 `;
 
+export const WelcomeInput = styled.input`
+  background-color: ${props => props.theme.colors.lightGray};;
+  border-radius: 4px;
+  border: 0;
+  border-radius: 4px;
+  color: ${props => props.theme.colors.darkBlack};
+  font-family: 'Source Sans Pro';
+  margin: auto;
+  padding: 12px 15px;
+
+  height: 48px;
+  width: 100%;
+
+  ::placeholder {
+    color: #A3A3A3;
+  }
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    max-width: 348px;
+    }
+`;
+
 export const WelcomeRequiredFieldText = styled.span`
   color: ${props => props.theme.colors.red};
 `;
@@ -203,7 +225,7 @@ export const WelcomeNote = styled.span<WelcomeNoteProps>`
   font-style: italic;
   font-weight: ${({ isBold }) => (isBold ? 700 : 400)};
   max-width: 320px;
-  margin: 52px auto 0;
+  margin: 52px auto 30px;
 `;
 
 export const WelcomeJumpToBottomContainer = styled.div`

@@ -8,6 +8,8 @@
     "paragraph2": "Atualmente nosso estudo está aberto apenas para pessoas dos países abaixo. Por favor, confirme se você está no território de um desses países.",
     "selectCountry": "Selecione seu país",
     "selectRegion": "Selecione a região",
+    "patientId": "Se você fizer parte de um estudo clínico, digite seu ID de paciente:",
+    "enterPatientId" : "Insira o seu ID de paciente", 
     "nextButton": "Próximo",
     "createdBy": "Criado por",
     "installApp": "Instale o aplicativo em seu telefone celular.",
@@ -51,8 +53,8 @@
     "recordCough": {
       "header": "Gravar sua fala",
       "title": "Instruções",
-      "intro1": "Encontre um ambiente tranqüilo a pelo menos 20 pés de distância dos outros. Se você estiver se sentindo mal, por favor, sente-se.",
-      "intro2": "Coloque seu dispositivo perto do rosto e tussa no cotovelo para evitar a disseminação do vírus.  Não tussa violentamente ou com muita força."
+      "intro1": "Encontre um ambiente <strong>silencioso</strong> pelo menos <strong>20 pés </strong> longe dos outros e use um pano ou máscara cirúrgica. Se você estiver se sentindo doente, por favor, sente-se.",
+      "intro2": "Coloque seu dispositivo <strong>1-2 pés </strong> longe de sua boca e <strong> não obstrua</strong> ou cubra seu dispositivo com plástico. Não tossir violentamente ou com muita força."
     },
     "recordSpeech": {
       "header": "Gravar sua fala",
@@ -72,7 +74,7 @@
     },
     "next": "Continuar",
     "delete": "Deletar",
-    "text": "Clique no botão gravar e tussa intencionalmente <strong>3 vezes</strong>. Quando terminar, clique em <3></3> e Continue.",
+    "text": "Toque no botão do microfone e <strong>suspir intencionalmente</strong> no fundo do telefone <strong>3 vezes</strong> com um <strong>suspir intencionalmente</strong> entre cada tosse. Quando terminar, toque no botão de pausa.",
     "textCount": "Clique no botão gravar e conte claramente de um até dez. Quando acabar, clique em continuar.",
     "upload": "Faça o upload de seu próprio arquivo"
   },
