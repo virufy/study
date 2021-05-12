@@ -44,6 +44,7 @@ const schema = Yup.object().shape({
     then: Yup.string().required(),
     else: Yup.string(),
   }),
+  patientId: Yup.string().notRequired(),
 }).defined();
 
 type Step1Type = Yup.InferType<typeof schema>;
