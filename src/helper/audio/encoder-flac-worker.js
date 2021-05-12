@@ -3,7 +3,9 @@
 /* global Flac */
 
 export default function () {
-  importScripts(`${process.env.PUBLIC_URL || 'https://virufy.org/study'}/workers/encoders/libflac.dev.js`); // eslint-disable-line
+  const workersHost = process.env.PUBLIC_URL || process.env.REACT_APP_WORKERS_HOST || 'https://virufy.org/study';
+  importScripts(`${workersHost}/workers/encoders/libflac.dev.js`); // eslint-disable-line
+
   let flacEncoder;
   let CHANNELS = 1;
   let SAMPLERATE = 44100;
