@@ -8,6 +8,8 @@
     "paragraph2": "Nuestro estudio actualmente está abierto sólo a personas dentro de los países y/o territorios listados debajo. Por favor confirme que está dentro del territorio de alguno de estos países.",
     "selectCountry": "Seleccione país",
     "selectRegion": "Seleccione region",
+    "patientId": "Si forma parte de un estudio clínico, ingrese su ID de paciente:",
+    "enterPatientId" : "Ingrese su ID de paciente", 
     "nextButton": "Siguiente",
     "createdBy": "Creado por",
     "installApp": "Instala la aplicación en tu celular.",
@@ -51,8 +53,8 @@
     "recordCough": {
       "header": "Grabe su tos",
       "title": "Instrucciones",
-      "intro1": "Busque un entorno tranquilo a una distancia mínima de 6 metros de los demás. Si se siente mal, siéntese.",
-      "intro2": "Mantenga su dispositivo cerca de la cara y tosa en el codo para evitar la propagación del virus. No tosa de forma violenta o con demasiada fuerza."
+      "intro1": "Busque un <strong> entorno tranquilo </strong> al menos a <strong> 6 metros </strong> de distancia de los demás y use un paño o una mascarilla quirúrgica. Si se siente mal, siéntese.",
+      "intro2": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong> no obstruya </strong> ni cubra el dispositivo con plástico. No tosa violentamente o con demasiada fuerza."
     },
     "recordSpeech": {
       "header": "Grabe su voz",
@@ -72,8 +74,8 @@
     },
     "next": "Continuar",
     "delete": "Borrar",
-    "text": "Pulse el botón de grabación y tosa intencionadamente <strong>3 veces</strong>. Cuando haya terminado, haga clic en <3></3> y continúe.",
-    "textCount": "Haga clic en el botón de grabar y cuente claramente del uno al diez. Cuando haya terminado, haga clic en continuar.",
+    "text": "Toca el botón del micrófono y <strong>tose intencionadamente</strong> en la parte inferior del teléfono <strong>3 veces</strong> con una <strong>respiración profunda</strong> entre cada tos. Cuando hayas terminado, toca el botón de pausa.",
+    "textCount": "Haga clic en el botón del micrófono y <strong> tosa intencionadamente </strong> en la parte inferior de su teléfono <strong> 3 veces </strong> con una <strong> respiración profunda </strong> entre cada tos. Cuando haya terminado, haga clic en el botón de pausa.",
     "upload": "Sube tu propio archivo"
   },
   "recordingsRecordManual": {

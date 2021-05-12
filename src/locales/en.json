@@ -8,6 +8,8 @@
     "paragraph2": "Our study is currently only open to people within the below countries and/or territories. Please confirm that you are within one of these locations.",
     "selectCountry": "Select country",
     "selectRegion": "Select region",
+    "patientId": "If you are part of a clinical study, please enter your patient ID:",
+    "enterPatientId" : "Enter your patient ID", 
     "nextButton": "Next",
     "createdBy": "Created By",
     "installApp": "Install the app on your cell phone.",
@@ -51,8 +53,8 @@
     "recordCough": {
       "header": "Record your cough",
       "title": "Instructions",
-      "intro1": "Find a quiet environment at least 20 feet away from others. If you are feeling ill, please sit down.",
-      "intro2": "Hold your device near your face and cough into your elbow to prevent virus spread. Do not cough violently or too forcefully."
+      "intro1": "Find a <strong>quiet environment</strong> at least <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask. If you are feeling ill, please sit down.",
+      "intro2": "Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and <strong>do not obstruct</strong> or cover your device with plastic. Do not cough violently or too forcefully."
     },
     "recordSpeech": {
       "header": "Record your speech",
@@ -72,7 +74,7 @@
     },
     "next": "Continue",
     "delete": "Delete",
-    "text": "Click the record button and cough intentionally <strong>3 times</strong>. When you are done, click <3></3> and Continue.",
+    "text": "Tap the microphone button and <strong>cough intentionally</strong> into the bottom of your phone <strong>3 times</strong> with a <strong>deep breath</strong> between each cough. When you are done, tap the pause button.",
     "textCount": "Click the record button and count clearly from one to ten. When you are done, click continue.",
     "upload": "Upload your own file"
   },

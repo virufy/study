@@ -65,7 +65,7 @@ const ThankYou = (p: Wizard.StepProps) => {
         <ThankYouLogo />
       </Link>
       <ThankYouTitle>{t('thankyou:title')}</ThankYouTitle>
-      <BeforeSubmitText color="primary">{t('thankyou:paragraph1', { context: getSpeechContext() })}</BeforeSubmitText>
+      <BeforeSubmitText>{t('thankyou:paragraph1', { context: getSpeechContext() })}</BeforeSubmitText>
       {submissionId && (
         <SubmissionIdBox>
           <Trans i18nKey="thankyou:paragraph2">
