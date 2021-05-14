@@ -36,7 +36,6 @@ export const SubmissionIdBox = styled.div`
   line-height: 25px;
   text-align: center;
   color: ${({ theme }) => theme.colors.darkBlack};
-  background-color: ${({ theme }) => theme.colors.green_05};
   border-radius: 10px;
   padding: 16px 0px;
 `;

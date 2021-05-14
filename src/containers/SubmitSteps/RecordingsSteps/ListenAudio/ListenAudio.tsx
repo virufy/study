@@ -27,8 +27,7 @@ import CrossSVG from 'assets/icons/cross.svg';
 import fileHelper from 'helper/fileHelper';
 import {
   MainContainer,
-  Title,
-  Text,
+  Subtitle,
   PlayerContainer,
   PlayerContainerTop,
   PlayerContainerBottom,
@@ -264,12 +263,12 @@ const ListenAudio = ({
         )
       }
       <MainContainer>
-        <Title>
+        <Subtitle>
           {t('recordingsListen:title')}
-        </Title>
-        <Text>
+        </Subtitle>
+        <Subtitle>
           {t('recordingsListen:subtitle')}
-        </Text>
+        </Subtitle>
         <PlayerContainer>
           <PlayerContainerTop>
             <PlayerPlayContainer

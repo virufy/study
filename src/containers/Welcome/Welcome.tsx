@@ -18,7 +18,7 @@ createStore({
 
 const baseUrl = '/welcome';
 
-const steps: Wizard.Step[] = [
+const stepsWithoutDots: Wizard.Step[] = [
   {
     path: '',
     componentPath: 'Welcome/Step1',
@@ -36,6 +36,9 @@ const steps: Wizard.Step[] = [
       nextStep: `${baseUrl}/step-3`,
     },
   },
+];
+
+const steps: Wizard.Step[] = [
   {
     path: '/step-3',
     componentPath: 'Welcome/Step3',
@@ -51,6 +54,15 @@ const steps: Wizard.Step[] = [
     props: {
       storeKey: StoreKey,
       previousStep: `${baseUrl}/step-3`,
+      nextStep: `${baseUrl}/step-5`,
+    },
+  },
+  {
+    path: '/step-5',
+    componentPath: 'Welcome/Step5',
+    props: {
+      storeKey: StoreKey,
+      previousStep: `${baseUrl}/step-4`,
       nextStep: '/submit-steps/step-record/cough',
     },
   },
@@ -66,12 +78,14 @@ const Welcome = () => {
 
   return (
     <Wizard
-      steps={steps}
+      steps={[...stepsWithoutDots, ...steps]}
     >
-      <DotIndicators
-        current={active}
-        total={steps.length}
-      />
+      {active >= 0 && (
+        <DotIndicators
+          current={active}
+          total={steps.length}
+        />
+      )}
     </Wizard>
   );
 };

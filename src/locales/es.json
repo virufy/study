@@ -4,35 +4,34 @@
     "logoIntro": "Una organización independiente de investigación sin ánimo de lucro",
     "note": "<strong>Por favor, tenga en cuenta:</strong> Este formulario es sólo para recopilar datos. No predice su estado de COVID-19 ni diagnostica ninguna enfermedad, trastorno u otra condición de salud. Virufy está llevando a cabo una investigación y utilizará la información que usted proporcione sólo para esa investigación. Virufy no sustituirá a un médico y le recuerda que es su responsabilidad buscar el consejo de su médico.",
     "paragraph1": "Bienvenido. Este estudio sólo debería tomarle unos 5 minutos en completarse.",
-    "selectYourLanguage": "Por favor, seleccione su idioma.",
-    "paragraph2": "Nuestro estudio actualmente está abierto sólo a personas dentro de los países y/o territorios listados debajo. Por favor confirme que está dentro del territorio de alguno de estos países.",
+    "selectYourLanguage": "Idioma.",
+    "paragraph2": "Estudio de recolección de datos sobre la tos Covid-19",
     "selectCountry": "Seleccione país",
     "selectRegion": "Seleccione region",
-    "patientId": "Si forma parte de un estudio clínico, ingrese su ID de paciente:",
-    "enterPatientId" : "Ingrese su ID de paciente", 
+    "patientId": "ID de paciente:",
+    "enterPatientId" : "Ingresar ID de paciente", 
     "nextButton": "Siguiente",
     "createdBy": "Creado por",
-    "installApp": "Instala la aplicación en tu celular.",
+    "installApp": "Instalar como aplicación",
     "addToHomeScreen": "Agregar a la pantalla principal"
   },
   "helpVirufy": {
-    "title": "Acerca de Virufy",
+    "title": "Acerca de Nosotros",
     "ourSupporters": "Nuestros colaboradores",
-    "aboutParagraph": "<p>Virufy es una organización sin ánimo de lucro que está trabajando para desarrollar los medios para utilizar la inteligencia artificial (Al) para detectar el COVID-19 a partir de los patrones de tos de forma rápida y sin coste alguno mediante el uso de un teléfono inteligente.</p><p>Nuestro equipo está formado por investigadores de 25 países y nos centramos en los países de bajos ingresos. Nuestra investigación ha demostrado que la tecnología Al puede ser capaz de identificar la firma única de la tos de COVID.</p><p>Mediante la recopilación de grabaciones de tos de personas de todo el mundo, Virufy está mejorando la solidez de su algoritmo de IA para reconocer el patrón de sonido único de COVID.</p><p>Usted tiene el poder de ayudar a beneficiar a millones de personas en todo el mundo contribuyendo con su tos en nuestro estudio.</p>",
+    "aboutParagraph": "<0>Virufy es una <strong>organización sin ánimo de lucro</strong> que está trabajando para desarrollar los medios para utilizar la <strong>inteligencia artificial (Al) para detectar el COVID-19 a partir de los patrones de tos</strong> de forma rápida y sin coste alguno mediante el uso de un smartphone en beneficio de los países de bajos ingresos.</0><1>Nuestro equipo incluye investigadores de más de <strong>25 países. </strong> <3>Nuestra investigación</3> ha demostrado que la tecnología Al puede ser capaz de identificar la firma única de la tos de COVID.</1><2>Al recopilar <strong>grabaciones de tos</strong> de personas de todo el mundo, Virufy está mejorando la solidez de su algoritmo de IA para reconocer el patrón de sonido único de COVID. </2><3><strong>Tienes el poder</strong> de ayudar a beneficiar a millones de personas de todo el mundo <strong>contribuyendo con tu tos</strong> en nuestro estudio.</3>",
     "nextButton": "Siguiente"
   },
   "consent": {
     "title": "Consentimiento para el estudio",
-    "paragraph1": "Virufy se preocupa por su privacidad y está asesorado por expertos en privacidad de datos con licencia. La información y las grabaciones que proporciones sólo se utilizarán para los fines descritos en nuestra <1>Política de Privacidad</1> y nuestro Formulario de Consentimiento. Por favor, lea el <3>Formulario de Consentimiento:</3>",
+    "paragraph1": "Virufy se preocupa por su privacidad y está asesorado por expertos en privacidad de datos con licencia. La información y las grabaciones que proporciones sólo se utilizarán para los fines descritos en nuestra <1>Política de Privacidad</1> y nuestro Formulario de Consentimiento. Por favor, lea el Formulario de Consentimiento:",
     "paragraph2Title": "Consentimiento explícito de Virufy para recoger información personal y participar en la investigación",
     "paragraph2": "\"Recopilación de datos de smartphones para la detección de COVID-19\"",
-    "paragraph3": "Al marcar las casillas que aparecen a continuación, usted otorga su consentimiento explícito, libre e informado a Virufy para que recopile, procese y comparta su información para los fines indicados anteriormente y como se indica con mayor detalle en nuestra <1>Política de Privacidad</1>. Puede imprimir una copia de este Formulario de Consentimiento para sus registros personales accediendo a <3>este archivo PDF</3>.", 
+    "paragraph3": "Al marcar las casillas de abajo, usted reconoce que ha leído y comprendido la política de privacidad de Virufy, y que está dando su consentimiento explícito para que Virufy recoja y procese las categorías de información biométrica y de salud que se enumeran a continuación.", 
     "paragraph3_brazil": "Si se encuentra dentro del territorio nacional brasileño, y para los efectos de la Ley General de Protección de Datos Personales (\"LGPD\"), el \"consentimiento\", en su pronunciamiento libre, informado e inequívoco, será la base legal sobre la cual procesamos la información personal.",
     "certify": "Certifico que tengo al menos 18 años y estoy de acuerdo con los términos del Formulario de Consentimiento.",
     "agree": "He leído, entendido y acepto los términos de la <1>Política de Privacidad</1> de Virufy.",
     "detection": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para la investigación y compilación de un conjunto de datos necesarios para el desarrollo de algoritmos de inteligencia artificial para la detección de COVID-19 basada en dispositivos.",
     "signs": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para entrenar algoritmos de inteligencia artificial para analizar grabaciones de audio para determinar mejor los signos de COVID-19.",
-    "collection": "Por la presente, doy mi consentimiento expreso para la recogida, el tratamiento y la transferencia de mis datos personales, biométricos y de salud.",
     "pleaseConfirm": "Por favor, confirme lo siguiente:",
     "nextButton": "Siguiente",
     "jumpToBottom": "Saltar al final"
@@ -41,11 +40,10 @@
     "title": "Por último, antes de empezar...",
     "subtitle": "Para garantizar la seguridad, le aconsejamos:",
     "advise_list": [
-      "Utilizar su propio dispositivo para registrar la muestra de tos y usar una máscara cuando sea apropiado.",
-      "Desinfectar su dispositivo y cualquier superficie afectada o cercana después de registrar su tos.",
-      "Si tiene una afección subyacente que aumente el riesgo de toser, consulte con su proveedor de atención médica antes de participar.",
-      "Si tiene algún síntoma o alguna pregunta o preocupación sobre su estado de salud, póngase en contacto con su proveedor de atención médica.",
-      "Si cree que sus síntomas están empeorando, póngase en contacto con los servicios de emergencia médica locales o con el personal de primeros auxilios inmediatamente."
+      "Utilizar su propio dispositivo y use una máscara cuando sea apropiado",
+      "Desinfecte su dispositivo y cualquier superficie afectada o cercana después de registrar su tos/habla",
+      "Si tiene una condición subyacente que aumenta el riesgo de toser, por favor consulte con su proveedor de atención médica antes de participar",
+      "Si cree que sus síntomas empeoran, póngase en contacto con su respuesta médica local"
     ],
     "startButton": "Comenzar"
   },
@@ -74,26 +72,31 @@
     },
     "next": "Continuar",
     "delete": "Borrar",
-    "text": "Toca el botón del micrófono y <strong>tose intencionadamente</strong> en la parte inferior del teléfono <strong>3 veces</strong> con una <strong>respiración profunda</strong> entre cada tos. Cuando hayas terminado, toca el botón de pausa.",
+    "textCough": "Haz clic en el botón de grabación de abajo y <strong>tose intencionadamente tres veces con una respiración profunda entre cada tos.</strong> Cuando hayas terminado, toca el botón de parada",
+    "textSpeech": "Haz clic en el botón de grabación de abajo y <strong>dice un 'aaah' sostenido durante al menos 5 segundos.</strong> Cuando hayas terminado, toca el botón de parada",
+    "textNext": "Haz clic en continuar para proseguir",
     "textCount": "Haga clic en el botón del micrófono y <strong> tosa intencionadamente </strong> en la parte inferior de su teléfono <strong> 3 veces </strong> con una <strong> respiración profunda </strong> entre cada tos. Cuando haya terminado, haga clic en el botón de pausa.",
-    "upload": "Sube tu propio archivo"
+    "upload": "Sube tu propio archivo",
+    "record": "Grabar",
+    "recordStop": "Parar"
   },
   "recordingsRecordManual": {
     "header": "Subir un archivo",
     "addFile": "Añada su archivo",
     "constraint": "Añada hasta 5 MB",
     "next": "Hecho",
-    "micError": "¿No puede acceder al micrófono?",
+    "micError": "¿No puede acceder al micrófono? Cargue un archivo de audio.",
     "micErrorDescription": "Por favor, suba un archivo de audio aquí.",
     "fileDurationTooShort": "Por favor, suba un archivo de al menos 3 segundos",
     "fileSizeTooBig": "Por favor, suba un archivo de menos de 5 MB",
-    "fileRequired": "Por favor, suba un archivo"
+    "fileRequired": "Por favor, suba un archivo",
+    "uploadFile": "Subir Archivo"
   },
   "recordingsListen": {
     "recordCough": {
       "header": "Grabe su tos",
-      "intro1": "Por favor, tosa lejos de las personas a tu alrededor. Si se siente enfermo, por favor siéntese.",
-      "intro2": "En un ambiente silencioso, por favor presione el botón de grabar y tosa intencionalmente de 3 a 5 veces."
+      "intro1": "Busca un entorno tranquilo que esté a 6 metros de los que te rodean",
+      "intro2": "Use una máscara quirúrgica o de tela y sostenga el dispositivo a dos manos de distancia de su cara"
     },
     "recordSpeech": {
       "header": "Grabe su voz",

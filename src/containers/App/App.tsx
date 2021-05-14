@@ -8,6 +8,7 @@ import {
 import FullWidth from 'components/FullWidthDiv';
 import Header, { HeaderContextProvider } from 'components/Header';
 import FooterReportProblems from 'components/FooterReportProblems';
+import FooterInstallAsApp from 'components/FooterInstallAsApp';
 
 // hooks
 import { useInitializeGoogleAnalytics } from 'hooks/useInitializeGoogleAnalytics';
@@ -58,6 +59,7 @@ const App = () => {
         {!pathname.includes('/submit-steps/thank-you') && (
           <FooterReportProblems />
         )}
+        <FooterInstallAsApp />
       </HeaderContextProvider>
     </AppContainer>
   );

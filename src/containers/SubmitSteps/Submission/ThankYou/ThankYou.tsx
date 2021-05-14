@@ -6,7 +6,7 @@ import { useStateMachine } from 'little-state-machine';
 // Components
 import StayInTouch from 'components/StayInTouch';
 import SocialIcons from 'components/SocialIcons';
-import Link from 'components/LinkGreen';
+import Link from 'components/LinkPurple';
 import CreatedBy from 'components/CreatedBy';
 
 // Utils

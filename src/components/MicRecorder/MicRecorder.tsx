@@ -21,6 +21,9 @@ import {
   MicRecorderTimerContainer,
   MicRecorderTimerReleaseTextContainer,
   MicRecorderTextP,
+  MicButtonsContainer,
+  MicButtonWithText,
+  MicNote,
 } from './style';
 
 interface MicRecorderProps {
@@ -238,26 +241,6 @@ const MicRecorder = ({
             </MicRecorderTextP>
           )}
       </MicRecorderTimerReleaseTextContainer>
-      <MicRecorderButton
-        disabled={!micAllowed}
-        onClick={recordingInProgress ? handleStopRecording : handleStartRecording}
-        onMouseDown={handleStartLongPress}
-        onMouseUp={handleEndLongPress}
-        onTouchStart={handleStartLongPress}
-        onTouchEnd={handleEndLongPress}
-        onMouseLeave={handleEndLongPress}
-      >
-        <MicRecorderStartImage
-          src={StartSVG}
-          alt="Start"
-          show={!recordingInProgress}
-        />
-        <MicRecorderStopImage
-          src={StopSVG}
-          alt="Stop"
-          show={recordingInProgress}
-        />
-      </MicRecorderButton>
       <MicRecorderTimerContainer>
         <Timer
           ref={timerRef}
@@ -274,6 +257,42 @@ const MicRecorder = ({
           <Timer.Seconds formatValue={handleFormatValue} />
         </Timer>
       </MicRecorderTimerContainer>
+      <MicButtonsContainer>
+        <MicButtonWithText>
+          <MicRecorderButton
+            disabled={!micAllowed || recordingInProgress}
+            onClick={handleStartRecording}
+            onMouseDown={handleStartLongPress}
+            onMouseUp={handleEndLongPress}
+            onTouchStart={handleStartLongPress}
+            onTouchEnd={handleEndLongPress}
+            onMouseLeave={handleEndLongPress}
+          >
+            <MicRecorderStartImage
+              src={StartSVG}
+              alt="Start"
+            />
+          </MicRecorderButton>
+          <MicNote>{t('recordingsRecord:record')}</MicNote>
+        </MicButtonWithText>
+        <MicButtonWithText>
+          <MicRecorderButton
+            disabled={!micAllowed || !recordingInProgress}
+            onClick={handleStopRecording}
+            onMouseDown={handleStartLongPress}
+            onMouseUp={handleEndLongPress}
+            onTouchStart={handleStartLongPress}
+            onTouchEnd={handleEndLongPress}
+            onMouseLeave={handleEndLongPress}
+          >
+            <MicRecorderStopImage
+              src={StopSVG}
+              alt="Stop"
+            />
+          </MicRecorderButton>
+          <MicNote>{t('recordingsRecord:recordStop')}</MicNote>
+        </MicButtonWithText>
+      </MicButtonsContainer>
     </MicRecorderContainer>
   );
 };

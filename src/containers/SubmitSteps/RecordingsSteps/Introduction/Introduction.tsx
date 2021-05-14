@@ -9,8 +9,7 @@ import { useStateMachine } from 'little-state-machine';
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
-import FullWidthDiv from 'components/FullWidthDiv';
-import ProgressIndicator from 'components/ProgressIndicator';
+import { BlackText } from 'components/Texts';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
@@ -22,11 +21,11 @@ import Record from './Record';
 // Styles
 import {
   MainContainer,
-  Text,
-  TextSpeech,
+  InstructionContainer,
+  WelcomeBullets,
+  BulletIndicator,
   CoughLeft,
   SocialDistancing,
-  InstructionTitle,
 } from './style';
 
 const Introduction = ({
@@ -44,7 +43,9 @@ const Introduction = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
 
   // Hooks
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setType, setSubtitle,
+  } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -86,50 +87,56 @@ const Introduction = ({
     } else {
       setTitle(t('recordingsIntroduction:recordSpeech.header'));
     }
+    setType('primary');
+    setSubtitle(t('recordingsIntroduction:recordCough:title'));
     setDoGoBack(() => handleDoBack);
-  }, [isCoughLogic, setTitle, handleDoBack, setDoGoBack, t]);
+  }, [isCoughLogic, setTitle, setSubtitle, setType, handleDoBack, setDoGoBack, t]);
 
   return (
-    <>
-      <MainContainer>
-        <ProgressIndicator
-          currentStep={metadata?.progressCurrent || (isCoughLogic ? 1 : 2)}
-          totalSteps={metadata?.progressTotal || 4}
-        />
-        <InstructionTitle>{t('recordingsIntroduction:recordCough.title')}</InstructionTitle>
-        {
+    <MainContainer>
+      <InstructionContainer>
+        <WelcomeBullets>
+          <BulletIndicator>1</BulletIndicator>
+        </WelcomeBullets>
+        <BlackText>
+          <Trans i18nKey="recordingsIntroduction:recordCough.intro1">
+            Find a quiet environment that is 20 feet away from those around you.
+          </Trans>
+        </BlackText>
+      </InstructionContainer>
+      <SocialDistancing />
+      <InstructionContainer>
+        <WelcomeBullets>
+          <BulletIndicator>2</BulletIndicator>
+        </WelcomeBullets>
+        <BlackText>
+          <Trans i18nKey="recordingsIntroduction:recordCough.intro2">
+            Wear a surgical or cloth mask and hold your device two hands-length away from your face.
+          </Trans>
+        </BlackText>
+      </InstructionContainer>
+      <CoughLeft />
+      <InstructionContainer>
+        <WelcomeBullets>
+          <BulletIndicator>3</BulletIndicator>
+        </WelcomeBullets>
+        <BlackText>
+          {
           isCoughLogic ? (
-            <>
-              <Text>
-                <Trans i18nKey="recordingsIntroduction:recordCough.intro1">
-                  Find a <strong>quiet environment</strong> at least <strong>20 ft (6m)</strong>
-                  away from others and wear a cloth or surgical mask. If you are feeling ill, please sit down.
-                </Trans>
-              </Text>
-              <SocialDistancing />
-              <Text>
-                <Trans i18nKey="recordingsIntroduction:recordCough.intro2">
-                  Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and
-                  <strong>do not obstruct</strong>
-                  or cover your device with plastic. Do not cough violently or too forcefully.
-                </Trans>
-              </Text>
-              <CoughLeft />
-            </>
+            <Trans i18nKey="recordingsRecord:textCough">
+              Click the record button below and
+              <strong>cough intentionally three times with a deep breath between each cough.</strong>
+              When you are done, tap the stop button.
+            </Trans>
           ) : (
-            <>
-              <TextSpeech>
-                {t('recordingsIntroduction:recordSpeech.intro1')}
-              </TextSpeech>
-              <FullWidthDiv>
-                <CoughLeft />
-              </FullWidthDiv>
-            </>
+            <Trans i18nKey="recordingsRecord:textSpeech">
+              Click the record button and cough intentionally <strong>3 times</strong>. When you are done,
+              click and Continue.
+            </Trans>
           )
-        }
-
-      </MainContainer>
-
+          }
+        </BlackText>
+      </InstructionContainer>
       <Record
         // isCoughLogic={isCoughLogic}
         defaultValues={state?.[storeKey]?.[metadata?.currentLogic]}
@@ -138,7 +145,19 @@ const Introduction = ({
         currentLogic={metadata?.currentLogic || ''}
         action={action}
       />
-    </>
+
+      <InstructionContainer>
+        <WelcomeBullets>
+          <BulletIndicator>4</BulletIndicator>
+        </WelcomeBullets>
+        <BlackText>
+          <Trans i18nKey="recordingsRecord:textNext">
+            Click continue to proceed.
+          </Trans>
+        </BlackText>
+      </InstructionContainer>
+
+    </MainContainer>
   );
 };
 

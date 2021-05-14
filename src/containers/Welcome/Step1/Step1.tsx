@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import usePortal from 'react-useportal';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -10,7 +9,6 @@ import { yupResolver } from '@hookform/resolvers';
 import * as Yup from 'yup';
 
 // Components
-import WizardButtons from 'components/WizardButtons';
 import Dropdown from 'components/Dropdown';
 import CreatedBy from 'components/CreatedBy';
 
@@ -24,16 +22,14 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { languageData } from 'data/lang';
 import { countryData, countriesWithStates } from 'data/country';
 
-// Hooks
-import useWindowSize from 'hooks/useWindowSize';
-
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
 import {
-  WelcomeLogo, WelcomeLogoText, WelcomeNote, WelcomeTitle, WelcomeContent, WelcomeSubtitle, WelcomeStyledForm,
-  WelcomeRequiredFieldText, RegionContainer, WelcomeInput,
+  WelcomeContent, WelcomeStyledForm, LogoSubtitle,
+  RegionContainer, WelcomeInput, ContainerNextButton, NextButton, ArrowRightSVG,
+  BoldBlackText,
 } from '../style';
 
 const schema = Yup.object().shape({
@@ -50,13 +46,10 @@ const schema = Yup.object().shape({
 type Step1Type = Yup.InferType<typeof schema>;
 
 const Step1 = (p: Wizard.StepProps) => {
-  const { width } = useWindowSize();
-
-  const { Portal } = usePortal({
-    bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
-  });
   const [activeStep, setActiveStep] = React.useState(true);
-  const { doGoBack, setDoGoBack, setLogoSize } = useHeaderContext();
+  const {
+    doGoBack, setType, setDoGoBack, setLogoSize,
+  } = useHeaderContext();
 
   const { state, action } = useStateMachine(updateAction(p.storeKey));
 
@@ -97,7 +90,7 @@ const Step1 = (p: Wizard.StepProps) => {
 
     // Hide back arrow in header if neccesary
     if (doGoBack) setDoGoBack(null);
-
+    setType('tertiary');
     setLogoSize('big');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -131,57 +124,43 @@ const Step1 = (p: Wizard.StepProps) => {
 
   return (
     <>
-      <WelcomeStyledForm mt="-4px">
-        <WelcomeLogo />
-        <WelcomeLogoText>
+      <WelcomeStyledForm>
+        <LogoSubtitle>
           {t('main:logoIntro', 'An Independent Nonprofit Research Organization')}
-        </WelcomeLogoText>
+        </LogoSubtitle>
+        <WelcomeContent mt={75}>
+          <BoldBlackText>
+            {t('main:selectYourLanguage', 'Language')}
+          </BoldBlackText>
 
-        <WelcomeTitle
-          fontSize={width && width > 560 ? 32 : 24}
-          mt={48}
-        >
-          {t('main:title')}
-        </WelcomeTitle>
-
-        <WelcomeContent>
-          <WelcomeSubtitle
-            fontWeight={700}
-            mb={0}
-            mt={width && width > 560 ? 0 : 18}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            {t('main:paragraph1')}
-          </WelcomeSubtitle>
-
-          <WelcomeSubtitle
-            mt={width && width > 560 ? 50 : 32}
-            mb={width && width > 560 ? 50 : 16}
-            fontWeight={400}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            Please select your language.
-          </WelcomeSubtitle>
+          {/* Language */}
           <Controller
             control={control}
             name="language"
             defaultValue={i18n.language.split('-')[0] || languageData[0].code}
             render={({ onChange, value }) => (
-              <Dropdown onChange={e => onChange(e.currentTarget.value)} value={value}>
-                {languageData.map(({ code, label }) => <option key={code} id={code} value={code}>{label}</option>)}
+              <Dropdown
+                onChange={e => onChange(e.currentTarget.value)}
+                value={value}
+              >
+                {
+                  languageData.map(({ code, label }) => (
+                    <option
+                      key={code}
+                      id={code}
+                      value={code}
+                    >
+                      {label}
+                    </option>
+                  ))
+                }
               </Dropdown>
             )}
           />
 
-          <WelcomeSubtitle
-            mt={width && width > 560 ? 50 : 32}
-            mb={width && width > 560 ? 50 : 16}
-            fontWeight={400}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            {t('main:paragraph2')}
-            <WelcomeRequiredFieldText> *</WelcomeRequiredFieldText>
-          </WelcomeSubtitle>
+          <BoldBlackText>
+            {t('main:selectLocation', 'Location')}
+          </BoldBlackText>
 
           <Controller
             control={control}
@@ -206,15 +185,9 @@ const Step1 = (p: Wizard.StepProps) => {
               </RegionContainer>
             ) : <></>)}
           />
-
-          <WelcomeSubtitle
-            mt={width && width > 560 ? 50 : 32}
-            mb={width && width > 560 ? 50 : 16}
-            fontWeight={400}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            {t('main:patientId', 'If you are part of a clinical study, please enter your patient ID:')}
-          </WelcomeSubtitle>
+          <BoldBlackText>
+            {t('main:patientId', 'Enter patient ID:')}
+          </BoldBlackText>
           <Controller
             control={control}
             name="patientId"
@@ -231,27 +204,21 @@ const Step1 = (p: Wizard.StepProps) => {
             )}
           />
 
-          <WelcomeNote>
-            <Trans i18nKey="main:note">
-              <strong>Please note:</strong> This form is for data collection only. It will not predict your COVID-19
-              status or diagnose any disease, disorder, or other health condition. Virufy is conducting research and
-              will use the information you provide for that research only. Virufy will not take place of a doctor and
-              would like to remind you it is your responsibility to seek medical advice from your doctor.
-            </Trans>
-          </WelcomeNote>
-
-          {activeStep && (
-            <Portal>
-              <WizardButtons
-                leftLabel={t('main:nextButton')}
-                leftHandler={handleSubmit(onSubmit)}
-                leftDisabled={!isValid}
-                invert
-              />
-              <CreatedBy inline />
-            </Portal>
-          )}
-
+          {
+            activeStep && (
+              <>
+                <ContainerNextButton>
+                  <NextButton
+                    onClick={handleSubmit(onSubmit)}
+                    isDisable={!isValid}
+                  >
+                    <ArrowRightSVG />
+                  </NextButton>
+                </ContainerNextButton>
+                <CreatedBy inline />
+              </>
+            )
+          }
         </WelcomeContent>
       </WelcomeStyledForm>
     </>
