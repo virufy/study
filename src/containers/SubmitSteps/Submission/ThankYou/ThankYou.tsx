@@ -6,7 +6,6 @@ import { useStateMachine } from 'little-state-machine';
 // Components
 import StayInTouch from 'components/StayInTouch';
 import SocialIcons from 'components/SocialIcons';
-import Link from 'components/LinkPurple';
 import CreatedBy from 'components/CreatedBy';
 
 // Utils
@@ -20,7 +19,7 @@ import { getSpeechContext } from 'helper/stepsDefinitions';
 import useHeaderContext from 'hooks/useHeaderContext';
 
 import {
-  BeforeSubmitText, ThankYouLayout, ThankYouLogo, ThankYouTitle, SubmissionIdBox,
+  BeforeSubmitText, ThankYouLayout, ThankYouTitle, SubmissionIdBox,
 } from './style';
 
 interface ThankYouLocation {
@@ -31,7 +30,7 @@ const ThankYou = (p: Wizard.StepProps) => {
   const { t } = useTranslation();
 
   const [, setActiveStep] = useState(true);
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const { action } = useStateMachine(resetStore());
 
   const history = useHistory();
@@ -56,16 +55,14 @@ const ThankYou = (p: Wizard.StepProps) => {
   useEffect(() => {
     scrollToTop();
     setTitle('');
+    setType('tertiary');
     setDoGoBack(null);
-  }, [handleDoBack, setDoGoBack, setTitle]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType]);
 
   return (
     <ThankYouLayout>
-      <Link to="http://www.virufy.org" target="_blank">
-        <ThankYouLogo />
-      </Link>
       <ThankYouTitle>{t('thankyou:title')}</ThankYouTitle>
-      <BeforeSubmitText>{t('thankyou:paragraph1', { context: getSpeechContext() })}</BeforeSubmitText>
+      <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>
       {submissionId && (
         <SubmissionIdBox>
           <Trans i18nKey="thankyou:paragraph2">
@@ -89,7 +86,7 @@ const ThankYou = (p: Wizard.StepProps) => {
 
       <SocialIcons />
 
-      <CreatedBy inline={false} color="#00A588" mt="72px" />
+      <CreatedBy inline={false} mt="72px" />
     </ThankYouLayout>
   );
 };

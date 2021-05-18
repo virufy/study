@@ -10,7 +10,7 @@ export const removeSpeechIn: string[] = [
   'Argentina',
   'Bolivia',
   'Brazil',
-  'Colombia',
+  // 'Colombia',
   'Mexico',
   'Pakistan',
   'Peru',
@@ -54,8 +54,6 @@ function getCoughSteps(storeKey: string, country: string) {
         },
         metadata: {
           currentLogic: recordYourCoughLogic,
-          progressCurrent: 1,
-          progressTotal: removeSpeechIn.includes(country) ? 2 : 3,
         },
       },
     },
@@ -105,8 +103,6 @@ function getSpeechSteps(storeKey: string, country: string) {
         },
         metadata: {
           currentLogic: recordYourSpeechLogic,
-          progressCurrent: 2,
-          progressTotal: 3,
         },
       },
     },
@@ -139,9 +135,9 @@ function getSpeechSteps(storeKey: string, country: string) {
 
 function getQuestionarySteps(storeKey: string, country: string) {
   const baseMetadata = {
-    total: removeQuestionaryStep6In.includes(country) ? 5 : 6,
-    progressCurrent: removeSpeechIn.includes(country) ? 2 : 3,
-    progressTotal: removeSpeechIn.includes(country) ? 2 : 3,
+    total: removeQuestionaryStep6In.includes(country) ? 8 : 9,
+    progressCurrent: removeSpeechIn.includes(country) ? 1 : 2,
+    progressTotal: removeSpeechIn.includes(country) ? 1 : 2,
   };
   const output = [
     {
@@ -170,7 +166,6 @@ function getQuestionarySteps(storeKey: string, country: string) {
         previousStep: `${baseUrl}/questionary/step1a`,
         nextStep: `${baseUrl}/questionary/step2`,
         metadata: {
-          current: 1,
           ...baseMetadata,
         },
       },
@@ -181,12 +176,38 @@ function getQuestionarySteps(storeKey: string, country: string) {
       props: {
         storeKey,
         previousStep: `${baseUrl}/questionary/step1b`,
-        nextStep: `${baseUrl}/questionary/step3`,
+        nextStep: `${baseUrl}/questionary/step2a`,
         otherSteps: {
           noTestStep: `${baseUrl}/questionary/step1a`,
         },
         metadata: {
           current: 2,
+          ...baseMetadata,
+        },
+      },
+    },
+    {
+      path: '/questionary/step2a',
+      componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2a`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/questionary/step2`,
+        nextStep: `${baseUrl}/questionary/step2b`,
+        metadata: {
+          current: 3,
+          ...baseMetadata,
+        },
+      },
+    },
+    {
+      path: '/questionary/step2b',
+      componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2b`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/questionary/step2a`,
+        nextStep: `${baseUrl}/questionary/step3`,
+        metadata: {
+          current: 4,
           ...baseMetadata,
         },
       },
@@ -199,7 +220,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
         previousStep: `${baseUrl}/questionary/step2`,
         nextStep: `${baseUrl}/questionary/step4a`,
         metadata: {
-          current: 3,
+          current: 5,
           ...baseMetadata,
         },
       },
@@ -215,7 +236,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
           covidSymptomsStep: `${baseUrl}/questionary/step4b`,
         },
         metadata: {
-          current: 4,
+          current: 6,
           ...baseMetadata,
         },
       },
@@ -228,7 +249,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
         previousStep: `${baseUrl}/questionary/step4a`,
         nextStep: `${baseUrl}/questionary/step5`,
         metadata: {
-          current: 4,
+          current: 7,
           ...baseMetadata,
         },
       },
@@ -243,7 +264,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
           ? `${baseUrl}/thank-you`
           : `${baseUrl}/questionary/step6`,
         metadata: {
-          current: 5,
+          current: 8,
           ...baseMetadata,
         },
       },
@@ -259,7 +280,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
         previousStep: `${baseUrl}/questionary/step5`,
         nextStep: `${baseUrl}/thank-you`,
         metadata: {
-          current: 6,
+          current: 9,
           ...baseMetadata,
         },
       },

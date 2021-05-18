@@ -8,7 +8,7 @@
     "paragraph2": "Estudio de recolección de datos sobre la tos Covid-19",
     "selectCountry": "Seleccione país",
     "selectRegion": "Seleccione region",
-    "patientId": "ID de paciente:",
+    "patientId": "ID de paciente",
     "enterPatientId" : "Ingresar ID de paciente", 
     "nextButton": "Siguiente",
     "createdBy": "Creado por",
@@ -45,7 +45,7 @@
       "Si tiene una condición subyacente que aumenta el riesgo de toser, por favor consulte con su proveedor de atención médica antes de participar",
       "Si cree que sus síntomas empeoran, póngase en contacto con su respuesta médica local"
     ],
-    "startButton": "Comenzar"
+    "startButton": "Siguiente"
   },
   "recordingsIntroduction": {
     "recordCough": {
@@ -102,21 +102,23 @@
       "header": "Grabe su voz",
       "intro1": "¡El sonido de su voz también puede ayudarnos a aprender cómo suena el COVID! Por favor, presione para grabar y cuente claramente del uno al diez."
     },
-    "title": "Grabación enviada",
+    "title": "Carga completa",
     "subtitle": "Siéntase libre de escuchar la grabación.",
-    "next": "Hecho"
+    "next": "Continuar",
+    "retake": "Retomar"
   },
   "questionary": {
-    "headerText": "Responda preguntas cortas",
-    "title": "¡Vamos a responder algunas preguntas!",
+    "headerText": "Preguntas",
+    "title": "¡Vamos a responder algunas preguntas rápidas!",
     "caption": "Por favor, contesta lo mejor que puedas.",
+    "allThatApply": "(seleccione todas las que correspondan)",
     "testTaken": {
       "question": "¿Cuáles de los siguientes tests para COVID-19 se ha hecho?",
       "options": {
-        "pcr": "Test basado en PCR (por ejemplo, con un hisopo nasal o bucal)",
-        "antibody": "Test de anticuerpos (por ejemplo, pinchazo en el dedo o extracción de sangre)",
-        "neither": "Ninguno",
-        "antigen": "Test de antígenos (por ejemplo, con un hisopo nasal o bucal)"
+        "pcr": "Test basado en PCR ",
+        "antibody": "Test de anticuerpos",
+        "unsure": "Inseguro",
+        "antigen": "Test de antígenos"
       }
     },
     "headerText2": "Pregunta para ampliar",
@@ -126,7 +128,8 @@
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Pendiente"
+        "pending": "Pendiente",
+        "unsure": "Inseguro"
       }
     },
     "whenAntibodyTest": "¿Cuándo se hizo el test de anticuerpos para COVID-19? Por favor, si no está seguro, estime.",
@@ -135,7 +138,8 @@
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Pendiente"
+        "pending": "Pendiente",
+        "unsure": "Inseguro"
       }
     },
     "whenAntigenTest": "¿Cuándo se hizo el test de antígenos para COVID-19? Por favor, si no está seguro, estime.",
@@ -144,7 +148,8 @@
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Pendiente"
+        "pending": "Pendiente",
+        "unsure": "Inseguro"
       }
     },
     "ageGroup": "Por favor, seleccione su grupo de edad.",
@@ -268,7 +273,7 @@
       },
       {
         "title": "Únete a nosotros",
-        "description": "Contribuye con tus habilidades en la lucha contra el COVID",
+        "description": "Contribuye con tus habilidades en la lucha contra el COVID-19",
         "cta": {
           "label": "Solicite ahora",
           "link": "https://virufy.org/join"
@@ -277,6 +282,6 @@
     ]
   },
   "socialIcons": {
-    "title": "Sigue a Virufy"
+    "title": "Siguenos"
   }
 }

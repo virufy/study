@@ -8,7 +8,7 @@
     "paragraph2": "Estudo de Coleta de Dados sobre Tosse Covid-19",
     "selectCountry": "Selecione seu país",
     "selectRegion": "Selecione a região",
-    "patientId": "ID de paciente:",
+    "patientId": "ID de paciente",
     "enterPatientId" : "Insira ID de paciente", 
     "nextButton": "Próximo",
     "createdBy": "Criado por",
@@ -45,7 +45,7 @@
       "Se você tiver uma condição subjacente que aumente seu risco de tosse, favor verificar com seu provedor de cuidados de saúde antes de participar",
       "Se você sentir que seus sintomas estão piorando, por favor, contate sua resposta médica local"
     ],
-    "startButton": "Começar"
+    "startButton": "Próximo"
   },
   "recordingsIntroduction": {
     "recordCough": {
@@ -102,21 +102,23 @@
       "header": "Gravar sua fala",
       "intro1": "O som da sua voz pode nos ajudar a aprender como a COVID soa! Por favor, pressione o botão gravar e conte claramente de um a dez."
     },
-    "title": "Gravação enviada",
+    "title": "Upload Completo",
     "subtitle": "Fique à vontade para ouvir",
-    "next": "Feito"
+    "next": "Próximo",
+    "retake": "Retomar"
   },
   "questionary": {
-    "headerText": "Responda algumas perguntas",
-    "title": "Vamos responder algumas perguntas!",
+    "headerText": "Perguntas",
+    "title": "Vamos responder algumas perguntas rápidas!",
     "caption": "Por favor, responda o melhor que puder.",
+    "allThatApply": "(selecione tudo que se aplica)",
     "testTaken": {
       "question": "Qual desses testes para COVID-19 você já realizou?",
       "options": {
-        "pcr": "Baseado em PCR (por exemplo: nariz ou cotonete bucal)",
-        "antibody": "teste de anticorpos para COVID-19 (por exemplo: exame de sangue)",
-        "neither": "Nenhum",
-        "antigen": "Teste de antigénios (por exemplo: nariz ou cotonete bucal)"
+        "pcr": "Baseado em PCR",
+        "antibody": "teste de anticorpos para COVID-19",
+        "unsure": "Inseguro",
+        "antigen": "Teste de antigénios"
       }
     },
     "headerText2": "Questão a seguir",
@@ -126,7 +128,8 @@
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Aguardando"
+        "pending": "Aguardando",
+        "unsure": "Inseguro"
       }
     },
     "whenAntibodyTest": "Quando você fez seu teste de anticorpos para COVID-19? Se não tiver certeza, dê uma estimativa.",
@@ -135,7 +138,8 @@
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Aguardando"
+        "pending": "Aguardando",
+        "unsure": "Inseguro"
       }
     },
     "whenAntigenTest": "Quando você fez seu teste de antigénios para COVID-19? Se não tiver certeza, dê uma estimativa.",
@@ -144,7 +148,8 @@
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Aguardando"
+        "pending": "Aguardando",
+        "unsure": "Inseguro"
       }
     },
     "ageGroup": "Por favor, selecione sua faixa etária",
@@ -268,7 +273,7 @@
       },
       {
         "title": "Junte-se a nós",
-        "description": "Contribua com suas habilidades na luta contra a COVID",
+        "description": "Contribua com suas habilidades na luta contra a COVID-19",
         "cta": {
           "label": "Inscreva-se agora",
           "link": "https://virufy.org/join"
@@ -277,6 +282,6 @@
     ]
   },
   "socialIcons": {
-    "title": "Siga a Virufy"
+    "title": "Siga-nos"
   }
 }

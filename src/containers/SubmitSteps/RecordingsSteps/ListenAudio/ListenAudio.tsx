@@ -28,14 +28,14 @@ import fileHelper from 'helper/fileHelper';
 import {
   MainContainer,
   Subtitle,
+  TitleAudioName,
   PlayerContainer,
   PlayerContainerTop,
   PlayerContainerBottom,
   PlayerPlay,
   PlayerCross,
-  PlayerFileName,
   PlayerTopMiddle,
-  PlayerFileSize,
+  PlayerPlayButton,
   PlayerPlayContainer,
   PlayerCrossContainer,
   PlayerBottomTop,
@@ -60,7 +60,7 @@ const ListenAudio = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setSubtitle } = useHeaderContext();
   const history = useHistory();
   const location = useLocation<{ from: string }>();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -144,7 +144,6 @@ const ListenAudio = ({
   const {
     fileUrl,
     fileName,
-    fileSize,
   } = React.useMemo(() => {
     const out = {
       fileUrl: '',
@@ -215,13 +214,9 @@ const ListenAudio = ({
   // Effects
   useEffect(() => {
     scrollToTop();
-    if (isCoughLogic) {
-      setTitle(t('recordingsListen:recordCough.header'));
-    } else {
-      setTitle(t('recordingsListen:recordCough.header'));
-    }
+    setSubtitle(t('recordingsListen:title'));
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, isCoughLogic, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, isCoughLogic, setDoGoBack, setTitle, setSubtitle, t]);
 
   // Memos
   const {
@@ -264,27 +259,14 @@ const ListenAudio = ({
       }
       <MainContainer>
         <Subtitle>
-          {t('recordingsListen:title')}
-        </Subtitle>
-        <Subtitle>
           {t('recordingsListen:subtitle')}
         </Subtitle>
         <PlayerContainer>
           <PlayerContainerTop>
-            <PlayerPlayContainer
-              onClick={handlePlay}
-            >
-              <PlayerPlay
-                src={PlaySVG}
-              />
-            </PlayerPlayContainer>
             <PlayerTopMiddle>
-              <PlayerFileName>
+              <TitleAudioName>
                 {fileName}
-              </PlayerFileName>
-              <PlayerFileSize>
-                {fileSize}
-              </PlayerFileSize>
+              </TitleAudioName>
             </PlayerTopMiddle>
             <PlayerCrossContainer
               onClick={handleRemoveFile}
@@ -296,7 +278,10 @@ const ListenAudio = ({
           </PlayerContainerTop>
           <PlayerContainerBottom>
             <PlayerBottomTop>
-              <PlayerBottomTrack />
+              <PlayerBottomTrack
+                playing={playing}
+                progress={trackProgress}
+              />
               <PlayerBottomThumb
                 playing={playing}
                 progress={trackProgress}
@@ -312,6 +297,15 @@ const ListenAudio = ({
             </PlayerBottomBottom>
           </PlayerContainerBottom>
         </PlayerContainer>
+        <PlayerPlayContainer
+          onClick={handlePlay}
+        >
+          <PlayerPlayButton>
+            <PlayerPlay
+              src={PlaySVG}
+            />
+          </PlayerPlayButton>
+        </PlayerPlayContainer>
       </MainContainer>
       {activeStep && (
         <Portal>
@@ -319,6 +313,8 @@ const ListenAudio = ({
             invert
             leftLabel={t('recordingsListen:next')}
             leftHandler={handleNext}
+            rightLabel={t('recordingsListen:retake')}
+            rightHandler={handleRemoveFile}
           />
         </Portal>
       )}

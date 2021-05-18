@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 import { ReactComponent as WomanWithPhoneSvg } from 'assets/images/womanWithPhoneSide.svg';
+import { colors } from 'theme/index';
+
+/* General */
+
+export const MainContainer = styled.div`
+  width: 100%;
+  max-width: 320px;
+  margin: 0px auto;
+`;
 
 export const Title = styled.h1`
   font-family: "Open Sans";
@@ -13,17 +22,45 @@ export const Title = styled.h1`
   }
 `;
 
-export const WomanWithPhone = styled(WomanWithPhoneSvg)`
-  width: calc(100% + 40px);
-  height: auto;
-  margin: 0 -20px;
-  @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 714px;
+export const StepTracker = styled.div<{ progress?: number }>`
+  width: 117px;
+  height: 8px; 
+  margin-right: auto;
+  margin-left: auto; 
+  margin-bottom: 40px; 
+  background-color: ${colors.purple_10};
+  border-radius: 10px;
+
+  &:after{
+    content: '';
+    position: absolute; 
+    height: 8px;
+    background-color: ${colors.purple};
+    width: ${props => (props.progress ? `${props.progress}%` : '0%')};
+    border-radius: 10px;
   }
 `;
 
+/* Question 1 */
+
+export const WomanWithPhone = styled(WomanWithPhoneSvg)`
+  width: 205px;
+  height: 156px;
+  margin: 40px auto;
+  display: block;
+`;
+
+export const QuestionAllApply = styled.span`
+  color: ${props => props.theme.colors.mineShaft_50};
+  font-family: "Source Sans Pro";
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  margin-left: 5px;
+`;
+
 export const GrayExtraInfo = styled.h6`
-  color: ${props => props.theme.colors.darkGray_70};
+  color: ${props => props.theme.colors.mineShaft_50};
   font-family: "Source Sans Pro";
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -42,12 +79,11 @@ export const QuestionText = styled.p<{extraSpace?: boolean; first?: boolean; rar
   font-size: 1rem;
   line-height: 1.375rem;
   font-weight: ${({ bold }) => ((bold || bold === undefined) ? 700 : 400)};
-  margin-top: ${props => (props.extraSpace ? 30 : 20)}px;
-  margin-bottom: 20px;
+  margin-top: ${({ first }) => (first ? '0px' : '40px')};
+  margin-bottom: 36px;
   color: ${props => props.theme.colors.darkBlack};
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    margin-top: ${props => (props.extraSpace && !props.first ? 100 : 40)}px;
     margin-bottom: ${props => (props.rare ? 23 : 60)}px;
   }
 `;
@@ -67,14 +103,6 @@ export const QuestionNote = styled.span`
   }
 `;
 
-export const QuestionStepIndicator = styled.p`
-  color: ${props => props.theme.colors.darkGray_50};
-  font-family: "Source Sans Pro";
-  font-size: 12px;
-  line-height: 24px;
-  text-align: center;
-`;
-
 export const QuestionRequiredIndicatorText = styled.span`
   color: ${props => props.theme.colors.red};
 `;
@@ -92,3 +120,5 @@ color: ${props => props.theme.colors.red};
   text-align: center;
   margin-bottom: 16px;
 `;
+
+export const QuestionStepIndicator = styled.p``;

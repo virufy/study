@@ -6,12 +6,15 @@ import Logo from 'assets/virufyLogo.png';
 import Logo2x from 'assets/virufyLogo2x.png';
 import Logo3x from 'assets/virufyLogo3x.png';
 
+// Components
+import Link from 'components/Link';
+
 // Texts
 import { TitlePurple, TitleBlack, HeaderTitle } from 'components/Texts';
 
 // Styles
 import {
-  HeaderContainer, ArrowLeft, ArrowLefContainer, LogoSize, LogoImg, TitleContainer, CloseLeft,
+  HeaderContainer, ArrowLeft, ArrowLefContainer, LogoSize, LogoImg, TitleContainer, /* CloseLeft, */
 } from './style';
 
 type ContextType = {
@@ -81,13 +84,12 @@ const Header = () => {
 
   return (
     <HeaderContainer type={type}>
-      {(doGoBack && title && !subtitle) && <ArrowLefContainer onClick={doGoBack}><CloseLeft /></ArrowLefContainer>}
-      {(doGoBack && subtitle) && <ArrowLefContainer onClick={doGoBack}><ArrowLeft /></ArrowLefContainer>}
+      {(doGoBack && title) && <ArrowLefContainer onClick={doGoBack}><ArrowLeft /></ArrowLefContainer>}
       <TitleContainer>
         {(type === 'primary' && !subtitle) && <HeaderTitle>{title}</HeaderTitle>}
         {(type === 'primary' && subtitle) && <><HeaderTitle>{title}</HeaderTitle><TitleBlack>{subtitle}</TitleBlack></>}
         {type === 'secondary' && <><LogoImg srcSet={`${Logo}, ${Logo2x} 2x, ${Logo3x} 3x`} src={LogoImg} size={logoSize} /><TitlePurple>{subtitle}</TitlePurple></>}
-        {type === 'tertiary' && <LogoImg srcSet={`${Logo}, ${Logo2x} 2x, ${Logo3x} 3x`} src={LogoImg} size={logoSize} />}
+        {type === 'tertiary' && <Link to="http://www.virufy.org" target="_blank"><LogoImg srcSet={`${Logo}, ${Logo2x} 2x, ${Logo3x} 3x`} src={LogoImg} size={logoSize} /></Link>}
       </TitleContainer>
     </HeaderContainer>
   );

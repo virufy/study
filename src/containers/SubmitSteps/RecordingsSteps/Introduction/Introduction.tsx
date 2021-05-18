@@ -130,8 +130,9 @@ const Introduction = ({
             </Trans>
           ) : (
             <Trans i18nKey="recordingsRecord:textSpeech">
-              Click the record button and cough intentionally <strong>3 times</strong>. When you are done,
-              click and Continue.
+              Click the record button below and
+              <strong>say a sustained ‘aaah’ for at least 5 seconds.</strong>
+              When you are done, tap the stop button.
             </Trans>
           )
           }

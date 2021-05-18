@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const AppContainer = styled.div`
   margin: 0 auto;
+  padding-bottom: 20px;
 
   height: 100%;
   width: 100%;

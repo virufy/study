@@ -9,7 +9,7 @@ export interface StyledButtonProps {
 
 export const StyledButton = styled.button<StyledButtonProps>`
   height: 50px;
-  border-radius: 4px; 
+  border-radius: 15px; 
   font-family: 'Source Sans Pro'; /* It could be removed if default on body changes */
   font-weight: bold;
   font-size: 14px;

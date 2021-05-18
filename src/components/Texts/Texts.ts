@@ -3,8 +3,8 @@ import { colors } from 'theme';
 
 export const HeaderTitle = styled.div`
   text-align: center; 
-  font-family: 'Source Sans Pro';
-  font-size: 0.875rem;
+  font-family: 'Open Sans';
+  font-size: 14px;
   line-height: 20px;
   color: ${colors.purple};
   font-weight: 700;
@@ -66,4 +66,13 @@ export const BlackText = styled.h2`
     font-size: 1rem;
     max-width: 470px;
   }
+`;
+
+export const PurpleTextBold = styled.h2`
+  font-family: 'Source Sans Pro';
+  font-size: 0.875rem;
+  line-height: 20px;
+  color: ${colors.purple};
+  font-weight: 600;
+  text-align: center;
 `;

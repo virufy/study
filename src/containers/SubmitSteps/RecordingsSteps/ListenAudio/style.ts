@@ -1,27 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
 import { colors } from 'theme';
-import { BlackText } from 'components/Texts';
 
+/* Containers */
 export const MainContainer = styled.div`
   margin-bottom: 77px;
-`;
-
-export const Subtitle = styled.h2`
-  color: ${({ theme }) => theme.colors.mineShaft};
-  font-size: 18px;
-  font-family: "Source Sans Pro";
-  margin-left: 20px;
-  margin-top: 35px;
-  text-align: left;
-  white-space: pre-wrap;
-  width: 100%;
-  
-  @media screen and (${props => props.theme.breakpoints.tablet}) {
-    align-text: center; 
-    max-width: 592px;
-    margin: 30px auto;
-  }
 `;
 
 export const PlayerContainer = styled.div`
@@ -49,22 +32,6 @@ export const PlayerPlayContainer = styled.div`
   margin-top: 76px;
 `;
 
-export const PlayerPlayButton = styled.div`
-  width: 108px;
-  height: 108px;
-  background-color: ${colors.purple_10};
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-`;
-
-export const PlayerPlay = styled.img`
-  width: 33px;
-  height: 40px;
-`;
-
 export const PlayerCrossContainer = styled.div`
   display: flex;
   align-items: flex-start;
@@ -76,41 +43,11 @@ export const PlayerCrossContainer = styled.div`
   box-sizing: content-box;
 `;
 
-export const PlayerCross = styled.img`
-  width: 14px;
-  height: 14px;
-`;
+export const PlayerContainerBottom = styled.div``;
 
 export const PlayerTopMiddle = styled.div`
   flex: 1;
 `;
-
-export const PlayerFileName = styled(BlackText).attrs({ dark: true, fontSize: '1rem' })`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  text-align: left;
-  font-size: 14px;
-
-  @media screen and (${props => props.theme.breakpoints.tablet}) {
-    font-size: 1.5rem;
-    line-height: 24px;
-  }
-`;
-
-export const PlayerFileSize = styled(BlackText).attrs({ dark: true, fontSize: '0.625rem' })`
-  text-align: left;
-  color: ${props => props.theme.colors.darkGray};
-
-  @media screen and (${props => props.theme.breakpoints.tablet}) {
-    font-size: 0.875rem;
-    line-height: 24px;
-  }
-`;
-
-export const PlayerContainerBottom = styled.div``;
 
 export const PlayerBottomTop = styled.div`
   position: relative;
@@ -153,7 +90,62 @@ export const PlayerBottomBottom = styled.div`
   justify-content: space-between;
 `;
 
-export const PlayerTimeIndicator = styled(BlackText).attrs({ dark: true, fontSize: '14px' })`
+/* Text */
+
+export const Subtitle = styled.h2`
+  color: ${({ theme }) => theme.colors.mineShaft};
+  font-size: 18px;
+  font-family: "Source Sans Pro";
+  text-align: left;
+  white-space: pre-wrap;
+  width: 100%;
+  margin-left: 20px;
+  margin-bottom: 60px;
+  
+  @media screen and (${props => props.theme.breakpoints.tablet}) {
+    max-width: 592px;
+    margin-right: auto; 
+    margin-left: auto; 
+  }
+`;
+
+export const TitleAudioName = styled.p`
+  color: ${({ theme }) => theme.colors.mineShaft};
+  font-size: 14px;
+  font-family: "Source Sans Pro";
+  text-align: left;
+`;
+
+export const PlayerTimeIndicator = styled.p`
   opacity: 0.5;
   margin-top: 8px;
+  font-family: 'Source Sans Pro';
+  font-size: 0.875rem;
+  color: ${colors.mineShaft};
+  font-weight: 400;
+`;
+
+/* Buttons */
+
+export const PlayerPlayButton = styled.div`
+  width: 108px;
+  height: 108px;
+  background-color: ${colors.purple_10};
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+`;
+
+/* Images */
+
+export const PlayerPlay = styled.img`
+  width: 33px;
+  height: 40px;
+`;
+
+export const PlayerCross = styled.img`
+  width: 14px;
+  height: 14px;
 `;

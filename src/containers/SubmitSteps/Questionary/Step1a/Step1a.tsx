@@ -14,8 +14,7 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-
-import ProgressIndicator from 'components/ProgressIndicator';
+import { TitleBlack, PurpleTextBold } from 'components/Texts';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -27,13 +26,13 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  Title, QuestionText, QuestionStepIndicator, QuestionRequiredIndicatorText,
-  GrayExtraInfo, WomanWithPhone,
+  MainContainer, StepTracker, QuestionText, QuestionAllApply,
+  WomanWithPhone,
 } from '../style';
 
 const schema = Yup.object({
   testTaken: Yup.array().of(Yup.string().required()).required().default([])
-    .test('SelecteOne', 'Select one', v => !(!!v && v.length > 1 && v.includes('neither'))),
+    .test('SelecteOne', 'Select one', v => !(!!v && v.length > 1 && v.includes('unsure'))),
 }).defined();
 
 type Step1aType = Yup.InferType<typeof schema>;
@@ -49,7 +48,7 @@ const Step1a = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setSubtitle } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -83,15 +82,16 @@ const Step1a = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setSubtitle, t]);
 
   // Handlers
   const onSubmit = async (values: Step1aType) => {
     if (values) {
       const { testTaken } = values;
       if (testTaken) {
-        const includesNeither = ((testTaken as unknown) as string[]).includes('neither');
+        const includesNeither = ((testTaken as unknown) as string[]).includes('unsure');
 
         action(values);
         if (includesNeither && otherSteps && otherSteps.noTestStep) {
@@ -106,13 +106,19 @@ const Step1a = ({
   };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-      <Title>{t('questionary:title')}</Title>
+    <MainContainer>
+      <TitleBlack>{t('questionary:title')}</TitleBlack>
       <WomanWithPhone />
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
+      {metadata && (
+        <>
+          <PurpleTextBold>
+            {metadata.current} {t('questionary:stepOf')} {metadata.total}
+          </PurpleTextBold>
+          <StepTracker progress={(metadata.current / metadata.total) * 100} />
+        </>
+      )}
       <QuestionText>{t('questionary:testTaken.question')}
-        <QuestionRequiredIndicatorText> *</QuestionRequiredIndicatorText>
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
 
       <Controller
@@ -133,11 +139,15 @@ const Step1a = ({
                 label: t('questionary:testTaken.options.antigen'),
               },
               {
-                value: 'neither',
-                label: t('questionary:testTaken.options.neither'),
+                value: 'antibody',
+                label: t('questionary:testTaken.options.antibody'),
+              },
+              {
+                value: 'unsure',
+                label: t('questionary:testTaken.options.unsure'),
               },
             ]}
-            excludableValue="neither"
+            excludableValue="unsure"
           />
         )}
       />
@@ -145,11 +155,6 @@ const Step1a = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          {metadata && (
-            <QuestionStepIndicator>
-              {metadata.current} {t('questionary:stepOf')} {metadata.total}
-            </QuestionStepIndicator>
-          )}
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
@@ -158,7 +163,7 @@ const Step1a = ({
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

@@ -19,9 +19,6 @@ import { PurpleTextBold } from 'components/Texts';
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
-// Data
-import { ageGroups } from 'data/ageGroup';
-
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
@@ -33,17 +30,17 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.array().of(Yup.string().required()).required().default([])
-    .test('SelecteOne', 'Select one', v => !(!!v && v.length > 1)),
+  ageGroup: Yup.string(),
+  gender: Yup.object().required(),
+  biologicalSex: Yup.string(),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
 
-const Step2 = ({
+const Step2b = ({
   previousStep,
   nextStep,
   storeKey,
-  otherSteps,
   metadata,
 }: Wizard.StepProps) => {
   // Hooks
@@ -57,7 +54,7 @@ const Step2 = ({
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
-  console.log('state', state?.[storeKey]);
+
   // Form
   const {
     control, handleSubmit, formState,
@@ -66,18 +63,15 @@ const Step2 = ({
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
-  console.log('errors', errors);
+
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    const { testTaken } = state['submit-steps'];
-    if (testTaken.includes('unsure') && otherSteps) {
-      history.push(otherSteps.noTestStep);
-    } else if (previousStep) {
+    if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [state, history, otherSteps, previousStep]);
+  }, [history, previousStep]);
 
   useEffect(() => {
     scrollToTop();
@@ -106,18 +100,28 @@ const Step2 = ({
           <StepTracker progress={(metadata.current / metadata.total) * 100} />
         </>
       )}
-      <QuestionText extraSpace first>{t('questionary:ageGroup')}</QuestionText>
-
+      <QuestionText extraSpace>
+        {t('questionary:biologicalSex.question')}
+      </QuestionText>
       <Controller
         control={control}
-        name="ageGroup"
-        defaultValue={[]}
+        name="biologicalSex"
+        defaultValue=""
         render={({ onChange, value }) => (
           <OptionList
             singleSelection
-            value={{ selected: value }}
-            onChange={v => onChange(v.selected)}
-            items={ageGroups.map(({ age }) => ({ value: age, label: age }))}
+            value={{ selected: value ? [value] : [] }}
+            onChange={v => onChange(v.selected[0])}
+            items={[
+              {
+                value: 'male',
+                label: t('questionary:biologicalSex.options.male'),
+              },
+              {
+                value: 'female',
+                label: t('questionary:biologicalSex.options.female'),
+              },
+            ]}
           />
         )}
       />
@@ -136,4 +140,4 @@ const Step2 = ({
   );
 };
 
-export default React.memo(Step2);
+export default React.memo(Step2b);

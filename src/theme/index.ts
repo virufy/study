@@ -11,7 +11,7 @@ export const colors = {
   ultraDarkBlack: '#1F1F1F',
   lightGray: '#F2F2F2',
   gray: '#C4C4C4',
-  mercury: '#E6E6E6',
+  mercury: '#F9F9F9',
   midGray: '#DEDEDE',
   midDarkGray: '#D1D1D1',
   mineShaft: '#393939',

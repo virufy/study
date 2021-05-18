@@ -70,7 +70,9 @@ const RecordManualUpload = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle, setSubtitle } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setSubtitle, setType,
+  } = useHeaderContext();
   const history = useHistory();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const inputUpload = useRef<HTMLInputElement>(null);
@@ -128,9 +130,10 @@ const RecordManualUpload = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('recordingsRecordManual:header'));
+    setType('primary');
     setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setSubtitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, t]);
 
   return (
     <>

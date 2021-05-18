@@ -8,7 +8,7 @@
     "paragraph2": "Covid-19 Cough Data Collection Study",
     "selectCountry": "Select country",
     "selectRegion": "Select region",
-    "patientId": "Patient ID:",
+    "patientId": "Patient ID",
     "enterPatientId" : "Enter patient ID", 
     "nextButton": "Next",
     "createdBy": "Created By",
@@ -45,7 +45,7 @@
       "If you have an underlying condition that increases your risk from coughing, please check with your health care provider before participating.",
       "If you feel your symptoms are getting worse, please contact your local medical response."
     ],
-    "startButton": "Start"
+    "startButton": "Next"
   },
   "recordingsIntroduction": {
     "recordCough": {
@@ -102,21 +102,23 @@
       "header": "Record your speech",
       "intro1": "The sound of your voice can also help us learn what COVID sounds like! 'Please press record and count clearly from one to ten."
     },
-    "title": "Recording uploaded",
+    "title": "Upload Complete",
     "subtitle": "Feel free to take a listen.",
-    "next": "Done"
+    "next": "Continue",
+    "retake": "Retake"
   },
   "questionary": {
-    "headerText": "Answer short questions",
-    "title": "Let’s answer some questions!",
+    "headerText": "Questions",
+    "title": "Let’s answer some quick questions!",
     "caption": "Please answer to the best of your ability.",
+    "allThatApply": "(select all that apply)",
     "testTaken": {
       "question": "Which of the following tests have you taken for COVID-19?",
       "options": {
-        "pcr": "PCR-based test (e.g. nose or mouth swab)",
-        "antibody": "Antibody test (e.g. finger stick or blood draw)",
-        "neither": "Neither",
-        "antigen": "Antigen test (e.g. nose or mouth swab)"
+        "pcr": "PCR-based test",
+        "antibody": "Antibody test",
+        "unsure": "Unsure",
+        "antigen": "Antigen test"
       }
     },
     "headerText2": "Follow-up question",
@@ -126,7 +128,8 @@
       "options": {
         "positive": "Positive",
         "negative": "Negative",
-        "pending": "Pending"
+        "pending": "Pending",
+        "unsure": "Unsure"
       }
     },
     "whenAntibodyTest": "When did you take your antibody test for COVID-19? Please estimate if unsure.",
@@ -135,7 +138,8 @@
       "options": {
         "positive": "Positive",
         "negative": "Negative",
-        "pending": "Pending"
+        "pending": "Pending",
+        "unsure": "Unsure"
       }
     },
     "whenAntigenTest": "When did you take your antigen test for COVID-19? Please estimate if unsure.",
@@ -144,7 +148,8 @@
       "options": {
         "positive": "Positive",
         "negative": "Negative",
-        "pending": "Pending"
+        "pending": "Pending",
+        "unsure": "Unsure"
       }
     },
     "ageGroup": "Please select your age group.",
@@ -236,7 +241,7 @@
   "thankyou": {
     "title": "Thank you for submitting.",
     "paragraph1_cough": "Your cough donation brings Virufy one step closer to changing the world.",
-    "paragraph1_voice": "Your cough and speech donation brings Virufy one step closer to changing the world.",
+    "paragraph1_voice": "Your cough donation brings Virufy one step closer to changing the world.",
     "paragraph2": "Your unique submission ID:<br/><2>{{submissionId}}</2>",
     "paragraph3": "Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized data in future.<br/><br/>If you later develop symptoms such as cough, fever, or shortness of breath, please come back to resubmit your latest cough sounds.",
     "downloadApp": "Click here to <1>Install the app.</1>",
@@ -268,7 +273,7 @@
       },
       {
         "title": "Join Us",
-        "description": "Contribute your skills in the fight against COVID",
+        "description": "Contribute your skills in the fight against COVID-19",
         "cta": {
           "label": "Apply now",
           "link": "https://virufy.org/join"
@@ -277,6 +282,6 @@
     ]
   },
   "socialIcons": {
-    "title": "Follow Virufy"
+    "title": "Follow us"
   }
 }
