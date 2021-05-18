@@ -14,8 +14,8 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import ProgressIndicator from 'components/ProgressIndicator';
 import Recaptcha from 'components/Recaptcha';
+import { PurpleTextBold } from 'components/Texts';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -28,7 +28,8 @@ import { doSubmit } from 'helper/submitHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, GrayExtraInfo, TempBeforeSubmitError,
+  QuestionText, TempBeforeSubmitError, MainContainer,
+  StepTracker, QuestionAllApply,
 } from '../style';
 
 const schema = Yup.object({
@@ -47,7 +48,7 @@ const Step6 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -103,8 +104,9 @@ const Step6 = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   // const onSubmit = async (values: Step6Type) => {
@@ -118,15 +120,20 @@ const Step6 = ({
   // };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
+    <MainContainer>
+      {metadata && (
+        <>
+          <PurpleTextBold>
+            {metadata.current} {t('questionary:stepOf')} {metadata.total}
+          </PurpleTextBold>
+          <StepTracker progress={metadata.current} />
+        </>
+      )}
       <QuestionText bold={false}>
         <Trans i18nKey="questionary:medical.question">
-          <strong>Which of the below medical conditions do you currently have?</strong> (Select all that apply)
+          <strong>Which of the below medical conditions do you currently have?</strong>
         </Trans>
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -137,6 +144,10 @@ const Step6 = ({
             value={value}
             onChange={v => onChange(v)}
             items={[
+              {
+                value: 'none',
+                label: t('questionary:medical.options.none'),
+              },
               {
                 value: 'chronicLungDisease',
                 label: t('questionary:medical.options.chronicLung'),
@@ -170,13 +181,10 @@ const Step6 = ({
                 label: t('questionary:medical.options.valvularHeart'),
               },
               {
-                value: 'none',
-                label: t('questionary:medical.options.none'),
+                value: 'other',
+                label: t('questionary:medical.options.other'),
               },
             ]}
-            allowAddOther
-            addOtherLabel={t('questionary:medical.options.addOther')}
-            otherPlaceholder={t('questionary:medical.addOtherPlaceholder')}
             excludableValue="none"
           />
         )}
@@ -185,11 +193,6 @@ const Step6 = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          {metadata && (
-            <QuestionStepIndicator>
-              {metadata.current} {t('questionary:stepOf')} {metadata.total}
-            </QuestionStepIndicator>
-          )}
           { /* ReCaptcha  */}
           <Recaptcha onChange={setCaptchaValue} />
           {submitError && (
@@ -206,7 +209,7 @@ const Step6 = ({
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

@@ -48,7 +48,9 @@ const Step1a = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle, setSubtitle } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setSubtitle, setType,
+  } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -83,8 +85,9 @@ const Step1a = ({
     scrollToTop();
     setTitle(t('questionary:headerText'));
     setSubtitle('');
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setSubtitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, t]);
 
   // Handlers
   const onSubmit = async (values: Step1aType) => {
@@ -114,7 +117,7 @@ const Step1a = ({
           <PurpleTextBold>
             {metadata.current} {t('questionary:stepOf')} {metadata.total}
           </PurpleTextBold>
-          <StepTracker progress={(metadata.current / metadata.total) * 100} />
+          <StepTracker progress={metadata.current} />
         </>
       )}
       <QuestionText>{t('questionary:testTaken.question')}
@@ -138,10 +141,10 @@ const Step1a = ({
                 value: 'antigen',
                 label: t('questionary:testTaken.options.antigen'),
               },
-              {
+              /* {
                 value: 'antibody',
                 label: t('questionary:testTaken.options.antibody'),
-              },
+              }, */
               {
                 value: 'unsure',
                 label: t('questionary:testTaken.options.unsure'),

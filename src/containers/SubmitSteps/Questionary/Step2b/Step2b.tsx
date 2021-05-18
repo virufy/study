@@ -26,12 +26,10 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, StepTracker,
+  QuestionText, MainContainer, StepTracker, QuestionNote,
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.string(),
-  gender: Yup.object().required(),
   biologicalSex: Yup.string(),
 }).defined();
 
@@ -47,7 +45,7 @@ const Step2b = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -59,10 +57,15 @@ const Step2b = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -76,8 +79,9 @@ const Step2b = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {
@@ -97,12 +101,13 @@ const Step2b = ({
           <PurpleTextBold>
             {metadata.current} {t('questionary:stepOf')} {metadata.total}
           </PurpleTextBold>
-          <StepTracker progress={(metadata.current / metadata.total) * 100} />
+          <StepTracker progress={metadata.current} />
         </>
       )}
-      <QuestionText extraSpace>
+      <QuestionText hasNote>
         {t('questionary:biologicalSex.question')}
       </QuestionText>
+      <QuestionNote>{t('questionary:biologicalSex.note')}</QuestionNote>
       <Controller
         control={control}
         name="biologicalSex"
@@ -132,6 +137,7 @@ const Step2b = ({
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>

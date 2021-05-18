@@ -153,6 +153,7 @@
       }
     },
     "ageGroup": "Por favor, selecione sua faixa etária",
+    "50+": "50 e mais",
     "unselectedAgeGroup": "Selecione sua faixa etária",
     "gender": {
       "question": "Com qual gênero você se identifica?",
@@ -160,6 +161,7 @@
         "male": "Masculino",
         "female": "Feminino",
         "notToSay": "Prefiro não responder",
+        "other": "Outro",
         "selfDescribe": "Prefiro me descrever"
       }
     },
@@ -180,7 +182,7 @@
       }
     },
     "symptoms": {
-      "question": "<strong>Qual dos sintomas abaixo você tem atualmente?</strong> (Selecione todos os que se aplicam)",
+      "question": "<strong>Qual dos sintomas abaixo você tem atualmente?</strong>",
       "options": {
         "bodyAches": "Dores no corpo",
         "dryCough": "Tosse (seca)",
@@ -194,13 +196,14 @@
         "chestTightness": "Aperto no peito",
         "vomitingAndDiarrhea": "Vômito ou diarreia",
         "none": "Nenhum",
+        "other": "Outro",
         "addOther": "+ Adicionar outro"
       },
       "addOtherPlaceholder": "Outro sintoma"
     },
-    "symptomsDate": "<strong>Qual das condições respiratórias abaixo você tem atualmente?</strong> (Selecione todas as que se aplicam)",
+    "symptomsDate": "<strong>Qual das condições respiratórias abaixo você tem atualmente?</strong>",
     "respiration": {
-      "question": "<strong>Which of the below respiratory conditions do you currently have?</strong> (Select all that apply)",
+      "question": "<strong>Which of the below respiratory conditions do you currently have?</strong>",
       "options": {
         "asthma": "Asma",
         "bronchitis": "Bronquite",
@@ -214,7 +217,7 @@
       "addOtherPlaceholder": "Outra condição"
     },
     "medical": {
-      "question": "<strong>Qual das condições médicas abaixo você tem atualmente?</strong> (Selecione todas as que se aplicam)",
+      "question": "<strong>Qual das condições médicas abaixo você tem atualmente?</strong>",
       "options": {
         "chronicLung": "Doença crônica de pulmão",
         "congestiveHeart": "Insuficiência cardíaca congestiva",

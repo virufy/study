@@ -19,9 +19,6 @@ import { PurpleTextBold } from 'components/Texts';
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
-// Data
-import { ageGroups } from 'data/ageGroup';
-
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
@@ -50,23 +47,35 @@ const Step2 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
-  console.log('state', state?.[storeKey]);
+
+  const ageGroups = [
+    { age: '18 - 20' },
+    { age: '21 - 29' },
+    { age: '30 - 39' },
+    { age: '40 - 49' },
+    { age: '50 - 59' },
+    { age: '60 - 69' },
+    { age: '70 - 79' },
+    { age: '80+' },
+  ];
+
   // Form
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
-  console.log('errors', errors);
+
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     const { testTaken } = state['submit-steps'];
@@ -79,11 +88,16 @@ const Step2 = ({
     }
   }, [state, history, otherSteps, previousStep]);
 
+  const {
+    isValid,
+  } = formState;
+
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {
@@ -103,7 +117,7 @@ const Step2 = ({
           <PurpleTextBold>
             {metadata.current} {t('questionary:stepOf')} {metadata.total}
           </PurpleTextBold>
-          <StepTracker progress={(metadata.current / metadata.total) * 100} />
+          <StepTracker progress={metadata.current} />
         </>
       )}
       <QuestionText extraSpace first>{t('questionary:ageGroup')}</QuestionText>
@@ -128,6 +142,7 @@ const Step2 = ({
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>

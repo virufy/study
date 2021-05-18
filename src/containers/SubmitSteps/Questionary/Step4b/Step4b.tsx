@@ -23,7 +23,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import DatePicker from 'components/DatePicker';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionRequiredIndicatorText, GrayExtraInfo,
+  QuestionText, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
@@ -41,7 +41,7 @@ const Step4b = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -53,10 +53,15 @@ const Step4b = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -69,9 +74,10 @@ const Step4b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText2'));
+    setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   const onSubmit = async (values: Step4bType) => {
@@ -85,12 +91,9 @@ const Step4b = ({
   };
 
   return (
-    <>
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
+    <MainContainer>
       <QuestionText>
         {t('questionary:symptomsDate')}
-        <QuestionRequiredIndicatorText> *</QuestionRequiredIndicatorText>
       </QuestionText>
       <Controller
         control={control}
@@ -112,11 +115,12 @@ const Step4b = ({
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

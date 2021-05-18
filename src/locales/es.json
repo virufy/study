@@ -153,6 +153,7 @@
       }
     },
     "ageGroup": "Por favor, seleccione su grupo de edad.",
+    "50+": "50 y más",
     "unselectedAgeGroup": "Seleccione el grupo de edad",
     "gender": {
       "question": "Cuál es su identidad de género?",
@@ -160,6 +161,7 @@
         "male": "Masculino",
         "female": "Femenino",
         "notToSay": "Prefiero no decirlo",
+        "other": "Otro",
         "selfDescribe": "Prefiero autodescribirme"
       }
     },
@@ -180,7 +182,7 @@
       }
     },
     "symptoms": {
-      "question": "<strong>¿Cuál de los siguientes síntomas tiene actualmente?</strong> (Seleccione todos los que correspondan)",
+      "question": "<strong>¿Cuál de los siguientes síntomas tiene actualmente?</strong>",
       "options": {
         "bodyAches": "Dolores en el cuerpo",
         "dryCough": "Tos (Seca)",
@@ -194,13 +196,14 @@
         "chestTightness": "Opresión en el pecho",
         "vomitingAndDiarrhea": "Vómito y diarrea",
         "none": "Ninguno",
+        "other": "Otro",
         "addOther": "+ Añadir otro"
       },
       "addOtherPlaceholder": "Otro síntoma"
     },
     "symptomsDate": "¿Cuándo compenzó a tener tos, fiebre y/o falta de aliento? Por favor, estime si no está seguro",
     "respiration": {
-      "question": "<strong>¿Cuál de las siguientes afecciones respiratorias tiene actualmente?</strong> (Seleccione todas las que correspondan)",
+      "question": "<strong>¿Cuál de las siguientes afecciones respiratorias tiene actualmente?</strong>",
       "options": {
         "asthma": "Asma",
         "bronchitis": "Bronquitis",
@@ -214,7 +217,7 @@
       "addOtherPlaceholder": "Otra condición"
     },
     "medical": {
-      "question": "<strong>¿Cuál de las siguientes condiciones médicas tiene usted actualmente?</strong> (Seleccione todas las que correspondan)",
+      "question": "<strong>¿Cuál de las siguientes condiciones médicas tiene usted actualmente?</strong>",
       "options": {
         "chronicLung": "Enfermedad pulmonar crónica",
         "congestiveHeart": "Insuficiencia cardíaca congestiva",

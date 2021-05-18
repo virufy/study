@@ -30,9 +30,7 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.string(),
   gender: Yup.object().required(),
-  biologicalSex: Yup.string(),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
@@ -47,7 +45,7 @@ const Step2 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -59,10 +57,15 @@ const Step2 = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -76,8 +79,9 @@ const Step2 = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {
@@ -97,7 +101,7 @@ const Step2 = ({
           <PurpleTextBold>
             {metadata.current} {t('questionary:stepOf')} {metadata.total}
           </PurpleTextBold>
-          <StepTracker progress={(metadata.current / metadata.total) * 100} />
+          <StepTracker progress={metadata.current} />
         </>
       )}
       <QuestionText extraSpace>{t('questionary:gender.question')}</QuestionText>
@@ -123,9 +127,11 @@ const Step2 = ({
                 value: 'notToSay',
                 label: t('questionary:gender.options.notToSay'),
               },
+              {
+                value: 'other',
+                label: t('questionary:gender.options.other'),
+              },
             ]}
-            enableOther
-            otherPlaceholder={t('questionary:gender.options.selfDescribe')}
           />
         )}
       />
@@ -136,6 +142,7 @@ const Step2 = ({
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>

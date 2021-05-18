@@ -24,7 +24,7 @@ import OptionList from 'components/OptionList';
 import DatePicker from 'components/DatePicker';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, MainContainer,
+  QuestionText, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
@@ -32,8 +32,9 @@ const schema = Yup.object({
   pcrTestResult: Yup.string().when('$hasPcr', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
   antigenTestDate: Yup.date().when('$hasAntigen', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
   antigenTestResult: Yup.string().when('$hasAntigen', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
-  antibodyTestDate: Yup.date().when('$hasAntibody', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
-  antibodyTestResult: Yup.string().when('$hasAntibody', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
+/* antibodyTestDate: Yup.date().when('$hasAntibody', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
+antibodyTestResult: Yup.string().when('$hasAntibody', { is: true, then: Yup.string().required(),
+otherwise: Yup.string() }), */
 }).defined();
 
 type Step1aType = Yup.InferType<typeof schema>;
@@ -47,7 +48,9 @@ const Step1b = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle, setSubtitle } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setSubtitle, setType,
+  } = useHeaderContext();
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -56,7 +59,7 @@ const Step1b = ({
   const [activeStep, setActiveStep] = React.useState(true);
   const [hasPcrTest, setHasPcrTest] = React.useState(false);
   const [hasAntigenTest, setHasAntigenTest] = React.useState(false);
-  const [hasAntibodyTest, setHasAntibodyTest] = React.useState(false);
+  // const [hasAntibodyTest, setHasAntibodyTest] = React.useState(false);
 
   useEffect(() => {
     if (state) {
@@ -64,7 +67,7 @@ const Step1b = ({
 
       setHasPcrTest(testTaken.includes('pcr'));
       setHasAntigenTest(testTaken.includes('antigen'));
-      setHasAntibodyTest(testTaken.includes('antibody'));
+      // setHasAntibodyTest(testTaken.includes('antibody'));
     }
   }, [state]);
 
@@ -77,7 +80,7 @@ const Step1b = ({
     context: {
       hasPcr: state['submit-steps'].testTaken.includes('pcr'),
       hasAntigen: state['submit-steps'].testTaken.includes('antigen'),
-      hasAntibody: state['submit-steps'].testTaken.includes('antibody'),
+      // hasAntibody: state['submit-steps'].testTaken.includes('antibody'),
     },
     resolver: yupResolver(schema),
   });
@@ -99,9 +102,10 @@ const Step1b = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setType('primary');
     setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setSubtitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, t]);
 
   // Handlers
   const onSubmit = async (values: Step1aType) => {
@@ -111,8 +115,8 @@ const Step1b = ({
         pcrTestResult,
         antigenTestDate,
         antigenTestResult,
-        antibodyTestDate,
-        antibodyTestResult,
+        // antibodyTestDate,
+        // antibodyTestResult,
       } = (values as any);
 
       if (hasPcrTest && (!pcrTestDate || !pcrTestResult)) {
@@ -121,9 +125,9 @@ const Step1b = ({
       if (hasAntigenTest && (!antigenTestDate || !antigenTestResult)) {
         return;
       }
-      if (hasAntibodyTest && (!antibodyTestDate || !antibodyTestResult)) {
+      /* if (hasAntibodyTest && (!antibodyTestDate || !antibodyTestResult)) {
         return;
-      }
+      } */
 
       action(values);
       if (nextStep) {
@@ -245,7 +249,7 @@ const Step1b = ({
           />
         </>
       )}
-      {hasAntibodyTest && (
+      {/* {hasAntibodyTest && (
         <>
           <QuestionText extraSpace first={!hasPcrTest}>
             {t('questionary:whenAntibodyTest')}
@@ -299,12 +303,11 @@ const Step1b = ({
             )}
           />
         </>
-      )}
+      )} */}
       {/* Bottom Buttons */}
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          <QuestionStepIndicator />
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}

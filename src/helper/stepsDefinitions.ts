@@ -135,7 +135,7 @@ function getSpeechSteps(storeKey: string, country: string) {
 
 function getQuestionarySteps(storeKey: string, country: string) {
   const baseMetadata = {
-    total: removeQuestionaryStep6In.includes(country) ? 8 : 9,
+    total: removeQuestionaryStep6In.includes(country) ? 7 : 8,
     progressCurrent: removeSpeechIn.includes(country) ? 1 : 2,
     progressTotal: removeSpeechIn.includes(country) ? 1 : 2,
   };
@@ -217,7 +217,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step3`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/questionary/step2`,
+        previousStep: `${baseUrl}/questionary/step2b`,
         nextStep: `${baseUrl}/questionary/step4a`,
         metadata: {
           current: 5,
@@ -249,7 +249,6 @@ function getQuestionarySteps(storeKey: string, country: string) {
         previousStep: `${baseUrl}/questionary/step4a`,
         nextStep: `${baseUrl}/questionary/step5`,
         metadata: {
-          current: 7,
           ...baseMetadata,
         },
       },
@@ -264,7 +263,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
           ? `${baseUrl}/thank-you`
           : `${baseUrl}/questionary/step6`,
         metadata: {
-          current: 8,
+          current: 7,
           ...baseMetadata,
         },
       },
@@ -280,7 +279,7 @@ function getQuestionarySteps(storeKey: string, country: string) {
         previousStep: `${baseUrl}/questionary/step5`,
         nextStep: `${baseUrl}/thank-you`,
         metadata: {
-          current: 9,
+          current: 8,
           ...baseMetadata,
         },
       },

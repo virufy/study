@@ -14,8 +14,8 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import ProgressIndicator from 'components/ProgressIndicator';
 import Recaptcha from 'components/Recaptcha';
+import { PurpleTextBold } from 'components/Texts';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -28,7 +28,7 @@ import { doSubmit } from 'helper/submitHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, GrayExtraInfo, TempBeforeSubmitError,
+  QuestionText, StepTracker, TempBeforeSubmitError, MainContainer, QuestionAllApply,
 } from '../style';
 
 const schema = Yup.object({
@@ -47,7 +47,7 @@ const Step5 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -61,10 +61,15 @@ const Step5 = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -78,8 +83,9 @@ const Step5 = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   const onSubmit = async (values: Step5Type) => {
@@ -105,15 +111,20 @@ const Step5 = ({
   };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
+    <MainContainer>
+      {metadata && (
+        <>
+          <PurpleTextBold>
+            {metadata.current} {t('questionary:stepOf')} {metadata.total}
+          </PurpleTextBold>
+          <StepTracker progress={metadata.current} />
+        </>
+      )}
       <QuestionText bold={false}>
         <Trans i18nKey="questionary:respiration.question">
-          <strong>Which of the below respiratory conditions do you currently have?</strong> (Select all that apply)
+          <strong>Which of the below respiratory conditions do you currently have?</strong>
         </Trans>
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -124,6 +135,10 @@ const Step5 = ({
             value={value}
             onChange={v => onChange(v)}
             items={[
+              {
+                value: 'none',
+                label: t('questionary:respiration.options.none'),
+              },
               {
                 value: 'asthma',
                 label: t('questionary:respiration.options.asthma'),
@@ -145,13 +160,10 @@ const Step5 = ({
                 label: t('questionary:respiration.options.tuberculosis'),
               },
               {
-                value: 'none',
-                label: t('questionary:respiration.options.none'),
+                value: 'other',
+                label: t('questionary:medical.options.other'),
               },
             ]}
-            allowAddOther
-            addOtherLabel={t('questionary:respiration.options.addOther')}
-            otherPlaceholder={t('questionary:respiration.addOtherPlaceholder')}
             excludableValue="none"
           />
         )}
@@ -160,11 +172,6 @@ const Step5 = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          {metadata && (
-            <QuestionStepIndicator>
-              {metadata.current} {t('questionary:stepOf')} {metadata.total}
-            </QuestionStepIndicator>
-          )}
           {(metadata?.current ?? 5) === (metadata?.total ?? 6) && (
             <Recaptcha onChange={setCaptchaValue} />
           )}
@@ -177,10 +184,11 @@ const Step5 = ({
             invert
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

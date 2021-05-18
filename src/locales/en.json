@@ -153,6 +153,7 @@
       }
     },
     "ageGroup": "Please select your age group.",
+    "50+": "50 and over",
     "unselectedAgeGroup": "Select age group",
     "gender": {
       "question": "What is your gender identity?",
@@ -160,6 +161,7 @@
         "male": "Male",
         "female": "Female",
         "notToSay": "Prefer not to say",
+        "other": "Other",
         "selfDescribe": "Prefer to self-describe"
       }
     },
@@ -180,7 +182,7 @@
       }
     },
     "symptoms": {
-      "question": "<strong>Which of the below symptoms do you currently have?</strong> (Select all that apply)",
+      "question": "<strong>Which of the below symptoms do you currently have?</strong>",
       "options": {
         "bodyAches": "Body aches",
         "dryCough": "Cough (dry)",
@@ -200,7 +202,7 @@
     },
     "symptomsDate": "When did you begin experiencing cough, fever, and/or shortness of breath? Please estimate if unsure.",
     "respiration": {
-      "question": "<strong>Which of the below respiratory conditions do you currently have?</strong> (Select all that apply)",
+      "question": "<strong>Which of the below respiratory conditions do you currently have?</strong>",
       "options": {
         "asthma": "Asthma",
         "bronchitis": "Bronchitis",
@@ -214,7 +216,7 @@
       "addOtherPlaceholder": "Other condition"
     },
     "medical": {
-      "question": "<strong>Which of the below medical conditions do you currently have?</strong> (Select all that apply)",
+      "question": "<strong>Which of the below medical conditions do you currently have?</strong>",
       "options": {
         "chronicLung": "Chronic lung disease",
         "congestiveHeart": "Congestive heart failure",
@@ -225,6 +227,7 @@
         "pregnancy": "Pregnancy",
         "valvularHeart": "Valvular heart disease",
         "none": "None",
+        "other": "Other",
         "addOther": "+ Add other"
       },
       "addOtherPlaceholder": "Other condition"

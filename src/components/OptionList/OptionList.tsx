@@ -30,7 +30,7 @@ const OptionList = ({
   onChange, allowAddOther, addOtherLabel, enableOther, otherPlaceholder,
 }: OptionListProps) => {
   const [showOtherInput, setShowOtherInput] = useState(false);
-  console.log(value);
+
   useEffect(() => {
     setShowOtherInput(!!enableOther || !!value?.other);
   }, [value, enableOther]);

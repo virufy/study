@@ -30,18 +30,18 @@ export const StepTracker = styled.div<{ progress?: number }>`
   margin-bottom: 40px; 
   background-color: ${colors.purple_10};
   border-radius: 10px;
+  position: relative; 
 
   &:after{
     content: '';
     position: absolute; 
+    left: 0px;
     height: 8px;
     background-color: ${colors.purple};
-    width: ${props => (props.progress ? `${props.progress}%` : '0%')};
+    width: ${props => (props.progress ? `${props.progress * 16.8}px` : '0%')};
     border-radius: 10px;
   }
 `;
-
-/* Question 1 */
 
 export const WomanWithPhone = styled(WomanWithPhoneSvg)`
   width: 205px;
@@ -59,52 +59,28 @@ export const QuestionAllApply = styled.span`
   margin-left: 5px;
 `;
 
-export const GrayExtraInfo = styled.h6`
-  color: ${props => props.theme.colors.mineShaft_50};
-  font-family: "Source Sans Pro";
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 400;
-  margin-top: 10px;
-  text-align: left;
-
-  @media screen and (${props => props.theme.breakpoints.tablet}){
-    margin-top: 15px;
-    text-align: center;
-  }
-`;
-
-export const QuestionText = styled.p<{extraSpace?: boolean; first?: boolean; rare?: boolean; bold?: boolean; }>`
+export const QuestionText = styled.p<{extraSpace?: boolean; first?: boolean; hasNote?: boolean; rare?: boolean; bold?: boolean; }>`
   font-family: "Source Sans Pro";
   font-size: 1rem;
   line-height: 1.375rem;
   font-weight: ${({ bold }) => ((bold || bold === undefined) ? 700 : 400)};
   margin-top: ${({ first }) => (first ? '0px' : '40px')};
-  margin-bottom: 36px;
+  margin-bottom: ${({ hasNote }) => (hasNote ? '8px' : '36px')};
   color: ${props => props.theme.colors.darkBlack};
-
-  @media screen and (${props => props.theme.breakpoints.tablet}){
-    margin-bottom: ${props => (props.rare ? 23 : 60)}px;
-  }
 `;
 export const QuestionNote = styled.span`
   font-family: "Source Sans Pro";
   font-size: 12px;
   line-height: 142.69%;
   font-weight: normal;
-  margin-top: 12px;
+  margin-bottom: 32px;
   color: ${props => props.theme.colors.black};
   display: block;
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
     font-size: 1rem;
     line-height: 1.375rem;
-    margin-top: 0;
   }
-`;
-
-export const QuestionRequiredIndicatorText = styled.span`
-  color: ${props => props.theme.colors.red};
 `;
 
 export const BeforeSubmitText = styled.p`
@@ -120,5 +96,3 @@ color: ${props => props.theme.colors.red};
   text-align: center;
   margin-bottom: 16px;
 `;
-
-export const QuestionStepIndicator = styled.p``;

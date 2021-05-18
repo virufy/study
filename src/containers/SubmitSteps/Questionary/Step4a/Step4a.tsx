@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import ProgressIndicator from 'components/ProgressIndicator';
+import { PurpleTextBold } from 'components/Texts';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -26,7 +26,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, GrayExtraInfo,
+  QuestionText, StepTracker, MainContainer, QuestionAllApply,
 } from '../style';
 
 const covidSymptoms = ['dryCough', 'wetCough', 'feverChillsSweating', 'newOrWorseCough', 'breathShortness'];
@@ -48,7 +48,7 @@ const Step4a = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -60,10 +60,15 @@ const Step4a = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -77,8 +82,9 @@ const Step4a = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   const onSubmit = async (values: Step4aType) => {
@@ -113,15 +119,20 @@ const Step4a = ({
   };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
+    <MainContainer>
+      {metadata && (
+        <>
+          <PurpleTextBold>
+            {metadata.current} {t('questionary:stepOf')} {metadata.total}
+          </PurpleTextBold>
+          <StepTracker progress={metadata.current} />
+        </>
+      )}
       <QuestionText bold={false}>
         <Trans i18nKey="questionary:symptoms.question">
-          <strong>Which of the below symptoms do you currently have?</strong> (Select all that apply)
+          <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -132,6 +143,10 @@ const Step4a = ({
             value={value}
             onChange={v => onChange(v)}
             items={[
+              {
+                value: 'none',
+                label: t('questionary:symptoms.options.none'),
+              },
               {
                 value: 'bodyAches',
                 label: t('questionary:symptoms.options.bodyAches'),
@@ -176,14 +191,7 @@ const Step4a = ({
                 value: 'vomitingAndDiarrhea',
                 label: t('questionary:symptoms.options.vomitingAndDiarrhea'),
               },
-              {
-                value: 'none',
-                label: t('questionary:symptoms.options.none'),
-              },
             ]}
-            allowAddOther
-            addOtherLabel={t('questionary:symptoms.options.addOther')}
-            otherPlaceholder={t('questionary:symptoms.addOtherPlaceholder')}
             excludableValue="none"
           />
         )}
@@ -192,19 +200,15 @@ const Step4a = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
       <Portal>
-        {metadata && (
-          <QuestionStepIndicator>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </QuestionStepIndicator>
-        )}
         <WizardButtons
           leftLabel={t('questionary:nextButton')}
           leftHandler={handleSubmit(onSubmit)}
+          leftDisabled={!isValid}
           invert
         />
       </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 
