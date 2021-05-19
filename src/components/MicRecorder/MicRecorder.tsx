@@ -37,8 +37,8 @@ interface MicRecorderProps {
 const baseConfig = {
   usingMediaRecorder: false,
   sampleRate: 44100,
-  manualEncoderId: 'flac', // wav / mp3 / flac
-  processorBufferSize: 4096, // 4096 flac / 2048 wav
+  manualEncoderId: 'wav', // wav / mp3 / flac
+  processorBufferSize: 2048, // 4096 flac / 2048 wav
 };
 
 export interface RecorderServiceType {
