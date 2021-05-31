@@ -29,7 +29,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import {
   WelcomeContent, WelcomeStyledForm, LogoSubtitle,
   RegionContainer, WelcomeInput, ContainerNextButton, NextButton, ArrowRightSVG,
-  BoldBlackText, BoldPurpleText, SupportedBy, NuevaLogo,
+  BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo,
 } from '../style';
 
 const schema = Yup.object().shape({
@@ -72,7 +72,10 @@ const Step1 = (p: Wizard.StepProps) => {
   const onSubmit = async (values: Step1Type) => {
     if (values) {
       action(values);
-      if (p.nextStep) {
+      if (values.patientId && p.otherSteps?.nextStepPatient) {
+        setActiveStep(false);
+        history.push(p.otherSteps.nextStepPatient);
+      } else if (p.nextStep) {
         setActiveStep(false);
         history.push(p.nextStep);
       }
@@ -129,9 +132,9 @@ const Step1 = (p: Wizard.StepProps) => {
           {t('main:logoIntro', 'An Independent Nonprofit Research Organization')}
         </LogoSubtitle>
         <WelcomeContent mt={4}>
-          <BoldPurpleText mb={8}>
+          <CustomPurpleText mb={8}>
             {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
-          </BoldPurpleText>
+          </CustomPurpleText>
           <SupportedBy>
             Supported by
             <NuevaLogo />

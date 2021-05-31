@@ -13,7 +13,12 @@
     "nextButton": "Próximo",
     "createdBy": "Criado por",
     "installApp": "Instale como aplicativo",
-    "addToHomeScreen": "Adicionar à tela inicial"
+    "addToHomeScreen": "Adicionar à tela inicial",
+    "hello": "Olá,",
+    "patient": "Paciente",
+    "questionnaire": "Questionário",
+    "audioCollection": "Coleta de áudio",
+    "testResults" : "Resultados do teste"
   },
   "helpVirufy": {
     "title": "Sobre Nós",
@@ -118,7 +123,8 @@
         "pcr": "Baseado em PCR",
         "antibody": "teste de anticorpos para COVID-19",
         "unsure": "Inseguro",
-        "antigen": "Teste de antigénios"
+        "antigen": "Teste de antigénios(rápido)",
+        "neither": "Nem"
       }
     },
     "headerText2": "Questão a seguir",
@@ -152,7 +158,14 @@
         "unsure": "Inseguro"
       }
     },
-    "ageGroup": "Por favor, selecione sua faixa etária",
+    "vaccine": {
+      "question": "Você já recebeu a vacina de COVID-19?",
+      "options":{
+        "yes": "Sim",
+        "no": "Não"
+      }
+    },
+    "ageGroup": "Por favor, entre sua idade.",
     "enterAge": "Entre sua idade",
     "50+": "50 e mais",
     "unselectedAgeGroup": "Selecione sua faixa etária",

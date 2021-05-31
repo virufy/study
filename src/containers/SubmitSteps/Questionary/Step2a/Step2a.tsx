@@ -13,9 +13,6 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
-// Components
-import { PurpleTextBold } from 'components/Texts';
-
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
@@ -23,22 +20,22 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
-import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, StepTracker, QuestionNote,
+  QuestionText, MainContainer, AgeInput,
 } from '../style';
 
 const schema = Yup.object({
-  gender: Yup.object().required(),
+  ageGroup: Yup.string(),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
 
-const Step2 = ({
+const Step2a = ({
   previousStep,
   nextStep,
   storeKey,
+  otherSteps,
   metadata,
 }: Wizard.StepProps) => {
   // Hooks
@@ -63,25 +60,28 @@ const Step2 = ({
   });
   const { errors } = formState;
 
-  const {
-    isValid,
-  } = formState;
-
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (previousStep) {
+    const { testTaken } = state['submit-steps'];
+    if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
+      history.push(otherSteps.noTestStep);
+    } else if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [history, previousStep]);
+  }, [state, history, otherSteps, previousStep]);
+
+  const {
+    isValid,
+  } = formState;
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {
@@ -96,48 +96,20 @@ const Step2 = ({
 
   return (
     <MainContainer>
-      {metadata && (
-        <>
-          <PurpleTextBold>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </PurpleTextBold>
-          <StepTracker progress={metadata.current} />
-        </>
-      )}
-      <QuestionText extraSpace>{t('questionary:gender.question')}
-        <QuestionNote>{t('questionary:gender.note')}</QuestionNote>
-      </QuestionText>
+      <QuestionText extraSpace first>{t('questionary:ageGroup')}</QuestionText>
+
       <Controller
         control={control}
-        name="gender"
-        defaultValue={{ selected: [], other: '' }}
-        render={({ onChange, value }) => (
-          <OptionList
-            singleSelection
+        name="ageGroup"
+        defaultValue=""
+        render={({ onChange, value, name }) => (
+          <AgeInput
+            name={name}
             value={value}
-            onChange={v => onChange(v)}
-            items={[
-              {
-                value: 'female',
-                label: t('questionary:gender.options.female'),
-              },
-              {
-                value: 'male',
-                label: t('questionary:gender.options.male'),
-              },
-              {
-                value: 'transgender',
-                label: t('questionary:gender.options.transgender'),
-              },
-              {
-                value: 'other',
-                label: t('questionary:gender.options.other'),
-              },
-              {
-                value: 'notToSay',
-                label: t('questionary:gender.options.notToSay'),
-              },
-            ]}
+            onChange={onChange}
+            type="number"
+            placeholder={t('questionary:enterAge')}
+            autoComplete="Off"
           />
         )}
       />
@@ -157,4 +129,4 @@ const Step2 = ({
   );
 };
 
-export default React.memo(Step2);
+export default React.memo(Step2a);

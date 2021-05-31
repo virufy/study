@@ -13,9 +13,6 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
-// Components
-import { PurpleTextBold } from 'components/Texts';
-
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
@@ -26,7 +23,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, StepTracker, MainContainer, QuestionAllApply,
+  QuestionText, MainContainer, QuestionAllApply,
 } from '../style';
 
 const covidSymptoms = ['dryCough', 'wetCough', 'feverChillsSweating', 'newOrWorseCough', 'breathShortness'];
@@ -81,10 +78,10 @@ const Step4a = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step4aType) => {
@@ -120,14 +117,6 @@ const Step4a = ({
 
   return (
     <MainContainer>
-      {metadata && (
-        <>
-          <PurpleTextBold>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </PurpleTextBold>
-          <StepTracker progress={metadata.current} />
-        </>
-      )}
       <QuestionText bold={false}>
         <Trans i18nKey="questionary:symptoms.question">
           <strong>Which of the below symptoms do you currently have?</strong>
@@ -140,7 +129,7 @@ const Step4a = ({
         defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
-            isCheck
+            isCheckbox
             value={value}
             onChange={v => onChange(v)}
             items={[
@@ -193,7 +182,7 @@ const Step4a = ({
                 label: t('questionary:symptoms.options.vomitingAndDiarrhea'),
               },
             ]}
-            excludableValue="none"
+            excludableValues={['none']}
           />
         )}
       />

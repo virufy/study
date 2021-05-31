@@ -14,7 +14,8 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import { PurpleTextBold } from 'components/Texts';
+import OptionList from 'components/OptionList';
+import WizardButtons from 'components/WizardButtons';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -23,14 +24,12 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
-import OptionList from 'components/OptionList';
-import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, StepTracker, QuestionNote,
+  QuestionText, MainContainer, QuestionNote,
 } from '../style';
 
 const schema = Yup.object({
-  biologicalSex: Yup.string(),
+  gender: Yup.object().required(),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
@@ -78,10 +77,10 @@ const Step2b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {
@@ -96,39 +95,38 @@ const Step2b = ({
 
   return (
     <MainContainer>
-      {metadata && (
-        <>
-          <PurpleTextBold>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </PurpleTextBold>
-          <StepTracker progress={metadata.current} />
-        </>
-      )}
-      <QuestionText hasNote>
-        {t('questionary:biologicalSex.question')}
+      <QuestionText first>{t('questionary:gender.question')}
+        <QuestionNote>{t('questionary:gender.note')}</QuestionNote>
       </QuestionText>
-      <QuestionNote>{t('questionary:biologicalSex.note')}</QuestionNote>
       <Controller
         control={control}
-        name="biologicalSex"
-        defaultValue=""
+        name="gender"
+        defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
             singleSelection
-            value={{ selected: value ? [value] : [] }}
-            onChange={v => onChange(v.selected[0])}
+            value={value}
+            onChange={v => onChange(v)}
             items={[
               {
-                value: 'male',
-                label: t('questionary:biologicalSex.options.male'),
+                value: 'female',
+                label: t('questionary:gender.options.female'),
               },
               {
-                value: 'female',
-                label: t('questionary:biologicalSex.options.female'),
+                value: 'male',
+                label: t('questionary:gender.options.male'),
+              },
+              {
+                value: 'transgender',
+                label: t('questionary:gender.options.transgender'),
+              },
+              {
+                value: 'other',
+                label: t('questionary:gender.options.other'),
               },
               {
                 value: 'notToSay',
-                label: t('questionary:biologicalSex.options.notToSay'),
+                label: t('questionary:gender.options.notToSay'),
               },
             ]}
           />

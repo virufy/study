@@ -15,7 +15,6 @@ import { updateAction } from 'utils/wizard';
 
 // Components
 import Recaptcha from 'components/Recaptcha';
-import { PurpleTextBold } from 'components/Texts';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -29,7 +28,7 @@ import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
   QuestionText, TempBeforeSubmitError, MainContainer,
-  StepTracker, QuestionAllApply,
+  QuestionAllApply,
 } from '../style';
 
 const schema = Yup.object({
@@ -103,10 +102,10 @@ const Step6 = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   // const onSubmit = async (values: Step6Type) => {
@@ -121,15 +120,7 @@ const Step6 = ({
 
   return (
     <MainContainer>
-      {metadata && (
-        <>
-          <PurpleTextBold>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </PurpleTextBold>
-          <StepTracker progress={metadata.current} />
-        </>
-      )}
-      <QuestionText bold={false}>
+      <QuestionText first bold={false}>
         <Trans i18nKey="questionary:medical.question">
           <strong>Which of the below medical conditions do you currently have?</strong>
         </Trans>
@@ -141,6 +132,7 @@ const Step6 = ({
         defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
+            isCheckbox
             value={value}
             onChange={v => onChange(v)}
             items={[
@@ -185,7 +177,7 @@ const Step6 = ({
                 label: t('questionary:medical.options.other'),
               },
             ]}
-            excludableValue="none"
+            excludableValues={['none']}
           />
         )}
       />

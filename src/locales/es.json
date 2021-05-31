@@ -13,7 +13,12 @@
     "nextButton": "Siguiente",
     "createdBy": "Creado por",
     "installApp": "Instalar como aplicación",
-    "addToHomeScreen": "Agregar a la pantalla principal"
+    "addToHomeScreen": "Agregar a la pantalla principal",
+    "hello": "Hola,",
+    "patient": "Paciente",
+    "questionnaire": "Cuestionario",
+    "audioCollection": "Recolección de audio",
+    "testResults" : "Resultados del test"
   },
   "helpVirufy": {
     "title": "Acerca de Nosotros",
@@ -118,7 +123,8 @@
         "pcr": "Test basado en PCR ",
         "antibody": "Test de anticuerpos",
         "unsure": "Inseguro",
-        "antigen": "Test de antígenos"
+        "antigen": "Test de antígenos(rápido)",
+        "neither": "Ninguno"
       }
     },
     "headerText2": "Pregunta para ampliar",
@@ -152,7 +158,14 @@
         "unsure": "Inseguro"
       }
     },
-    "ageGroup": "Por favor, seleccione su grupo de edad.",
+    "vaccine": {
+      "question": "¿Ha recibido la vacuna de COVID-19?",
+      "options":{
+        "yes": "Si",
+        "no": "No"
+      }
+    },
+    "ageGroup": "Por favor, ingrese su edad.",
     "enterAge": "Ingrese su edad",
     "50+": "50 y más",
     "unselectedAgeGroup": "Seleccione el grupo de edad",

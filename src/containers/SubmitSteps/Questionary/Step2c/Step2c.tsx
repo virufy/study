@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -13,30 +13,26 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
-// Components
-import Recaptcha from 'components/Recaptcha';
-
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
-import { doSubmit } from 'helper/submitHelper';
 
 // Styles
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, TempBeforeSubmitError, MainContainer, QuestionAllApply,
+  QuestionText, MainContainer, QuestionNote,
 } from '../style';
 
 const schema = Yup.object({
-  currentRespiratoryCondition: Yup.object().required(),
+  biologicalSex: Yup.string(),
 }).defined();
 
-type Step5Type = Yup.InferType<typeof schema>;
+type Step2Type = Yup.InferType<typeof schema>;
 
-const Step5 = ({
+const Step2d = ({
   previousStep,
   nextStep,
   storeKey,
@@ -53,8 +49,6 @@ const Step5 = ({
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
-  const [submitError, setSubmitError] = React.useState<string | null>(null);
-  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
 
   // Form
   const {
@@ -87,75 +81,45 @@ const Step5 = ({
   }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
-  const onSubmit = async (values: Step5Type) => {
+  const onSubmit = async (values: Step2Type) => {
     if (values) {
-      if ((metadata?.current ?? 5) === (metadata?.total ?? 6)) {
-        await doSubmit({
-          setSubmitError: s => setSubmitError(!s ? null : t(s)),
-          state,
-          captchaValue,
-          action,
-          nextStep,
-          setActiveStep,
-          history,
-        });
-      } else {
-        action(values);
-        if (nextStep) {
-          setActiveStep(false);
-          history.push(nextStep);
-        }
+      action(values);
+      if (nextStep) {
+        setActiveStep(false);
+        history.push(nextStep);
       }
     }
   };
 
   return (
     <MainContainer>
-      <QuestionText bold={false}>
-        <Trans i18nKey="questionary:respiration.question">
-          <strong>Which of the below respiratory conditions do you currently have?</strong>
-        </Trans>
-        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
+      <QuestionText first hasNote>
+        {t('questionary:biologicalSex.question')}
       </QuestionText>
+      <QuestionNote>{t('questionary:biologicalSex.note')}</QuestionNote>
       <Controller
         control={control}
-        name="currentRespiratoryCondition"
-        defaultValue={{ selected: [], other: '' }}
+        name="biologicalSex"
+        defaultValue=""
         render={({ onChange, value }) => (
           <OptionList
-            value={value}
-            onChange={v => onChange(v)}
+            singleSelection
+            value={{ selected: value ? [value] : [] }}
+            onChange={v => onChange(v.selected[0])}
             items={[
               {
-                value: 'none',
-                label: t('questionary:respiration.options.none'),
+                value: 'male',
+                label: t('questionary:biologicalSex.options.male'),
               },
               {
-                value: 'asthma',
-                label: t('questionary:respiration.options.asthma'),
+                value: 'female',
+                label: t('questionary:biologicalSex.options.female'),
               },
               {
-                value: 'bronchitis',
-                label: t('questionary:respiration.options.bronchitis'),
-              },
-              {
-                value: 'copdEmphysema',
-                label: t('questionary:respiration.options.emphysema'),
-              },
-              {
-                value: 'pneumonia',
-                label: t('questionary:respiration.options.pneumonia'),
-              },
-              {
-                value: 'tuberculosis',
-                label: t('questionary:respiration.options.tuberculosis'),
-              },
-              {
-                value: 'other',
-                label: t('questionary:medical.options.other'),
+                value: 'notToSay',
+                label: t('questionary:biologicalSex.options.notToSay'),
               },
             ]}
-            excludableValues={['none']}
           />
         )}
       />
@@ -163,19 +127,11 @@ const Step5 = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          {(metadata?.current ?? 5) === (metadata?.total ?? 6) && (
-            <Recaptcha onChange={setCaptchaValue} />
-          )}
-          {submitError && (
-            <TempBeforeSubmitError>
-              {submitError}
-            </TempBeforeSubmitError>
-          )}
           <WizardButtons
-            invert
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
             leftDisabled={!isValid}
+            invert
           />
         </Portal>
       )}
@@ -183,4 +139,4 @@ const Step5 = ({
   );
 };
 
-export default React.memo(Step5);
+export default React.memo(Step2d);

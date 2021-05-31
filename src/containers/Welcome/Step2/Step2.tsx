@@ -21,7 +21,7 @@ import {
   HeaderImageContainer,
   HeaderImage,
   LogoWhiteBG,
-  BoldPurpleText,
+  CustomPurpleText,
   WelcomeContent,
   WelcomeBullets,
   BulletIndicator,
@@ -75,9 +75,9 @@ const Step2 = (p: Wizard.StepProps) => {
         />
         <LogoWhiteBG />
       </HeaderImageContainer>
-      <BoldPurpleText>
+      <CustomPurpleText>
         {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
-      </BoldPurpleText>
+      </CustomPurpleText>
       <WelcomeContent maxWidth={335} mt={0}>
         <BlackText>
           <Trans i18nKey="helpVirufy:introParagraph">

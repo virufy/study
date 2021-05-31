@@ -13,9 +13,6 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
-// Components
-import { PurpleTextBold } from 'components/Texts';
-
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
@@ -26,7 +23,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionNote, MainContainer, StepTracker,
+  QuestionText, QuestionNote, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
@@ -78,10 +75,10 @@ const Step3 = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step3Type) => {
@@ -96,14 +93,6 @@ const Step3 = ({
 
   return (
     <MainContainer>
-      {metadata && (
-        <>
-          <PurpleTextBold>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </PurpleTextBold>
-          <StepTracker progress={metadata.current} />
-        </>
-      )}
       <QuestionText extraSpace first>
         {t('questionary:smokeLastSixMonths.question')}
         <QuestionNote>{t('questionary:smokeLastSixMonths.note')}</QuestionNote>

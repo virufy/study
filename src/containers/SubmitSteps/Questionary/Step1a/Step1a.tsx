@@ -32,7 +32,7 @@ import {
 
 const schema = Yup.object({
   testTaken: Yup.array().of(Yup.string().required()).required().default([])
-    .test('SelecteOne', 'Select one', v => !(!!v && v.length > 1 && v.includes('unsure'))),
+    .test('SelecteOne', 'Select one', v => !(!!v && v.length > 1 && (v.includes('unsure') || v.includes('neither')))),
 }).defined();
 
 type Step1aType = Yup.InferType<typeof schema>;
@@ -94,10 +94,10 @@ const Step1a = ({
     if (values) {
       const { testTaken } = values;
       if (testTaken) {
-        const includesNeither = ((testTaken as unknown) as string[]).includes('unsure');
-
+        const includesNeither = ((testTaken as unknown) as string[]).includes('neither');
+        const includesUnsure = ((testTaken as unknown) as string[]).includes('unsure');
         action(values);
-        if (includesNeither && otherSteps && otherSteps.noTestStep) {
+        if ((includesNeither || includesUnsure) && otherSteps && otherSteps.noTestStep) {
           setActiveStep(false);
           history.push(otherSteps.noTestStep);
         } else if (nextStep) {
@@ -122,6 +122,7 @@ const Step1a = ({
         defaultValue={[]}
         render={({ onChange, value }) => (
           <OptionList
+            isCheckbox
             value={{ selected: value }}
             onChange={v => onChange(v.selected)}
             items={[
@@ -141,8 +142,12 @@ const Step1a = ({
                 value: 'unsure',
                 label: t('questionary:testTaken.options.unsure'),
               },
+              {
+                value: 'neither',
+                label: t('questionary:testTaken.options.neither'),
+              },
             ]}
-            excludableValue="unsure"
+            excludableValues={['unsure', 'neither']}
           />
         )}
       />

@@ -13,7 +13,7 @@ import { resetStore } from 'utils/wizard';
 
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
-import { getSpeechContext } from 'helper/stepsDefinitions';
+import { getPatientId, getSpeechContext } from 'helper/stepsDefinitions';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -35,6 +35,7 @@ const ThankYou = (p: Wizard.StepProps) => {
 
   const history = useHistory();
   const location = useLocation<ThankYouLocation>();
+  const patientId = getPatientId();
 
   const submissionId = location.state?.submissionId;
 
@@ -62,7 +63,7 @@ const ThankYou = (p: Wizard.StepProps) => {
   return (
     <ThankYouLayout>
       <ThankYouTitle>{t('thankyou:title')}</ThankYouTitle>
-      <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>
+      {!patientId && <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>}
       {submissionId && (
         <SubmissionIdBox>
           <Trans i18nKey="thankyou:paragraph2">
@@ -72,19 +73,25 @@ const ThankYou = (p: Wizard.StepProps) => {
           </Trans>
         </SubmissionIdBox>
       )}
-      <BeforeSubmitText>
-        <Trans i18nKey="thankyou:paragraph3">
-          Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized
-          data in future.
-          <br /><br />
-          If you later develop symptoms such as cough, fever, or shortness of breath, please come back to resubmit your
-          latest cough sounds.
-        </Trans>
-      </BeforeSubmitText>
+      {!patientId
+      && (
+        <>
+          <BeforeSubmitText>
+            <Trans i18nKey="thankyou:paragraph3">
+              Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized
+              data in future.
+              <br /><br />
+              If you later develop symptoms such as cough, fever, or shortness of breath, please come
+              back to resubmit your
+              latest cough sounds.
+            </Trans>
+          </BeforeSubmitText>
 
-      <StayInTouch />
+          <StayInTouch />
 
-      <SocialIcons />
+          <SocialIcons />
+        </>
+      )}
 
       <CreatedBy inline={false} mt="72px" />
     </ThankYouLayout>

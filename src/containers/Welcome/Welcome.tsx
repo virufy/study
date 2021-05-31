@@ -25,11 +25,23 @@ const stepsWithoutDots: Wizard.Step[] = [
     props: {
       storeKey: StoreKey,
       nextStep: `${baseUrl}/step-2`,
+      otherSteps: {
+        nextStepPatient: `${baseUrl}/patientSummary`,
+      },
     },
   },
   {
     path: '/step-2',
     componentPath: 'Welcome/Step2',
+    props: {
+      storeKey: StoreKey,
+      previousStep: `${baseUrl}`,
+      nextStep: `${baseUrl}/step-3`,
+    },
+  },
+  {
+    path: '/patientSummary',
+    componentPath: 'Welcome/PatientSummary',
     props: {
       storeKey: StoreKey,
       previousStep: `${baseUrl}`,

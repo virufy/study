@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import { PurpleTextBold } from 'components/Texts';
+import OptionList from 'components/OptionList';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -25,11 +25,11 @@ import { scrollToTop } from 'helper/scrollHelper';
 // Styles
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, StepTracker, AgeInput,
+  QuestionText, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.string(),
+  vaccine: Yup.string(),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
@@ -66,7 +66,7 @@ const Step2 = ({
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     const { testTaken } = state['submit-steps'];
-    if (testTaken.includes('unsure') && otherSteps) {
+    if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
       history.push(otherSteps.noTestStep);
     } else if (previousStep) {
       history.push(previousStep);
@@ -81,10 +81,10 @@ const Step2 = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {
@@ -99,28 +99,27 @@ const Step2 = ({
 
   return (
     <MainContainer>
-      {metadata && (
-        <>
-          <PurpleTextBold>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </PurpleTextBold>
-          <StepTracker progress={metadata.current} />
-        </>
-      )}
-      <QuestionText extraSpace first>{t('questionary:ageGroup')}</QuestionText>
-
+      <QuestionText first>{t('questionary:vaccine.question')}
+      </QuestionText>
       <Controller
         control={control}
-        name="ageGroup"
+        name="vaccine"
         defaultValue=""
-        render={({ onChange, value, name }) => (
-          <AgeInput
-            name={name}
-            value={value}
-            onChange={onChange}
-            type="number"
-            placeholder={t('questionary:enterAge')}
-            autoComplete="Off"
+        render={({ onChange, value }) => (
+          <OptionList
+            singleSelection
+            value={{ selected: value ? [value] : [] }}
+            onChange={v => onChange(v.selected[0])}
+            items={[
+              {
+                value: 'yes',
+                label: t('questionary:vaccine.options.yes'),
+              },
+              {
+                value: 'no',
+                label: t('questionary:vaccine.options.no'),
+              },
+            ]}
           />
         )}
       />

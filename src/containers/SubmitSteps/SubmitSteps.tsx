@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Wizard from 'components/Wizard';
 
 // Local
-import stepsDefinition, { getCountry } from 'helper/stepsDefinitions';
+import stepsDefinition, { getCountry, getPatientId } from 'helper/stepsDefinitions';
 
 setStorageType(window.localStorage);
 
@@ -88,7 +88,8 @@ const SubmitSteps = () => {
 
 const WrapperSubmitSteps = () => {
   const country = getCountry();
-  const steps = React.useMemo(() => stepsDefinition(StoreKey, country), [country]);
+  const patientId = getPatientId();
+  const steps = React.useMemo(() => stepsDefinition(StoreKey, country, patientId), [country, patientId]);
   return (
     <Wizard
       steps={steps}

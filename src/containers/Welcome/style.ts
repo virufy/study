@@ -4,6 +4,7 @@ import { ReactComponent as ArrowRight } from 'assets/icons/arrowRight.svg';
 import { ReactComponent as AboutUs } from 'assets/images/about-us.svg';
 import { ReactComponent as LogoSplash } from 'assets/virufyLogoWhiteBox.svg';
 import { ReactComponent as NuevaLogoSVG } from 'assets/images/nuevaLogo.svg';
+import { ReactComponent as ChevronRightSVG } from 'assets/icons/chevronRight.svg';
 
 interface WelcomeTitleProps {
   fontSize?: number;
@@ -226,14 +227,14 @@ export const LogoWhiteBG = styled(LogoSplash)`
   }
 `;
 
-export const BoldPurpleText = styled.h2<{ mb?: number }>`
+export const CustomPurpleText = styled.h2<{ mb?: number; mt?: number; isLight?: boolean; left?: boolean}>`
   font-family: 'Biko';
   font-size: 24px;
   line-height: 28px;
   color: ${({ theme }) => theme.colors.purple}; 
-  text-align: center;
-  font-weight: 700;
-  margin: 32px auto ${({ mb = 32 }) => mb}px auto;
+  text-align: ${({ left }) => (left ? 'left' : 'center')};
+  font-weight: ${({ isLight }) => (isLight ? '200' : '700')};
+  margin: ${({ mt = 32 }) => mt}px auto ${({ mb = 32 }) => mb}px auto;
   white-space: pre-wrap;
 
   max-width: 320px;
@@ -336,6 +337,33 @@ export const WelcomeItemListItem = styled.li`
   &:not(:first-of-type){
       margin-top: 1.25rem;
     }
+`;
+
+/* Patient Summary */
+
+export const OptionsContainer = styled.div<{ isFirst?: boolean }>`
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  
+  height: 60px;
+  width: 100%;
+  border-top: ${({ isFirst }) => (isFirst ? '1px solid  #CFCFCF' : '0px')};;
+  border-bottom: 1px solid #CFCFCF;
+  padding: 0px 20px;
+
+  font-size: 14px; 
+  line-height: 20px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    max-width: 470px;
+    }
+`;
+export const ChevronRight = styled(ChevronRightSVG)`
+  width: 6px;
+  height: 12.5px;
+  margin-right: 5px;
+  cursor: pointer;
 `;
 
 /**/

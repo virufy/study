@@ -49,6 +49,7 @@ export async function doSubmit({
       antigenTestDate,
       antigenTestResult,
 
+      vaccine,
       ageGroup,
       gender,
       biologicalSex,
@@ -99,6 +100,10 @@ export async function doSubmit({
     if (testTaken.includes('antigen')) {
       body.append('antigenTestDate', antigenTestDate.toISOString());
       body.append('antigenTestResult', antigenTestResult);
+    }
+
+    if (vaccine) {
+      body.append('vaccine', vaccine);
     }
 
     if (ageGroup !== 'unselected') {
