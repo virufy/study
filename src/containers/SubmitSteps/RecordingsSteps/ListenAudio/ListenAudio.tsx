@@ -313,8 +313,6 @@ const ListenAudio = ({
             invert
             leftLabel={t('recordingsListen:next')}
             leftHandler={handleNext}
-            rightLabel={t('recordingsListen:retake')}
-            rightHandler={handleRemoveFile}
           />
         </Portal>
       )}

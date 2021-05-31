@@ -23,10 +23,11 @@ interface OptionListProps {
   addOtherLabel?: string;
   enableOther?: boolean;
   otherPlaceholder?: string;
+  isCheck?: boolean;
 }
 const defaultValue = { selected: [], other: '' };
 const OptionList = ({
-  value = defaultValue, items, excludableValue, singleSelection,
+  value = defaultValue, items, excludableValue, singleSelection, isCheck,
   onChange, allowAddOther, addOtherLabel, enableOther, otherPlaceholder,
 }: OptionListProps) => {
   const [showOtherInput, setShowOtherInput] = useState(false);
@@ -102,7 +103,7 @@ const OptionList = ({
             isSelected={isSelected}
           >
             {item.label}
-            <OptionListCheck isSelected={isSelected} />
+            <OptionListCheck isSelected={isSelected} check={isCheck} />
           </OptionListItem>
         );
       })}

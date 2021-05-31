@@ -100,7 +100,9 @@ const Introduction = ({
         </WelcomeBullets>
         <BlackText>
           <Trans i18nKey="recordingsIntroduction:recordCough.intro1">
-            Find a quiet environment that is 20 feet away from those around you.
+            Find a <strong>quiet environment</strong> at least
+            <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask.
+            If you are feeling ill, please sit down.
           </Trans>
         </BlackText>
       </InstructionContainer>
@@ -111,7 +113,9 @@ const Introduction = ({
         </WelcomeBullets>
         <BlackText>
           <Trans i18nKey="recordingsIntroduction:recordCough.intro2">
-            Wear a surgical or cloth mask and hold your device two hands-length away from your face.
+            Hold your device <strong>1-2 ft (30-60 cm)</strong>
+            away from your mouth and <strong>do not obstruct</strong>
+            or cover your device with plastic. Do not cough violently or too forcefully.
           </Trans>
         </BlackText>
       </InstructionContainer>
@@ -124,14 +128,13 @@ const Introduction = ({
           {
           isCoughLogic ? (
             <Trans i18nKey="recordingsRecord:textCough">
-              Click the record button below and
-              <strong>cough intentionally three times with a deep breath between each cough.</strong>
-              When you are done, tap the stop button.
+              Tap the record button and <strong>cough intentionally</strong>
+              into the bottom of your phone <strong>3 times</strong> with a
+              <strong> deep breath</strong> between each cough. When you are done, tap the stop button.
             </Trans>
           ) : (
             <Trans i18nKey="recordingsRecord:textSpeech">
-              Click the record button below and
-              <strong>say a sustained ‘aaah’ for at least 5 seconds.</strong>
+              Tap the record button below and <strong>say a sustained ‘aaaaah’ for at least 5 seconds.</strong>
               When you are done, tap the stop button.
             </Trans>
           )

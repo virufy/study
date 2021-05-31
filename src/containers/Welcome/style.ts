@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowRight } from 'assets/icons/arrowRight.svg';
 import { ReactComponent as AboutUs } from 'assets/images/about-us.svg';
 import { ReactComponent as LogoSplash } from 'assets/virufyLogoWhiteBox.svg';
+import { ReactComponent as NuevaLogoSVG } from 'assets/images/nuevaLogo.svg';
 
 interface WelcomeTitleProps {
   fontSize?: number;
@@ -69,18 +70,18 @@ export const InnerContainerShapeDown = styled.div`
 export const LogoSubtitle = styled.div`
   font-family: 'Open Sans';
   font-weight: 200;
-  font-size: 0.8rem;
+  font-size: 12px;
   line-height: 20px;
   color: ${props => props.theme.colors.purple};;
   text-align: center; 
 `;
 
 export const WelcomeInput = styled.input`
-  background-color: ${props => props.theme.colors.purple_5};;
+  background-color: ${props => props.theme.colors.midGray};
   border-radius: 4px;
   border: 0;
   border-radius: 15px;
-  color: ${props => props.theme.colors.mineShaft_50};
+  color: ${props => props.theme.colors.mineShaft};
   font-family: 'Source Sans Pro';
   margin: auto;
   padding: 12px 15px;
@@ -123,7 +124,7 @@ export const NextButton = styled.button<{ isDisable?: boolean;}>`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.purple_10}; 
+  background-color: #EBF1FC; 
   opacity: ${({ isDisable }) => (isDisable ? '0.5' : '1')};
   border: 0px;
   margin-bottom: 30px;
@@ -158,6 +159,19 @@ export const BoldBlackText = styled.h2`
   @media screen and (${props => props.theme.breakpoints.tablet}){
     max-width: 348px;
   }
+`;
+
+export const SupportedBy = styled.p`
+  color: #4E92CE;
+  font-size: 14px; 
+  text-align: center; 
+  font-weight: 600; 
+`;
+
+export const NuevaLogo = styled(NuevaLogoSVG)`
+  width: 49px;
+  height: 17px;
+  margin-left: 5px;
 `;
 
 /* Step 2 */
@@ -212,14 +226,14 @@ export const LogoWhiteBG = styled(LogoSplash)`
   }
 `;
 
-export const BoldPurpleText = styled.h2`
+export const BoldPurpleText = styled.h2<{ mb?: number }>`
   font-family: 'Biko';
   font-size: 24px;
   line-height: 28px;
   color: ${({ theme }) => theme.colors.purple}; 
   text-align: center;
   font-weight: 700;
-  margin: 32px auto;
+  margin: 32px auto ${({ mb = 32 }) => mb}px auto;
   white-space: pre-wrap;
 
   max-width: 320px;

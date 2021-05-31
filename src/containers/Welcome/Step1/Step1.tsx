@@ -29,7 +29,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import {
   WelcomeContent, WelcomeStyledForm, LogoSubtitle,
   RegionContainer, WelcomeInput, ContainerNextButton, NextButton, ArrowRightSVG,
-  BoldBlackText,
+  BoldBlackText, BoldPurpleText, SupportedBy, NuevaLogo,
 } from '../style';
 
 const schema = Yup.object().shape({
@@ -128,7 +128,14 @@ const Step1 = (p: Wizard.StepProps) => {
         <LogoSubtitle>
           {t('main:logoIntro', 'An Independent Nonprofit Research Organization')}
         </LogoSubtitle>
-        <WelcomeContent mt={75}>
+        <WelcomeContent mt={4}>
+          <BoldPurpleText mb={8}>
+            {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
+          </BoldPurpleText>
+          <SupportedBy>
+            Supported by
+            <NuevaLogo />
+          </SupportedBy>
           <BoldBlackText>
             {t('main:selectYourLanguage', 'Language')}
           </BoldBlackText>

@@ -96,3 +96,28 @@ color: ${props => props.theme.colors.red};
   text-align: center;
   margin-bottom: 16px;
 `;
+
+export const AgeInput = styled.input`
+  background-color: ${props => props.theme.colors.midGray};
+  border-radius: 4px;
+  border: 0;
+  border-radius: 15px;
+  color: ${props => props.theme.colors.mineShaft};
+  font-family: 'Source Sans Pro';
+  margin: auto;
+  padding: 12px 15px;
+
+  height: 48px;
+  width: 100%;
+  max-width: 320px;
+  
+
+  ::placeholder {
+    color: #A3A3A3;
+    font-size: 14px;
+  }
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    max-width: 348px;
+    }
+`;

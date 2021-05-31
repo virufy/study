@@ -140,6 +140,7 @@ const Step4a = ({
         defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
+            isCheck
             value={value}
             onChange={v => onChange(v)}
             items={[

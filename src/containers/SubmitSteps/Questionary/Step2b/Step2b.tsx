@@ -126,6 +126,10 @@ const Step2b = ({
                 value: 'female',
                 label: t('questionary:biologicalSex.options.female'),
               },
+              {
+                value: 'notToSay',
+                label: t('questionary:biologicalSex.options.notToSay'),
+              },
             ]}
           />
         )}

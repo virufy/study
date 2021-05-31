@@ -51,8 +51,8 @@
     "recordCough": {
       "header": "Gravar sua fala",
       "title": "Instruções",
-      "intro1": "Encontre um ambiente tranqüilo que esteja a 6 metros de distância dos que o rodeiam",
-      "intro2": "Use uma máscara cirúrgica ou de pano e mantenha seu dispositivo a duas mãos de distância do seu rosto"
+      "intro1": "Encontre um <strong>ambiente silencioso</strong> a pelo menos <strong>6m</strong> de distância dos outros e use um pano ou máscara cirúrgica. Se você estiver se sentindo doente, por favor, sente-se.",
+      "intro2": "Mantenha seu dispositivo a <strong>30-60 cm</strong> de distância de sua boca e <strong>não obstrua</strong> ou cubra seu dispositivo com plástico. Não tossir violentamente ou com muita força."
     },
     "recordSpeech": {
       "header": "Gravar sua fala",
@@ -72,8 +72,8 @@
     },
     "next": "Continuar",
     "delete": "Deletar",
-    "textCough": "Clique no botão de gravação abaixo e <strong>tussa intencionalmente três vezes com um sopro profundo entre cada tosse.</strong> Quando terminar, toque no botão de parada",
-    "textSpeech": "Clique no botão de gravação abaixo e <strong>diga um 'aaah' sustentado por pelo menos 5 segundos.</strong> Quando terminar, toque no botão de parada",
+    "textCough": "Toque no botão gravar e <strong>tussa intencionalmente</strong> no fundo de seu telefone <strong>3 vezes</strong> com uma <strong>respiração profunda</strong> entre cada tosse. Quando terminar, toque no botão de parada.",
+    "textSpeech": "Toque no botão de gravação abaixo e <strong>diga um 'aaaaah' sustentado por pelo menos 5 segundos.</strong> Quando terminar, toque no botão de parada.",
     "textNext": "Clique em Continuar",
     "textCount": "Clique no botão gravar e conte claramente de um até dez. Quando acabar, clique em continuar.",
     "upload": "Faça o upload de seu próprio arquivo",
@@ -108,7 +108,7 @@
     "retake": "Retomar"
   },
   "questionary": {
-    "headerText": "Perguntas",
+    "headerText": "Pergunta",
     "title": "Vamos responder algumas perguntas rápidas!",
     "caption": "Por favor, responda o melhor que puder.",
     "allThatApply": "(selecione tudo que se aplica)",
@@ -153,24 +153,28 @@
       }
     },
     "ageGroup": "Por favor, selecione sua faixa etária",
+    "enterAge": "Entre sua idade",
     "50+": "50 e mais",
     "unselectedAgeGroup": "Selecione sua faixa etária",
     "gender": {
       "question": "Com qual gênero você se identifica?",
+      "note": "Como você se descreve?",
       "options": {
         "male": "Masculino",
         "female": "Feminino",
-        "notToSay": "Prefiro não responder",
+        "notToSay": "Recusar-se a responder",
         "other": "Outro",
+        "transgender": "Transgênero",
         "selfDescribe": "Prefiro me descrever"
       }
     },
     "biologicalSex": {
       "question": "Qual o seu sexo biológico?",
-      "note": "O som das vozes masculinas e femininas variam. Isto é importante para ajudar a IA a detectar a COVID-19.",
+      "note": "Que sexo lhe foi designado ao nascer, em sua certidão de nascimento original? Esta informação é importante para que a IA ajude a detectar a COVID-19, pois o som da voz varia entre os gêneros.",
       "options": {
         "male": "Masculino",
-        "female": "Feminino"
+        "female": "Feminino",
+        "notToSay": "Recusar-se a responder"
       }
     },
     "smokeLastSixMonths": {

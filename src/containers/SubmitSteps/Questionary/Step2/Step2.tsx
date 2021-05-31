@@ -23,15 +23,13 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
-import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, StepTracker,
+  QuestionText, MainContainer, StepTracker, AgeInput,
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.array().of(Yup.string().required()).required().default([])
-    .test('SelecteOne', 'Select one', v => !(!!v && v.length > 1)),
+  ageGroup: Yup.string(),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
@@ -54,17 +52,6 @@ const Step2 = ({
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
-
-  const ageGroups = [
-    { age: '18 - 20' },
-    { age: '21 - 29' },
-    { age: '30 - 39' },
-    { age: '40 - 49' },
-    { age: '50 - 59' },
-    { age: '60 - 69' },
-    { age: '70 - 79' },
-    { age: '80+' },
-  ];
 
   // Form
   const {
@@ -125,13 +112,15 @@ const Step2 = ({
       <Controller
         control={control}
         name="ageGroup"
-        defaultValue={[]}
-        render={({ onChange, value }) => (
-          <OptionList
-            singleSelection
-            value={{ selected: value }}
-            onChange={v => onChange(v.selected)}
-            items={ageGroups.map(({ age }) => ({ value: age, label: age }))}
+        defaultValue=""
+        render={({ onChange, value, name }) => (
+          <AgeInput
+            name={name}
+            value={value}
+            onChange={onChange}
+            type="number"
+            placeholder={t('questionary:enterAge')}
+            autoComplete="Off"
           />
         )}
       />

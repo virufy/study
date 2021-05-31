@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import { TitleBlack, PurpleTextBold } from 'components/Texts';
+import { TitleBlack } from 'components/Texts';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -26,7 +26,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  MainContainer, StepTracker, QuestionText, QuestionAllApply,
+  MainContainer, QuestionText, QuestionAllApply,
   WomanWithPhone,
 } from '../style';
 
@@ -83,11 +83,11 @@ const Step1a = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
     setSubtitle('');
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, t, metadata]);
 
   // Handlers
   const onSubmit = async (values: Step1aType) => {
@@ -112,14 +112,6 @@ const Step1a = ({
     <MainContainer>
       <TitleBlack>{t('questionary:title')}</TitleBlack>
       <WomanWithPhone />
-      {metadata && (
-        <>
-          <PurpleTextBold>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </PurpleTextBold>
-          <StepTracker progress={metadata.current} />
-        </>
-      )}
       <QuestionText>{t('questionary:testTaken.question')}
         <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>

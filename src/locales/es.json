@@ -72,8 +72,8 @@
     },
     "next": "Continuar",
     "delete": "Borrar",
-    "textCough": "Haz clic en el botón de grabación de abajo y <strong>tose intencionadamente tres veces con una respiración profunda entre cada tos.</strong> Cuando hayas terminado, toca el botón de parada",
-    "textSpeech": "Haz clic en el botón de grabación de abajo y <strong>dice un 'aaah' sostenido durante al menos 5 segundos.</strong> Cuando hayas terminado, toca el botón de parada",
+    "textCough": "Haga clic en el botón de grabación y <strong> tosa intencionadamente </strong> en la parte inferior de su teléfono <strong> 3 veces </strong> con una <strong> respiración profunda </strong> entre cada tos. Cuando haya terminado, haga clic en el botón de pausa.",
+    "textSpeech": "Haz clic en el botón de grabación de abajo y <strong>di un 'aaah' sostenido durante al menos 5 segundos.</strong> Cuando hayas terminado, toca el botón de parar",
     "textNext": "Haz clic en continuar para proseguir",
     "textCount": "Haga clic en el botón del micrófono y <strong> tosa intencionadamente </strong> en la parte inferior de su teléfono <strong> 3 veces </strong> con una <strong> respiración profunda </strong> entre cada tos. Cuando haya terminado, haga clic en el botón de pausa.",
     "upload": "Sube tu propio archivo",
@@ -108,7 +108,7 @@
     "retake": "Retomar"
   },
   "questionary": {
-    "headerText": "Preguntas",
+    "headerText": "Pregunta",
     "title": "¡Vamos a responder algunas preguntas rápidas!",
     "caption": "Por favor, contesta lo mejor que puedas.",
     "allThatApply": "(seleccione todas las que correspondan)",
@@ -153,24 +153,28 @@
       }
     },
     "ageGroup": "Por favor, seleccione su grupo de edad.",
+    "enterAge": "Ingrese su edad",
     "50+": "50 y más",
     "unselectedAgeGroup": "Seleccione el grupo de edad",
     "gender": {
-      "question": "Cuál es su identidad de género?",
+      "question": "¿Cuál es su identidad de género?",
+      "note": "¿Cómo te describes a ti mismo?",
       "options": {
         "male": "Masculino",
         "female": "Femenino",
-        "notToSay": "Prefiero no decirlo",
+        "notToSay": "Declina contestar",
         "other": "Otro",
+        "transgender": "Transgénero",
         "selfDescribe": "Prefiero autodescribirme"
       }
     },
     "biologicalSex": {
       "question": "¿Cuál es su sexo biológico?",
-      "note": "El sonido de la voz de los hombres y las mujeres varía. Esto es importante para que la IA ayude a detectar el COVID-19.",
+      "note": "¿Qué sexo se le asignó al nacer, en su certificado de nacimiento original? Esta información es importante para que la IA ayude a detectar el COVID-19, ya que el sonido de la voz varía según el sexo.",
       "options": {
         "male": "Masculino",
-        "female": "Femenino"
+        "female": "Femenino",
+        "notToSay": "Declina contestar"
       }
     },
     "smokeLastSixMonths": {

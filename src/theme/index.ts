@@ -12,7 +12,8 @@ export const colors = {
   lightGray: '#F2F2F2',
   gray: '#C4C4C4',
   mercury: '#F9F9F9',
-  midGray: '#DEDEDE',
+  midGrayBlue: '#EBF1FC',
+  midGray: '#F5F8FD',
   midDarkGray: '#D1D1D1',
   mineShaft: '#393939',
   mineShaft_50: 'rgba(56, 56, 56, 0.5)', // 393939

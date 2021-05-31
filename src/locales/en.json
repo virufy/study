@@ -51,8 +51,8 @@
     "recordCough": {
       "header": "Record your cough",
       "title": "Instructions",
-      "intro1": "Find a quiet environment that is 20 feet away from those around you.",
-      "intro2": "Wear a surgical or cloth mask and hold your device two hands-length away from your face."
+      "intro1": "Find a <strong>quiet environment</strong> at least <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask. If you are feeling ill, please sit down.",
+      "intro2": "Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and <strong>do not obstruct</strong> or cover your device with plastic. Do not cough violently or too forcefully."
     },
     "recordSpeech": {
       "header": "Record your speech",
@@ -72,8 +72,8 @@
     },
     "next": "Continue",
     "delete": "Delete",
-    "textCough": "Click the record button below and <strong>cough intentionally three times with a deep breath between each cough.</strong> When you are done, tap the stop button.",
-    "textSpeech": "Click the record button below and <strong>say a sustained ‘aaah’ for at least 5 seconds.</strong> When you are done, tap the stop button.",
+    "textCough": "Tap the record button and <strong>cough intentionally</strong> into the bottom of your phone <strong>3 times</strong> with a <strong>deep breath</strong> between each cough. When you are done, tap the stop button. ",
+    "textSpeech": "Tap the record button below and <strong>say a sustained ‘aaaaah’ for at least 5 seconds.</strong> When you are done, tap the stop button.",
     "textNext": "Click continue to proceed.",
     "textCount": "Click the record button and count clearly from one to ten. When you are done, click continue.",
     "upload": "Upload your own file",
@@ -108,7 +108,7 @@
     "retake": "Retake"
   },
   "questionary": {
-    "headerText": "Questions",
+    "headerText": "Question",
     "title": "Let’s answer some quick questions!",
     "caption": "Please answer to the best of your ability.",
     "allThatApply": "(select all that apply)",
@@ -153,24 +153,28 @@
       }
     },
     "ageGroup": "Please select your age group.",
+    "enterAge": "Enter your age",
     "50+": "50 and over",
     "unselectedAgeGroup": "Select age group",
     "gender": {
       "question": "What is your gender identity?",
+      "note": "How do you describe yourself?",
       "options": {
         "male": "Male",
         "female": "Female",
-        "notToSay": "Prefer not to say",
+        "notToSay": "Decline to answer",
         "other": "Other",
+        "transgender": "Transgender",
         "selfDescribe": "Prefer to self-describe"
       }
     },
     "biologicalSex": {
       "question": "What is your biological sex?",
-      "note": "The sound of the voice for males and females varies. This is important for the AI to help detect COVID-19.",
+      "note": "What sex were you assigned at birth, on your original birth certificate? This information is important for the AI to help detect COVID-19 as the sound of the voice varies across genders.",
       "options": {
         "male": "Male",
-        "female": "Female"
+        "female": "Female",
+        "notToSay": "Decline to answer"
       }
     },
     "smokeLastSixMonths": {

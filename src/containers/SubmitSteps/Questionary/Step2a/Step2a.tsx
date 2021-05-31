@@ -26,7 +26,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, StepTracker,
+  QuestionText, MainContainer, StepTracker, QuestionNote,
 } from '../style';
 
 const schema = Yup.object({
@@ -104,7 +104,9 @@ const Step2 = ({
           <StepTracker progress={metadata.current} />
         </>
       )}
-      <QuestionText extraSpace>{t('questionary:gender.question')}</QuestionText>
+      <QuestionText extraSpace>{t('questionary:gender.question')}
+        <QuestionNote>{t('questionary:gender.note')}</QuestionNote>
+      </QuestionText>
       <Controller
         control={control}
         name="gender"
@@ -116,20 +118,24 @@ const Step2 = ({
             onChange={v => onChange(v)}
             items={[
               {
-                value: 'male',
-                label: t('questionary:gender.options.male'),
-              },
-              {
                 value: 'female',
                 label: t('questionary:gender.options.female'),
               },
               {
-                value: 'notToSay',
-                label: t('questionary:gender.options.notToSay'),
+                value: 'male',
+                label: t('questionary:gender.options.male'),
+              },
+              {
+                value: 'transgender',
+                label: t('questionary:gender.options.transgender'),
               },
               {
                 value: 'other',
                 label: t('questionary:gender.options.other'),
+              },
+              {
+                value: 'notToSay',
+                label: t('questionary:gender.options.notToSay'),
               },
             ]}
           />

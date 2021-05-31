@@ -14,18 +14,10 @@ export const HeaderContainer = styled.div<{ type?: string }>`
 
   background-color: ${({ type }) => {
     switch (type) {
-      case 'tertiary':
-        return '#FFF';
-      default:
+      case 'secondary':
         return 'rgba(53, 120, 222, 0.1)';
-    }
-  }};
-  border-radius: ${({ type }) => {
-    switch (type) {
-      case 'primary':
-        return '0px 0px 70px 70px';
       default:
-        return '0px';
+        return '#FFF';
     }
   }};
   margin-bottom: ${({ type }) => {

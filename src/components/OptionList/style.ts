@@ -24,18 +24,34 @@ export const OptionListAddOtherButton = styled(OptionListItem)`
   font-weight: bold;
 `;
 
-export const OptionListCheck = styled.div<{ isSelected?: boolean }>`
+export const OptionListCheck = styled.div<{ isSelected?: boolean; check?: boolean }>`
   width: 22px;
   height: 22px; 
-  border-radius: 50%;
+  border-radius: ${props => (props.check ? '10%' : '50%')};
   border: 3px solid ${props => (props.isSelected ? props.theme.colors.purple : '#C1C1C1')};
   position: absolute;
   right: 0;
   top: 0;
   margin-top: 14px;
   margin-right: 29px;
+  
   @media screen and (${props => props.theme.breakpoints.tablet}){
     margin-right: 31px;
+  }
+
+  &:after{
+    content: '';
+    position: absolute; 
+    left: ${props => (props.check ? '0%' : '15%')}; 
+    top: ${props => (props.check ? '0%' : '15%')};
+    height: ${props => (props.check ? '16px' : '12px')};
+    width: ${props => (props.check ? '16px' : '12px')};
+    border-radius: ${props => (props.check ? '0%' : '50%')};
+    background-color: ${props => (props.check ? props.theme.colors.purple_10 : props.theme.colors.purple)}; 
+    display: ${props => (props.isSelected ? 'block' : 'none')};
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 16 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.0005 2L6.00018 10L2 6.00018' stroke='%233578DE' stroke-width='2.18192' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
   }
 `;
 
