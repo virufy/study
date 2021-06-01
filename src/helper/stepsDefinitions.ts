@@ -12,7 +12,6 @@ export const removeSpeechIn: string[] = [
   'Brazil',
   // 'Colombia',
   'Mexico',
-  'Pakistan',
   'Peru',
   'United States',
 ];
@@ -45,14 +44,14 @@ export function getSpeechContext() {
   return 'voice';
 }
 
-function getCoughSteps(storeKey: string, country: string) {
+function getCoughSteps(storeKey: string, country: string, patientId?: string) {
   return [
     {
       path: '/step-record/cough',
       componentPath: `${baseComponentPath}/${middleComponentPathRecording}/Introduction`,
       props: {
         storeKey,
-        previousStep: '/welcome/step-5',
+        previousStep: patientId ? '/welcome/patientSummary' : '/welcome/step-5',
         nextStep: `${baseUrl}/step-listen/cough`,
         otherSteps: {
           manualUploadStep: `${baseUrl}/step-manual-upload/cough`,
@@ -80,9 +79,15 @@ function getCoughSteps(storeKey: string, country: string) {
       props: {
         storeKey,
         previousStep: `${baseUrl}/step-record/cough`,
-        nextStep: removeSpeechIn.includes(country)
-          ? `${baseUrl}/questionary/step1a`
-          : `${baseUrl}/step-record/speech`,
+        nextStep: (() => {
+          if (removeSpeechIn.includes(country)) {
+            if (patientId) {
+              return '/thank-you';
+            }
+            return `${baseUrl}/questionary/step1a`;
+          }
+          return `${baseUrl}/step-record/speech`;
+        })(),
         metadata: {
           currentLogic: recordYourCoughLogic,
         },
@@ -91,7 +96,7 @@ function getCoughSteps(storeKey: string, country: string) {
   ];
 }
 
-function getSpeechSteps(storeKey: string, country: string) {
+function getSpeechSteps(storeKey: string, country: string, patientId: string) {
   if (removeSpeechIn.includes(country)) {
     return [];
   }
@@ -129,7 +134,7 @@ function getSpeechSteps(storeKey: string, country: string) {
       props: {
         storeKey,
         previousStep: `${baseUrl}/step-record/speech`,
-        nextStep: `${baseUrl}/questionary/step1a`,
+        nextStep: patientId ? '/thank-you' : `${baseUrl}/questionary/step1a`,
         metadata: {
           currentLogic: recordYourSpeechLogic,
         },
@@ -140,7 +145,15 @@ function getSpeechSteps(storeKey: string, country: string) {
 
 function getQuestionarySteps(storeKey: string, country: string, patientId: string) {
   const baseMetadata = {
-    total: removeQuestionaryStep6In.includes(country) ? 7 : 8,
+    total: (() => {
+      if (!removeQuestionaryStep6In.includes(country)) {
+        if (patientId) {
+          return 7;
+        }
+        return 8;
+      }
+      return 7;
+    })(),
     progressCurrent: removeSpeechIn.includes(country) ? 1 : 2,
     progressTotal: removeSpeechIn.includes(country) ? 1 : 2,
   };
@@ -150,14 +163,13 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1a`,
       props: {
         storeKey,
-        previousStep: removeSpeechIn.includes(country)
-          ? `${baseUrl}/step-listen/cough`
-          : `${baseUrl}/step-listen/speech`,
+        previousStep: removeSpeechIn.includes(country) ? `${baseUrl}/step-listen/cough` : `${baseUrl}/step-listen/speech`,
         nextStep: `${baseUrl}/questionary/step1b`,
         otherSteps: {
           noTestStep: `${baseUrl}/questionary/step2`,
         },
         metadata: {
+          patientId,
           current: 1,
           ...baseMetadata,
         },
@@ -168,8 +180,8 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1b`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/questionary/step1a`,
-        nextStep: `${baseUrl}/questionary/step2`,
+        previousStep: patientId ? '/welcome/patientSummary' : `${baseUrl}/questionary/step1a`,
+        nextStep: patientId ? '/welcome/patientSummary' : `${baseUrl}/questionary/step2`,
         metadata: {
           ...baseMetadata,
         },
@@ -180,7 +192,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/questionary/step1b`,
+        previousStep: patientId ? '/welcome/patientSummary' : `${baseUrl}/questionary/step1b`,
         nextStep: `${baseUrl}/questionary/step2a`,
         otherSteps: {
           noTestStep: `${baseUrl}/questionary/step1a`,
@@ -309,9 +321,9 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
 export default function stepsDefinition(storeKey: string, country: string, patientId: string) {
   const steps: Wizard.Step[] = [
     // Record Your Cough Steps
-    ...getCoughSteps(storeKey, country),
+    ...getCoughSteps(storeKey, country, patientId),
     // Record Your Speech Steps
-    ...getSpeechSteps(storeKey, country),
+    ...getSpeechSteps(storeKey, country, patientId),
     // Questionary
     ...getQuestionarySteps(storeKey, country, patientId),
     {

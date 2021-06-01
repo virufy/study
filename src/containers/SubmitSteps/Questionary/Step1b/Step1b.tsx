@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -9,6 +9,9 @@ import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
+
+// Helper
+import { getPatientId } from 'helper/stepsDefinitions';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -27,7 +30,7 @@ import {
   QuestionText, MainContainer,
 } from '../style';
 
-const schema = Yup.object({
+const schemaWithoutPatient = Yup.object({
   pcrTestDate: Yup.date().when('$hasPcr', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
   pcrTestResult: Yup.string().when('$hasPcr', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
   antigenTestDate: Yup.date().when('$hasAntigen', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
@@ -37,7 +40,12 @@ antibodyTestResult: Yup.string().when('$hasAntibody', { is: true, then: Yup.stri
 otherwise: Yup.string() }), */
 }).defined();
 
-type Step1aType = Yup.InferType<typeof schema>;
+const schemaWithPatient = Yup.object({
+  patientAntigenTestResult: Yup.string().oneOf(['positive', 'negative', '']).when('patientPcrTestResult', (value: string, schema: any) => (!value ? schema.required() : schema)),
+  patientPcrTestResult: Yup.string().oneOf(['positive', 'negative', '']),
+}).defined();
+
+type Step1aType = Yup.InferType<typeof schemaWithoutPatient> | Yup.InferType<typeof schemaWithPatient>;
 
 const Step1b = ({
   previousStep,
@@ -54,12 +62,15 @@ const Step1b = ({
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const patientId = getPatientId();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
   const [hasPcrTest, setHasPcrTest] = React.useState(false);
   const [hasAntigenTest, setHasAntigenTest] = React.useState(false);
   // const [hasAntibodyTest, setHasAntibodyTest] = React.useState(false);
+  const [patientHasPcrTest, setPatientHasPcrTest] = React.useState(true);
+  const [patienthasAntigenTest, setPatientHasAntigenTest] = React.useState(true);
 
   useEffect(() => {
     if (state) {
@@ -68,6 +79,8 @@ const Step1b = ({
       setHasPcrTest(testTaken.includes('pcr'));
       setHasAntigenTest(testTaken.includes('antigen'));
       // setHasAntibodyTest(testTaken.includes('antibody'));
+      setPatientHasPcrTest(true);
+      setPatientHasAntigenTest(true);
     }
   }, [state]);
 
@@ -82,13 +95,9 @@ const Step1b = ({
       hasAntigen: state['submit-steps'].testTaken.includes('antigen'),
       // hasAntibody: state['submit-steps'].testTaken.includes('antibody'),
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(patientId ? schemaWithPatient : schemaWithoutPatient),
   });
-  const { errors } = formState;
-
-  const {
-    isValid,
-  } = formState;
+  const { errors, isValid } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -101,11 +110,19 @@ const Step1b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
-    setType('primary');
+    if (patientId) {
+      setTitle('');
+    } else {
+      setTitle(t('questionary:headerText'));
+    }
+    if (patientId) {
+      setType('tertiary');
+    } else {
+      setType('primary');
+    }
     setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, patientId, t]);
 
   // Handlers
   const onSubmit = async (values: Step1aType) => {
@@ -117,12 +134,20 @@ const Step1b = ({
         antigenTestResult,
         // antibodyTestDate,
         // antibodyTestResult,
+        patientAntigenTestResult,
+        patientPcrTestResult,
       } = (values as any);
-
+      // if patient
       if (hasPcrTest && (!pcrTestDate || !pcrTestResult)) {
         return;
       }
       if (hasAntigenTest && (!antigenTestDate || !antigenTestResult)) {
+        return;
+      }
+      if ((patientHasPcrTest && patientId) && (!patientPcrTestResult)) {
+        return;
+      }
+      if ((patientAntigenTestResult && patientId) && (!patienthasAntigenTest)) {
         return;
       }
       /* if (hasAntibodyTest && (!antibodyTestDate || !antibodyTestResult)) {
@@ -139,7 +164,7 @@ const Step1b = ({
 
   return (
     <MainContainer>
-      {hasPcrTest && (
+      {(!patientId && hasPcrTest) && (
         <>
           <QuestionText extraSpace first>
             {t('questionary:whenPcrTest')}
@@ -194,7 +219,7 @@ const Step1b = ({
           />
         </>
       )}
-      {hasAntigenTest && (
+      {(!patientId && hasAntigenTest) && (
         <>
           <QuestionText extraSpace first={!hasPcrTest}>
             {t('questionary:whenAntigenTest')}
@@ -304,6 +329,64 @@ const Step1b = ({
           />
         </>
       )} */}
+      {patientId && (
+        <>
+          <QuestionText extraSpace>
+            <Trans i18nKey="questionary:patient:resultPcrTest.question">
+              What was the result of Patient {patientId} PCR-based COVID-19 test?
+            </Trans>
+          </QuestionText>
+          <Controller
+            control={control}
+            name="patientPcrTestResult"
+            defaultValue=""
+            render={({ onChange, value }) => (
+              <OptionList
+                singleSelection
+                value={{ selected: value ? [value] : [] }}
+                onChange={v => onChange(v.selected[0] || '')}
+                items={[
+                  {
+                    value: 'positive',
+                    label: t('questionary:resultPcrTest.options.positive'),
+                  },
+                  {
+                    value: 'negative',
+                    label: t('questionary:resultPcrTest.options.negative'),
+                  },
+                ]}
+              />
+            )}
+          />
+          <QuestionText extraSpace>
+            <Trans i18nKey="questionary:patient:resultAntigenTest.question'">
+              What was the result of Patient {patientId} rapid antigen COVID-19 test?
+            </Trans>
+          </QuestionText>
+          <Controller
+            control={control}
+            name="patientAntigenTestResult"
+            defaultValue=""
+            render={({ onChange, value }) => (
+              <OptionList
+                singleSelection
+                value={{ selected: value ? [value] : [] }}
+                onChange={v => onChange(v.selected[0] || '')}
+                items={[
+                  {
+                    value: 'positive',
+                    label: t('questionary:resultAntigenTest.options.positive'),
+                  },
+                  {
+                    value: 'negative',
+                    label: t('questionary:resultAntigenTest.options.negative'),
+                  },
+                ]}
+              />
+            )}
+          />
+        </>
+      )}
       {/* Bottom Buttons */}
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (

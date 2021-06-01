@@ -45,7 +45,7 @@ const stepsWithoutDots: Wizard.Step[] = [
     props: {
       storeKey: StoreKey,
       previousStep: `${baseUrl}`,
-      nextStep: `${baseUrl}/step-3`,
+      // nextStep: `${baseUrl}/step-3`,
     },
   },
 ];

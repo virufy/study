@@ -48,7 +48,7 @@ type Step1Type = Yup.InferType<typeof schema>;
 const Step1 = (p: Wizard.StepProps) => {
   const [activeStep, setActiveStep] = React.useState(true);
   const {
-    doGoBack, setType, setDoGoBack, setLogoSize,
+    setType, setDoGoBack, setLogoSize,
   } = useHeaderContext();
 
   const { state, action } = useStateMachine(updateAction(p.storeKey));
@@ -90,14 +90,12 @@ const Step1 = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     scrollToTop();
-
     // Hide back arrow in header if neccesary
-    if (doGoBack) setDoGoBack(null);
+    setDoGoBack(null);
     setType('tertiary');
     setLogoSize('big');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const { t, i18n } = useTranslation();
 
   const lang = watch('language');

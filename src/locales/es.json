@@ -127,6 +127,12 @@
         "neither": "Ninguno"
       }
     },
+    "patient":{
+      "resultPcrTest":{
+        "question": " Cuál fue el resultado del test de COVID-19 basado en PCR del paciente <1><0>{{patientId}}</0></1>?"
+      },
+      "resultAntigenTest": "Cuál fue el resultado del test de anticuerpos para COVID-19 del paciente <1><0>{{patientId}}</0></1>?"
+    },
     "headerText2": "Pregunta para ampliar",
     "whenPcrTest": "¿Cuándo se hizo el test de COVID-19 basado en PCR? Por favor, estime si no está seguro.",
     "resultPcrTest": {
@@ -267,7 +273,8 @@
     "downloadApp": "Haga clic aquí para <1>Instale la aplicación.</1>",
     "paragraph4": "¡Proporcione <1>comentarios</1> para mejorar nuestra aplicación y visite nuestro <3>sitio web</3>!",
     "paragraph5": "Aprende más sobre Virufy con nuestras <1>noticias</1>!",
-    "returnButton": "Enviar otra grabación de tos"
+    "returnButton": "Enviar otra grabación de tos",
+    "returnMain": "Volver al menú principal"
   },
   "footerReportProblems": {
     "message": "¿Algo mal? Reportar un problema"

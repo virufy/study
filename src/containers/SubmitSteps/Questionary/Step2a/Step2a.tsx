@@ -107,7 +107,7 @@ const Step2a = ({
             name={name}
             value={value}
             onChange={onChange}
-            type="number"
+            type="text"
             placeholder={t('questionary:enterAge')}
             autoComplete="Off"
           />

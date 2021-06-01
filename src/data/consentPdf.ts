@@ -5,7 +5,6 @@ export const consentPdf = {
   Colombia: 'https://virufy.org/co/study_consent.pdf',
   Peru: 'https://virufy.org/pe/study_consent.pdf',
   Mexico: 'https://virufy.org/mx/study_consent.pdf',
-  Pakistan: 'https://virufy.org/eu/study_consent.pdf',
   'United States': 'https://virufy.org/us/study_consent.pdf',
 };
 

@@ -5,6 +5,7 @@ import { ReactComponent as AboutUs } from 'assets/images/about-us.svg';
 import { ReactComponent as LogoSplash } from 'assets/virufyLogoWhiteBox.svg';
 import { ReactComponent as NuevaLogoSVG } from 'assets/images/nuevaLogo.svg';
 import { ReactComponent as ChevronRightSVG } from 'assets/icons/chevronRight.svg';
+import { ReactComponent as checkCircleSVG } from 'assets/icons/checkCircle.svg';
 
 interface WelcomeTitleProps {
   fontSize?: number;
@@ -34,9 +35,6 @@ export const WelcomeStyledForm = styled.form``;
 export const WelcomeStyledFormAlternative = styled.form`
     padding: 0px !important; 
     text-align: center !important;
-    @media screen and (${props => props.theme.breakpoints.tablet}){
-      padding: 0px !important;
-    }
 `;
 
 export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
@@ -242,6 +240,7 @@ export const CustomPurpleText = styled.h2<{ mb?: number; mt?: number; isLight?: 
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
     max-width: 348px;
+    text-align: center;
   }
 `;
 
@@ -343,8 +342,8 @@ export const WelcomeItemListItem = styled.li`
 
 export const OptionsContainer = styled.div<{ isFirst?: boolean }>`
   display: flex; 
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   
   height: 60px;
   width: 100%;
@@ -354,11 +353,18 @@ export const OptionsContainer = styled.div<{ isFirst?: boolean }>`
 
   font-size: 14px; 
   line-height: 20px;
-
-  @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 470px;
-    }
 `;
+
+export const OptionsHeader = styled.div<{ isFirst?: boolean }>`
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const OptionsBody = styled.div<{ isFirst?: boolean }>`
+  display: flex; 
+`;
+
 export const ChevronRight = styled(ChevronRightSVG)`
   width: 6px;
   height: 12.5px;
@@ -366,6 +372,11 @@ export const ChevronRight = styled(ChevronRightSVG)`
   cursor: pointer;
 `;
 
+export const CheckCircle = styled(checkCircleSVG)`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`;
 /**/
 
 export const WelcomeJumpToBottomContainer = styled.div`

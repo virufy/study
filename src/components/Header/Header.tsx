@@ -84,12 +84,12 @@ const Header = () => {
 
   return (
     <HeaderContainer type={type}>
-      {(doGoBack && title) && <ArrowLefContainer onClick={doGoBack}><ArrowLeft /></ArrowLefContainer>}
+      {(doGoBack && location.pathname !== '/welcome') && <ArrowLefContainer onClick={doGoBack}><ArrowLeft /></ArrowLefContainer>}
       <TitleContainer>
         {(type === 'primary' && !subtitle) && <HeaderTitle>{title}</HeaderTitle>}
         {(type === 'primary' && subtitle) && <><HeaderTitle>{title}</HeaderTitle><TitleBlack>{subtitle}</TitleBlack></>}
         {type === 'secondary' && <><LogoImg srcSet={`${Logo}, ${Logo2x} 2x, ${Logo3x} 3x`} src={LogoImg} size={logoSize} /><TitlePurple>{subtitle}</TitlePurple></>}
-        {type === 'tertiary' && <Link to="http://www.virufy.org" target="_blank"><LogoImg srcSet={`${Logo}, ${Logo2x} 2x, ${Logo3x} 3x`} src={LogoImg} size={logoSize} /></Link>}
+        {type === 'tertiary' && <Link to="http://www.virufy.org" target="_blank"><LogoImg srcSet={`${Logo}, ${Logo2x} 2x, ${Logo3x} 3x`} src={LogoImg} size={location.pathname !== '/welcome' ? 'regular' : 'big'} /></Link>}
       </TitleContainer>
     </HeaderContainer>
   );

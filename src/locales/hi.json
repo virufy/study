@@ -127,6 +127,12 @@
         "neither": "Neither"
       }
     },
+    "patient":{
+      "resultPcrTest":{
+        "question": " What was the result of Patient <1><0>{{patientId}}</0></1> PCR-based COVID-19 test?"
+      },
+      "resultAntigenTest": "What was the result of Patient <1><0>{{patientId}}</0></1> rapid antigen COVID-19 test?"
+    },
     "headerText2": "Follow-up question",
     "whenPcrTest": "When did you take your PCR-based COVID-19 test? Please estimate if unsure.",
     "resultPcrTest": {
@@ -267,7 +273,8 @@
     "downloadApp": "Click here to <1>Install the app.</1>",
     "paragraph4": "Provide <1>feedback</1> for us to improve our application and check out our <3>website</3>!",
     "paragraph5": "Learn more about Virufy with our <1>news</1>!",
-    "returnButton": "Submit another cough"
+    "returnButton": "Submit another cough",
+    "returnMain": "Return to main menu"
   },
   "footerReportProblems": {
     "message": "Something wrong? Report an error"

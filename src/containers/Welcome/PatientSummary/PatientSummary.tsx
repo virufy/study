@@ -16,8 +16,11 @@ import {
   WelcomeContent,
   WelcomeStyledFormAlternative,
   CustomPurpleText,
+  OptionsHeader,
   OptionsContainer,
+  OptionsBody,
   ChevronRight,
+  CheckCircle,
 } from '../style';
 
 const PatientSummary = (p: Wizard.StepProps) => {
@@ -31,6 +34,12 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   const history = useHistory();
 
+  // FALSO LLAMADO AL BACK
+
+  const questionaryBack = true;
+  const age = 22;
+  const gender = 'Female';
+
   const handleNextQuestionnaire = React.useCallback(() => {
     history.push('/submit-steps/questionary/step2');
   }, [history]);
@@ -40,7 +49,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
   }, [history]);
 
   const handleNextTestResults = React.useCallback(() => {
-    history.push('/submit-steps/questionary/step1a');
+    history.push('/submit-steps/questionary/step1b');
   }, [history]);
 
   const doBack = useCallback(() => {
@@ -72,9 +81,25 @@ const PatientSummary = (p: Wizard.StepProps) => {
         <CustomPurpleText left mt={0}>
           {`${t('main:patient', 'Patient')} ${patientId}`}
         </CustomPurpleText>
-        <OptionsContainer isFirst>{t('main:questionnaire', 'Questionnaire')}<ChevronRight onClick={handleNextQuestionnaire} /></OptionsContainer>
-        <OptionsContainer>{t('main:audioCollection', 'Audio Collection')}<ChevronRight onClick={handleNextAudioCollection} /></OptionsContainer>
-        <OptionsContainer>{t('main:testResults', 'Test Results')}<ChevronRight onClick={handleNextTestResults} /></OptionsContainer>
+
+        <OptionsContainer isFirst>
+          <OptionsHeader>{t('main:questionnaire', 'Questionnaire')}
+            {questionaryBack ? <CheckCircle /> : <ChevronRight onClick={handleNextQuestionnaire} />}
+            {questionaryBack && <OptionsBody>Age: {age} Gender: {gender} </OptionsBody>}
+          </OptionsHeader>
+        </OptionsContainer>
+
+        <OptionsContainer>
+          <OptionsHeader>
+            {t('main:audioCollection', 'Audio Collection')}<ChevronRight onClick={handleNextAudioCollection} />
+          </OptionsHeader>
+        </OptionsContainer>
+
+        <OptionsContainer>
+          <OptionsHeader>
+            {t('main:testResults', 'Test Results')}<ChevronRight onClick={handleNextTestResults} />
+          </OptionsHeader>
+        </OptionsContainer>
       </WelcomeContent>
     </WelcomeStyledFormAlternative>
   );

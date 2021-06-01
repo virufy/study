@@ -2,11 +2,13 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { useStateMachine } from 'little-state-machine';
+import usePortal from 'react-useportal';
 
 // Components
 import StayInTouch from 'components/StayInTouch';
 import SocialIcons from 'components/SocialIcons';
 import CreatedBy from 'components/CreatedBy';
+import WizardButtons from 'components/WizardButtons';
 
 // Utils
 import { resetStore } from 'utils/wizard';
@@ -28,6 +30,10 @@ interface ThankYouLocation {
 
 const ThankYou = (p: Wizard.StepProps) => {
   const { t } = useTranslation();
+
+  const { Portal } = usePortal({
+    bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
+  });
 
   const [, setActiveStep] = useState(true);
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
@@ -52,6 +58,10 @@ const ThankYou = (p: Wizard.StepProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleBackMain = React.useCallback(() => {
+    history.push('/Welcome');
+  }, [history]);
 
   useEffect(() => {
     scrollToTop();
@@ -90,10 +100,20 @@ const ThankYou = (p: Wizard.StepProps) => {
           <StayInTouch />
 
           <SocialIcons />
+
+          <CreatedBy inline={false} mt="72px" />
         </>
       )}
+      {patientId && (
+        <Portal>
+          <WizardButtons
+            leftLabel={t('thankyou:returnMain')}
+            leftHandler={handleBackMain}
+            invert
+          />
+        </Portal>
+      )}
 
-      <CreatedBy inline={false} mt="72px" />
     </ThankYouLayout>
   );
 };

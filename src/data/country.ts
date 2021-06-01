@@ -28,9 +28,6 @@ export const countryData: CountryDataProps[] = [
     name: 'Mexico', val: 'Mexico', telephonePrefix: '+52', states: [],
   },
   {
-    name: 'Pakistan', val: 'Pakistan', telephonePrefix: '+92', states: [],
-  },
-  {
     name: 'Peru', val: 'Peru', telephonePrefix: '+51', states: PeruStates,
   },
   {

@@ -10,6 +10,9 @@ import Header, { HeaderContextProvider } from 'components/Header';
 import FooterReportProblems from 'components/FooterReportProblems';
 import FooterInstallAsApp from 'components/FooterInstallAsApp';
 
+// Helper
+import { getPatientId } from 'helper/stepsDefinitions';
+
 // hooks
 import { useInitializeGoogleAnalytics } from 'hooks/useInitializeGoogleAnalytics';
 
@@ -28,6 +31,8 @@ declare global {
 
 const App = () => {
   const { pathname, search } = useLocation();
+  const patientId = getPatientId();
+
   React.useEffect(() => {
     const params = new URLSearchParams(search);
     window.sourceCampaign = params.get('utm_campaign');
@@ -36,7 +41,6 @@ const App = () => {
 
   // Google Analytics
   useInitializeGoogleAnalytics();
-
   return (
     <AppContainer>
       <HeaderContextProvider>
@@ -56,9 +60,8 @@ const App = () => {
             <Redirect exact from="/" to="/welcome" />
           </Switch>
         </FullWidth>
-        {!pathname.includes('/submit-steps/thank-you') && (
-          <FooterReportProblems />
-        )}
+        { patientId && <FooterReportProblems /> }
+        {(!patientId && !pathname.includes('/submit-steps/thank-you')) && <FooterReportProblems /> }
         <FooterInstallAsApp />
       </HeaderContextProvider>
     </AppContainer>
