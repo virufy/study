@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom';
 
 // Header Control
 import { useTranslation } from 'react-i18next';
+
+// Hooks
+import useAxios from 'hooks/useAxios';
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Helpers
 import { getPatientId } from 'helper/stepsDefinitions';
-
-// Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
@@ -19,6 +20,7 @@ import {
   OptionsHeader,
   OptionsContainer,
   OptionsBody,
+  OptionsText,
   ChevronRight,
   CheckCircle,
 } from '../style';
@@ -28,17 +30,32 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeStep, setActiveStep] = useState(true);
+  const [patientInformation, setPatientInformation] = useState({
+    questionary: false,
+    age: undefined,
+    gender: '',
+    audioCollection: false,
+    testResult: false,
+  });
   const {
     setType, setDoGoBack, setTitle, setLogoSize,
   } = useHeaderContext();
 
   const history = useHistory();
+  const axios = useAxios();
 
-  // FALSO LLAMADO AL BACK
-
-  const questionaryBack = true;
-  const age = 22;
-  const gender = 'Female';
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get('/getPatient').catch(() => ({
+        status: 403,
+        data: {},
+      }));
+      if (res.status === 200) {
+        setPatientInformation(res.data);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleNextQuestionnaire = React.useCallback(() => {
     history.push('/submit-steps/questionary/step2');
@@ -84,20 +101,32 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
         <OptionsContainer isFirst>
           <OptionsHeader>{t('main:questionnaire', 'Questionnaire')}
-            {questionaryBack ? <CheckCircle /> : <ChevronRight onClick={handleNextQuestionnaire} />}
-            {questionaryBack && <OptionsBody>Age: {age} Gender: {gender} </OptionsBody>}
+            {patientInformation.questionary ? <CheckCircle /> : <ChevronRight onClick={handleNextQuestionnaire} />}
+          </OptionsHeader>
+          {patientInformation.questionary && (
+            <OptionsBody>
+              <OptionsText>
+                {t('questionary:age', 'Age: ')} <strong>{patientInformation.age}</strong>
+              </OptionsText>
+              <OptionsText>
+                {t('questionary:gender.gender', 'Gender: ')} <strong>{t(`questionary:gender.options.${patientInformation.gender}`, `${patientInformation.gender}`)}</strong>
+              </OptionsText>
+            </OptionsBody>
+          )}
+        </OptionsContainer>
+
+        <OptionsContainer>
+          <OptionsHeader>
+            {t('main:audioCollection', 'Audio Collection')}
+            {patientInformation.audioCollection ? <CheckCircle />
+              : <ChevronRight onClick={handleNextAudioCollection} />}
           </OptionsHeader>
         </OptionsContainer>
 
         <OptionsContainer>
           <OptionsHeader>
-            {t('main:audioCollection', 'Audio Collection')}<ChevronRight onClick={handleNextAudioCollection} />
-          </OptionsHeader>
-        </OptionsContainer>
-
-        <OptionsContainer>
-          <OptionsHeader>
-            {t('main:testResults', 'Test Results')}<ChevronRight onClick={handleNextTestResults} />
+            {t('main:testResults', 'Test Results')}
+            {patientInformation.testResult ? <CheckCircle /> : <ChevronRight onClick={handleNextTestResults} />}
           </OptionsHeader>
         </OptionsContainer>
       </WelcomeContent>

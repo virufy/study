@@ -149,3 +149,17 @@ export const PlayerCross = styled.img`
   width: 14px;
   height: 14px;
 `;
+
+export const BeforeSubmitText = styled.p`
+  font-family: 'Source Sans Pro';
+  font-size: 14px;
+  line-height: 20px;
+  color: ${props => props.theme.colors.darkGray_70};
+  margin: 0;
+`;
+
+export const TempBeforeSubmitError = styled(BeforeSubmitText)`
+color: ${props => props.theme.colors.red};
+  text-align: center;
+  margin-bottom: 16px;
+`;

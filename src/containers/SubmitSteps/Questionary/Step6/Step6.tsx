@@ -16,12 +16,14 @@ import { updateAction } from 'utils/wizard';
 // Components
 import Recaptcha from 'components/Recaptcha';
 
-// Header Control
+// Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import { getPatientId } from 'helper/stepsDefinitions';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmit } from 'helper/submitHelper';
+import { doSubmitPatientQuestionnaire } from 'helper/patientHelper';
 
 // Styles
 import OptionList from 'components/OptionList';
@@ -51,6 +53,7 @@ const Step6 = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const patientId = getPatientId();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -78,6 +81,20 @@ const Step6 = ({
   const onSubmit = async (values: Step6Type) => {
     if (values) {
       await doSubmit({
+        setSubmitError: s => setSubmitError(!s ? null : t(s)),
+        state,
+        captchaValue,
+        action,
+        nextStep,
+        setActiveStep,
+        history,
+      });
+    }
+  };
+
+  const onSubmitPatientQuestionnaire = async (values: Step6Type) => {
+    if (values) {
+      await doSubmitPatientQuestionnaire({
         setSubmitError: s => setSubmitError(!s ? null : t(s)),
         state,
         captchaValue,
@@ -120,7 +137,7 @@ const Step6 = ({
 
   return (
     <MainContainer>
-      <QuestionText first bold={false}>
+      <QuestionText extraSpace first>
         <Trans i18nKey="questionary:medical.question">
           <strong>Which of the below medical conditions do you currently have?</strong>
         </Trans>
@@ -197,7 +214,7 @@ const Step6 = ({
             // leftLabel={t('questionary:proceedButton')}
             leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
             leftDisabled={!captchaValue || isSubmitting}
-            leftHandler={handleSubmit(onSubmit)}
+            leftHandler={patientId ? handleSubmit(onSubmitPatientQuestionnaire) : handleSubmit(onSubmit)}
           />
         </Portal>
       )}

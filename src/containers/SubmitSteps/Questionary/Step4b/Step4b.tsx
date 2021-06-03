@@ -92,7 +92,7 @@ const Step4b = ({
 
   return (
     <MainContainer>
-      <QuestionText>
+      <QuestionText extraSpace first>
         {t('questionary:symptomsDate')}
       </QuestionText>
       <Controller

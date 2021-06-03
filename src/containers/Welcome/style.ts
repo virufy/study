@@ -345,7 +345,6 @@ export const OptionsContainer = styled.div<{ isFirst?: boolean }>`
   flex-direction: column;
   justify-content: center;
   
-  height: 60px;
   width: 100%;
   border-top: ${({ isFirst }) => (isFirst ? '1px solid  #CFCFCF' : '0px')};;
   border-bottom: 1px solid #CFCFCF;
@@ -355,14 +354,21 @@ export const OptionsContainer = styled.div<{ isFirst?: boolean }>`
   line-height: 20px;
 `;
 
-export const OptionsHeader = styled.div<{ isFirst?: boolean }>`
+export const OptionsHeader = styled.div`
   display: flex; 
   justify-content: space-between;
   align-items: center;
+  height: 60px;
 `;
 
-export const OptionsBody = styled.div<{ isFirst?: boolean }>`
+export const OptionsBody = styled.div`
   display: flex; 
+  flex-direction: column; 
+  margin: 20px 0px;
+`;
+
+export const OptionsText = styled.p`
+    text-align: left;
 `;
 
 export const ChevronRight = styled(ChevronRightSVG)`

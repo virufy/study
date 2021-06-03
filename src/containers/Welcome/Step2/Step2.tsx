@@ -26,6 +26,8 @@ import {
   WelcomeBullets,
   BulletIndicator,
   WelcomeStyledFormAlternative,
+  SupportedBy,
+  NuevaLogo,
 } from '../style';
 
 const Step2 = (p: Wizard.StepProps) => {
@@ -87,13 +89,17 @@ const Step2 = (p: Wizard.StepProps) => {
             </p>
           </Trans>
         </BlackText>
+        <SupportedBy>
+          {t('main:supportedBy', 'Supported by')}
+          <NuevaLogo />
+        </SupportedBy>
 
         <BlackText>
           <WelcomeBullets>
             <BulletIndicator>1</BulletIndicator>
           </WelcomeBullets>
           <Trans i18nKey="helpVirufy:bulletsIntro">
-            <strong>Intro:</strong>About us and Safety Reminders
+            <strong>Intro: </strong>About us and Safety Reminders
           </Trans>
         </BlackText>
         <BlackText>

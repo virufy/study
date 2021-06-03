@@ -18,7 +18,8 @@
     "patient": "Patient",
     "questionnaire": "Questionnaire",
     "audioCollection": "Audio Collection",
-    "testResults" : "Test Results"
+    "testResults" : "Test Results",
+    "supportedBy": "Supported by"
   },
   "helpVirufy": {
     "title": "About Us",
@@ -171,11 +172,13 @@
         "no": "No"
       }
     },
+    "age": "Age:",
     "ageGroup": "Please enter your age.",
     "enterAge": "Enter your age",
     "50+": "50 and over",
     "unselectedAgeGroup": "Select age group",
     "gender": {
+      "gender": "Gender: ",
       "question": "What is your gender identity?",
       "note": "How do you describe yourself?",
       "options": {
@@ -261,7 +264,7 @@
     "submitting": "Submitting..."
   },
   "beforeSubmit": {
-    "submitButton": "Submit form",
+    "submitButton": "Submit",
     "submitError": "An error occurred. Please try again."
   },
   "thankyou": {

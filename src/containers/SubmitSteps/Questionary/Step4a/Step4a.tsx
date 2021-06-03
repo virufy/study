@@ -117,7 +117,7 @@ const Step4a = ({
 
   return (
     <MainContainer>
-      <QuestionText bold={false}>
+      <QuestionText extraSpace first>
         <Trans i18nKey="questionary:symptoms.question">
           <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>

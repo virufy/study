@@ -15,7 +15,7 @@ import { resetStore } from 'utils/wizard';
 
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
-import { getPatientId, getSpeechContext } from 'helper/stepsDefinitions';
+import { getSpeechContext } from 'helper/stepsDefinitions';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -25,7 +25,8 @@ import {
 } from './style';
 
 interface ThankYouLocation {
-  submissionId: string
+  submissionId: string;
+  patientId?: string;
 }
 
 const ThankYou = (p: Wizard.StepProps) => {
@@ -41,13 +42,13 @@ const ThankYou = (p: Wizard.StepProps) => {
 
   const history = useHistory();
   const location = useLocation<ThankYouLocation>();
-  const patientId = getPatientId();
 
   const submissionId = location.state?.submissionId;
+  const patientId = location.state?.patientId;
 
   React.useEffect(() => {
-    action({});
-  }, [action]);
+    if (!patientId) { action({}); }
+  }, [action, patientId]);
 
   const handleDoBack = useCallback(() => {
     if (p.previousStep) {
@@ -60,8 +61,8 @@ const ThankYou = (p: Wizard.StepProps) => {
   }, []);
 
   const handleBackMain = React.useCallback(() => {
-    history.push('/Welcome');
-  }, [history]);
+    history.push(patientId ? '/Welcome/patientSummary' : '/Welcome');
+  }, [history, patientId]);
 
   useEffect(() => {
     scrollToTop();

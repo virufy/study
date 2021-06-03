@@ -134,7 +134,7 @@ const Step1 = (p: Wizard.StepProps) => {
             {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
           </CustomPurpleText>
           <SupportedBy>
-            Supported by
+            {t('main:supportedBy', 'Supported by')}
             <NuevaLogo />
           </SupportedBy>
           <BoldBlackText>

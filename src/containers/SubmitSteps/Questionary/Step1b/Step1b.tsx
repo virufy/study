@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 
 // Helper
 import { getPatientId } from 'helper/stepsDefinitions';
+import { doSubmitPatientTestResults } from 'helper/patientHelper';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -22,12 +23,15 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
-// Styles
+// Components
 import OptionList from 'components/OptionList';
 import DatePicker from 'components/DatePicker';
 import WizardButtons from 'components/WizardButtons';
+import Recaptcha from 'components/Recaptcha';
+
+// Styles
 import {
-  QuestionText, MainContainer,
+  QuestionText, MainContainer, TempBeforeSubmitError,
 } from '../style';
 
 const schemaWithoutPatient = Yup.object({
@@ -69,18 +73,14 @@ const Step1b = ({
   const [hasPcrTest, setHasPcrTest] = React.useState(false);
   const [hasAntigenTest, setHasAntigenTest] = React.useState(false);
   // const [hasAntibodyTest, setHasAntibodyTest] = React.useState(false);
-  const [patientHasPcrTest, setPatientHasPcrTest] = React.useState(true);
-  const [patienthasAntigenTest, setPatientHasAntigenTest] = React.useState(true);
 
   useEffect(() => {
     if (state) {
-      const { testTaken } = state['submit-steps'];
+      const { testTaken } = state['submit-steps'] || {};
 
-      setHasPcrTest(testTaken.includes('pcr'));
-      setHasAntigenTest(testTaken.includes('antigen'));
+      setHasPcrTest(testTaken?.includes('pcr') ?? false);
+      setHasAntigenTest(testTaken?.includes('antigen') ?? false);
       // setHasAntibodyTest(testTaken.includes('antibody'));
-      setPatientHasPcrTest(true);
-      setPatientHasAntigenTest(true);
     }
   }, [state]);
 
@@ -91,13 +91,24 @@ const Step1b = ({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
     context: {
-      hasPcr: state['submit-steps'].testTaken.includes('pcr'),
-      hasAntigen: state['submit-steps'].testTaken.includes('antigen'),
+      hasPcr: state['submit-steps']?.testTaken?.includes('pcr') ?? false,
+      hasAntigen: state['submit-steps']?.testTaken?.includes('antigen') ?? false,
       // hasAntibody: state['submit-steps'].testTaken.includes('antibody'),
     },
     resolver: yupResolver(patientId ? schemaWithPatient : schemaWithoutPatient),
   });
   const { errors, isValid } = formState;
+
+  /* Delete after Contact info step is re-integrated */
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
+  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const { isSubmitting } = formState;
+
+  useEffect(() => {
+    if (!captchaValue) {
+      setSubmitError(null);
+    }
+  }, [captchaValue]);
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -134,8 +145,6 @@ const Step1b = ({
         antigenTestResult,
         // antibodyTestDate,
         // antibodyTestResult,
-        patientAntigenTestResult,
-        patientPcrTestResult,
       } = (values as any);
       // if patient
       if (hasPcrTest && (!pcrTestDate || !pcrTestResult)) {
@@ -144,18 +153,22 @@ const Step1b = ({
       if (hasAntigenTest && (!antigenTestDate || !antigenTestResult)) {
         return;
       }
-      if ((patientHasPcrTest && patientId) && (!patientPcrTestResult)) {
-        return;
-      }
-      if ((patientAntigenTestResult && patientId) && (!patienthasAntigenTest)) {
-        return;
-      }
       /* if (hasAntibodyTest && (!antibodyTestDate || !antibodyTestResult)) {
         return;
       } */
 
       action(values);
-      if (nextStep) {
+      if (patientId) {
+        doSubmitPatientTestResults({
+          setSubmitError: s => setSubmitError(!s ? null : t(s)),
+          state,
+          captchaValue,
+          action,
+          nextStep,
+          setActiveStep,
+          history,
+        });
+      } else if (nextStep) {
         setActiveStep(false);
         history.push(nextStep);
       }
@@ -391,10 +404,34 @@ const Step1b = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
+          {(() => {
+            if (patientId) {
+              if (submitError) {
+                return (
+                  <>
+                    <Recaptcha onChange={setCaptchaValue} />
+                    <TempBeforeSubmitError>
+                      {submitError}
+                    </TempBeforeSubmitError>
+                  </>
+                );
+              }
+              return <Recaptcha onChange={setCaptchaValue} />;
+            }
+            return null;
+          })()}
           <WizardButtons
-            leftLabel={t('questionary:nextButton')}
+            leftLabel={(() => {
+              if (patientId) {
+                if (isSubmitting) {
+                  return t('questionary:submitting');
+                }
+                return t('beforeSubmit:submitButton');
+              }
+              return t('questionary:nextButton');
+            })()}
             leftHandler={handleSubmit(onSubmit)}
-            leftDisabled={!isValid}
+            leftDisabled={patientId ? (!captchaValue || isSubmitting) : !isValid}
             invert
           />
         </Portal>

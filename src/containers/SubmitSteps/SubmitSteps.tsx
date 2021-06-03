@@ -1,6 +1,6 @@
 import React from 'react';
-import { createStore, setStorageType/* , useStateMachine */ } from 'little-state-machine';
-// import { useHistory } from 'react-router-dom';
+import { createStore, setStorageType, useStateMachine } from 'little-state-machine';
+import { useHistory } from 'react-router-dom';
 
 // Wizard
 import Wizard from 'components/Wizard';
@@ -27,14 +27,14 @@ createStore({
   name: 'VirufyWizard',
 });
 
-const SubmitSteps = () => null;
-// Hooks
-// const { state } = useStateMachine();
-// const history = useHistory();
+const SubmitSteps = () => {
+  // Hooks
+  const { state } = useStateMachine();
+  const history = useHistory();
 
-// Effects
-/* React.useEffect(() => {
-   const checkFileProblem = (file: File) => {
+  // Effects
+  React.useEffect(() => {
+    const checkFileProblem = (file: File) => {
       if (file && file.size === undefined) {
         return true;
       }
@@ -43,7 +43,7 @@ const SubmitSteps = () => null;
 
     const checkFileConsistencyProblem = (inputState: Record<string, any>) => {
       let out = null;
-      if (inputState[StoreKey]) {
+      if (!inputState.welcome?.patientId && inputState[StoreKey]) {
         const { recordYourCough, recordYourSpeech } = inputState[StoreKey];
         const toTest = [];
 
@@ -79,7 +79,9 @@ const SubmitSteps = () => null;
       history.push(`/${StoreKey}${problemRoute}`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); */
+  }, []);
+  return null;
+};
 
 const WrapperSubmitSteps = () => {
   const country = getCountry();

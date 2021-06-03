@@ -16,6 +16,9 @@ import { updateAction } from 'utils/wizard';
 // Components
 import OptionList from 'components/OptionList';
 
+// Helper
+import { getPatientId } from 'helper/stepsDefinitions';
+
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
@@ -48,6 +51,7 @@ const Step2 = ({
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
+  const patientId = getPatientId();
   const { state, action } = useStateMachine(updateAction(storeKey));
 
   // States
@@ -66,14 +70,21 @@ const Step2 = ({
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     const { testTaken } = state['submit-steps'];
-    if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
-      history.push(otherSteps.noTestStep);
-    } else if (previousStep) {
+    if (!patientId) {
+      if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
+        history.push(otherSteps.noTestStep);
+      } else if (previousStep) {
+        history.push(previousStep);
+      } else {
+        history.goBack();
+      }
+    }
+    if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [state, history, otherSteps, previousStep]);
+  }, [state, history, otherSteps, previousStep, patientId]);
 
   const {
     isValid,
