@@ -19,15 +19,17 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
-// Styles
-import DatePicker from 'components/DatePicker';
+// Components
 import WizardButtons from 'components/WizardButtons';
+import OptionList from 'components/OptionList';
+
+// Styles
 import {
   QuestionText, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
-  symptomsStartedDate: Yup.date().required(),
+  symptomsStartedDate: Yup.string().required(),
 }).defined();
 
 type Step4bType = Yup.InferType<typeof schema>;
@@ -43,7 +45,7 @@ const Step4b = ({
   });
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
 
   // States
@@ -98,13 +100,30 @@ const Step4b = ({
       <Controller
         control={control}
         name="symptomsStartedDate"
-        defaultValue={null}
+        defaultValue=""
         render={({ onChange, value }) => (
-          <DatePicker
-            label="Date"
-            value={value ? new Date(value) : null}
-            locale={i18n.language}
-            onChange={onChange}
+          <OptionList
+            singleSelection
+            value={{ selected: value ? [value] : [] }}
+            onChange={v => onChange(v.selected[0])}
+            items={[
+              {
+                value: 'today',
+                label: t('questionary:options.today'),
+              },
+              {
+                value: '1-3DaysAgo',
+                label: t('questionary:options.days'),
+              },
+              {
+                value: 'AWeekAgo',
+                label: t('questionary:options.week'),
+              },
+              {
+                value: 'OverAWeekAgo',
+                label: t('questionary:options.overWeek'),
+              },
+            ]}
           />
         )}
       />

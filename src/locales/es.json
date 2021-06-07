@@ -232,7 +232,13 @@
       },
       "addOtherPlaceholder": "Otro síntoma"
     },
-    "symptomsDate": "¿Cuándo compenzó a tener tos, fiebre y/o falta de aliento? Por favor, estime si no está seguro",
+    "symptomsDate": "Aproximadamente, ¿cuándo empezó a experimentar los síntomas de COVID-19, como tos, fiebre y/o dificultad para respirar?",
+    "options":{
+      "today": "Hoy",
+      "days": "1-3 días atrás",
+      "week": "Una semana atrás",
+      "overWeek": "Más de una semana atrás"
+    },
     "respiration": {
       "question": "<strong>¿Cuál de las siguientes afecciones respiratorias tiene actualmente?</strong>",
       "options": {

@@ -129,7 +129,7 @@ export async function doSubmit({
     }
 
     if (symptomsStartedDate) {
-      body.append('symptomsStartedDate', symptomsStartedDate.toISOString());
+      body.append('symptomsStartedDate', symptomsStartedDate);
     }
 
     if (currentRespiratoryCondition?.selected?.length > 0) {
