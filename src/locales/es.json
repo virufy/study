@@ -8,6 +8,7 @@
     "paragraph2": "Estudio de recolección de datos sobre la tos Covid-19",
     "selectCountry": "Seleccione país",
     "selectRegion": "Seleccione region",
+    "selectLocation": "Localización",
     "patientId": "ID de paciente",
     "enterPatientId" : "Ingresar ID de paciente", 
     "nextButton": "Siguiente",
@@ -24,7 +25,11 @@
   "helpVirufy": {
     "title": "Acerca de Nosotros",
     "ourSupporters": "Nuestros colaboradores",
+    "introParagraph": "Bienvenido a nuestro estudio. Sólo le llevará unos 5 minutos completarlo. Antes de empezar, vamos a discutir lo que vamos a cubrir:",
     "aboutParagraph": "<0>Virufy es una <strong>organización sin ánimo de lucro</strong> que está trabajando para desarrollar los medios para utilizar la <strong>inteligencia artificial (Al) para detectar el COVID-19 a partir de los patrones de tos</strong> de forma rápida y sin coste alguno mediante el uso de un smartphone en beneficio de los países de bajos ingresos.</0><1>Nuestro equipo incluye investigadores de más de <strong>25 países. </strong> <3>Nuestra investigación</3> ha demostrado que la tecnología Al puede ser capaz de identificar la firma única de la tos de COVID.</1><2>Al recopilar <strong>grabaciones de tos</strong> de personas de todo el mundo, Virufy está mejorando la solidez de su algoritmo de IA para reconocer el patrón de sonido único de COVID. </2><3><strong>Tienes el poder</strong> de ayudar a beneficiar a millones de personas de todo el mundo <strong>contribuyendo con tu tos</strong> en nuestro estudio.</3>",
+    "bulletsIntro":"<strong>Introducción: </strong>Acerca de nosotros y recordatorios de seguridad",
+    "bulletCough": "<strong>Toser en el teléfono</strong>",
+    "bulletQuestions": "<strong>Preguntas rápidas de salud</strong>",
     "nextButton": "Siguiente"
   },
   "consent": {
@@ -254,6 +259,7 @@
         "pregnancy": "Embarazo",
         "valvularHeart": "Enfermedad cardíaca valvular",
         "none": "Ninguna",
+        "other": "Otro",
         "addOther": "+ Añadir otra"
       },
       "addOtherPlaceholder": "Otra condición"

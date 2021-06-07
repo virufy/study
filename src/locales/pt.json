@@ -8,6 +8,7 @@
     "paragraph2": "Estudo de Coleta de Dados sobre Tosse Covid-19",
     "selectCountry": "Selecione seu país",
     "selectRegion": "Selecione a região",
+    "selectLocation": "Localização",
     "patientId": "ID de paciente",
     "enterPatientId" : "Insira ID de paciente", 
     "nextButton": "Próximo",
@@ -24,7 +25,11 @@
   "helpVirufy": {
     "title": "Sobre Nós",
     "ourSupporters": "Nossos apoiadores",
+    "introParagraph": "Bem-vindo ao nosso estudo! Isto deve levar apenas cerca de 5 minutos para ser concluído. Antes de começarmos, vamos discutir o que vamos cobrir:",
     "aboutParagraph": "<0>Virufy é uma <strong>organização sem fins lucrativos</strong> que está a trabalhar para desenvolver os meios para utilizar <strong> inteligência artificial (Al) para fazer o rastreio para COVID-19 a partir de padrões de tosse</strong> rapidamente e sem custos através da utilização de um smartphone em benefício de países de baixos rendimentos.</0><1> A nossa equipa inclui investigadores de mais de <strong>25 países. </strong> <3>A nossa investigação</3> demonstrou que a tecnologia Al pode ser capaz de identificar a assinatura única de tosse da COVID.</1><2> Ao recolher <strong> gravações de tosse</strong> de pessoas de todo o mundo, a Virufy está a melhorar a robustez do seu algoritmo de IA ao reconhecer o padrão de som único da COVID. </2><3> <strong>Você tem o poder</strong> de ajudar a beneficiar milhões de pessoas em todo o mundo ao <strong> contribuir com a sua tosse</strong> no nosso estudo.</3>",
+    "bulletsIntro":"<strong>Introdução: </strong> Sobre nós e Lembretes de Segurança",
+    "bulletCough": "<strong>Tosse por telefone</strong>",
+    "bulletQuestions": "<strong>Perguntas rápidas de saúde</strong>",
     "nextButton": "Próximo"
   },
   "consent": {
@@ -254,13 +259,14 @@
         "pregnancy": "Gravidez",
         "valvularHeart": "Doença cardiovascular",
         "none": "Nenhuma",
+        "other": "Outro",
         "addOther": "+ adicionar outra"
       },
       "addOtherPlaceholder": "Outra condição"
     },
     "proceedButton": "Prossiga para o último passo",
     "stepOf": "de",
-    "nextButton": "próximo",
+    "nextButton": "Próximo",
     "submitting": "submetendo..."
   },
   "beforeSubmit": {

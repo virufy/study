@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  OptionListAddOtherButton, OptionListCheck, OptionListInput, OptionListInputContainer, OptionListItem,
+  OptionListAddOtherButton,
+  OptionListCheck, OptionListInput,
+  OptionListInputContainer,
+  OptionListItem,
+  OptionListItemLabel,
 } from './style';
 
 interface OptionListItemProps {
@@ -103,7 +107,9 @@ const OptionList = ({
             onClick={() => selectItem(item)}
             isSelected={isSelected}
           >
-            {item.label}
+            <OptionListItemLabel>
+              {item.label}
+            </OptionListItemLabel>
             <OptionListCheck isSelected={isSelected} checkbox={isCheckbox} />
           </OptionListItem>
         );

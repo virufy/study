@@ -28,6 +28,7 @@ import {
   WelcomeStyledFormAlternative,
   SupportedBy,
   NuevaLogo,
+  InstructionContainer,
 } from '../style';
 
 const Step2 = (p: Wizard.StepProps) => {
@@ -77,10 +78,14 @@ const Step2 = (p: Wizard.StepProps) => {
         />
         <LogoWhiteBG />
       </HeaderImageContainer>
-      <CustomPurpleText>
+      <CustomPurpleText mb={5}>
         {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
       </CustomPurpleText>
-      <WelcomeContent maxWidth={335} mt={0}>
+      <SupportedBy>
+        {t('main:supportedBy', 'Supported by')}
+        <NuevaLogo />
+      </SupportedBy>
+      <WelcomeContent maxWidth={470} mt={0}>
         <BlackText>
           <Trans i18nKey="helpVirufy:introParagraph">
             <p>
@@ -89,35 +94,38 @@ const Step2 = (p: Wizard.StepProps) => {
             </p>
           </Trans>
         </BlackText>
-        <SupportedBy>
-          {t('main:supportedBy', 'Supported by')}
-          <NuevaLogo />
-        </SupportedBy>
-
-        <BlackText>
+        <InstructionContainer>
           <WelcomeBullets>
             <BulletIndicator>1</BulletIndicator>
           </WelcomeBullets>
-          <Trans i18nKey="helpVirufy:bulletsIntro">
-            <strong>Intro: </strong>About us and Safety Reminders
-          </Trans>
-        </BlackText>
-        <BlackText>
+          <BlackText>
+            <Trans i18nKey="helpVirufy:bulletsIntro">
+              <strong>Intro: </strong>About us and Safety Reminders
+            </Trans>
+          </BlackText>
+        </InstructionContainer>
+
+        <InstructionContainer>
           <WelcomeBullets>
             <BulletIndicator>2</BulletIndicator>
           </WelcomeBullets>
-          <Trans i18nKey="helpVirufy:bulletCough">
-            <strong>Cough Into Phone</strong>
-          </Trans>
-        </BlackText>
-        <BlackText>
+          <BlackText>
+            <Trans i18nKey="helpVirufy:bulletCough">
+              <strong>Cough Into Phone</strong>
+            </Trans>
+          </BlackText>
+        </InstructionContainer>
+
+        <InstructionContainer>
           <WelcomeBullets>
             <BulletIndicator>3</BulletIndicator>
           </WelcomeBullets>
-          <Trans i18nKey="helpVirufy:bulletQuestions">
-            <strong>Quick Health Questions</strong>
-          </Trans>
-        </BlackText>
+          <BlackText>
+            <Trans i18nKey="helpVirufy:bulletQuestions">
+              <strong>Quick Health Questions</strong>
+            </Trans>
+          </BlackText>
+        </InstructionContainer>
 
         {activeStep && (
           <Portal>

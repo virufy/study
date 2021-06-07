@@ -20,6 +20,16 @@ export const OptionListItem = styled.button<{lastItem: boolean; isSelected?: boo
   }
 `;
 
+export const OptionListItemLabel = styled.span`
+  display: block;
+  width: 250px;
+  margin: auto;
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    width: 230px;
+    text-align: center;
+  }
+`;
+
 export const OptionListAddOtherButton = styled(OptionListItem)`
   font-weight: bold;
 `;

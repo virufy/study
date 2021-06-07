@@ -175,6 +175,19 @@ export const NuevaLogo = styled(NuevaLogoSVG)`
 
 /* Step 2 */
 
+export const InstructionContainer = styled.div`
+  display: flex; 
+  margin-left: 10px; 
+  max-width: 330px;
+  width: 100%;
+  align-items: center;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}) {
+    max-width: 475px;
+    margin: auto;
+  }
+`;
+
 export const WelcomeBullets = styled.div`
   width: 30px;
   height: 30px;
@@ -184,7 +197,8 @@ export const WelcomeBullets = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 export const BulletIndicator = styled.p`
