@@ -231,7 +231,13 @@
       },
       "addOtherPlaceholder": "Other symptom"
     },
-    "symptomsDate": "When did you begin experiencing cough, fever, and/or shortness of breath? Please estimate if unsure.",
+    "symptomsDate": "Approximately when did you begin experiencing COVID-19 symptoms such as cough, fever, and/or shortness of breath?",
+    "options":{
+      "today": "Today",
+      "days": "1-3 days ago",
+      "week": "A week ago",
+      "overWeek": "Over a week ago"
+    },
     "respiration": {
       "question": "<strong>Which of the below respiratory conditions do you currently have?</strong>",
       "options": {
