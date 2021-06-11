@@ -123,11 +123,11 @@ const Step2 = ({
             onChange={v => onChange(v.selected[0])}
             items={[
               {
-                value: 'yes',
+                value: 'true',
                 label: t('questionary:vaccine.options.yes'),
               },
               {
-                value: 'no',
+                value: 'false',
                 label: t('questionary:vaccine.options.no'),
               },
             ]}

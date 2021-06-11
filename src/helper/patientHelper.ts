@@ -1,7 +1,7 @@
 import * as H from 'history';
 
 // Hooks
-// import { client as axiosClient } from 'hooks/useAxios';
+import { client as axiosClient } from 'hooks/useAxios';
 
 // Helpers
 import { removeSpeechIn } from 'helper/stepsDefinitions';
@@ -53,10 +53,6 @@ export async function doSubmitPatientQuestionnaire({
     body.append('country', country);
     if (region) {
       body.append('region', region);
-    }
-
-    if (patientId) {
-      body.append('patientId', patientId);
     }
 
     if (window.sourceCampaign) {
@@ -116,14 +112,12 @@ export async function doSubmitPatientQuestionnaire({
     if (captchaValue) {
       body.append('captchaValue', captchaValue);
     }
-    // TODO: complete with endpoint
-    /* const response = await axiosClient.post('saveSurvey', body, {
+
+    const response = await axiosClient.post(`/patient/${patientId}/questionary`, body, {
       headers: {
-        'Content-Type': 'multipart/form-data; boundary=SaveSurvey',
+        'Content-Type': 'multipart/form-data; boundary=Questionary',
       },
-    }); */
-    console.log('body', body);
-    const response = { data: { submissionId: 'abc' } };
+    });
 
     if (nextStep && response.data?.submissionId) {
       setActiveStep(false);
@@ -167,10 +161,6 @@ export async function doSubmitPatientAudioCollection({
       body.append('region', region);
     }
 
-    if (patientId) {
-      body.append('patientId', patientId);
-    }
-
     if (window.sourceCampaign) {
       body.append('source', window.sourceCampaign);
     }
@@ -185,14 +175,11 @@ export async function doSubmitPatientAudioCollection({
       body.append('captchaValue', captchaValue);
     }
 
-    // TODO: complete with endpoint
-    /* const response = await axiosClient.post('saveSurvey', body, {
+    const response = await axiosClient.post(`/patient/${patientId}/audioCollection`, body, {
       headers: {
-        'Content-Type': 'multipart/form-data; boundary=SaveSurvey',
+        'Content-Type': 'multipart/form-data; boundary=AudioCollection',
       },
-    }); */
-    console.log('body', body);
-    const response = { data: { submissionId: 'def' } };
+    });
 
     if (nextStep && response.data?.submissionId) {
       setActiveStep(false);
@@ -235,10 +222,6 @@ export async function doSubmitPatientTestResults({
       body.append('region', region);
     }
 
-    if (patientId) {
-      body.append('patientId', patientId);
-    }
-
     if (window.sourceCampaign) {
       body.append('source', window.sourceCampaign);
     }
@@ -255,14 +238,11 @@ export async function doSubmitPatientTestResults({
       body.append('captchaValue', captchaValue);
     }
 
-    // TODO: complete with endpoint
-    /* const response = await axiosClient.post('saveSurvey', body, {
+    const response = await axiosClient.post(`/patient/${patientId}/testResult`, body, {
       headers: {
-        'Content-Type': 'multipart/form-data; boundary=SaveSurvey',
+        'Content-Type': 'multipart/form-data; boundary=testResult',
       },
-    }); */
-    console.log('body', body);
-    const response = { data: { submissionId: 'ghi' } };
+    });
 
     if (nextStep && response.data?.submissionId) {
       setActiveStep(false);

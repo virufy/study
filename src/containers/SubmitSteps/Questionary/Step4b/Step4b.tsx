@@ -112,15 +112,15 @@ const Step4b = ({
                 label: t('questionary:options.today'),
               },
               {
-                value: '1-3DaysAgo',
+                value: 'oneToThreeDaysAgo',
                 label: t('questionary:options.days'),
               },
               {
-                value: 'AWeekAgo',
+                value: 'aWeekAgo',
                 label: t('questionary:options.week'),
               },
               {
-                value: 'OverAWeekAgo',
+                value: 'overAWeekAgo',
                 label: t('questionary:options.overWeek'),
               },
             ]}

@@ -46,8 +46,8 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get('/getPatient').catch(() => ({
-        status: 403,
+      const res = await axios.get(`/patient/${patientId}`).catch(() => ({
+        status: 404,
         data: {},
       }));
       if (res.status === 200) {
