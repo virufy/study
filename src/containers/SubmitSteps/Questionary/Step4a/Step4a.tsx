@@ -150,6 +150,10 @@ const Step4a = ({
                 label: t('questionary:symptoms.options.wetCough'),
               },
               {
+                value: 'runnyNose',
+                label: t('questionary:symptoms.options.runnyNose'),
+              },
+              {
                 value: 'feverChillsSweating',
                 label: t('questionary:symptoms.options.feverChillsSweating'),
               },
@@ -180,6 +184,14 @@ const Step4a = ({
               {
                 value: 'vomitingAndDiarrhea',
                 label: t('questionary:symptoms.options.vomitingAndDiarrhea'),
+              },
+              {
+                value: 'weakness',
+                label: t('questionary:symptoms.options.weakness'),
+              },
+              {
+                value: 'other',
+                label: t('questionary:symptoms.options.other'),
               },
             ]}
             excludableValues={['none']}

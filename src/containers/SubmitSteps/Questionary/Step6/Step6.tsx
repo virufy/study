@@ -158,36 +158,64 @@ const Step6 = ({
                 label: t('questionary:medical.options.none'),
               },
               {
-                value: 'chronicLungDisease',
-                label: t('questionary:medical.options.chronicLung'),
+                value: 'allergies',
+                label: t('questionary:medical.options.allergies'),
+              },
+              {
+                value: 'asthma',
+                label: t('questionary:medical.options.asthma'),
+              },
+              {
+                value: 'bronchitis',
+                label: t('questionary:medical.options.bronchitis'),
               },
               {
                 value: 'congestiveHeartFailure',
                 label: t('questionary:medical.options.congestiveHeart'),
               },
               {
-                value: 'coughFromOtherMedicalConditions',
-                label: t('questionary:medical.options.cough'),
+                value: 'copdEmphysema',
+                label: t('questionary:medical.options.emphysema'),
               },
               {
                 value: 'extremeObesity',
                 label: t('questionary:medical.options.obesity'),
               },
               {
+                value: 'heartDisease',
+                label: t('questionary:medical.options.heartDisease'),
+              },
+              {
                 value: 'hivAidsOrImpairedImmuneSystem',
                 label: t('questionary:medical.options.hiv'),
+              },
+              {
+                value: 'lungCancer',
+                label: t('questionary:medical.options.lungCancer'),
+              },
+              {
+                value: 'otherChronic',
+                label: t('questionary:medical.options.otherChronic'),
+              },
+              {
+                value: 'pneumonia',
+                label: t('questionary:medical.options.pneumonia'),
               },
               {
                 value: 'pulmonaryFibrosis',
                 label: t('questionary:medical.options.pulmonary'),
               },
               {
-                value: 'pregnancy',
-                label: t('questionary:medical.options.pregnancy'),
+                value: 'reflux',
+                label: t('questionary:medical.options.reflux'),
               },
               {
-                value: 'valvularHeartDisease',
-                label: t('questionary:medical.options.valvularHeart'),
+                value: 'sinusitis',
+                label: t('questionary:medical.options.sinusitis'),
+              },
+              {
+                value: 'tuberculosis',
+                label: t('questionary:medical.options.tuberculosis'),
               },
               {
                 value: 'other',

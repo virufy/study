@@ -259,7 +259,15 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
           : `${baseUrl}/questionary/step2c`,
         nextStep: `${baseUrl}/questionary/step4a`,
         metadata: {
-          current: patientId ? 5 : 6,
+          current: (() => {
+            if ((patientId && !removeQuestionaryStep2cIn.includes(country))
+            || (!patientId && removeQuestionaryStep2cIn.includes(country))) {
+              return 5;
+            } if (patientId && removeQuestionaryStep2cIn.includes(country)) {
+              return 4;
+            }
+            return 6;
+          })(),
           ...baseMetadata,
         },
       },
@@ -275,7 +283,15 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
           covidSymptomsStep: `${baseUrl}/questionary/step4b`,
         },
         metadata: {
-          current: patientId ? 6 : 7,
+          current: (() => {
+            if ((patientId && !removeQuestionaryStep2cIn.includes(country))
+            || (!patientId && removeQuestionaryStep2cIn.includes(country))) {
+              return 6;
+            } if (patientId && removeQuestionaryStep2cIn.includes(country)) {
+              return 5;
+            }
+            return 7;
+          })(),
           ...baseMetadata,
         },
       },
@@ -318,7 +334,15 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
         previousStep: `${baseUrl}/questionary/step4a`,
         nextStep: `${baseUrl}/thank-you`,
         metadata: {
-          current: patientId ? 7 : 8,
+          current: (() => {
+            if ((patientId && !removeQuestionaryStep2cIn.includes(country))
+            || (!patientId && removeQuestionaryStep2cIn.includes(country))) {
+              return 7;
+            } if (patientId && removeQuestionaryStep2cIn.includes(country)) {
+              return 6;
+            }
+            return 8;
+          })(),
           ...baseMetadata,
         },
       },
