@@ -43,6 +43,7 @@
     "agree": "He leído, entendido y acepto los términos de la <1>Política de Privacidad</1> de Virufy.",
     "detection": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para la investigación y compilación de un conjunto de datos necesarios para el desarrollo de algoritmos de inteligencia artificial para la detección de COVID-19 basada en dispositivos.",
     "signs": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para entrenar algoritmos de inteligencia artificial para analizar grabaciones de audio para determinar mejor los signos de COVID-19.",
+    "biometric": "Por la presente doy mi consentimiento expreso a la recogida y tratamiento de mis datos personales, biométricos y de salud para los fines indicados anteriormente.",
     "pleaseConfirm": "Por favor, confirme lo siguiente:",
     "nextButton": "Siguiente",
     "jumpToBottom": "Saltar al final"

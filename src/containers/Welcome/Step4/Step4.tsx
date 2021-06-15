@@ -236,6 +236,26 @@ const Step4 = (p: Wizard.StepProps) => {
                 />
               )}
             />
+
+            <Controller
+              control={control}
+              name="agreedBiometric"
+              defaultValue={false}
+              render={({ onChange, value, name }) => (
+                <Checkbox
+                  id="Step2-Biometric"
+                  label={(
+                    <Trans i18nKey="consent:biometric">
+                      I hereby expressly consent to the collection and processing of
+                      my personal information, biometric information, and health information.
+                    </Trans>
+              )}
+                  name={name}
+                  onChange={e => onChange(e.target.checked)}
+                  value={value}
+                />
+              )}
+            />
           </>
         )}
 
