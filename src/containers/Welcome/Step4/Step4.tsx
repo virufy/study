@@ -165,7 +165,7 @@ const Step4 = (p: Wizard.StepProps) => {
           render={({ onChange, value }) => (
             <Checkbox
               id="Step2-ConsentTerms"
-              label={t('consent:certify')}
+              label={(currentCountry !== 'Brazil') ? (t('consent:certify')) : (t('consent:certifyBrazil'))}
               name="agreedConsentTerms"
               onChange={e => onChange(e.target.checked)}
               value={value}
@@ -193,70 +193,69 @@ const Step4 = (p: Wizard.StepProps) => {
           )}
         />
 
-        {currentCountry !== 'Colombia' && (
-          <>
-            <Controller
-              control={control}
-              name="agreedCovidDetection"
-              defaultValue={false}
-              render={({ onChange, value, name }) => (
-                <Checkbox
-                  id="Step2-DetectionCovid"
-                  label={(
-                    <Trans i18nKey="consent:detection">
-                      I hereby acknowledge and agree that processing shall be done for the purposes indicated above
-                      and, in particular but without limitation, for research and compiling a dataset needed for the
-                      development of artificial intelligence algorithms for device-based COVID-19 detection.
-                    </Trans>
-              )}
-                  name={name}
-                  onChange={e => onChange(e.target.checked)}
-                  value={value}
-                />
-              )}
-            />
+        {currentCountry !== 'Brazil' && (
+          <Controller
+            control={control}
+            name="agreedCovidDetection"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-DetectionCovid"
+                label={(
+                  <Trans i18nKey="consent:detection">
+                    I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                    and, in particular but without limitation, for research and compiling a dataset needed for the
+                    development of artificial intelligence algorithms for device-based COVID-19 detection.
+                  </Trans>
+            )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
+          />
+        )}
 
-            <Controller
-              control={control}
-              name="agreedTrainingArtificial"
-              defaultValue={false}
-              render={({ onChange, value, name }) => (
-                <Checkbox
-                  id="Step2-TrainingArtificial"
-                  label={(
-                    <Trans i18nKey="consent:signs">
-                      I hereby acknowledge and agree that processing shall be done for the purposes indicated above
-                      and, in particular but without limitation, for training artificial intelligence algorithms to
-                      analyze cough audio recordings to better determine signs of COVID-19.
-                    </Trans>
-              )}
-                  name={name}
-                  onChange={e => onChange(e.target.checked)}
-                  value={value}
-                />
-              )}
+        <Controller
+          control={control}
+          name="agreedTrainingArtificial"
+          defaultValue={false}
+          render={({ onChange, value, name }) => (
+            <Checkbox
+              id="Step2-TrainingArtificial"
+              label={(
+                <Trans i18nKey="consent:signs">
+                  I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                  and, in particular but without limitation, for training artificial intelligence algorithms to
+                  analyze cough audio recordings to better determine signs of COVID-19.
+                </Trans>
+          )}
+              name={name}
+              onChange={e => onChange(e.target.checked)}
+              value={value}
             />
-
-            <Controller
-              control={control}
-              name="agreedBiometric"
-              defaultValue={false}
-              render={({ onChange, value, name }) => (
-                <Checkbox
-                  id="Step2-Biometric"
-                  label={(
-                    <Trans i18nKey="consent:biometric">
-                      I hereby expressly consent to the collection and processing of
-                      my personal information, biometric information, and health information.
-                    </Trans>
-              )}
-                  name={name}
-                  onChange={e => onChange(e.target.checked)}
-                  value={value}
-                />
-              )}
-            />
-          </>
+          )}
+        />
+        {currentCountry !== 'Brazil' && (
+          <Controller
+            control={control}
+            name="agreedBiometric"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-Biometric"
+                label={(
+                  <Trans i18nKey="consent:biometric">
+                    I hereby expressly consent to the collection and processing of
+                    my personal information, biometric information, and health information.
+                  </Trans>
+            )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
+          />
         )}
 
         <p><ErrorMessage errors={errors} name="name" /></p>

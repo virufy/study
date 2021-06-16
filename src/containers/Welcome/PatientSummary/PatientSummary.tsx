@@ -100,8 +100,8 @@ const PatientSummary = (p: Wizard.StepProps) => {
         </CustomPurpleText>
 
         <OptionsContainer isFirst>
-          <OptionsHeader>{t('main:questionnaire', 'Questionnaire')}
-            {patientInformation.questionary ? <CheckCircle /> : <ChevronRight onClick={handleNextQuestionnaire} />}
+          <OptionsHeader onClick={handleNextQuestionnaire}>{t('main:questionnaire', 'Questionnaire')}
+            {patientInformation.questionary ? <CheckCircle /> : <ChevronRight />}
           </OptionsHeader>
           {patientInformation.questionary && (
             <OptionsBody>
@@ -116,17 +116,17 @@ const PatientSummary = (p: Wizard.StepProps) => {
         </OptionsContainer>
 
         <OptionsContainer>
-          <OptionsHeader>
+          <OptionsHeader onClick={handleNextAudioCollection}>
             {t('main:audioCollection', 'Audio Collection')}
             {patientInformation.audioCollection ? <CheckCircle />
-              : <ChevronRight onClick={handleNextAudioCollection} />}
+              : <ChevronRight />}
           </OptionsHeader>
         </OptionsContainer>
 
         <OptionsContainer>
-          <OptionsHeader>
+          <OptionsHeader onClick={handleNextTestResults}>
             {t('main:testResults', 'Test Results')}
-            {patientInformation.testResult ? <CheckCircle /> : <ChevronRight onClick={handleNextTestResults} />}
+            {patientInformation.testResult ? <CheckCircle /> : <ChevronRight />}
           </OptionsHeader>
         </OptionsContainer>
       </WelcomeContent>

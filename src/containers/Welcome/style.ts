@@ -373,6 +373,7 @@ export const OptionsHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 60px;
+  cursor: pointer;
 `;
 
 export const OptionsBody = styled.div`
