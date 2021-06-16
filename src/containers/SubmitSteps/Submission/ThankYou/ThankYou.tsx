@@ -77,11 +77,19 @@ const ThankYou = (p: Wizard.StepProps) => {
       {!patientId && <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>}
       {submissionId && (
         <SubmissionIdBox>
-          <Trans i18nKey="thankyou:paragraph2">
-            Your unique submission ID:
-            <br />
-            <strong>{{ submissionId }}</strong>
-          </Trans>
+          {patientId ? (
+            <Trans i18nKey="thankyou:paragraph2Patient">
+              Your unique patient ID:
+              <br />
+              <strong>{{ patientId }}</strong>
+            </Trans>
+          ) : (
+            <Trans i18nKey="thankyou:paragraph2">
+              Your unique submission ID:
+              <br />
+              <strong>{{ submissionId }}</strong>
+            </Trans>
+          )}
         </SubmissionIdBox>
       )}
       {!patientId

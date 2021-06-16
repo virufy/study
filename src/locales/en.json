@@ -295,6 +295,7 @@
     "paragraph1_cough": "Your cough donation brings Virufy one step closer to changing the world.",
     "paragraph1_voice": "Your cough donation brings Virufy one step closer to changing the world.",
     "paragraph2": "Your unique submission ID:<br/><2>{{submissionId}}</2>",
+    "paragraph2Patient": "Your unique patient ID:<br/><2>{{patientId}}</2>",
     "paragraph3": "Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized data in future.<br/><br/>If you later develop symptoms such as cough, fever, or shortness of breath, please come back to resubmit your latest cough sounds.",
     "downloadApp": "Click here to <1>Install the app.</1>",
     "paragraph4": "Provide <1>feedback</1> for us to improve our application and check out our <3>website</3>!",
