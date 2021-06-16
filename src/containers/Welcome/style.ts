@@ -211,7 +211,7 @@ export const BulletIndicator = styled.p`
 export const HeaderImageContainer = styled.div`
   position: relative;
   min-width: 375px;
-  height: 325px;
+  height: 251px;
   margin-bottom: 30px;
 
 @media screen and (${props => props.theme.breakpoints.tablet}){
@@ -226,11 +226,11 @@ export const HeaderImage = styled.img`
 `;
 
 export const LogoWhiteBG = styled(LogoSplash)`
-  width: 134px;
-  height: 177px;
+  width: 109px;
+  height: 143px;
   margin: auto;
   position: absolute;
-  margin-left: -68%;
+  margin-left: -64%;
   top: 26%;
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
@@ -373,6 +373,7 @@ export const OptionsHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 60px;
+  cursor: pointer;
 `;
 
 export const OptionsBody = styled.div`

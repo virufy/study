@@ -39,10 +39,12 @@
     "paragraph2": "\"Collection of Smartphone Data for Screening of COVID-19\"",
     "paragraph3": "By checking the below boxes, you acknowledge that you have read and understood the Virufy privacy policy, and that you are providing your explicit consent to Virufy’s collection and processing of the categories of biometric and health information enumerated below.",
     "paragraph3_brazil": "If you are located inside Brazilian national territory, and for the purposes of the General Personal Data Protection Law (\"LGPD\"), \"consent\", in its free, informed, and unequivocal pronouncement, will be the legal basis on which we process sensitive personal data.",
-    "certify": "I certify that I am at least 18 years old and agree to the terms of the Consent Form.",
-    "agree": "I agree to the terms of Virufy <1>Privacy Policy</1>.",
+    "certifyBrazil": "I certify that I am at least 18 years old and agree to the terms of this Consent Form, hereby expressly consenting to the collection and processing of my personal information, biometric information, and health information.",
+    "certify": "I certify that I am at least 18 years old and agree to the terms of this Consent Form.",
+    "agree": "I have read, understood, and agree to the terms of the Virufy <1>Privacy Policy</1>.",
     "detection": "I hereby acknowledge and agree that processing shall be done for the purposes indicated above   and, in particular but without limitation, for research and compiling a dataset needed for the development of artificial intelligence algorithms for device-based COVID-19 detection.",
     "signs": "I hereby acknowledge and agree that processing shall be done for the purposes indicated above and, in particular but without limitation, for training artificial intelligence algorithms to analyze cough audio recordings to better determine signs of COVID-19.",
+    "biometric": "I hereby expressly consent to the collection and processing of my personal information, biometric information, and health information.",
     "pleaseConfirm": "Please confirm the following:",
     "nextButton": "Next",
     "jumpToBottom": "Jump To Bottom"
@@ -135,9 +137,9 @@
     },
     "patient":{
       "resultPcrTest":{
-        "question": " What was the result of Patient <1><0>{{patientId}}</0></1> PCR-based COVID-19 test?"
+        "question": " What was the result of Patient <1><0>{{patientId}}</0></1>'s PCR-based COVID-19 test?"
       },
-      "resultAntigenTest": "What was the result of Patient <1><0>{{patientId}}</0></1> rapid antigen COVID-19 test?"
+      "resultAntigenTest": "What was the result of Patient <1><0>{{patientId}}</0></1>'s rapid antigen COVID-19 test?"
     },
     "headerText2": "Follow-up question",
     "whenPcrTest": "When did you take your PCR-based COVID-19 test? Please estimate if unsure.",

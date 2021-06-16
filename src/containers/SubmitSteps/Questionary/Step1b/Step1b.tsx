@@ -346,7 +346,7 @@ const Step1b = ({
         <>
           <QuestionText extraSpace>
             <Trans i18nKey="questionary:patient:resultPcrTest.question">
-              What was the result of Patient {patientId} PCR-based COVID-19 test?
+              What was the result of Patient {patientId}&apos;s PCR-based COVID-19 test?
             </Trans>
           </QuestionText>
           <Controller
@@ -373,7 +373,7 @@ const Step1b = ({
           />
           <QuestionText extraSpace>
             <Trans i18nKey="questionary:patient:resultAntigenTest.question'">
-              What was the result of Patient {patientId} rapid antigen COVID-19 test?
+              What was the result of Patient {patientId}&apos;s rapid antigen COVID-19 test?
             </Trans>
           </QuestionText>
           <Controller
