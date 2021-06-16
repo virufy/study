@@ -22,7 +22,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 // Styles
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, AgeInput,
+  QuestionText, MainContainer, QuestionInput,
 } from '../style';
 
 const schema = Yup.object({
@@ -103,7 +103,7 @@ const Step2a = ({
         name="ageGroup"
         defaultValue=""
         render={({ onChange, value, name }) => (
-          <AgeInput
+          <QuestionInput
             name={name}
             value={value}
             onChange={onChange}

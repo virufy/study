@@ -21,11 +21,10 @@ import { scrollToTop } from 'helper/scrollHelper';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
-import OptionList from 'components/OptionList';
 
 // Styles
 import {
-  QuestionText, MainContainer,
+  QuestionText, MainContainer, QuestionInput,
 } from '../style';
 
 const schema = Yup.object({
@@ -101,29 +100,14 @@ const Step4b = ({
         control={control}
         name="symptomsStartedDate"
         defaultValue=""
-        render={({ onChange, value }) => (
-          <OptionList
-            singleSelection
-            value={{ selected: value ? [value] : [] }}
-            onChange={v => onChange(v.selected[0])}
-            items={[
-              {
-                value: 'today',
-                label: t('questionary:options.today'),
-              },
-              {
-                value: 'oneToThreeDaysAgo',
-                label: t('questionary:options.days'),
-              },
-              {
-                value: 'aWeekAgo',
-                label: t('questionary:options.week'),
-              },
-              {
-                value: 'overAWeekAgo',
-                label: t('questionary:options.overWeek'),
-              },
-            ]}
+        render={({ onChange, value, name }) => (
+          <QuestionInput
+            name={name}
+            value={value}
+            onChange={onChange}
+            type="text"
+            placeholder={t('questionary:enterDays')}
+            autoComplete="Off"
           />
         )}
       />

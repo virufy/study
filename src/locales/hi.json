@@ -236,7 +236,8 @@
       },
       "addOtherPlaceholder": "Other symptom"
     },
-    "symptomsDate": "Approximately when did you begin experiencing COVID-19 symptoms such as cough, fever, and/or shortness of breath?",
+    "symptomsDate": "Approximately how many days ago did these symptoms start?",
+    "enterDays": "Enter days",
     "options":{
       "today": "Today",
       "days": "1-3 days ago",

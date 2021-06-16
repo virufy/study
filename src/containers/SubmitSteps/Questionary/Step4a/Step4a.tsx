@@ -26,8 +26,6 @@ import {
   QuestionText, MainContainer, QuestionAllApply,
 } from '../style';
 
-const covidSymptoms = ['dryCough', 'wetCough', 'feverChillsSweating', 'newOrWorseCough', 'breathShortness'];
-
 const schema = Yup.object({
   currentSymptoms: Yup.object().required(),
 }).defined();
@@ -96,7 +94,7 @@ const Step4a = ({
 
       // eslint-disable-next-line no-plusplus
       for (let index = 0; index < currentSymptoms.selected?.length; index++) {
-        if (covidSymptoms.includes(currentSymptoms.selected[index])) {
+        if (currentSymptoms.selected[index] !== 'none') {
           hasSymptom = true;
           break;
         }
