@@ -236,7 +236,8 @@
       },
       "addOtherPlaceholder": "Outro sintoma"
     },
-    "symptomsDate": "Aproximadamente quando você começou a sentir sintomas de COVID-19, como tosse, febre e/ou falta de ar?",
+    "symptomsDate": "Há quantos dias, aproximadamente, esses sintomas começaram?",
+    "enterDays": "Entrar dias",
     "options":{
       "today": "Hoje",
       "days": "1-3 dias atrás",
@@ -295,6 +296,7 @@
     "title": "Obrigada por submeter suas respostas!",
     "paragraph1_cough": "Sua doação de tosse deixa a Virufy um passo mais próximo de mudar o mundo.",
     "paragraph1_voice": "Sua doação de tosse e fala deixa a Virufy um passo mais próximo de mudar o mundo.",
+    "paragraph2Patient": "Seu ID exclusivo de paciente:<br/><2>{{patientId}}</2>",
     "paragraph2": "Seu ID exclusivo de apresentação:<br/><2>{{submissionId}}</2>",
     "paragraph3": "Certifique-se de salvaguardar este ID de apresentação, pois você precisará dele para solicitar à Virufy a exclusão de seus dados anonimizados no futuro.<br/>>br/> Se mais tarde você desenvolver sintomas como tosse, febre ou falta de ar, por favor, volte a apresentar novamente seus últimos sons de tosse.",
     "downloadApp": "Clique aqui para <1>Instale o aplicativo.</1>",

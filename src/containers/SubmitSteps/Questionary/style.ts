@@ -97,7 +97,7 @@ color: ${props => props.theme.colors.red};
   margin-bottom: 16px;
 `;
 
-export const AgeInput = styled.input`
+export const QuestionInput = styled.input`
   background-color: ${props => props.theme.colors.midGray};
   border-radius: 4px;
   border: 0;
