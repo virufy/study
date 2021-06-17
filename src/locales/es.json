@@ -98,7 +98,7 @@
     "addFile": "Añadir un archivo",
     "constraint": "Añada hasta 5 MB",
     "next": "Hecho",
-    "micError": "¿No puede acceder al micrófono? Suba un archivo de audio.",
+    "micError": "¿No puede acceder al micrófono? Suba un archivo de audio (.wav/.wave/.mp3/.ogg)",
     "micErrorDescription": "Por favor, suba un archivo de audio aquí.",
     "fileDurationTooShort": "Por favor, suba un archivo de al menos 3 segundos",
     "fileSizeTooBig": "Por favor, suba un archivo de menos de 5 MB",
