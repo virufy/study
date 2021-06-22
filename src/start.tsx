@@ -13,6 +13,8 @@ import { theme } from 'theme';
 // Fonts
 import SFProDisplayWoff from 'assets/fonts/SFProDisplay.woff';
 import SFProDisplayWoff2 from 'assets/fonts/SFProDisplay.woff2';
+import BikoBoldWoff from 'assets/fonts/BikoBold.woff';
+import BikoBoldWoff2 from 'assets/fonts/BikoBold.woff2';
 
 const GlobalStyle = createGlobalStyle`
   ${reboot}
@@ -41,6 +43,17 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         font-style: normal;
     }
+
+    @font-face {
+      font-family: 'Biko';
+      src: local('BikoBold'), local('BikoBold'),
+      url(${BikoBoldWoff2}) format('woff2'),
+      url(${BikoBoldWoff}) format('woff');
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+  }
+
     input {
       appearance: none;
     }

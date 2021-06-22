@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const AppContainer = styled.div`
   margin: 0 auto;
-  padding-left: ${props => props.theme.layout.generalPaddingLeft};
-  padding-right: ${props => props.theme.layout.generalPaddingRight};
+  padding-bottom: 20px;
 
   height: 100%;
   width: 100%;

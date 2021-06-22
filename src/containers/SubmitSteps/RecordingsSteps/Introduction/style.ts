@@ -5,43 +5,18 @@ import { BlackText } from 'components/Texts';
 import { ReactComponent as SocialDistancingSVG } from 'assets/images/social-distancing.svg';
 import { ReactComponent as CoughLeftSVG } from 'assets/images/cough-left.svg';
 
+/* Containers */
 export const MainContainer = styled.div``;
 
-export const InstructionTitle = styled.div`
+export const InstructionContainer = styled.div`
+  display: flex; 
+  margin-left: 10px; 
+  max-width: 330px;
   width: 100%;
-  height: 29px;
-
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 160%;
-
-  text-align: center;
-  margin-bottom: 16px;
-
-  color: ${props => props.theme.colors.darkBlack};
-`;
-
-export const Text = styled(BlackText).attrs({ dark: true })`
-  margin-bottom: 24px;
 
   @media screen and (${props => props.theme.breakpoints.tablet}) {
-    margin-bottom: 40px;
-    font-size: 16px;
-  }
-`;
-
-export const TextSpeech = styled(Text)`
-  color: ${colors.realBlack};
-  text-align: left;
-
-  @media screen and (${props => props.theme.breakpoints.tablet}) {
-    max-width: 470px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 205px;
-    font-size: 16px;
+    max-width: 475px;
+    margin: auto;
   }
 `;
 
@@ -105,11 +80,35 @@ export const BottomImageRight = styled.img`
   }
 `;
 
+/* Bullets */
+
+export const WelcomeBullets = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.purple_10}; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+`;
+
+export const BulletIndicator = styled.p`
+  color: ${({ theme }) => theme.colors.purple}; 
+  font-family: Source Sans Pro;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px;
+`;
+
+/* Images */
+
 export const SocialDistancing = styled(SocialDistancingSVG)`
   width: 192px;
   height: 96px;
-  margin: 0 auto 22px;
+  margin: 30px auto 37px;
   display: block;
+  text-align: center;
 
   @media screen and (${props => props.theme.breakpoints.tablet}) {
     width: 205px;
@@ -118,13 +117,36 @@ export const SocialDistancing = styled(SocialDistancingSVG)`
 `;
 
 export const CoughLeft = styled(CoughLeftSVG)`
-  width: 88px;
-  height: 96px;
-  margin: 0 auto;
+  width: 99px;
+  height: 108px;
+  margin: 30px auto;
   display: block;
 
   @media screen and (${props => props.theme.breakpoints.tablet}) {
     width: 126px;
     height: 158px;
+  }
+`;
+
+/* Text */
+export const Text = styled(BlackText).attrs({ dark: true })`
+  margin-bottom: 24px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}) {
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+`;
+
+export const TextSpeech = styled(Text)`
+  color: ${colors.realBlack};
+  text-align: left;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}) {
+    max-width: 470px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 205px;
+    font-size: 16px;
   }
 `;

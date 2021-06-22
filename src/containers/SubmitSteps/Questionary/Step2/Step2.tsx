@@ -14,29 +14,25 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import ProgressIndicator from 'components/ProgressIndicator';
-import Dropdown from 'components/Dropdown';
+import OptionList from 'components/OptionList';
+
+// Helper
+import { getPatientId } from 'helper/stepsDefinitions';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
-
-// Data
-import { ageGroups } from 'data/ageGroup';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
-import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, GrayExtraInfo, QuestionNote,
+  QuestionText, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.string(),
-  gender: Yup.object().required(),
-  biologicalSex: Yup.string(),
+  vaccine: Yup.string(),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
@@ -52,9 +48,10 @@ const Step2 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
+  const patientId = getPatientId();
   const { state, action } = useStateMachine(updateAction(storeKey));
 
   // States
@@ -64,6 +61,7 @@ const Step2 = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
@@ -72,20 +70,32 @@ const Step2 = ({
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     const { testTaken } = state['submit-steps'];
-    if (testTaken.includes('neither') && otherSteps) {
-      history.push(otherSteps.noTestStep);
-    } else if (previousStep) {
+    if (!patientId) {
+      if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
+        history.push(otherSteps.noTestStep);
+      } else if (previousStep) {
+        history.push(previousStep);
+      } else {
+        history.goBack();
+      }
+    }
+    if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [state, history, otherSteps, previousStep]);
+  }, [state, history, otherSteps, previousStep, patientId]);
+
+  const {
+    isValid,
+  } = formState;
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {
@@ -99,64 +109,12 @@ const Step2 = ({
   };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
-      <QuestionText extraSpace first>{t('questionary:ageGroup')}</QuestionText>
-
-      <Controller
-        control={control}
-        name="ageGroup"
-        defaultValue="unselected"
-        render={({ onChange, value }) => (
-          <Dropdown onChange={e => onChange(e.currentTarget.value)} value={value} isMobileFullWidth>
-            <option id="unselected">
-              {t('questionary:unselectedAgeGroup')}
-            </option>
-            {ageGroups.map(({ age }) => <option key={age} id={age}>{age}</option>)}
-          </Dropdown>
-        )}
-      />
-
-      <QuestionText extraSpace>{t('questionary:gender.question')}</QuestionText>
-      <Controller
-        control={control}
-        name="gender"
-        defaultValue={{ selected: [], other: '' }}
-        render={({ onChange, value }) => (
-          <OptionList
-            singleSelection
-            value={value}
-            onChange={v => onChange(v)}
-            items={[
-              {
-                value: 'male',
-                label: t('questionary:gender.options.male'),
-              },
-              {
-                value: 'female',
-                label: t('questionary:gender.options.female'),
-              },
-              {
-                value: 'notToSay',
-                label: t('questionary:gender.options.notToSay'),
-              },
-            ]}
-            enableOther
-            otherPlaceholder={t('questionary:gender.options.selfDescribe')}
-          />
-        )}
-      />
-
-      <QuestionText extraSpace>
-        {t('questionary:biologicalSex.question')}
-        <QuestionNote>{t('questionary:biologicalSex.note')}</QuestionNote>
+    <MainContainer>
+      <QuestionText first>{t('questionary:vaccine.question')}
       </QuestionText>
       <Controller
         control={control}
-        name="biologicalSex"
+        name="vaccine"
         defaultValue=""
         render={({ onChange, value }) => (
           <OptionList
@@ -165,12 +123,12 @@ const Step2 = ({
             onChange={v => onChange(v.selected[0])}
             items={[
               {
-                value: 'male',
-                label: t('questionary:biologicalSex.options.male'),
+                value: 'true',
+                label: t('questionary:vaccine.options.yes'),
               },
               {
-                value: 'female',
-                label: t('questionary:biologicalSex.options.female'),
+                value: 'false',
+                label: t('questionary:vaccine.options.no'),
               },
             ]}
           />
@@ -180,19 +138,15 @@ const Step2 = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          {metadata && (
-            <QuestionStepIndicator>
-              {metadata.current} {t('questionary:stepOf')} {metadata.total}
-            </QuestionStepIndicator>
-          )}
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

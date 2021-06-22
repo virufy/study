@@ -13,6 +13,7 @@ export const Title = styled.h2`
   font-weight: 700;
   color: ${({ theme }) => theme.colors.realBlack};
   margin-bottom: 0;
+  margin-top: 40px;
 `;
 
 export const Card = styled.div`
@@ -42,7 +43,7 @@ export const CardDescription = styled.div`
 `;
 
 const baseButton = css`
-  background-color: ${({ theme }) => theme.colors.green};
+  background-color: ${({ theme }) => theme.colors.purple};
   
   color: ${({ theme }) => theme.colors.white};
   font-family: "Source Sans Pro";
@@ -57,7 +58,7 @@ const baseButton = css`
   text-align: center;
   width: 100%;
 
-  border-radius: 4px;
+  border-radius: 15px;
 `;
 
 export const CardLink = styled.a.attrs(() => ({ target: '_blank', rel: 'noopener noreferrer' }))`

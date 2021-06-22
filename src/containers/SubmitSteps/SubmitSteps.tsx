@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Wizard from 'components/Wizard';
 
 // Local
-import stepsDefinition, { getCountry } from 'helper/stepsDefinitions';
+import stepsDefinition, { getCountry, getPatientId } from 'helper/stepsDefinitions';
 
 setStorageType(window.localStorage);
 
@@ -43,8 +43,7 @@ const SubmitSteps = () => {
 
     const checkFileConsistencyProblem = (inputState: Record<string, any>) => {
       let out = null;
-
-      if (inputState[StoreKey]) {
+      if (!inputState.welcome?.patientId && inputState[StoreKey]) {
         const { recordYourCough, recordYourSpeech } = inputState[StoreKey];
         const toTest = [];
 
@@ -72,7 +71,6 @@ const SubmitSteps = () => {
           out = itemWithProblem.route;
         }
       }
-
       return out;
     };
 
@@ -82,13 +80,13 @@ const SubmitSteps = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return null;
 };
 
 const WrapperSubmitSteps = () => {
   const country = getCountry();
-  const steps = React.useMemo(() => stepsDefinition(StoreKey, country), [country]);
+  const patientId = getPatientId();
+  const steps = React.useMemo(() => stepsDefinition(StoreKey, country, patientId), [country, patientId]);
   return (
     <Wizard
       steps={steps}

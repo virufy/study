@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
+import { TitleBlack } from 'components/Texts';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -22,14 +23,12 @@ import { scrollToTop } from 'helper/scrollHelper';
 // Styles
 import {
   MainContainer,
-  Title,
-  Text,
-  TextAddFile,
-  TextFileConstraints,
   TextErrorContainer,
   UploadContainer,
   UploadInput,
   UploadButton,
+  CloudsSVG,
+  ArrowUp,
 } from './style';
 
 const audioMaxSizeInMb = 5;
@@ -71,13 +70,14 @@ const RecordManualUpload = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setSubtitle, setType,
+  } = useHeaderContext();
   const history = useHistory();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const inputUpload = useRef<HTMLInputElement>(null);
   const {
-    handleSubmit,
     control,
-    formState,
   } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey]?.[metadata?.currentLogic],
@@ -85,12 +85,8 @@ const RecordManualUpload = ({
   });
   const { t } = useTranslation();
 
-  const {
-    isValid,
-  } = formState;
-
   // States
-  const [activeStep, setActiveStep] = React.useState(false);
+  const [activeStep, setActiveStep] = React.useState(true);
   const [errorMsg, setErrorMsg] = React.useState('');
 
   // Handlers
@@ -134,25 +130,27 @@ const RecordManualUpload = ({
   useEffect(() => {
     scrollToTop();
     setTitle(t('recordingsRecordManual:header'));
+    setType('primary');
+    setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, t]);
 
   return (
     <>
       <MainContainer>
-        <Title>
+        <TitleBlack>
           {t('recordingsRecordManual:micError')}
-        </Title>
-        <Text>
-          {t('recordingsRecordManual:micErrorDescription')}
-        </Text>
+        </TitleBlack>
+        <CloudsSVG />
         <Controller
           control={control}
           name="uploadedFile"
           render={({ name }) => (
             <UploadContainer>
               <UploadButton htmlFor="uploaded-file" />
+              <ArrowUp />
               <UploadInput
+                ref={inputUpload}
                 id="uploaded-file"
                 type="file"
                 name={name}
@@ -162,12 +160,6 @@ const RecordManualUpload = ({
             </UploadContainer>
           )}
         />
-        <TextAddFile>
-          {t('recordingsRecordManual:addFile')}
-        </TextAddFile>
-        <TextFileConstraints>
-          {t('recordingsRecordManual:constraint')}
-        </TextFileConstraints>
       </MainContainer>
       <TextErrorContainer>
         {errorMsg}
@@ -177,9 +169,8 @@ const RecordManualUpload = ({
         <Portal>
           <WizardButtons
             invert
-            leftLabel={t('recordingsRecordManual:next')}
-            leftDisabled={!isValid}
-            leftHandler={handleSubmit(handleNext)}
+            leftLabel={t('recordingsRecordManual:uploadFile')}
+            leftHandler={() => inputUpload.current?.click()}
           />
         </Portal>
       )}

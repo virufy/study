@@ -37,6 +37,7 @@ export async function doSubmit({
       agreedPolicyTerms,
       agreedCovidDetection,
       agreedTrainingArtificial,
+      agreedBiometric,
     } = state.welcome;
 
     const {
@@ -49,6 +50,7 @@ export async function doSubmit({
       antigenTestDate,
       antigenTestResult,
 
+      vaccine,
       ageGroup,
       gender,
       biologicalSex,
@@ -81,6 +83,7 @@ export async function doSubmit({
     body.append('agreedPolicyTerms', agreedPolicyTerms);
     body.append('agreedCovidDetection', agreedCovidDetection);
     body.append('agreedTrainingArtificial', agreedTrainingArtificial);
+    body.append('agreedBiometric', agreedBiometric);
 
     const coughFile = recordYourCough.recordingFile || recordYourCough.uploadedFile;
     body.append('cough', coughFile, coughFile.name || 'filename.wav');
@@ -99,6 +102,10 @@ export async function doSubmit({
     if (testTaken.includes('antigen')) {
       body.append('antigenTestDate', antigenTestDate.toISOString());
       body.append('antigenTestResult', antigenTestResult);
+    }
+
+    if (vaccine) {
+      body.append('vaccine', vaccine);
     }
 
     if (ageGroup !== 'unselected') {
@@ -124,7 +131,7 @@ export async function doSubmit({
     }
 
     if (symptomsStartedDate) {
-      body.append('symptomsStartedDate', symptomsStartedDate.toISOString());
+      body.append('symptomsStartedDate', symptomsStartedDate);
     }
 
     if (currentRespiratoryCondition?.selected?.length > 0) {

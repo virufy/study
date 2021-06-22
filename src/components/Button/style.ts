@@ -9,7 +9,7 @@ export interface StyledButtonProps {
 
 export const StyledButton = styled.button<StyledButtonProps>`
   height: 50px;
-  border-radius: 4px; 
+  border-radius: 15px; 
   font-family: 'Source Sans Pro'; /* It could be removed if default on body changes */
   font-weight: bold;
   font-size: 14px;
@@ -17,7 +17,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   width: 100%;
 
   ${({ dark, disabled }) => {
-    const color = disabled ? colors.midGray : colors.darkBlack;
+    const color = disabled ? colors.purple_50 : colors.purple;
     return dark ? `
     background-color: ${color};
     color: ${colors.white};

@@ -13,9 +13,6 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
-// Components
-import ProgressIndicator from 'components/ProgressIndicator';
-
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
@@ -26,7 +23,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, GrayExtraInfo, QuestionNote,
+  QuestionText, QuestionNote, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
@@ -45,7 +42,7 @@ const Step3 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -57,10 +54,15 @@ const Step3 = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -73,9 +75,10 @@ const Step3 = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step3Type) => {
@@ -89,11 +92,7 @@ const Step3 = ({
   };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
+    <MainContainer>
       <QuestionText extraSpace first>
         {t('questionary:smokeLastSixMonths.question')}
         <QuestionNote>{t('questionary:smokeLastSixMonths.note')}</QuestionNote>
@@ -124,19 +123,15 @@ const Step3 = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          {metadata && (
-            <QuestionStepIndicator>
-              {metadata.current} {t('questionary:stepOf')} {metadata.total}
-            </QuestionStepIndicator>
-          )}
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

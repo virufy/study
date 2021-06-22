@@ -8,16 +8,36 @@ export const MicRecorderContainer = styled.div`
   justify-content: flex-start;
 `;
 
-export const MicRecorderButton = styled.button`
-  background-color: ${colors.lightGray};
-  width: 180px;
-  height: 180px;
+export const MicButtonsContainer = styled.div`
+  display:flex;
+  justify-content: space-between;
+  width: 144px;
+  margin: auto;
+`;
+
+export const MicButtonWithText = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const MicNote = styled.p`
+  font-size: 14px;
+  color: ${colors.lightDarkGray};
+  margin-top: 8px;
+  margin-bottom: 0px;
+`;
+export const MicRecorderButton = styled.button<{ disabled?: boolean; opacity?: boolean}>`
+  background-color: ${colors.purple};
+  width: 56px;
+  height: 56px;
   position: relative;
   outline: none !important;
   border: none;
   border-radius: 50%;
   padding: 0;
   transition: background-color 0.25s;
+  opacity: ${props => (props.disabled || props.opacity ? '0.5' : '1')};
 
   @supports not (-webkit-touch-callout: none) {
     /* CSS for other than iOS devices */
@@ -25,7 +45,7 @@ export const MicRecorderButton = styled.button`
   }
 
   &:active {
-    background-color: ${colors.midDarkGray};
+    background-color: ${colors.purple};
   }
 
   &:before {
@@ -41,50 +61,45 @@ export const MicRecorderButton = styled.button`
   }
 
   @media screen and (${props => props.theme.breakpoints.tablet}) {
-    width: 275px;
-    height: 275px;
+    width: 66px;
+    height: 66px;
   }
 `;
 
-export const MicRecorderImage = styled.img<{ show?: boolean }>`
+export const MicRecorderImage = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: ${props => (props.show ? '1' : '0')};
   transition: opacity 0.25s;
 `;
 
 export const MicRecorderStartImage = styled(MicRecorderImage)`
-  width: 51.33px;
-  height: 69.67px;
-
-  @media screen and (${props => props.theme.breakpoints.tablet}) {
-    width: 78.43px;
-    height: 106.44px;
-  }
+  width: 27px;
+  height: 27px;
 `;
 
 export const MicRecorderStopImage = styled(MicRecorderImage)`
-  width: 44px;
-  height: 51.33px;
-
-  @media screen and (${props => props.theme.breakpoints.tablet}) {
-    width: 53px;
-    height: 61.83px;
-  }
+  width: 15px;
+  height: 15px;
 `;
 
 export const MicRecorderTimerContainer = styled.div`
+  width: 70px;
+  height: 41px;
   font-size: 1.25rem;
-  line-height: 28px;
-  color: ${colors.realBlack};
-  margin-top: 20px;
+  color: ${colors.purple};
+  font-weight: bold;
   font-family: 'Source Sans Pro';
+  border: 1px solid ${colors.purple};
+  border-radius: 15px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-bottom: 28px;
 
   @media screen and (${props => props.theme.breakpoints.tablet}) {
     font-size: 1.75rem;
-    line-height: 40px;
     margin-top: 22px;
   }
 `;
@@ -94,7 +109,9 @@ export const MicRecorderTimerReleaseTextContainer = styled.div`
   line-height: 20px;
   color: ${colors.red};
   font-family: 'Source Sans Pro';
-  display: flex;
+  display: flex; 
+  margin-left: 20px;
+  margin-top:10px;
 `;
 
 export const MicRecorderTextP = styled.p<{ show?: boolean }>`
