@@ -15,7 +15,7 @@ import { resetStore } from 'utils/wizard';
 
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
-import { getSpeechContext } from 'helper/stepsDefinitions';
+import { getCountry, getSpeechContext } from 'helper/stepsDefinitions';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -35,7 +35,7 @@ const ThankYou = (p: Wizard.StepProps) => {
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-
+  const country = getCountry();
   const [, setActiveStep] = useState(true);
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const { action } = useStateMachine(resetStore());
@@ -77,7 +77,7 @@ const ThankYou = (p: Wizard.StepProps) => {
       {!patientId && <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>}
       {submissionId && (
         <SubmissionIdBox>
-          {patientId ? (
+          {country === 'Colombia' ? (
             <Trans i18nKey="thankyou:paragraph2Patient">
               Your unique patient ID:
               <br />
