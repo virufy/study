@@ -1,9 +1,11 @@
 import React from 'react';
+import { useRouteMatch, useLocation } from 'react-router-dom';
 import { createStore, setStorageType } from 'little-state-machine';
 
 // Wizard
-import { useRouteMatch, useLocation } from 'react-router-dom';
 import Wizard from 'components/Wizard';
+
+// Components
 import DotIndicators from 'components/DotIndicators';
 
 setStorageType(window.localStorage);

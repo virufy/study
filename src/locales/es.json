@@ -10,6 +10,7 @@
     "selectRegion": "Seleccione region",
     "selectLocation": "Localización",
     "patientId": "ID del paciente",
+    "hospitalId": "ID del hospital",
     "enterPatientId" : "Ingresar ID del paciente", 
     "nextButton": "Siguiente",
     "createdBy": "Creado por",

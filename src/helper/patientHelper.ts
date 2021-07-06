@@ -31,6 +31,7 @@ export async function doSubmitPatientQuestionnaire({
       country,
       region,
       patientId,
+      hospitalId,
     } = state.welcome;
 
     const {
@@ -53,6 +54,10 @@ export async function doSubmitPatientQuestionnaire({
     body.append('country', country);
     if (region) {
       body.append('region', region);
+    }
+
+    if (hospitalId) {
+      body.append('hospitalId', hospitalId);
     }
 
     if (window.sourceCampaign) {
@@ -144,6 +149,7 @@ export async function doSubmitPatientAudioCollection({
       country,
       region,
       patientId,
+      hospitalId,
 
     } = state.welcome;
 
@@ -159,6 +165,10 @@ export async function doSubmitPatientAudioCollection({
     body.append('country', country);
     if (region) {
       body.append('region', region);
+    }
+
+    if (hospitalId) {
+      body.append('hospitalId', hospitalId);
     }
 
     if (window.sourceCampaign) {
@@ -206,6 +216,7 @@ export async function doSubmitPatientTestResults({
       country,
       region,
       patientId,
+      hospitalId,
 
     } = state.welcome;
 
@@ -220,6 +231,10 @@ export async function doSubmitPatientTestResults({
     body.append('country', country);
     if (region) {
       body.append('region', region);
+    }
+
+    if (hospitalId) {
+      body.append('hospitalId', hospitalId);
     }
 
     if (window.sourceCampaign) {
