@@ -47,12 +47,13 @@ const schema = Yup.object().shape({
   agreedConsentTerms: Yup.boolean().required().default(false).oneOf([true]),
   agreedPolicyTerms: Yup.boolean().required().default(false).oneOf([true]),
   agreedCovidDetection: Yup.boolean().when('$country', {
-    is: 'Colombia',
+    is: 'Brazil',
     then: Yup.boolean().notRequired(),
     otherwise: Yup.boolean().required().default(false).oneOf([true]),
   }),
-  agreedTrainingArtificial: Yup.boolean().when('$country', {
-    is: 'Colombia',
+  agreedTrainingArtificial: Yup.boolean().required().default(false).oneOf([true]),
+  agreedBiometric: Yup.boolean().when('$country', {
+    is: 'Brazil',
     then: Yup.boolean().notRequired(),
     otherwise: Yup.boolean().required().default(false).oneOf([true]),
   }),
