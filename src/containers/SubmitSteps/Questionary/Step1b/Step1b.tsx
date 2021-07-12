@@ -161,7 +161,13 @@ const Step1b = ({
       if (patientId) {
         doSubmitPatientTestResults({
           setSubmitError: s => setSubmitError(!s ? null : t(s)),
-          state,
+          state: {
+            ...state,
+            'submit-steps': {
+              ...state['submit-steps'],
+              ...values,
+            },
+          },
           captchaValue,
           action,
           nextStep,
