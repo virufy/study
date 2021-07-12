@@ -25,6 +25,9 @@ import { countryData, countriesWithStates } from 'data/country';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
+// Helper
+import { isClinic } from 'helper/basePathHelper';
+
 // Styles
 import {
   WelcomeContent, WelcomeStyledForm, LogoSubtitle,
@@ -40,7 +43,16 @@ const schema = Yup.object().shape({
     then: Yup.string().required(),
     else: Yup.string(),
   }),
-  patientId: Yup.string().notRequired(),
+  patientId: Yup.string().when('$isClinical', {
+    is: true,
+    then: Yup.string().required(),
+    else: Yup.string().notRequired(),
+  }),
+  hospitalId: Yup.string().when('$isClinical', {
+    is: true,
+    then: Yup.string().required(),
+    else: Yup.string().notRequired(),
+  }),
 }).defined();
 
 type Step1Type = Yup.InferType<typeof schema>;
@@ -62,6 +74,9 @@ const Step1 = (p: Wizard.StepProps) => {
     setValue,
   } = useForm({
     defaultValues: store,
+    context: {
+      isClinical: isClinic,
+    },
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
@@ -193,25 +208,44 @@ const Step1 = (p: Wizard.StepProps) => {
               </RegionContainer>
             ) : <></>)}
           />
-          <BoldBlackText>
-            {t('main:patientId', 'Enter patient ID:')}
-          </BoldBlackText>
-          <Controller
-            control={control}
-            name="patientId"
-            defaultValue=""
-            render={({ onChange, value, name }) => (
-              <WelcomeInput
-                name={name}
-                value={value}
-                onChange={onChange}
-                type="text"
-                placeholder={t('main:enterPatientId', 'Enter your patient ID')}
-                autoComplete="Off"
+          {isClinic && (
+            <>
+              <BoldBlackText>
+                {t('main:patientId', 'Enter patient ID:')}
+              </BoldBlackText>
+              <Controller
+                control={control}
+                name="patientId"
+                defaultValue=""
+                render={({ onChange, value, name }) => (
+                  <WelcomeInput
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    type="text"
+                    autoComplete="Off"
+                  />
+                )}
               />
-            )}
-          />
-
+              <BoldBlackText>
+                {t('main:hospitalId', 'Enter hospital ID:')}
+              </BoldBlackText>
+              <Controller
+                control={control}
+                name="hospitalId"
+                defaultValue=""
+                render={({ onChange, value, name }) => (
+                  <WelcomeInput
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    type="text"
+                    autoComplete="Off"
+                  />
+                )}
+              />
+            </>
+          )}
           {
             activeStep && (
               <>
