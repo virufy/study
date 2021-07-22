@@ -23,7 +23,7 @@ import Recaptcha from 'components/Recaptcha';
 import { updateAction } from 'utils/wizard';
 
 // Helpers
-import { getPatientId, getCountry, removeSpeechIn } from 'helper/stepsDefinitions';
+import { getPatientId, getCountry, allowSpeechIn } from 'helper/stepsDefinitions';
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmitPatientAudioCollection } from 'helper/patientHelper';
 
@@ -357,7 +357,7 @@ const ListenAudio = ({
           </PlayerPlayButton>
         </PlayerPlayContainer>
       </MainContainer>
-      {((!patientId && activeStep) || (patientId && !removeSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech')) && (
+      {((!patientId && activeStep) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech')) && (
         <Portal>
           <WizardButtons
             invert
@@ -367,7 +367,7 @@ const ListenAudio = ({
         </Portal>
       )}
 
-      {((patientId && removeSpeechIn.includes(country)) || (patientId && !removeSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
+      {((patientId && !allowSpeechIn.includes(country)) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
         <Portal>
           { /* ReCaptcha  */}
           <Recaptcha onChange={setCaptchaValue} />

@@ -6,14 +6,8 @@ const middleComponentPathSubmission = 'Submission';
 const recordYourCoughLogic = 'recordYourCough';
 const recordYourSpeechLogic = 'recordYourSpeech';
 
-export const removeSpeechIn: string[] = [
-  'Argentina',
-  'Bolivia',
-  'Brazil',
-  // 'Colombia',
-  'Mexico',
-  'Peru',
-  'United States',
+export const allowSpeechIn: string[] = [
+  'Colombia',
 ];
 export const removeQuestionaryStep6In: string[] = [];
 export const removeQuestionaryStep2cIn: string[] = ['Colombia'];
@@ -39,10 +33,10 @@ export function getPatientId() {
 
 export function getSpeechContext() {
   const country = getCountry();
-  if (removeSpeechIn.includes(country)) {
-    return 'cough';
+  if (allowSpeechIn.includes(country)) {
+    return 'voice';
   }
-  return 'voice';
+  return 'cough';
 }
 
 function getCoughSteps(storeKey: string, country: string, patientId?: string) {
@@ -81,7 +75,7 @@ function getCoughSteps(storeKey: string, country: string, patientId?: string) {
         storeKey,
         previousStep: `${baseUrl}/step-record/cough`,
         nextStep: (() => {
-          if (removeSpeechIn.includes(country)) {
+          if (!allowSpeechIn.includes(country)) {
             if (patientId) {
               return `${baseUrl}/thank-you`;
             }
@@ -91,7 +85,7 @@ function getCoughSteps(storeKey: string, country: string, patientId?: string) {
         })(),
         metadata: {
           currentLogic: recordYourCoughLogic,
-          nextSpeech: removeSpeechIn.includes(country),
+          nextSpeech: !allowSpeechIn.includes(country),
         },
       },
     },
@@ -99,7 +93,7 @@ function getCoughSteps(storeKey: string, country: string, patientId?: string) {
 }
 
 function getSpeechSteps(storeKey: string, country: string, patientId: string) {
-  if (removeSpeechIn.includes(country)) {
+  if (!allowSpeechIn.includes(country)) {
     return [];
   }
   return [
@@ -159,8 +153,8 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       }
       return 7;
     })(),
-    progressCurrent: removeSpeechIn.includes(country) ? 1 : 2,
-    progressTotal: removeSpeechIn.includes(country) ? 1 : 2,
+    progressCurrent: !allowSpeechIn.includes(country) ? 1 : 2,
+    progressTotal: !allowSpeechIn.includes(country) ? 1 : 2,
   };
   const output = [
     {
@@ -168,7 +162,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1a`,
       props: {
         storeKey,
-        previousStep: removeSpeechIn.includes(country) ? `${baseUrl}/step-listen/cough` : `${baseUrl}/step-listen/speech`,
+        previousStep: !allowSpeechIn.includes(country) ? `${baseUrl}/step-listen/cough` : `${baseUrl}/step-listen/speech`,
         nextStep: `${baseUrl}/questionary/step1b`,
         otherSteps: {
           noTestStep: `${baseUrl}/questionary/step2`,

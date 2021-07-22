@@ -4,7 +4,7 @@ import * as H from 'history';
 import { client as axiosClient } from 'hooks/useAxios';
 
 // Helpers
-import { removeSpeechIn } from 'helper/stepsDefinitions';
+import { allowSpeechIn } from 'helper/stepsDefinitions';
 
 interface DoSubmitProps {
   setSubmitError(err: string | null): void;
@@ -176,7 +176,7 @@ export async function doSubmitPatientAudioCollection({
     }
     const coughFile = recordYourCough.recordingFile || recordYourCough.uploadedFile;
     body.append('cough', coughFile, coughFile.name || 'filename.wav');
-    if (!removeSpeechIn.includes(country)) {
+    if (allowSpeechIn.includes(country)) {
       const voiceFile = recordYourSpeech.recordingFile || recordYourSpeech.uploadedFile;
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
     }

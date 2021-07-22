@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import usePortal from 'react-useportal';
@@ -46,6 +46,11 @@ import {
 const schema = Yup.object().shape({
   agreedConsentTerms: Yup.boolean().required().default(false).oneOf([true]),
   agreedPolicyTerms: Yup.boolean().required().default(false).oneOf([true]),
+  agreedCovidCollection: Yup.boolean().when('$country', {
+    is: 'Global',
+    then: Yup.boolean().required().default(false).oneOf([true]),
+    otherwise: Yup.boolean().notRequired(),
+  }),
   agreedCovidDetection: Yup.boolean().when('$country', {
     is: 'Brazil',
     then: Yup.boolean().notRequired(),
@@ -72,7 +77,13 @@ const Step4 = (p: Wizard.StepProps) => {
 
   const store = state?.[p.storeKey];
 
-  const currentCountry: PrivacyPolicyCountry = state.welcome.country;
+  const currentCountry: PrivacyPolicyCountry = useMemo(() => {
+    if (['Argentina', 'Bolivia', 'Colombia', 'Peru', 'Mexico', 'Brazil', 'United States'].includes(state.welcome.country)) {
+      return state.welcome.country;
+    }
+    return 'Global';
+  }, [state.welcome.country]);
+
   const {
     control, handleSubmit, formState,
   } = useForm({
@@ -194,6 +205,28 @@ const Step4 = (p: Wizard.StepProps) => {
           )}
         />
 
+        {currentCountry === 'Global' && (
+          <Controller
+            control={control}
+            name="agreedCovidCollection"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-CollectionCovid"
+                label={(
+                  <Trans i18nKey="consent:collection">
+                    I hereby expressly consent to the collection and
+                    processing of my personal information, biometric information, and health information.
+                  </Trans>
+            )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
+          />
+        )}
+
         {currentCountry !== 'Brazil' && (
           <Controller
             control={control}
@@ -247,8 +280,9 @@ const Step4 = (p: Wizard.StepProps) => {
                 id="Step2-Biometric"
                 label={(
                   <Trans i18nKey="consent:biometric">
-                    I hereby expressly consent to the collection and processing of
-                    my personal information, biometric information, and health information.
+                    I hereby expressly consent to the sharing of my personal information,
+                    biometric information, and health information with third parties as described
+                    in this Consent Form and/or the Virufy Privacy Policy..
                   </Trans>
             )}
                 name={name}
