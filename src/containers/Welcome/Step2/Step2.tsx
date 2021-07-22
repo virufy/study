@@ -12,6 +12,7 @@ import { BlackText } from 'components/Texts';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
+import { isClinic } from 'helper/basePathHelper';
 
 // Assets
 import HeaderSplash from 'assets/images/baseLogoSplash.png';
@@ -78,13 +79,16 @@ const Step2 = (p: Wizard.StepProps) => {
         />
         <LogoWhiteBG />
       </HeaderImageContainer>
-      <CustomPurpleText mb={5}>
+      <CustomPurpleText mb={isClinic ? 5 : 15}>
         {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
       </CustomPurpleText>
+      {isClinic && (
       <SupportedBy>
         {t('main:supportedBy', 'Supported by')}
         <NuevaLogo />
       </SupportedBy>
+      )}
+
       <WelcomeContent maxWidth={470} mt={0}>
         <BlackText>
           <Trans i18nKey="helpVirufy:introParagraph">

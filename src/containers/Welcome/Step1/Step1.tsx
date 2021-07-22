@@ -120,9 +120,6 @@ const Step1 = (p: Wizard.StepProps) => {
     i18n.changeLanguage(lang);
   }, [i18n, lang]);
 
-  const countrySelectOptions = useMemo(() => [{ name: t('main:selectCountry'), consentFormUrl: '', val: '' },
-    ...countryData], [t]);
-
   const regionSelectOptions = useMemo(() => {
     const output = [
       { name: t('main:selectRegion'), val: '' },
@@ -148,10 +145,14 @@ const Step1 = (p: Wizard.StepProps) => {
           <CustomPurpleText mb={8}>
             {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
           </CustomPurpleText>
+          {isClinic
+          && (
           <SupportedBy>
             {t('main:supportedBy', 'Supported by')}
             <NuevaLogo />
           </SupportedBy>
+          )}
+
           <BoldBlackText>
             {t('main:selectYourLanguage', 'Language')}
           </BoldBlackText>
@@ -188,10 +189,11 @@ const Step1 = (p: Wizard.StepProps) => {
           <Controller
             control={control}
             name="country"
-            defaultValue={countrySelectOptions[0].val}
+            defaultValue=""
             render={({ onChange, value }) => (
               <Dropdown onChange={e => { onChange(e.currentTarget.value); resetRegion(); }} value={value}>
-                {countrySelectOptions.map(({ name, val }) => <option key={name} id={name} value={val}>{name}</option>)}
+                <option id={t('main:selectCountry')} value="">{t('main:selectCountry')}</option>
+                {countryData.map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)}
               </Dropdown>
             )}
           />
