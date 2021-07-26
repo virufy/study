@@ -23,6 +23,8 @@
     "audioCollection": "Recolección de audio",
     "testResults" : "Resultados del test",
     "supportedBy": "Apoyado por",
+    "visitWebsite": "Visite nuestra página web",
+    "errorCountry": "En este momento no podemos recoger tos de su región. Vuelva a consultarnos pronto!",
     "countries": {
       "Afghanistan":"Afganistán",
       "Albania":"Albania",

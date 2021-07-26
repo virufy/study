@@ -869,7 +869,7 @@ export const states = {
     'Zanzan',
   ],
 
-  DemocraticKorea: [
+  /* DemocraticKorea: [
     'Chagang do',
     'Hamgyong bukto',
     'Hamgyong namdo',
@@ -881,7 +881,7 @@ export const states = {
     'Pyongan namdo',
     'Pyongyangsi',
     'Yanggangdo',
-  ],
+  ], */
 
   RepublicCongo: [
     'Bandundu',

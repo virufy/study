@@ -23,6 +23,8 @@
     "audioCollection": "Coleta de áudio",
     "testResults" : "Resultados do teste",
     "supportedBy": "Apoiado por",
+    "visitWebsite": "Visite nosso website",
+    "errorCountry": "Neste momento, não podemos recolher tosse de sua região. Consulte-nos em breve!",
     "countries": {
       "Afghanistan":"Afeganistão",
       "Albania":"Albânia",
