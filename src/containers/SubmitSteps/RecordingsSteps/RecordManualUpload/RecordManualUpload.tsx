@@ -13,8 +13,12 @@ import * as Yup from 'yup';
 import WizardButtons from 'components/WizardButtons';
 import { TitleBlack } from 'components/Texts';
 
-// Header Control
+// Modals
+import RecordErrorModal from 'modals/RecordErrorModal';
+
+// Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import { useModal } from 'hooks/useModal';
 
 // Utils
 import { updateAction } from 'utils/wizard';
@@ -23,7 +27,6 @@ import { scrollToTop } from 'helper/scrollHelper';
 // Styles
 import {
   MainContainer,
-  TextErrorContainer,
   UploadContainer,
   UploadInput,
   UploadButton,
@@ -75,6 +78,7 @@ const RecordManualUpload = ({
   } = useHeaderContext();
   const history = useHistory();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const { isOpen, openModal, closeModal } = useModal();
   const inputUpload = useRef<HTMLInputElement>(null);
   const {
     control,
@@ -123,8 +127,9 @@ const RecordManualUpload = ({
       } else {
         setErrorMsg(t('recordingsRecordManual:fileDurationTooShort'));
       }
+      openModal();
     });
-  }, [handleNext, t]);
+  }, [handleNext, t, openModal]);
 
   // Effects
   useEffect(() => {
@@ -161,9 +166,13 @@ const RecordManualUpload = ({
           )}
         />
       </MainContainer>
-      <TextErrorContainer>
+      <RecordErrorModal
+        isOpen={isOpen}
+        modalTitle="Oops."
+        onConfirm={closeModal}
+      >
         {errorMsg}
-      </TextErrorContainer>
+      </RecordErrorModal>
       {/* Bottom Buttons */}
       {activeStep && (
         <Portal>
