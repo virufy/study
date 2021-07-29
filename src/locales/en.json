@@ -22,6 +22,8 @@
     "audioCollection": "Audio Collection",
     "testResults" : "Test Results",
     "supportedBy": "Supported by",
+    "visitWebsite": "Visit our website",
+    "errorCountry": "We are unable to collect coughs from your region at this time. Check back with us soon!",
     "countries": {
       "Afghanistan":"Afghanistan",
       "Albania":"Albania",

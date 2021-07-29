@@ -12,6 +12,9 @@ import * as Yup from 'yup';
 import Dropdown from 'components/Dropdown';
 import CreatedBy from 'components/CreatedBy';
 
+// Modals
+import CountryErrorModal from 'modals/CountryErrorModal';
+
 // Update Action
 import { updateAction } from 'utils/wizard';
 
@@ -35,8 +38,10 @@ import {
   BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo,
 } from '../style';
 
+const invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan'];
+
 const schema = Yup.object().shape({
-  country: Yup.string().required(),
+  country: Yup.string().required().notOneOf(invalidCountries),
   language: Yup.string().required(),
   region: Yup.string().when('country', {
     is: (val: string) => countriesWithStates.includes(val),
@@ -119,6 +124,10 @@ const Step1 = (p: Wizard.StepProps) => {
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [i18n, lang]);
+
+  const invalidCountryModal = React.useMemo(() => invalidCountries.includes(country),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+    [country]);
 
   const regionSelectOptions = useMemo(() => {
     const output = [
@@ -265,6 +274,12 @@ const Step1 = (p: Wizard.StepProps) => {
           }
         </WelcomeContent>
       </WelcomeStyledForm>
+      <CountryErrorModal
+        isOpen={invalidCountryModal}
+        modalTitle="Oops."
+      >
+        {t('main:errorCountry', 'We are unable to collect coughs from your region at this time. Check back with us soon!')}
+      </CountryErrorModal>
     </>
   );
 };
