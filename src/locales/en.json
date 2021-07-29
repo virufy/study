@@ -274,6 +274,7 @@
       "intro1": "The sound of your voice can also help us learn what COVID sounds like! 'Please press record and count clearly from one to ten."
     },
     "next": "Next",
+    "retryButton": "Retry",
     "releaseButtonStart": "Release to start recording",
     "releaseButtonStop": "Release to stop recording",
     "shortRecording": "Please make a recording of at least 3 seconds"

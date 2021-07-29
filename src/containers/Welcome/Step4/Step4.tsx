@@ -129,6 +129,16 @@ const Step4 = (p: Wizard.StepProps) => {
     setSubtitle(t('consent:title'));
   }, [doBack, setDoGoBack, setType, setSubtitle, t]);
 
+  const getCurrentCountryCheckbox = (country: PrivacyPolicyCountry) => {
+    if (country === 'Brazil') {
+      return 'pt';
+    }
+    if (country === 'Global' || country === 'United States') {
+      return 'en';
+    }
+    return 'es';
+  };
+
   return (
     <WelcomeStyledFormAlternative>
       <ContainerShapeDown>
@@ -177,7 +187,18 @@ const Step4 = (p: Wizard.StepProps) => {
           render={({ onChange, value }) => (
             <Checkbox
               id="Step2-ConsentTerms"
-              label={(currentCountry !== 'Brazil') ? (t('consent:certify')) : (t('consent:certifyBrazil'))}
+              label={(currentCountry !== 'Brazil')
+                ? (
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:certify">
+                    I certify that I am at least 18 years old and agree to the terms of this Consent Form.
+                  </Trans>
+                ) : (
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:certifyBrazil">
+                    I certify that I am at least 18 years old and agree to the terms of this Consent Form,
+                    hereby expressly consenting to the collection and processing of my personal information,
+                    biometric information, and health information.
+                  </Trans>
+                )}
               name="agreedConsentTerms"
               onChange={e => onChange(e.target.checked)}
               value={value}
@@ -193,7 +214,7 @@ const Step4 = (p: Wizard.StepProps) => {
             <Checkbox
               id="Step2-PolicyTerms"
               label={(
-                <Trans i18nKey="consent:agree">
+                <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:agree">
                   I agree to the terms of the Virufy
                   <Link to={privacyPolicy[currentCountry]} target="_blank">Privacy Policy</Link>
                 </Trans>
@@ -214,7 +235,7 @@ const Step4 = (p: Wizard.StepProps) => {
               <Checkbox
                 id="Step2-CollectionCovid"
                 label={(
-                  <Trans i18nKey="consent:collection">
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collection">
                     I hereby expressly consent to the collection and
                     processing of my personal information, biometric information, and health information.
                   </Trans>
@@ -236,7 +257,7 @@ const Step4 = (p: Wizard.StepProps) => {
               <Checkbox
                 id="Step2-DetectionCovid"
                 label={(
-                  <Trans i18nKey="consent:detection">
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:detection">
                     I hereby acknowledge and agree that processing shall be done for the purposes indicated above
                     and, in particular but without limitation, for research and compiling a dataset needed for the
                     development of artificial intelligence algorithms for device-based COVID-19 detection.
@@ -258,7 +279,7 @@ const Step4 = (p: Wizard.StepProps) => {
             <Checkbox
               id="Step2-TrainingArtificial"
               label={(
-                <Trans i18nKey="consent:signs">
+                <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:signs">
                   I hereby acknowledge and agree that processing shall be done for the purposes indicated above
                   and, in particular but without limitation, for training artificial intelligence algorithms to
                   analyze cough audio recordings to better determine signs of COVID-19.
@@ -279,7 +300,7 @@ const Step4 = (p: Wizard.StepProps) => {
               <Checkbox
                 id="Step2-Biometric"
                 label={(
-                  <Trans i18nKey="consent:biometric">
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:biometric">
                     I hereby expressly consent to the sharing of my personal information,
                     biometric information, and health information with third parties as described
                     in this Consent Form and/or the Virufy Privacy Policy..

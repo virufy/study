@@ -275,6 +275,7 @@
       "intro1": "O som da sua voz pode nos ajudar a aprender como a COVID soa! Por favor, pressione o botão gravar e conte claramente de um a dez."
     },
     "next": "Próximo",
+    "retryButton": "Tente novamente",
     "releaseButtonStart": "Lançamento para iniciar a gravação",
     "releaseButtonStop": "Liberação para parar a gravação",
     "shortRecording": "Por favor, faça uma gravação de pelo menos 3 segundos"
