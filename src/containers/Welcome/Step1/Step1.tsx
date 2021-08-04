@@ -38,7 +38,7 @@ import {
   BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo,
 } from '../style';
 
-const invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan'];
+const invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany'];
 
 const schema = Yup.object().shape({
   country: Yup.string().required().notOneOf(invalidCountries),
