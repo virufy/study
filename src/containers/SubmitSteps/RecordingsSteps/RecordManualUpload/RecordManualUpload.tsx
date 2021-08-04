@@ -35,7 +35,7 @@ import {
 } from './style';
 
 const audioMaxSizeInMb = 5;
-const audioMinLength = 3; // in seconds
+const audioMinLength = 5; // in seconds
 
 const mimeTypes = 'audio/wav,audio/wave,audio/wav,audio/x-wav,audio/x-pn-wav,audio/mp3,audio/ogg';
 
