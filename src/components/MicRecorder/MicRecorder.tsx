@@ -179,7 +179,7 @@ const MicRecorder = ({
       recordingService.current.stopRecording();
       setRecordingInProgress(false);
       if (timerRef.current) {
-        if (timerRef.current.getTime() / 1000 < 3) {
+        if (timerRef.current.getTime() / 1000 < 5) {
           setShowShortRecordingText(true);
         }
         timerRef.current.stop();

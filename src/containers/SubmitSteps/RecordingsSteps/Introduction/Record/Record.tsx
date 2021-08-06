@@ -24,7 +24,7 @@ import {
 } from './style';
 
 const audioMaxSizeInMb = 5;
-const audioMinLength = 3; // in seconds
+const audioMinLength = 5; // in seconds
 
 const schema = Yup.object({
   recordingFile: Yup.mixed()
