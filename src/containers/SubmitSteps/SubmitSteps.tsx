@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStore, setStorageType, useStateMachine } from 'little-state-machine';
 import { useHistory } from 'react-router-dom';
+import { localstoragePrefix } from 'helper/basePathHelper';
 
 // Wizard
 import Wizard from 'components/Wizard';
@@ -24,7 +25,7 @@ createStore({
     },
   },
 }, {
-  name: 'VirufyWizard',
+  name: `${localstoragePrefix}_VirufyWizard`,
 });
 
 const SubmitSteps = () => {

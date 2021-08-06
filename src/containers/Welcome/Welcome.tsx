@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
 import { createStore, setStorageType } from 'little-state-machine';
+import { localstoragePrefix } from 'helper/basePathHelper';
 
 // Wizard
 import Wizard from 'components/Wizard';
@@ -15,7 +16,7 @@ const StoreKey = 'welcome';
 createStore({
   [StoreKey]: {},
 }, {
-  name: 'VirufyWizard',
+  name: `${localstoragePrefix}_VirufyWizard`,
 });
 
 const baseUrl = '/welcome';

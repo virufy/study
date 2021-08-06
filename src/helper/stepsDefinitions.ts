@@ -1,3 +1,5 @@
+import { localstoragePrefix } from 'helper/basePathHelper';
+
 const baseUrl = '/submit-steps';
 const baseComponentPath = 'SubmitSteps';
 const middleComponentPathRecording = 'RecordingsSteps';
@@ -14,7 +16,7 @@ export const removeQuestionaryStep2cIn: string[] = ['Colombia'];
 
 function getWizardData() {
   try {
-    const output = JSON.parse(window.localStorage.getItem('VirufyWizard') || '{}');
+    const output = JSON.parse(window.localStorage.getItem(`${localstoragePrefix}_VirufyWizard`) || '{}');
     return output;
   } catch {
     return {};
