@@ -5,6 +5,7 @@ import { client as axiosClient } from 'hooks/useAxios';
 
 //
 import { allowSpeechIn } from 'helper/stepsDefinitions';
+import deviceDetect from 'helper/deviceHelper';
 
 interface DoSubmitProps {
   setSubmitError(err: string | null): void;
@@ -66,6 +67,7 @@ export async function doSubmit({
 
     const body = new FormData();
 
+    body.append('device', JSON.stringify(deviceDetect()));
     body.append('language', language);
     body.append('country', country);
     if (region) {
