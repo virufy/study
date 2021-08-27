@@ -5,6 +5,7 @@ import { client as axiosClient } from 'hooks/useAxios';
 
 // Helpers
 import { allowSpeechIn } from 'helper/stepsDefinitions';
+import deviceDetect from 'helper/deviceHelper';
 
 interface DoSubmitProps {
   setSubmitError(err: string | null): void;
@@ -50,6 +51,7 @@ export async function doSubmitPatientQuestionnaire({
 
     const body = new FormData();
 
+    body.append('device', JSON.stringify(deviceDetect()));
     body.append('language', language);
     body.append('country', country);
     if (region) {
@@ -161,6 +163,7 @@ export async function doSubmitPatientAudioCollection({
 
     const body = new FormData();
 
+    body.append('device', JSON.stringify(deviceDetect()));
     body.append('language', language);
     body.append('country', country);
     if (region) {
@@ -227,6 +230,7 @@ export async function doSubmitPatientTestResults({
 
     const body = new FormData();
 
+    body.append('device', JSON.stringify(deviceDetect()));
     body.append('language', language);
     body.append('country', country);
     if (region) {
