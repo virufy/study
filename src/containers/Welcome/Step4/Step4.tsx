@@ -78,7 +78,7 @@ const Step4 = (p: Wizard.StepProps) => {
   const store = state?.[p.storeKey];
 
   const currentCountry: PrivacyPolicyCountry = useMemo(() => {
-    if (['Argentina', 'Bolivia', 'Colombia', 'Peru', 'Mexico', 'Brazil', 'United States'].includes(state.welcome.country)) {
+    if (['Argentina', 'Bolivia', 'Colombia', 'Greece', 'Peru', 'Mexico', 'Brazil', 'United States'].includes(state.welcome.country)) {
       return state.welcome.country;
     }
     return 'Global';
@@ -132,6 +132,9 @@ const Step4 = (p: Wizard.StepProps) => {
   const getCurrentCountryCheckbox = (country: PrivacyPolicyCountry) => {
     if (country === 'Brazil') {
       return 'pt';
+    }
+    if (country === 'Greece') {
+      return 'el';
     }
     if (country === 'Global' || country === 'United States') {
       return 'en';
@@ -303,7 +306,7 @@ const Step4 = (p: Wizard.StepProps) => {
                   <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:biometric">
                     I hereby expressly consent to the sharing of my personal information,
                     biometric information, and health information with third parties as described
-                    in this Consent Form and/or the Virufy Privacy Policy..
+                    in this Consent Form and/or the Virufy Privacy Policy.
                   </Trans>
             )}
                 name={name}
@@ -313,7 +316,6 @@ const Step4 = (p: Wizard.StepProps) => {
             )}
           />
         )}
-
         <p><ErrorMessage errors={errors} name="name" /></p>
         {activeStep && (
           <Portal>
