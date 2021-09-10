@@ -4,4 +4,6 @@ export const languageData = [
   { code: 'pt', label: 'Português' },
   { code: 'fr', label: 'Français' },
   { code: 'bn', label: 'বাংলা' },
+  { code: 'el', label: 'ελληνικά' },
+  { code: 'mn', label: 'монгол хэл' },
 ];
