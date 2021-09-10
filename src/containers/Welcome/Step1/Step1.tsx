@@ -39,6 +39,7 @@ import {
 } from '../style';
 
 const invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany'];
+const clinicCountries = ['India', 'Colombia'];
 
 const schema = Yup.object().shape({
   country: Yup.string().required().notOneOf(invalidCountries),
@@ -144,6 +145,8 @@ const Step1 = (p: Wizard.StepProps) => {
     return output;
   }, [t, country]);
 
+  const getClinicCountries = () => countryData.filter(item => clinicCountries.includes(item.val));
+
   return (
     <>
       <WelcomeStyledForm>
@@ -202,7 +205,9 @@ const Step1 = (p: Wizard.StepProps) => {
             render={({ onChange, value }) => (
               <Dropdown onChange={e => { onChange(e.currentTarget.value); resetRegion(); }} value={value}>
                 <option id={t('main:selectCountry')} value="">{t('main:selectCountry')}</option>
-                {countryData.map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)}
+                {isClinic
+                  ? getClinicCountries().map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)
+                  : countryData.map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)}
               </Dropdown>
             )}
           />
