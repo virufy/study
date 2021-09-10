@@ -3,7 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import { registerLocale } from 'react-datepicker';
 import {
-  enUS, es, pt, fr,
+  enUS, es, pt, fr, el, bn,
 } from 'date-fns/locale';
 
 // Locales
@@ -13,6 +13,8 @@ registerLocale('en', enUS);
 registerLocale('es', es);
 registerLocale('pt', pt);
 registerLocale('fr', fr);
+registerLocale('el', el);
+registerLocale('bn', bn);
 
 // Translations
 i18n
