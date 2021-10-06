@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 // Assets
 import Logo from 'assets/virufyLogo.png';
@@ -83,7 +84,7 @@ const Header = () => {
   if (location.pathname === '/welcome/step-2') return null;
 
   return (
-    <HeaderContainer type={type}>
+    <HeaderContainer type={type} isMobile={isMobile}>
       {(doGoBack && location.pathname !== '/welcome') && <ArrowLefContainer onClick={doGoBack}><ArrowLeft /></ArrowLefContainer>}
       <TitleContainer>
         {(type === 'primary' && !subtitle) && <HeaderTitle>{title}</HeaderTitle>}

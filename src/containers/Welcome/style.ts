@@ -50,9 +50,9 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
   };
 `;
 
-export const ContainerShapeDown = styled.div`
+export const ContainerShapeDown = styled.div<{ isMobile?: boolean }>`
   width:100%;
-  background-color: ${({ theme }) => theme.colors.purple_10};
+  background-color: ${({ theme, isMobile }) => (isMobile ? theme.colors.purple_10 : '#FFF')};
   padding-top: 55px;
 `;
 

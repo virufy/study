@@ -205,12 +205,21 @@ const Step1 = (p: Wizard.StepProps) => {
             name="country"
             defaultValue=""
             render={({ onChange, value }) => (
-              <Dropdown onChange={e => { onChange(e.currentTarget.value); resetRegion(); }} value={value}>
-                <option id={t('main:selectCountry')} value="">{t('main:selectCountry')}</option>
-                {isClinic
-                  ? getClinicCountries().map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)
-                  : countryData.map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)}
-              </Dropdown>
+              <>
+                <WelcomeInput
+                  list="country"
+                  placeholder={t('main:selectCountry')}
+                  onChange={e => { onChange(e.currentTarget.value); resetRegion(); }}
+                  value={value}
+                  type="text"
+                />
+                <datalist id="country">
+                  {isClinic
+                    ? getClinicCountries().map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)
+                    : countryData.map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)}
+                </datalist>
+              </>
+
             )}
           />
 
