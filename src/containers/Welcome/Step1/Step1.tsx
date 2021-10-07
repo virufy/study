@@ -9,7 +9,6 @@ import { yupResolver } from '@hookform/resolvers';
 import * as Yup from 'yup';
 
 // Components
-import Dropdown from 'components/Dropdown';
 import CreatedBy from 'components/CreatedBy';
 
 // Modals
@@ -23,7 +22,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Data
 import { languageData } from 'data/lang';
-import { countryData, countriesWithStates } from 'data/country';
+import { countryData, countriesWithStates, CountryDataProps } from 'data/country';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
@@ -35,8 +34,13 @@ import { isClinic } from 'helper/basePathHelper';
 import {
   WelcomeContent, WelcomeStyledForm, LogoSubtitle,
   RegionContainer, WelcomeInput, ContainerNextButton, NextButton, ArrowRightSVG,
-  BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo,
+  BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo, WelcomeSelect,
 } from '../style';
+
+declare interface OptionsProps {
+  label: string;
+  value: string;
+}
 
 let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany'];
 const clinicCountries = ['India', 'Colombia'];
@@ -126,6 +130,10 @@ const Step1 = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     i18n.changeLanguage(lang);
+    setValue('country', '', {
+      shouldValidate: true,
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n, lang]);
 
   const invalidCountryModal = React.useMemo(() => invalidCountries.includes(country),
@@ -134,20 +142,29 @@ const Step1 = (p: Wizard.StepProps) => {
 
   const regionSelectOptions = useMemo(() => {
     const output = [
-      { name: t('main:selectRegion'), val: '' },
+      { label: t('main:selectRegion'), value: '' },
     ];
     if (country) {
-      const elem = countryData.find(a => a.val === country);
+      const elem = countryData.find(a => a.value === country);
       if (elem) {
         elem.states.forEach(s => {
-          output.push({ name: s, val: s });
+          output.push({ label: s, value: s });
         });
       }
     }
     return output;
   }, [t, country]);
 
-  const getClinicCountries = () => countryData.filter(item => clinicCountries.includes(item.val));
+  const getClinicCountries = () => countryData.filter(item => clinicCountries.includes(item.value));
+
+  const getOptionsCountry = () => {
+    const options = isClinic ? getClinicCountries() : countryData;
+    const formattedOptions = options.reduce((acc: CountryDataProps[], current) => {
+      acc.push({ ...current, label: t(`main:countries.${current.value}`) });
+      return acc;
+    }, []);
+    return formattedOptions;
+  };
 
   return (
     <>
@@ -175,24 +192,16 @@ const Step1 = (p: Wizard.StepProps) => {
           <Controller
             control={control}
             name="language"
-            defaultValue={i18n.language.split('-')[0] || languageData[0].code}
-            render={({ onChange, value }) => (
-              <Dropdown
-                onChange={e => onChange(e.currentTarget.value)}
-                value={value}
-              >
-                {
-                  languageData.map(({ code, label }) => (
-                    <option
-                      key={code}
-                      id={code}
-                      value={code}
-                    >
-                      {label}
-                    </option>
-                  ))
-                }
-              </Dropdown>
+            defaultValue={languageData[0].value}
+            render={({ onChange, value: valueController }) => (
+              <WelcomeSelect
+                placeholder={t('main.selectYourLanguage', 'Language')}
+                options={languageData}
+                onChange={(e: any) => { onChange(e?.value); }}
+                value={languageData.filter(({ value }) => value === valueController) || ''}
+                className="custom-select"
+                classNamePrefix="custom-select"
+              />
             )}
           />
 
@@ -204,34 +213,32 @@ const Step1 = (p: Wizard.StepProps) => {
             control={control}
             name="country"
             defaultValue=""
-            render={({ onChange, value }) => (
-              <>
-                <WelcomeInput
-                  list="country"
-                  placeholder={t('main:selectCountry')}
-                  onChange={e => { onChange(e.currentTarget.value); resetRegion(); }}
-                  value={value}
-                  type="text"
-                />
-                <datalist id="country">
-                  {isClinic
-                    ? getClinicCountries().map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)
-                    : countryData.map(({ val }) => <option key={val} id={val} value={val}>{t(`main:countries.${val}`)}</option>)}
-                </datalist>
-              </>
-
+            render={({ onChange, value: valueController }) => (
+              <WelcomeSelect
+                placeholder={t('main.selectCountry', 'Select country')}
+                options={getOptionsCountry()}
+                onChange={(e: any) => { onChange(e?.value); resetRegion(); }}
+                value={getOptionsCountry().filter(({ value }) => value === valueController) || ''}
+                className="custom-select"
+                classNamePrefix="custom-select"
+              />
             )}
           />
 
           <Controller
             control={control}
             name="region"
-            defaultValue={regionSelectOptions[0].val}
-            render={({ onChange, value }) => (regionSelectOptions.length > 1 ? (
+            defaultValue=""
+            render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
               <RegionContainer>
-                <Dropdown onChange={e => onChange(e.currentTarget.value)} value={value}>
-                  {regionSelectOptions.map(({ name, val }) => <option key={name} id={name} value={val}>{name}</option>)}
-                </Dropdown>
+                <WelcomeSelect
+                  placeholder={t('main.selectRegion', 'Select region')}
+                  options={regionSelectOptions}
+                  onChange={(e: any) => { onChange(e?.value); }}
+                  value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
+                  className="custom-select"
+                  classNamePrefix="custom-select"
+                />
               </RegionContainer>
             ) : <></>)}
           />
