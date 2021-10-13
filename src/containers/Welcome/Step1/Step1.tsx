@@ -215,12 +215,15 @@ const Step1 = (p: Wizard.StepProps) => {
             defaultValue=""
             render={({ onChange, value: valueController }) => (
               <WelcomeSelect
-                placeholder={t('main.selectCountry', 'Select country')}
+                placeholder={t('main:selectCountry', 'Select country')}
                 options={getOptionsCountry()}
                 onChange={(e: any) => { onChange(e?.value); resetRegion(); }}
                 value={getOptionsCountry().filter(({ value }) => value === valueController) || ''}
                 className="custom-select"
                 classNamePrefix="custom-select"
+                noOptionsMessage={({ inputValue }) => (
+                  !inputValue ? `${t('main:noOptionsError')}` : `${t('main:noValueError')}`
+                )}
               />
             )}
           />
@@ -232,7 +235,6 @@ const Step1 = (p: Wizard.StepProps) => {
             render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
               <RegionContainer>
                 <WelcomeSelect
-                  placeholder={t('main.selectRegion', 'Select region')}
                   options={regionSelectOptions}
                   onChange={(e: any) => { onChange(e?.value); }}
                   value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
