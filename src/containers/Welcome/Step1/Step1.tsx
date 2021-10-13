@@ -130,9 +130,6 @@ const Step1 = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     i18n.changeLanguage(lang);
-    setValue('country', '', {
-      shouldValidate: true,
-    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n, lang]);
 
@@ -198,7 +195,7 @@ const Step1 = (p: Wizard.StepProps) => {
                 placeholder={t('main.selectYourLanguage', 'Language')}
                 options={languageData}
                 onChange={(e: any) => { onChange(e?.value); }}
-                value={languageData.filter(({ value }) => value === valueController) || ''}
+                value={languageData.filter(({ value }) => value === valueController)}
                 className="custom-select"
                 classNamePrefix="custom-select"
               />
@@ -218,7 +215,7 @@ const Step1 = (p: Wizard.StepProps) => {
                 placeholder={t('main:selectCountry', 'Select country')}
                 options={getOptionsCountry()}
                 onChange={(e: any) => { onChange(e?.value); resetRegion(); }}
-                value={getOptionsCountry().filter(({ value }) => value === valueController) || ''}
+                value={getOptionsCountry().filter(({ value }) => value === valueController)}
                 className="custom-select"
                 classNamePrefix="custom-select"
                 noOptionsMessage={({ inputValue }) => (
