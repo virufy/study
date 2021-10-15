@@ -25,6 +25,8 @@
     "supportedBy": "Apoyado por",
     "visitWebsite": "Visite nuestra página web",
     "errorCountry": "En este momento no podemos recoger tos de su región. Vuelva a consultarnos pronto!",
+    "noOptionsError": "No se encontraron opciones",
+    "noValueError": "No se encontraron resultados",
     "countries": {
       "Afghanistan":"Afganistán",
       "Albania":"Albania",

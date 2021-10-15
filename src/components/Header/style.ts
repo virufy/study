@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ReactComponent as CloseX } from 'assets/icons/crossPurple.svg';
 import { ReactComponent as ArrowftSvg } from 'assets/icons/arrowLeft.svg';
 
-export const HeaderContainer = styled.div<{ type?: string }>`
+export const HeaderContainer = styled.div<{ type?: string, isMobile?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,14 +12,7 @@ export const HeaderContainer = styled.div<{ type?: string }>`
 
   width: 100%;
 
-  background-color: ${({ type }) => {
-    switch (type) {
-      case 'secondary':
-        return 'rgba(53, 120, 222, 0.1)';
-      default:
-        return '#FFF';
-    }
-  }};
+  background-color: ${({ type, isMobile }) => ((type === 'secondary' && isMobile) ? 'rgba(53, 120, 222, 0.1)' : '#FFF')};
   margin-bottom: ${({ type }) => {
     switch (type) {
       case 'primary':

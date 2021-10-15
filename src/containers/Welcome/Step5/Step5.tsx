@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
+import { isMobile } from 'react-device-detect';
 
 // Header Control
 import { useTranslation, Trans } from 'react-i18next';
@@ -78,7 +79,7 @@ const Step5 = (p: Wizard.StepProps) => {
 
   return (
     <WelcomeStyledFormAlternative>
-      <ContainerShapeDown>
+      <ContainerShapeDown isMobile={isMobile}>
         <InnerContainerShapeDown>
           <BlackText>
             <Trans i18nKey="beforeStart:subtitle">

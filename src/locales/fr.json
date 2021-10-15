@@ -24,6 +24,8 @@
     "supportedBy": "Pris en charge par",
     "visitWebsite": "Visitez notre site Internet",
     "errorCountry": "Nous sommes incapables de recueillir les toux de votre région pour le moment. Revenez vers nous prochainement!",
+    "noOptionsError": "No options",
+    "noValueError": "Aucun résultat trouvé",
     "countries": {
       "Afghanistan":"L’Afghanistan",
       "Albania":"L’Albanie",

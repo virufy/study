@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import usePortal from 'react-useportal';
+import { isMobile } from 'react-device-detect';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -144,7 +145,7 @@ const Step4 = (p: Wizard.StepProps) => {
 
   return (
     <WelcomeStyledFormAlternative>
-      <ContainerShapeDown>
+      <ContainerShapeDown isMobile={isMobile}>
         <InnerContainerShapeDown>
           <BlackText>
             <Trans i18nKey="consent:paragraph1">

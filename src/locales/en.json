@@ -24,6 +24,8 @@
     "supportedBy": "Supported by",
     "visitWebsite": "Visit our website",
     "errorCountry": "We are unable to collect coughs from your region at this time. Check back with us soon!",
+    "noOptionsError": "No options",
+    "noValueError": "No results found",
     "countries": {
       "Afghanistan":"Afghanistan",
       "Albania":"Albania",

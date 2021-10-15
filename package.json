@@ -25,6 +25,7 @@
     "react-modal": "^3.14.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
+    "react-select": "^5.1.0",
     "react-slide-routes": "^0.13.0",
     "react-useportal": "^1.0.13",
     "styled-components": "^5.2.0",

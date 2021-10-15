@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import Select from 'react-select';
 
 import { ReactComponent as ArrowRight } from 'assets/icons/arrowRight.svg';
 import { ReactComponent as AboutUs } from 'assets/images/about-us.svg';
@@ -50,9 +51,9 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
   };
 `;
 
-export const ContainerShapeDown = styled.div`
+export const ContainerShapeDown = styled.div<{ isMobile?: boolean }>`
   width:100%;
-  background-color: ${({ theme }) => theme.colors.purple_10};
+  background-color: ${({ theme, isMobile }) => (isMobile ? theme.colors.purple_10 : '#FFF')};
   padding-top: 55px;
 `;
 
@@ -95,6 +96,115 @@ export const WelcomeInput = styled.input`
     font-size: 14px;
   }
 
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    max-width: 348px;
+    }
+`;
+
+export const WelcomeSelect = styled(Select)`
+    color: ${props => props.theme.colors.mineShaft};
+    background-color: ${props => props.theme.colors.midGray};
+    font-family: 'Source Sans Pro';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4;
+    width: 100%;
+    height: 48px;
+    max-width: 320px;
+    align-items: center;
+    border: 0;
+    border-radius: 15px;
+    margin: auto;
+    padding: 12px 15px;
+  
+    .custom-select__control {
+      background-color: transparent;
+      border-color: none;
+      border-radius: 15px;
+      border-style: none; 
+      border-width: 0px;
+      align-items: center;
+      height: 100%;
+
+      :hover {
+        border-color: none;
+      }
+    }
+  
+    .custom-select__input-container {
+      color: ${props => props.theme.colors.mineShaft};
+    }
+
+    .custom-select__value-container {
+      text-align: left;
+      color: ${props => props.theme.colors.mineShaft};
+      padding-left: 0;
+      padding-top: 0;
+      div {
+        margin: 0;
+      }
+  
+      .custom-select__placeholder {
+        color: ${props => props.theme.colors.mineShaft};
+      }
+
+      .custom-select__single-value{
+        height: 22px;
+        color: ${props => props.theme.colors.mineShaft};
+        text-align: left;
+      }
+    } 
+    
+    .custom-select__control--is-focused {
+      border: none;
+    }
+  
+    .custom-select__indicator {
+      padding: 0;
+    }
+  
+    .custom-select__indicator-separator {
+      display: none;
+    }
+  
+    .custom-select__control {
+      box-shadow: none ;
+      min-height: unset;
+      &.custom-select__control--is-focused {
+        background-color: inherit;
+      }
+  
+    }
+  
+    .custom-select__dropdown-indicator {
+      svg {
+        height: 18px;
+        width: 19px;
+      }
+    }
+  
+    .custom-select__menu {
+      width: 100%;
+      border-radius: 0;
+      border-style: none;
+      color: ${props => props.theme.colors.mineShaft};
+      margin-left: -15px;
+      
+      .custom-select__menu-list {
+        padding-bottom: 0;
+        padding-top: 0;
+        
+        .custom-select__option {
+          padding-left: 15px;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          color: ${props => props.theme.colors.mineShaft};
+        }
+      }
+  }
+  
   @media screen and (${props => props.theme.breakpoints.tablet}){
     max-width: 348px;
     }

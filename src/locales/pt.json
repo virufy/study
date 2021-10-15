@@ -25,6 +25,8 @@
     "supportedBy": "Apoiado por",
     "visitWebsite": "Visite nosso website",
     "errorCountry": "Neste momento, não podemos recolher tosse de sua região. Consulte-nos em breve!",
+    "noOptionsError": "Sem opções",
+    "noValueError": "Nenhum resultado encontrado",
     "countries": {
       "Afghanistan":"Afeganistão",
       "Albania":"Albânia",
