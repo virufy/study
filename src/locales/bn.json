@@ -9,6 +9,8 @@
         "selectCountry": "দেশ নির্বাচন করুন",
         "selectRegion": "অঞ্চল নির্বাচন করুন",
         "selectLocation": "অবস্থান",
+        "region": "অঞ্চল",
+        "regionRequired": "অনুগ্রহ করে অঞ্চল নির্বাচন করুন",
         "patientId": "রোগীর আইডি",
         "hospitalId": "হাসপাতাল আইডি",
         "enterPatientId": "রোগীর আইডি লিখুন",

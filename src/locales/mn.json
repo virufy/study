@@ -9,6 +9,8 @@
         "selectCountry": "Улсаа сонгоно уу",
         "selectRegion": "Бүс нутгийг сонгоно уу",
         "selectLocation": "Байршил",
+        "region": "бүс нутаг",
+        "regionRequired": "Бүс нутгийг сонгоно уу",
         "patientId": "Өвчтөний ID",
         "hospitalId": "Эмнэлгийн ID",
         "enterPatientId": "Өвчтөний ID оруулна уу",

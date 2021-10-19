@@ -9,6 +9,8 @@
         "selectCountry": "เลือกประเทศ",
         "selectRegion": "เลือกภูมิภาค",
         "selectLocation": "สถานที่",
+        "region": "ภาค",
+        "regionRequired": "กรุณาเลือกภูมิภาค",
         "patientId": "รหัสคนผู้ป่วย",
         "hospitalId": "รหัสโรงพยาบาล",
         "enterPatientId": "ระบุรหัสผู้ป่วย",

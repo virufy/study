@@ -9,6 +9,8 @@
       "selectCountry": "Επιλέξτε χώρα",
       "selectRegion": "Επιλέξτε περιοχή",
       "selectLocation": "Τοποθεσία",
+      "region": "Περιοχή", 
+      "regionRequired": "Παρακαλώ εισάγετε μια περιοχή",
       "patientId": "Ταυτότητα ασθενούς",
       "hospitalId": "Ταυτότητα νοσοκομείου",
       "enterPatientId": "Εισάγετε την ταυτότητα του ασθενούς",
