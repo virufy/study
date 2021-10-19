@@ -1,0 +1,544 @@
+{
+    "main": {
+        "title":"COVID-19 Öksürük Veri Toplama Çalışması",
+        "logoIntro":"Kar Amacı Gütmeyen Bağımsız Bir Araştırma Kuruluşu",
+        "note":"<strong>Lütfen dikkat:</strong> Bu form yalnızca veri toplamak içindir. COVID-19 durumunuzu tahmin etmeyecek veya herhangi bir hastalık, rahatsızlık veya diğer sağlık durumlarını teşhis etmeyecektir. Virufy araştırma yürütmektedir ve verdiğiniz bilgileri sadece o araştırma için kullanacaktir. Virufy bir doktorun yerini tutmaz, doktorunuzdan tıbbi yardım almanın sizin sorumluluğunuzda olduğunu hatırlatmak isteriz.",
+        "paragraph1":"Hoş geldiniz! Tamamlanması yalnızca 5 dakika sürecektir.",
+        "selectYourLanguage":"Dil",
+        "paragraf2":"Covid-19 Öksürük Veri Toplama Çalışması",
+        "selectCountry":"Ülke seç",
+        "selectRegion":"Bölge seç",
+        "selectLocation":"Konum",
+        "patientId":"Hasta kimliği",
+        "hospitalId":"Hastane kimliği",
+        "enterPatientId":"Hasta kimliğini girin",
+        "nextButton":"Sonraki",
+        "createDy":"Oluşturan",
+        "installApp":"Uygulamaui yükleyin",
+        "addToHomeScreen":"Ana ekrana ekleyin",
+        "hello":"Merhaba",
+        "patient":"Hasta",
+        "questionnaire":"Anket",
+        "audioCollection":"Ses Koleksiyonu",
+        "testResults":"Test Sonuçları",
+        "supportedBy":"Destekleyen",
+        "visitWebsite":"Web sitemizi ziyaret ediniz",
+        "errorCountry":"Şu anda bölgenizden öksürük toplayamıyoruz. Kısa süre sonra tekrar kontrol edin!",
+        "countries": {
+            "Afghanistan":"Afganistan",
+            "Albania":"Arnavutluk",
+            "Algeria":"Cezayir",
+            "Andorra":"Andorra",
+            "Angola":"Angola",
+            "Antigua and barbuda":"Antigua ve Barbuda",
+            "Argentina":"Arjantin",
+            "Armenia":"Ermenistan",
+            "Australia":"Avustralya",
+            "Austria":"Avusturya",
+            "Azerbaijan":"Azerbaycan",
+            "Bahamas":"Bahamalar",
+            "Bahrain":"Bahreyn",
+            "Bangladesh":"Bangladeş",
+            "Barbados":"Barbados",
+            "Belarus":"Beyaz Rusya",
+            "Belgium":"Belçika",
+            "Belize":"Belize",
+            "Benin":"Benin",
+            "Bhutan":"Butan",
+            "Bolivia":"Bolivya",
+            "Bosnia and herzegovina":"Bosna Hersek",
+            "Botswana":"Botsvana",
+            "Brazil":"Brezilya",
+            "Brunei darussalam":"Brunei Sultanlığı",
+            "Bulgaria":"Bulgaristan",
+            "Burkina faso":"Burkina Faso",
+            "Burundi":"Burundi",
+            "Cabo verde":"Cabo Verde",
+            "Cambodia":"Kamboçya",
+            "Cameroon":"Kamerun",
+            "Canada":"Kanada",
+            "Central african republic":"Orta Afrika Cumhuriyeti",
+            "Chad":"Çad",
+            "Chile":"Şili",
+            "China":"Çin",
+            "Colombia":"Kolombiya",
+            "Comoros":"Komorlar",
+            "Congo":"Kongo",
+            "Cook islands":"Cook Adaları",
+            "Costa rica":"Kosta Rika",
+            "Croatia":"Hırvatistan",
+            "Cuba":"Küba",
+            "Cyprus":"Kıbrıs",
+            "Czechia":"Çekya",
+            "Ivory Coast":"Fildişi Sahili",
+            "Democratic republic of korea":"Kore Demokratik Cumhuriyeti",
+            "Democratic republic of the congo":"Kongo Demokratik Cumhuriyeti",
+            "Denmark":"Danimarka",
+            "Djibouti":"Cibuti",
+            "Dominica":"Dominika",
+            "Dominican republic":"Dominik Cumhuriyeti",
+            "Ecuador":"Ekvador",
+            "Egypt":"Mısır",
+            "El salvador":"El Salvador",
+            "Equatorial guinea":"Ekvator Ginesi",
+            "Eritrea":"Eritre",
+            "Estonia":"Estonya",
+            "Eswatini":"Eswatini",
+            "Ethiopia":"Etiyopya",
+            "Faroe islands":"Faroe Adaları",
+            "Fiji":"Fiji",
+            "Finland":"Finlandiya",
+            "France":"Fransa",
+            "Gabon":"Gabon",
+            "Gambia":"Gambiya",
+            "Georgia":"Gürcistan",
+            "Germany":"Almanya",
+            "Ghana":"Gana",
+            "Greece":"Yunanistan",
+            "Grenada":"Grenada",
+            "Guatemala":"Guatemala",
+            "Guinea":"Gine",
+            "Guinea-bissau":"Gine-Bissau",
+            "Guyana":"Guyana",
+            "Haiti":"Haiti",
+            "Honduras":"Honduras",
+            "Hungary":"Hun gary",
+            "Iceland":"İzlanda",
+            "India":"Hindistan",
+            "Indonesia":"Endonezya",
+            "Iran":"İran",
+            "Iraq":"Irak",
+            "Ireland":"İrlanda",
+            "Israel":"İsrail",
+            "Italy":"İtalya",
+            "Jamaica":"Jamaika",
+            "Japan":"Japonya",
+            "Jordan":"Ürdün",
+            "Kazakhstan":"Kazakistan",
+            "Kenya":"Kenya",
+            "Kiribati":"Kiribati",
+            "Kuwait":"Kuveyt",
+            "Kyrgyzstan":"Kırgızistan",
+            "Lao democratic republic":"Lao Demokratik Cumhuriyeti",
+            "Latvia":"Letonya",
+            "Lebanon":"Lübnan",
+            "Lesotho":"Lesotho",
+            "Liberia":"Liberya",
+            "Libya":"Libya",
+            "Lithuania":"Litvanya",
+            "Luxembourg":"Lüksemburg",
+            "Madagascar":"Madagaskar",
+            "Malawi":"Malawi",
+            "Malaysia":"Malezya",
+            "Maldives":"Maldivler",
+            "Mali":"Mali",
+            "Malta":"Malta",
+            "Marshall islands":"Marshall Adaları",
+            "Mauritania":"Moritanya",
+            "Mauritius":"Mauritius",
+            "Mexico":"Meksika",
+            "Micronesia":"Mikronezya",
+            "Monaco":"Monako",
+            "Mongolia":"Moğolistan",
+            "Montenegro":"Karadağ",
+            "Morocco":"Fas",
+            "Mozambique":"Mozambik",
+            "Myanmar":"Myanmar",
+            "Namibia":"Namibya",
+            "Nauru":"Nauru",
+            "Nepal":"Nepal",
+            "Netherlands":"Hollanda",
+            "New zealand":"Yeni Zelanda",
+            "Nicaragua":"Nikaragua",
+            "Niger":"Nijer",
+            "Nigeria":"Nijerya",
+            "Niue":"Niue",
+            "North macedonia":"Kuzey Makedonya",
+            "Norway":"Norveç",
+            "Oman":"Umman",
+            "Pakistan":"Pakistan",
+            "Palau":"Palau",
+            "Palestine":"Filistin",
+            "Panama":"Panama",
+            "Papua new guinea":"Papua Yeni Gine",
+            "Paraguay":"Paraguay",
+            "Peru":"Peru",
+            "Philippines":"Filipinler",
+            "Poland":"Polonya",
+            "Portugal":"Portekiz",
+            "Qatar":"Katar",
+            "Republic of korea":"Kore Cumhuriyeti",
+            "Republic of moldova":"Moldova Cumhuriyeti",
+            "Romania":"Romanya",
+            "Russian federation":"Rusya Federasyonu",
+            "Rwanda":"Ruanda",
+            "Saint kitts and nevis":"Saint Kitts ve Nevis",
+            "Saint lucia":"Saint Lucia",
+            "Saint vincent and the grenadines":"Saint Vincent ve Grenadinler",
+            "Samoa":"Samoa",
+            "San marino":"San Marino",
+            "Sao tome and principe":"Sao Tome ve Principe",
+            "Saudi arabia":"Suudi Arabistan",
+            "Senegal":"Senegal",
+            "Serbia":"Sırbistan",
+            "Seychelles":"Seyşeller",
+            "Sierra leone":"Sierra Leone",
+            "Singapore":"Singapur",
+            "Slovakia":"Slovakya",
+            "Slovenia":"Slovenya",
+            "Solomon islands":"Solomon Adaları",
+            "Somalia":"Somali",
+            "South africa":"Güney Afrika",
+            "South sudan":"Güney Sudan",
+            "Spain":"İspanya",
+            "Sri lanka":"Sri Lanka",
+            "Sudan":"Sudan",
+            "Suriname":"Surinam",
+            "Sweden":"İsveç",
+            "Switzerland":"İsviçre",
+            "Syrian arab republic":"Suriye",
+            "Tajikistan":"Tacikistan",
+            "Thailand":"Tayland",
+            "Timor-leste":"Doğu Timor",
+            "Togo":"Togo",
+            "Tokelau":"Tokelau",
+            "Tonga":"Tonga",
+            "Trinidad and tobago":"Trinidad ve Tobago",
+            "Tunisia":"Tunus",
+            "Turkey":"Türkiye",
+            "Turkmenistan":"Türkmenistan",
+            "Tuvalu":"Tuvalu",
+            "Uganda":"Uganda",
+            "Ukraine":"Ukrayna",
+            "United arab emirates":"Birleşik Arap Emirlikleri",
+            "United kingdom":"Birleşik Krallık",
+            "United republic of tanzania":"Tanzanya Birleşik Cumhuriyeti",
+            "United States":"Birleşmiş Amerika Devletleri",
+            "Uruguay":"Uruguay",
+            "Uzbekistan":"Özbekistan",
+            "Vanuatu":"Vanuatu",
+            "Venezuela":"Venezuela",
+            "Vietnam":"Vietnam",
+            "Yemen":"Yemen",
+            "Zambia":"Zambiya",
+            "Zimbabwe":"Zimbabve"
+        }
+    },
+    "helpVirufy": {
+        "title":"Hakkımızda",
+        "ourSupporters":"Destekçilerimiz",
+        "introParagraph":"Çalışmamıza hoş geldiniz! Bu işlemi tamamlamanız yalnızca 5 dakikanızı alacaktır. Başlamadan önce, neleri ele alacağımızı tartışalım:",
+        "aboutParagraph":"<0>Virufy, düşük gelirli ülkelerin yararına, akıllı telefon kullanarak hızlı ve ücretsiz bir şekile öksürük kalıplarından COVID-19'u taramak için, <strong>yapay zekayı (Al) kullanmanın yollarını geliştirmeye çalışan, <strong>kar amacı gütmeyen bir kuruluştur</strong></0><1>Ekibimiz <strong>25'ten fazla ülkenin</strong> araştırmacılardan oluşuyor. <3>Araştırmamız</3 > Al teknolojisinin COVID'in benzersiz öksürük imzasını tanımlayabildiğini göstermiştir.</1><2>Dünyanın dört bir yanındaki insanlardan <strong>öksürük kayıtları</strong> toplayan Virufy, COVID'in benzersiz ses düzenini tanıyarak, yapay zeka algoritmasını şu anda geliştirmeye çalışmaktadır. </2><3><strong>Çalışmamıza <strong>öksürüğünüzle katkıda bulunarak</strong> dünya genelinde milyonlarca insanın faydalanmasına yardımcı olacak güce sahipsiniz</strong>.</strong> 3>",
+        "bulletsIntro":"<strong>Giriş: </strong>Hakkımızda ve Güvenlik Hatırlatıcıları",
+        "bulletCough":"<strong>Telefona Öksürük</strong>",
+        "bulletQuestions":"<strong>Hızlı Sağlık Soruları</strong>",
+        "nextButton":"Sonraki"
+      },
+      "consent": {
+        "title":"Onay",
+        "paragraph1":"Virufy gizliliğinize önem verir ve lisanslı veri gizliliği uzmanları tarafından tavsiye edilir. Sağladığınız bilgiler ve kayıtlar yalnızca <1>Gizlilik Politikamızda</1> ve Onay Formumuzda açıklanan amaçlar için kullanılacaktır. Lütfen Onay Formunu okuyun:",
+        "paragraph2Title":"Kişisel Bilgilerin Toplanması ve Araştırma Formuna Katılmak İçin Virufy Açık Rızası",
+        "paragraph2":"COVID-19 Taraması için Akıllı Telefon Verilerinin Toplanması",
+        "paragraf3":"Aşağıdaki kutuları işaretleyerek, Virufy gizlilik politikasını okuduğunuzu ve anladığınızı ve Virufy'nin aşağıda sıralanan biyometrik ve sağlık bilgilerinin kategorilerini toplamasına ve işlemesine açık rıza gösterdiğinizi kabul etmektesiniz.",
+        "paragraph3_brazil":"Brezilya ulusal sınırları içinde bulunuyorsanız ve Genel Kişisel Verilerin Korunması Yasası ('LGPD') amaçları doğrultusunda, 'rıza', özgür, bilgilendirilmiş ve net beyanında, hassas kişisel verileri işlediğimiz yasal dayanak olacaktır.",
+        "certifyBrazil":"En az 18 yaşında olduğumu ve bu Onay Formunun şartlarını kabul ettiğimi, burada kişisel bilgilerimin, biyometrik bilgilerimin ve sağlık bilgilerimin toplanmasına ve işlenmesine açıkça rıza gösterdiğimi onaylıyorum.",
+        "certify":"En az 18 yaşında olduğumu ve bu Onay Formunun şartlarını kabul ettiğimi onaylıyorum.",
+        "agree":"Virufy <1>Gizlilik Politikası</1>'nın şartlarını okudum, anladım ve kabul ediyorum.",
+        "collection":"Kişisel bilgilerimin, biyometrik bilgilerimin ve sağlık bilgilerimin toplanmasına ve işlenmesine açıkça izin veriyorum.",
+        "detection":"İşlemenin yukarıda belirtilen amaçlarla ve özellikle, ancak bunlarla sınırlı olmaksızın, cihaz tabanlı COVID-19 tespiti için yapay zeka algoritmalarının geliştirilmesi için gerekli bir veri kümesini araştırmak ve derlemek için yapılacağını kabul ve beyan ederim.",
+        "signs":"İşlemenin yukarıda belirtilen amaçlar doğrultusunda ve özellikle, ancak bununla sınırlı olmaksızın, COVID-19 belirtilerini daha iyi belirlemek için öksürük ses kayıtlarını analiz etmek üzere yapay zeka algoritmalarının eğitilmesi amacıyla yapılacağını kabul ve beyan ederim.",
+        "biometric":"Kişisel bilgilerimin, biyometrik bilgilerimin ve sağlık bilgilerimin bu Rıza Formu ve/veya Virufy Gizlilik Politikası'nda açıklandığı şekilde üçüncü kişilerle paylaşılmasına açıkça muvafakat ediyorum.",
+        "PleaseConfirm":"Lütfen aşağıdakileri onaylayın:",
+        "nextButton":"Sonraki",
+        "JumpToBottom":"Alta Geçiniz"
+      },
+      "beforeStart": {
+        "title":"Son olarak, başlamadan önce...",
+        "subtitle":"<strong>Güvenliği sağlamak için şunları yapmanızı öneririz:</strong>",
+        "0":"Lütfen kendi cihazınızı kullanın ve gerektiğinde maske takın.",
+        "1":"Öksürüğünüzü/konuşmanızı kaydettikten sonra cihazınızı ve etkilenen veya yakındakı yüzeyleri dezenfekte edin.",
+        "2":"Öksürme riskinizi artıran temel bir durumunuz varsa, katılmadan önce lütfen sağlık uzmanınıza danışın.",
+        "3":"Semptomlarınızın kötüleştiğini düşünüyorsanız, lütfen yerel tıbbi müdahaleye başvurun.",
+        "startButton":"Sonraki"
+      },
+      "recordingsIntroduction": {
+        "recordCough": {
+            "header":"Öksürüğünüzü kaydedin",
+            "title":"Talimatlar",
+            "intro1":"Diğerlerinden en az <strong>20 ft (6m)</strong> uzakta <strong>sessiz bir ortam</strong> bulun ve bez veya cerrahi maske takın. Kendinizi hasta hissediyorsanız lütfen oturun.",
+            "intro2":"Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetle veya çok zorla öksürmeyin."
+        },
+        "recordSpeech": {
+            "header":"Konuşmanızı kaydedin",
+            "intro1":"Konusmaniz da, COVID'in neye benzediğini öğrenmemize yardımcı olabilir! 'Lütfen kaydet'e basın ve birden ona kadar net bir şekilde sayın."
+        },
+        "next":"Sonraki",
+        "retryButton":"Yeniden deneyin",
+        "releaseButtonStart":"Kaydı başlatmak için bırakın",
+        "releaseButtonStop":"Kaydı durdurmak için bırakın",
+        "shortRecording":"Lütfen en az 5 saniyelik bir kayıt yapın"
+      },
+      "recordingsRecord": {
+        "recordCough": {
+            "header":"Öksürüğünüzü kaydedin"
+        },
+        "recordSpeech": {
+            "header":"Konuşmanızı kaydedin"
+        },
+        "next":"Devam",
+        "delete":"Sil",
+        "textCough":"Kayıt düğmesine dokunun ve her öksürük arasında <strong>derin bir nefes</strong> vererek telefonunuzun altına <strong>3 kez</strong> <strong>kasıtlı öksürün</strong>. bitirdiniz, durdur düğmesine dokunun.",
+        "textSpeech":"Aşağıdaki kayıt düğmesine dokunun ve <strong>en az 5 saniye boyunca sürekli bir 'aaaaah' söyleyin.</strong> İşiniz bittiğinde, durdur düğmesine dokunun.",
+        "textNext":"Devam etmek için devam et'e tıklayın.",
+        "textCount":"Kayıt düğmesine tıklayın ve birden ona kadar net bir şekilde sayın. İşiniz bittiğinde, devam düğmesine tıklayın.",
+        "upload":"Kendi dosyanızı yükleyin",
+        "record":"Kayıt",
+        "recordStop":"Durdur"
+      },
+      "recordingsRecordManual": {
+        "header":"Dosya yükleyin",
+        "addFile":"Dosyanızı ekleyin",
+        "constraint":"5 MB'a kadar ekleyin",
+        "next":"Bitti",
+        "micError":"Mikrofona erişilemiyor mu? Bir ses dosyası yükleyin (.wav/.wave/.mp3/.ogg)",
+        "micErrorDescription":"Lütfen buraya bir ses dosyası yükleyin.",
+        "fileDurationTooShort":"Lütfen en az 3 saniyelik bir dosya yükleyin",
+        "fileSizeTooBig":"Lütfen 5 MB'den küçük bir dosya yükleyin",
+        "fileRequired":"Lütfen bir dosya yükleyin",
+        "uploadFile":"Dosya Yükleyin"
+      },
+      "recordingsListen": {
+        "recordCough": {
+            "header":"Öksürüğünüzü kaydedin",
+            "intro1":"Lütfen etrafınızdakilerden uzaklaşın! Kendinizi hasta hissediyorsanız lütfen oturun.",
+            "intro2":"Sessiz bir ortamda lütfen kayıt tuşuna basın ve kasıtlı olarak 3-5 defa öksürün."
+        },
+        "recordSpeech": {
+            "header":"Konuşmanızı kaydedin",
+            "intro1":"Konuşmanız da, COVID'in neye benzediğini öğrenmemize yardımcı olabilir! 'Lütfen kaydet'e basın ve birden ona kadar net bir şekilde sayın."
+        },
+        "title":"Yükleme Tamamlandı",
+        "subtitle":"Dinlemekten çekinmeyin.",
+        "next":"Devam",
+        "retake":"Tekrar al"
+      },
+      "questionary": {
+        "headerText":"Soru",
+        "title":"Hadi birkaç kısa soruyu cevaplayalım!",
+        "caption":"Lütfen elinizden gelenin en iyisini yapın.",
+        "allThatApply":"(geçerli olan tüm seçenekleri seçin)",
+        "testTaken": {
+        "question":"COVID-19 için aşağıdaki testlerden hangisini yaptırdınız?",
+          "options": {
+            "pcr":"PCR tabanlı test",
+            "antibody":"Antikor testi",
+            "unsure":"Emin değilim",
+            "antigen":"Antijen testi(hızlı)",
+            "neither":"Hiçbiri"
+          }
+        },
+        "patient":{
+          "resultPcrTest":{
+            "question":"Hasta <1><0>{{hastaId}}</0></1>'in PCR tabanlı COVID-19 testinin sonucu ne oldu?"
+          },
+          "resultAntigenTest":"Hasta <1><0>{{hastaId}}</0></1>'in hızlı antijen COVID-19 testinin sonucu ne oldu?"
+        },
+        "headerText2":"Takip sorusu",
+        "WhenPcrTest":"PCR tabanlı COVID-19 testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+        "resultPcrTest": {
+        "resultPcrTest":"PCR tabanlı COVID-19 testinizin sonucu ne oldu?",
+          "options": {
+            "positive":"Olumlu",
+            "negative":"Olumsuz",
+            "pending":"Beklemede",
+            "unsure":"Emin değilim"
+          }
+        },
+        "WhenAntibodyTest":"COVID-19 için antikor testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+        "resultAntibodyTest": {
+          "question": "COVID-19 için antikor testinizin sonucu ne oldu?",
+          "options": {
+            "positive":"Olumlu",
+            "negative":"Olumsuz",
+            "pending":"Beklemede",
+            "unsure":"Emin değilim"
+          }
+        },
+        "WhenAntigenTest":"COVID-19 için antijen testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+        "resultAntigenTest": {
+          "question": "COVID-19 için antijen testinizin sonucu ne oldu?",
+          "options": {
+            "positive":"Olumlu",
+            "negative":"Olumsuz",
+            "pending":"Beklemede",
+            "unsure":"Emin değilim"
+          }
+        },
+        "vaccine": {
+        "question":"COVID-19 aşısını oldunuz mu?",
+          "options":{
+            "yes":"Evet",
+            "no":"Hayir"
+          }
+        },
+        "age":"Yaş:",
+        "ageGroup":"Lütfen yaşınızı girin.",
+        "enterAge":"Yaşınızı girin",
+        "50+":"50 ve üzeri",
+        "unselectedAgeGroup":"Yaş grubunu seçin",
+        "gender": {
+          "gender":"Cinsiyet:",
+          "question":"Cinsiyet kimliğiniz nedir?",
+          "note":"Kendini nasıl tanımlarsın?",
+          "options": {
+            "male":"Erkek",
+            "female":"Kadın",
+            "notToSay":"Yanıtlamayı reddet",
+            "other":"Diğer",
+            "transgender":"Transseksüel",
+            "selfDescribe":"Kendini tarif etmeyi tercih et"
+          }
+        },
+        "biologicalSex": {
+          "question":"Biyolojik cinsiyetiniz nedir?",
+          "note":"Orijinal doğum belgenizde doğumda size hangi cinsiyet atandı? Sesin sesi cinsiyete göre değiştiği için bu bilgi yapay zekanın COVID-19'u tespit etmesine yardımcı olması açısından önemlidir.",
+          "options": {
+            "male":"Erkek",
+            "female":"Kadın",
+            "notToSay":"Yanıtlamayı reddet"
+          }
+        },
+        "smokeLastSixMonths": {
+          "question":"Son altı ay içinde herhangi bir zamanda düzenli olarak sigara içtiniz mi?",
+          "note": "Buna sigara, nargile, pipo, esrar ve nikotinli vape dahildir.",
+          "options": {
+            "yes":"Evet",
+            "no":"Hayir"
+          }
+        },
+        "symptoms": {
+          "question":"<strong>Şu anda aşağıdaki belirtilerden hangilerine sahipsiniz?</strong>",
+          "options": {
+            "bodyAches":"Vücut ağrıları",
+            "dryCough":"Öksürük (kuru)",
+            "wetCough":"Öksürük (ıslak, mukuslu)",
+            "feverChillsSweating":"Ateş, titreme veya terleme",
+            "headaches":"Baş ağrıları",
+            "lossTasteOrSmell":"Tat ve/veya koku kaybı",
+            "WorseCough":"Yeni veya kötüleşen öksürük",
+            "runnyNose":"Burun akıntısı",
+            "breathShortness":"Nefes darlığı",
+            "soreThroat":"Boğaz ağrısı",
+            "chestTightness":"Göğüste sıkışma",
+            "vomitingAndDiarrhea":"Kusma ve ishal",
+            "none":"Yok",
+            "weakness":"Zayıflık",
+            "other":"Diğer",
+            "addOther":"+ Başka ekle"
+          },
+          "addOtherPlaceholder":"Diğer belirti"
+        },
+        "symptomsDate":"Bu belirtiler yaklaşık olarak kaç gün önce başladı?",
+        "enterDays":"Günleri girin",
+        "options":{
+            "today":"Bugün",
+            "days":"1-3 gün önce",
+            "week":"Bir hafta önce",
+            "overWeek":"Bir haftadan fazla bir süre önce"
+        },
+        "respiration": {
+          "question":"<strong>Şu anda aşağıdaki solunum rahatsızlıklarından hangisine sahipsiniz?</strong>",
+          "options": {
+            "asthma":"Astım",
+            "bronchitis":"Bronşit",
+            "emphysema":"KOAH/amfizem",
+            "otherChronic":"Diğer kronik akciğer hastalığı",
+            "pneumonia":"Zatürree",
+            "tuberculosis":"Tüberküloz",
+            "none":"Yok",
+            "addOther":"+ Başka ekle"
+          },
+          "addOtherPlaceholder":"Diğer koşul"
+        },
+        "medical": {
+          "question":"<strong>Şu anda aşağıdaki tıbbi durumlardan hangilerine sahipsiniz?</strong>",
+          "options": {
+            "allergies":"Alerjiler",
+            "asthma":"Astım",
+            "bronchitis":"Bronşit",
+            "congestiveHeart":"Konjestif kalp yetmezliği",
+            "emphysema":"KOAH/amfizem",
+            "obesity":"Aşırı obezite",
+            "heartDisease":"Kalp hastalığı",
+            "hiv":"HIV, AIDS veya bozulmuş bağışıklık sistemi",
+            "lungCancer":"Akciğer kanseri",
+            "otherChronic":"Diğer kronik akciğer hastalığı",
+            "pneumonia":"Zatürree",
+            "pulmonary":"Pulmoner fibroz",
+            "reflux":"Geri akış",
+            "sinusitis":"Sinüzit",
+            "tuberculosis":"Tüberküloz",
+            "none":"Yok",
+            "other":"Diğer",
+            "addOther":"+ Başka ekle"
+          },
+          "addOtherPlaceholder":"Diğer koşul"
+        },
+        "proceedButton":"Son adıma geç",
+        "stepOf":"of",
+        "nextButton":"Sonraki",
+        "submitting":"Gönderiliyor..."
+      },
+      "beforeSubmit": {
+        "submitButton":"Gönder",
+        "submitError":"Bir hata oluştu. Lütfen tekrar deneyin."
+      },
+      "thankyou": {
+        "title":"Gönderdiğiniz için teşekkür ederiz.",
+        "paragraph1_cough":"Öksürük bağışınız Virufy'yi dünyayı değiştirmeye bir adım daha yaklaştırıyor.",
+        "paragraph1_voice":"Öksürük bağışınız Virufy'yi dünyayı değiştirmeye bir adım daha yaklaştırıyor.",
+        "paragraph2":"Benzersiz gönderim kimliğiniz:<br/><2>{{submissionId}}</2>",
+        "paragraph2Patient":"Benzersiz hasta kimliğiniz:<br/><2>{{hasta kimliği}}</2>",
+        "paragraph3":"Gelecekte Virufy'den anonimleştirilmiş verilerinizi silmesini istemeniz gerekeceğinden, bu gönderim kimliğini değiştirmediğinizden emin olunuz.<br/><br/>Daha sonra öksürük, ateş veya kısırlık gibi belirtiler geliştirirseniz nefes, lütfen en son öksürük seslerinizi yeniden göndermek için geri gelin.",
+        "downloadApp":"<1>Uygulamayı yüklemek</1> için burayı tıklayın.",
+        "paragraph4":"Uygulamamızı geliştirmemiz ve <3>web sitemize</3> göz atabilmemiz için <1>geribildirim</1> sağlayın!",
+        "paragraph5":"<1>haberimiz</1> ile Virufy hakkında daha fazla bilgi edinin!",
+        "returnButton":"Başka bir öksürük gönderin",
+        "returnMain":"Ana menüye dön"
+      },
+      "footerReportProblems": {
+        "message":"Bir sorun mu var? Hata bildir"
+      },
+      "stayInTouch": {
+        "title":"İletişimde kalın!",
+        "cards": [
+          {
+            "title":"Bağış yap",
+            "description":"Devam eden araştırma ve geliştirme maliyetlerimizin desteklenmesine yardımcı olun",
+            "cta": {
+                "label":"Şimdi bağış yapın",
+                "link":"https://charity.gofundme.com/o/en/campaign/virufy"
+            }
+          },
+          {
+            "title":"Daha Fazla Bilgi Edinin",
+            "description":"Hakkımızda daha fazla bilgi edinmek için web sitemizi ziyaret edin",
+            "cta": {
+                "label":"Virufi web sitesini ziyaret edin",
+                "link":"https://virufy.org/"
+            }
+          },
+          {
+            "title":"Bize Katılın",
+            "description":"COVID-19 ile mücadelede becerilerinize katkıda bulunun",
+            "cta": {
+                "label":"Şimdi başvur",
+                "link":"https://virufy.org/join"
+            }
+          }
+        ]
+      },
+      "socialIcons": {
+        "title":"Bizi takip edin"
+      }
+}
