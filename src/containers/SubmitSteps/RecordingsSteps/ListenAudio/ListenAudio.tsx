@@ -64,6 +64,10 @@ const ListenAudio = ({
     () => (metadata ? metadata.currentLogic === 'recordYourCough' : false),
     [metadata],
   );
+  const isBreathLogic = React.useMemo(
+    () => (metadata ? metadata.currentLogic === 'recordYourBreath' : false),
+    [metadata],
+  );
 
   const schema = Yup.object({
     audioCollection: Yup.object(),
@@ -192,14 +196,19 @@ const ListenAudio = ({
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     if (location.state && location.state.from) {
-      const newRoute = `/submit-steps/step-record/${isCoughLogic ? 'cough' : 'speech'}`;
-      history.push(newRoute);
+      if (isCoughLogic) {
+        history.push('/submit-steps/step-record/cough');
+      } else if (isBreathLogic) {
+        history.push('/submit-steps/step-record/breath');
+      } else {
+        history.push('/submit-steps/step-record/speech');
+      }
     } else if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [location.state, previousStep, history, isCoughLogic]);
+  }, [location.state, previousStep, history, isCoughLogic, isBreathLogic]);
 
   const handleRemoveFile = React.useCallback(() => {
     if (playing) {
@@ -241,6 +250,15 @@ const ListenAudio = ({
   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
   const { isSubmitting } = formState;
 
+  const renderTitle = () => {
+    if (isCoughLogic) {
+      return t('recordingsListen:recordCough.header');
+    } if (isBreathLogic) {
+      return t('recordingsListen:recordBreath.header');
+    }
+    return t('recordingsListen:recordSpeech.header');
+  };
+
   useEffect(() => {
     if (!captchaValue) {
       setSubmitError(null);
@@ -251,8 +269,10 @@ const ListenAudio = ({
   useEffect(() => {
     scrollToTop();
     setSubtitle(t('recordingsListen:title'));
+    setTitle(renderTitle());
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, isCoughLogic, setDoGoBack, setTitle, setSubtitle, t]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleDoBack, isCoughLogic, isBreathLogic, setDoGoBack, setTitle, setSubtitle, t]);
 
   const onSubmitPatientAudioCollection = async (values: AudioType) => {
     if (values) {

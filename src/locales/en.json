@@ -273,6 +273,9 @@
       "intro1": "Find a <strong>quiet environment</strong> at least <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask. If you are feeling ill, please sit down.",
       "intro2": "Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and <strong>do not obstruct</strong> or cover your device with plastic. Do not cough violently or too forcefully."
     },
+    "recordBreath": {
+      "header": "Record your breathing"
+    },
     "recordSpeech": {
       "header": "Record your speech",
       "intro1": "The sound of your voice can also help us learn what COVID sounds like! 'Please press record and count clearly from one to ten."
@@ -287,6 +290,9 @@
     "recordCough": {
       "header": "Record your cough"
     },
+    "recordBreath": {
+      "header": "Record your breathing"
+    },
     "recordSpeech": {
       "header": "Record your speech"
     },
@@ -294,6 +300,7 @@
     "delete": "Delete",
     "textCough": "Tap the record button and <strong>cough intentionally</strong> into the bottom of your phone <strong>3 times</strong> with a <strong>deep breath</strong> between each cough. When you are done, tap the stop button. ",
     "textSpeech": "Tap the record button below and <strong>say a sustained ‘aaaaah’ for at least 5 seconds.</strong> When you are done, tap the stop button.",
+    "textBreath": "Tap the record button and <strong>breathe deeply and loudly</strong>into the bottom of your phone <strong>5 times.</strong> When you are done, tap the stop button.",
     "textNext": "Click continue to proceed.",
     "textCount": "Click the record button and count clearly from one to ten. When you are done, click continue.",
     "upload": "Upload your own file",
@@ -317,6 +324,9 @@
       "header": "Record your cough",
       "intro1": "Please cough away from others around you! Please sit down if you are feeling ill.",
       "intro2": " In a quiet environment, please press record and intentionally cough around 3-5 times."
+    },
+    "recordBreath": {
+      "header": "Record your breathing"
     },
     "recordSpeech": {
       "header": "Record your speech",
