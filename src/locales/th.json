@@ -24,6 +24,8 @@
         "supportedBy": "สนับสนุนด้วย",
         "visitWebsite": "เยี่ยมชมเว็บไซต์ของเรา",
         "errorCountry": "เราไม่สามารถรวบรวมข้อมูลอาการไอในภูมิภาคของท่านได้ในขณะนี้ โปรดกลับมาตรวจสอบอีกครั้งเร็ว ๆ นี้!",
+        "noOptionsError": "ไม่มีตัวเลือก",
+        "noValueError": "ไม่พบผลลัพธ์",
         "countries": {
             "Afghanistan": "อัฟกานิสถาน",
             "Albania": "แอลเบเนีย",
@@ -390,6 +392,7 @@
         "gender": {
             "gender": "เพศ:",
             "question": "อัตลักษณ์ทางเพศของท่านคืออะไร?",
+            "note": "How do you describe yourself?",
             "options": {
                 "male": "ชาย",
                 "female": "หญิง",

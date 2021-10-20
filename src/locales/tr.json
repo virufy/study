@@ -5,7 +5,7 @@
         "note":"<strong>Lütfen dikkat:</strong> Bu form yalnızca veri toplamak içindir. COVID-19 durumunuzu tahmin etmeyecek veya herhangi bir hastalık, rahatsızlık veya diğer sağlık durumlarını teşhis etmeyecektir. Virufy araştırma yürütmektedir ve verdiğiniz bilgileri sadece o araştırma için kullanacaktir. Virufy bir doktorun yerini tutmaz, doktorunuzdan tıbbi yardım almanın sizin sorumluluğunuzda olduğunu hatırlatmak isteriz.",
         "paragraph1":"Hoş geldiniz! Tamamlanması yalnızca 5 dakika sürecektir.",
         "selectYourLanguage":"Dil",
-        "paragraf2":"Covid-19 Öksürük Veri Toplama Çalışması",
+        "paragraph2":"Covid-19 Öksürük Veri Toplama Çalışması",
         "selectCountry":"Ülke seç",
         "selectRegion":"Bölge seç",
         "selectLocation":"Konum",
@@ -13,7 +13,7 @@
         "hospitalId":"Hastane kimliği",
         "enterPatientId":"Hasta kimliğini girin",
         "nextButton":"Sonraki",
-        "createDy":"Oluşturan",
+        "createdBy":"Oluşturan",
         "installApp":"Uygulamaui yükleyin",
         "addToHomeScreen":"Ana ekrana ekleyin",
         "hello":"Merhaba",
@@ -24,6 +24,8 @@
         "supportedBy":"Destekleyen",
         "visitWebsite":"Web sitemizi ziyaret ediniz",
         "errorCountry":"Şu anda bölgenizden öksürük toplayamıyoruz. Kısa süre sonra tekrar kontrol edin!",
+        "noOptionsError": "Seçenek yok",
+        "noValueError": "Sonuç bulunamadı",
         "countries": {
             "Afghanistan":"Afganistan",
             "Albania":"Arnavutluk",
@@ -239,8 +241,7 @@
         "paragraph1":"Virufy gizliliğinize önem verir ve lisanslı veri gizliliği uzmanları tarafından tavsiye edilir. Sağladığınız bilgiler ve kayıtlar yalnızca <1>Gizlilik Politikamızda</1> ve Onay Formumuzda açıklanan amaçlar için kullanılacaktır. Lütfen Onay Formunu okuyun:",
         "paragraph2Title":"Kişisel Bilgilerin Toplanması ve Araştırma Formuna Katılmak İçin Virufy Açık Rızası",
         "paragraph2":"COVID-19 Taraması için Akıllı Telefon Verilerinin Toplanması",
-        "paragraf3":"Aşağıdaki kutuları işaretleyerek, Virufy gizlilik politikasını okuduğunuzu ve anladığınızı ve Virufy'nin aşağıda sıralanan biyometrik ve sağlık bilgilerinin kategorilerini toplamasına ve işlemesine açık rıza gösterdiğinizi kabul etmektesiniz.",
-        "paragraph3_brazil":"Brezilya ulusal sınırları içinde bulunuyorsanız ve Genel Kişisel Verilerin Korunması Yasası ('LGPD') amaçları doğrultusunda, 'rıza', özgür, bilgilendirilmiş ve net beyanında, hassas kişisel verileri işlediğimiz yasal dayanak olacaktır.",
+        "paragraph3":"Aşağıdaki kutuları işaretleyerek, Virufy gizlilik politikasını okuduğunuzu ve anladığınızı ve Virufy'nin aşağıda sıralanan biyometrik ve sağlık bilgilerinin kategorilerini toplamasına ve işlemesine açık rıza gösterdiğinizi kabul etmektesiniz.",
         "certifyBrazil":"En az 18 yaşında olduğumu ve bu Onay Formunun şartlarını kabul ettiğimi, burada kişisel bilgilerimin, biyometrik bilgilerimin ve sağlık bilgilerimin toplanmasına ve işlenmesine açıkça rıza gösterdiğimi onaylıyorum.",
         "certify":"En az 18 yaşında olduğumu ve bu Onay Formunun şartlarını kabul ettiğimi onaylıyorum.",
         "agree":"Virufy <1>Gizlilik Politikası</1>'nın şartlarını okudum, anladım ve kabul ediyorum.",
@@ -248,17 +249,19 @@
         "detection":"İşlemenin yukarıda belirtilen amaçlarla ve özellikle, ancak bunlarla sınırlı olmaksızın, cihaz tabanlı COVID-19 tespiti için yapay zeka algoritmalarının geliştirilmesi için gerekli bir veri kümesini araştırmak ve derlemek için yapılacağını kabul ve beyan ederim.",
         "signs":"İşlemenin yukarıda belirtilen amaçlar doğrultusunda ve özellikle, ancak bununla sınırlı olmaksızın, COVID-19 belirtilerini daha iyi belirlemek için öksürük ses kayıtlarını analiz etmek üzere yapay zeka algoritmalarının eğitilmesi amacıyla yapılacağını kabul ve beyan ederim.",
         "biometric":"Kişisel bilgilerimin, biyometrik bilgilerimin ve sağlık bilgilerimin bu Rıza Formu ve/veya Virufy Gizlilik Politikası'nda açıklandığı şekilde üçüncü kişilerle paylaşılmasına açıkça muvafakat ediyorum.",
-        "PleaseConfirm":"Lütfen aşağıdakileri onaylayın:",
+        "pleaseConfirm":"Lütfen aşağıdakileri onaylayın:",
         "nextButton":"Sonraki",
-        "JumpToBottom":"Alta Geçiniz"
+        "jumpToBottom":"Alta Geçiniz"
       },
       "beforeStart": {
         "title":"Son olarak, başlamadan önce...",
         "subtitle":"<strong>Güvenliği sağlamak için şunları yapmanızı öneririz:</strong>",
-        "0":"Lütfen kendi cihazınızı kullanın ve gerektiğinde maske takın.",
-        "1":"Öksürüğünüzü/konuşmanızı kaydettikten sonra cihazınızı ve etkilenen veya yakındakı yüzeyleri dezenfekte edin.",
-        "2":"Öksürme riskinizi artıran temel bir durumunuz varsa, katılmadan önce lütfen sağlık uzmanınıza danışın.",
-        "3":"Semptomlarınızın kötüleştiğini düşünüyorsanız, lütfen yerel tıbbi müdahaleye başvurun.",
+        "advise_list": [
+          "Lütfen kendi cihazınızı kullanın ve gerektiğinde maske takın.",
+          "Öksürüğünüzü/konuşmanızı kaydettikten sonra cihazınızı ve etkilenen veya yakındakı yüzeyleri dezenfekte edin.",
+          "Öksürme riskinizi artıran temel bir durumunuz varsa, katılmadan önce lütfen sağlık uzmanınıza danışın.",
+          "Semptomlarınızın kötüleştiğini düşünüyorsanız, lütfen yerel tıbbi müdahaleye başvurun."
+        ],
         "startButton":"Sonraki"
       },
       "recordingsIntroduction": {
@@ -344,9 +347,9 @@
           "resultAntigenTest":"Hasta <1><0>{{hastaId}}</0></1>'in hızlı antijen COVID-19 testinin sonucu ne oldu?"
         },
         "headerText2":"Takip sorusu",
-        "WhenPcrTest":"PCR tabanlı COVID-19 testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+        "whenPcrTest":"PCR tabanlı COVID-19 testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
         "resultPcrTest": {
-        "resultPcrTest":"PCR tabanlı COVID-19 testinizin sonucu ne oldu?",
+        "question":"PCR tabanlı COVID-19 testinizin sonucu ne oldu?",
           "options": {
             "positive":"Olumlu",
             "negative":"Olumsuz",
@@ -354,7 +357,7 @@
             "unsure":"Emin değilim"
           }
         },
-        "WhenAntibodyTest":"COVID-19 için antikor testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+        "whenAntibodyTest":"COVID-19 için antikor testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
         "resultAntibodyTest": {
           "question": "COVID-19 için antikor testinizin sonucu ne oldu?",
           "options": {
@@ -364,7 +367,7 @@
             "unsure":"Emin değilim"
           }
         },
-        "WhenAntigenTest":"COVID-19 için antijen testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+        "whenAntigenTest":"COVID-19 için antijen testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
         "resultAntigenTest": {
           "question": "COVID-19 için antijen testinizin sonucu ne oldu?",
           "options": {
@@ -425,7 +428,7 @@
             "feverChillsSweating":"Ateş, titreme veya terleme",
             "headaches":"Baş ağrıları",
             "lossTasteOrSmell":"Tat ve/veya koku kaybı",
-            "WorseCough":"Yeni veya kötüleşen öksürük",
+            "worseCough":"Yeni veya kötüleşen öksürük",
             "runnyNose":"Burun akıntısı",
             "breathShortness":"Nefes darlığı",
             "soreThroat":"Boğaz ağrısı",
