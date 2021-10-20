@@ -31,7 +31,6 @@ import { buildConsentFilePath } from 'helper/consentPathHelper';
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Data
-import { privacyPolicy } from 'data/privacyPolicy';
 import { consentPdf } from 'data/consentPdf';
 
 // Styles
@@ -151,7 +150,7 @@ const Step4 = (p: Wizard.StepProps) => {
             <Trans i18nKey="consent:paragraph1">
               Virufy cares about your privacy and is advised by licensed data privacy experts.
               The information and recordings you provide will only be used for the purposes described in our
-              <Link to={privacyPolicy[currentCountry]} target="_blank">Privacy Policy</Link> and consent form.
+              Privacy Policy and consent form.
               Please read the consent Form:
             </Trans>
           </BlackText>
@@ -164,21 +163,11 @@ const Step4 = (p: Wizard.StepProps) => {
           <Trans i18nKey="consent:paragraph3">
             By checking the below boxes, you are granting your explicit, freely given, and informed consent to Virufy to
             collect, process, and share your information for the purposes indicated above and as provided in greater
-            detail in our <Link to={privacyPolicy[currentCountry]} target="_blank">Privacy Policy</Link>. You can print
+            detail in our Privacy Policy. You can print
             a copy of this Consent Form for your personal records by
-            accessing <Link to={consentPdf[currentCountry]} target="_blank">Privacy Policy</Link>
+            accessing <Link to={consentPdf[currentCountry]} target="_blank">Consent Form</Link>
           </Trans>
         </BlackText>
-
-        {store?.country === 'Brazil' && (
-          <BlackText>
-            <Trans i18nKey="consent:paragraph3_brazil">
-              If you are located inside Brazilian national territory, and for the purposes of the General Personal Data
-              Protection Law (&quot;LGPD&quot;), &quot;consent&quot;, in its free, informed, and unequivocal
-              pronouncement, will be the legal basis on which we process sensitive personal data.
-            </Trans>
-          </BlackText>
-        )}
 
         <CheckboxTitle>
           {t('consent:pleaseConfirm', 'Please confirm the following:')}
@@ -219,8 +208,7 @@ const Step4 = (p: Wizard.StepProps) => {
               id="Step2-PolicyTerms"
               label={(
                 <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:agree">
-                  I agree to the terms of the Virufy
-                  <Link to={privacyPolicy[currentCountry]} target="_blank">Privacy Policy</Link>
+                  I agree to the terms of the Virufy Privacy Policy
                 </Trans>
               )}
               name="agreedPolicyTerms"

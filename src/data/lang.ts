@@ -6,4 +6,6 @@ export const languageData = [
   { value: 'bn', label: 'বাংলা' },
   { value: 'el', label: 'ελληνικά' },
   { value: 'mn', label: 'монгол хэл' },
+  { value: 'th', label: 'ภาษาไทย' },
+  { value: 'tr', label: 'Türkçe' },
 ];

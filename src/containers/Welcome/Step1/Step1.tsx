@@ -8,6 +8,9 @@ import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
 import * as Yup from 'yup';
 
+// Icons
+import { ReactComponent as ExclamationSVG } from 'assets/icons/exclamationCircle.svg';
+
 // Components
 import CreatedBy from 'components/CreatedBy';
 
@@ -34,7 +37,7 @@ import { isClinic } from 'helper/basePathHelper';
 import {
   WelcomeContent, WelcomeStyledForm, LogoSubtitle,
   RegionContainer, WelcomeInput, ContainerNextButton, NextButton, ArrowRightSVG,
-  BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo, WelcomeSelect,
+  BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo, WelcomeSelect, TextErrorContainer,
 } from '../style';
 
 declare interface OptionsProps {
@@ -52,7 +55,7 @@ const schema = Yup.object().shape({
   language: Yup.string().required(),
   region: Yup.string().when('country', {
     is: (val: string) => countriesWithStates.includes(val),
-    then: Yup.string().required(),
+    then: Yup.string().required('regionRequired'),
     else: Yup.string(),
   }),
   patientId: Yup.string().when('$isClinical', {
@@ -94,7 +97,7 @@ const Step1 = (p: Wizard.StepProps) => {
   });
 
   const history = useHistory();
-  const { isValid } = formState;
+  const { isValid, errors } = formState;
 
   const onSubmit = async (values: Step1Type) => {
     if (values) {
@@ -110,9 +113,7 @@ const Step1 = (p: Wizard.StepProps) => {
   };
 
   const resetRegion = () => {
-    setValue('region', '', {
-      shouldValidate: true,
-    });
+    setValue('region', '');
   };
 
   useEffect(() => {
@@ -230,15 +231,28 @@ const Step1 = (p: Wizard.StepProps) => {
             name="region"
             defaultValue=""
             render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
-              <RegionContainer>
-                <WelcomeSelect
-                  options={regionSelectOptions}
-                  onChange={(e: any) => { onChange(e?.value); }}
-                  value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
-                  className="custom-select"
-                  classNamePrefix="custom-select"
-                />
-              </RegionContainer>
+              <>
+                <BoldBlackText>
+                  {t('main:region', 'Region')}
+                </BoldBlackText>
+
+                <RegionContainer>
+                  <WelcomeSelect
+                    options={regionSelectOptions}
+                    onChange={(e: any) => { onChange(e?.value); }}
+                    value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
+                    className="custom-select"
+                    classNamePrefix="custom-select"
+                    error={errors.region}
+                  />
+                  {errors.region && (
+                  <TextErrorContainer>
+                    <ExclamationSVG />
+                    {t(errors.region.message, 'Please select a region')}
+                  </TextErrorContainer>
+                  )}
+                </RegionContainer>
+              </>
             ) : <></>)}
           />
           {isClinic && (
