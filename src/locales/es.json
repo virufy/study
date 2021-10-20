@@ -9,6 +9,8 @@
     "paragraph2": "Recolección de datos para la investigación sobre la tos de la COVID-19",
     "selectCountry": "Seleccione país",
     "selectRegion": "Seleccione region",
+    "region": "Región", 
+    "regionRequired": "Por favor ingresar una región",
     "selectLocation": "Localización",
     "patientId": "ID del paciente",
     "hospitalId": "ID del hospital",

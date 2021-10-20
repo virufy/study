@@ -9,6 +9,8 @@
     "selectCountry": "Choisissez le pays",
     "selectRegion": "Choisissez la région",
     "selectLocation": "Lieu",
+    "region" : "Région", 
+    "regionRequired" : "Veuillez entrer une région",
     "patientId": "Identifiant du patient",
     "hospitalId": "Identifiant de l'hôpital",
     "enterPatientId" : "Saisir l’identifiant du patient", 

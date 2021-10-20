@@ -9,6 +9,8 @@
         "selectCountry":"Ülke seç",
         "selectRegion":"Bölge seç",
         "selectLocation":"Konum",
+        "region": "bölge",
+        "regionRequired": "Lütfen bölge seçin",
         "patientId":"Hasta kimliği",
         "hospitalId":"Hastane kimliği",
         "enterPatientId":"Hasta kimliğini girin",

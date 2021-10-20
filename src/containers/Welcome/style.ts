@@ -101,7 +101,7 @@ export const WelcomeInput = styled.input`
     }
 `;
 
-export const WelcomeSelect = styled(Select)`
+export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
     color: ${props => props.theme.colors.mineShaft};
     background-color: ${props => props.theme.colors.midGray};
     font-family: 'Source Sans Pro';
@@ -113,7 +113,7 @@ export const WelcomeSelect = styled(Select)`
     height: 48px;
     max-width: 320px;
     align-items: center;
-    border: 0;
+    border: 2px solid ${props => (props.error ? '#FF0000' : 'transparent')};
     border-radius: 15px;
     margin: auto;
     padding: 12px 15px;
@@ -207,11 +207,23 @@ export const WelcomeSelect = styled(Select)`
   
   @media screen and (${props => props.theme.breakpoints.tablet}){
     max-width: 348px;
-    }
+  }
+`;
+
+export const TextErrorContainer = styled.div`
+  width: 348px;
+  margin: 10px auto;
+
+  text-align: left;
+  color: #FF0000;
+
+  svg {
+    margin-right: 5px;
+    fill: #FF0000;
+  }
 `;
 
 export const RegionContainer = styled.div`
-  margin-top: 8px;
   text-align: center;
 `;
 
