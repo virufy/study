@@ -5,6 +5,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import './i18n';
 
+// Sentry
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
+
 // Utils
 import swConfig from 'utils/swConfig';
 
@@ -14,6 +18,19 @@ import * as serviceWorker from './serviceWorker';
 const StartApp = loadable(() => import('./start'), {
   fallback: <div>Loading</div>,
 });
+
+if (process.env.NODE_ENV === 'production' && process.env.REACT_APP_SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.REACT_APP_SENTRY_DSN,
+    integrations: [new Integrations.BrowserTracing()],
+    release: `${process.env.REACT_APP_NAME} @ v${process.env.REACT_APP_VERSION}`,
+    environment: process.env.REACT_APP_SENTRY_ENV || 'unknown',
+
+    // We recommend adjusting this value in production, or using tracesSampler
+    // for finer control
+    tracesSampleRate: 1.0,
+  });
+}
 
 ReactDOM.render(
   <>

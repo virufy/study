@@ -4,6 +4,10 @@
 import React from 'react';
 import Timer from 'react-compound-timer';
 import { useTranslation } from 'react-i18next';
+
+// Sentry
+import * as Sentry from '@sentry/react';
+
 // Utils
 import RecorderService from 'helper/audio/RecorderService';
 import FileHelper from 'helper/fileHelper';
@@ -130,8 +134,9 @@ const MicRecorder = ({
       .then(() => {
         setMicAllowed(true);
       })
-      .catch(() => {
+      .catch(err => {
         setMicAllowed(false);
+        Sentry.captureException(err);
       });
 
     if (recordingFile) {
