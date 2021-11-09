@@ -329,6 +329,7 @@
       },
       "questionary": {
         "headerText":"Soru",
+        "headerQuestions": "Sorular",
         "title":"Hadi birkaç kısa soruyu cevaplayalım!",
         "caption":"Lütfen elinizden gelenin en iyisini yapın.",
         "allThatApply":"(geçerli olan tüm seçenekleri seçin)",
