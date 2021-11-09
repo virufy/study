@@ -105,7 +105,7 @@ export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
     color: ${props => props.theme.colors.mineShaft};
     background-color: ${props => props.theme.colors.midGray};
     font-family: 'Source Sans Pro';
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 1.4;
