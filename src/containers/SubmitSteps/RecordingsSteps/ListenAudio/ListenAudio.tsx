@@ -29,6 +29,7 @@ import { doSubmitPatientAudioCollection } from 'helper/patientHelper';
 
 // Images
 import PlaySVG from 'assets/icons/play.svg';
+import PauseSVG from 'assets/icons/pause.svg';
 import CrossSVG from 'assets/icons/cross.svg';
 
 // Styles
@@ -221,9 +222,16 @@ const ListenAudio = ({
 
   const handlePlay = React.useCallback(() => {
     if (!playing) {
-      setProgressSeconds(0);
       if (refAudio.current) {
         refAudio.current.play();
+      }
+    }
+  }, [playing]);
+
+  const handlePause = React.useCallback(() => {
+    if (playing) {
+      if (refAudio.current) {
+        refAudio.current.pause();
       }
     }
   }, [playing]);
@@ -291,6 +299,7 @@ const ListenAudio = ({
 
       out.trackProgress = Math.ceil((progressSeconds / duration) * 100);
     }
+    console.log('out', out, 'out.trackProgress', out.trackProgress);
     return out;
   }, [duration, progressSeconds]);
 
@@ -348,11 +357,11 @@ const ListenAudio = ({
           </PlayerContainerBottom>
         </PlayerContainer>
         <PlayerPlayContainer
-          onClick={handlePlay}
+          onClick={playing ? handlePause : handlePlay}
         >
           <PlayerPlayButton>
             <PlayerPlay
-              src={PlaySVG}
+              src={playing ? PauseSVG : PlaySVG}
             />
           </PlayerPlayButton>
         </PlayerPlayContainer>
