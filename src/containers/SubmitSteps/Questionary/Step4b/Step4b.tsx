@@ -75,7 +75,7 @@ const Step4b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(t('questionary:headerQuestions'));
     setType('primary');
     setDoGoBack(() => handleDoBack);
   }, [handleDoBack, setDoGoBack, setTitle, setType, t]);

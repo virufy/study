@@ -313,6 +313,7 @@ export const InstructionContainer = styled.div`
 export const WelcomeBullets = styled.div`
   width: 30px;
   height: 30px;
+  min-width: 30px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.purple_10}; 
   display: inline-flex;

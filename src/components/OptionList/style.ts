@@ -52,8 +52,8 @@ export const OptionListCheck = styled.div<{ isSelected?: boolean; checkbox?: boo
   &:after{
     content: '';
     position: absolute; 
-    left: ${props => (props.checkbox ? '0%' : '15%')}; 
-    top: ${props => (props.checkbox ? '0%' : '15%')};
+    left: ${props => (props.checkbox ? '0%' : '2px')}; 
+    top: ${props => (props.checkbox ? '0%' : '2px')};
     height: ${props => (props.checkbox ? '16px' : '12px')};
     width: ${props => (props.checkbox ? '16px' : '12px')};
     border-radius: ${props => (props.checkbox ? '0%' : '50%')};

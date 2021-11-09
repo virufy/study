@@ -331,6 +331,7 @@
   },
   "questionary": {
     "headerText": "Pergunta",
+    "headerQuestions": "Preguntas",
     "title": "Vamos responder algumas perguntas rápidas!",
     "caption": "Por favor, responda o melhor que puder.",
     "allThatApply": "(selecione tudo que se aplica)",
