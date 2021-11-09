@@ -47,18 +47,22 @@ const schema = Yup.object().shape({
   agreedConsentTerms: Yup.boolean().required().default(false).oneOf([true]),
   agreedPolicyTerms: Yup.boolean().required().default(false).oneOf([true]),
   agreedCovidCollection: Yup.boolean().when('$country', {
-    is: 'Global',
-    then: Yup.boolean().required().default(false).oneOf([true]),
-    otherwise: Yup.boolean().notRequired(),
-  }),
-  agreedCovidDetection: Yup.boolean().when('$country', {
     is: 'Brazil',
     then: Yup.boolean().notRequired(),
     otherwise: Yup.boolean().required().default(false).oneOf([true]),
   }),
-  agreedTrainingArtificial: Yup.boolean().required().default(false).oneOf([true]),
+  agreedCovidDetection: Yup.boolean().when('$country', {
+    is: 'Colombia',
+    then: Yup.boolean().notRequired(),
+    otherwise: Yup.boolean().required().default(false).oneOf([true]),
+  }),
+  agreedTrainingArtificial: Yup.boolean().when('$country', {
+    is: value => ['Brazil', 'Colombia'].includes(value),
+    then: Yup.boolean().notRequired(),
+    otherwise: Yup.boolean().required().default(false).oneOf([true]),
+  }),
   agreedBiometric: Yup.boolean().when('$country', {
-    is: 'Brazil',
+    is: 'Colombia',
     then: Yup.boolean().notRequired(),
     otherwise: Yup.boolean().required().default(false).oneOf([true]),
   }),
