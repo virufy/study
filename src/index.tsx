@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import loadable from '@loadable/component';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import './i18n';
-
 // Sentry
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
@@ -14,6 +12,8 @@ import swConfig from 'utils/swConfig';
 
 // Service Work
 import * as serviceWorker from './serviceWorker';
+
+import './i18n';
 
 const StartApp = loadable(() => import('./start'), {
   fallback: <div>Loading</div>,
