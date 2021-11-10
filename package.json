@@ -6,6 +6,8 @@
     "@hookform/error-message": "0.0.4",
     "@hookform/resolvers": "^0.1.1",
     "@loadable/component": "^5.13.2",
+    "@sentry/react": "^6.14.1",
+    "@sentry/tracing": "^6.14.1",
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
     "dompurify": "^2.1.1",

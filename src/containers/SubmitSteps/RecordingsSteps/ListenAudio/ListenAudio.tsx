@@ -29,6 +29,7 @@ import { doSubmitPatientAudioCollection } from 'helper/patientHelper';
 
 // Images
 import PlaySVG from 'assets/icons/play.svg';
+import PauseSVG from 'assets/icons/pause.svg';
 import CrossSVG from 'assets/icons/cross.svg';
 
 // Styles
@@ -64,6 +65,10 @@ const ListenAudio = ({
     () => (metadata ? metadata.currentLogic === 'recordYourCough' : false),
     [metadata],
   );
+  const isBreathLogic = React.useMemo(
+    () => (metadata ? metadata.currentLogic === 'recordYourBreath' : false),
+    [metadata],
+  );
 
   const schema = Yup.object({
     audioCollection: Yup.object(),
@@ -89,6 +94,7 @@ const ListenAudio = ({
   // Refs
   const refAudio = React.useRef<HTMLMediaElement>(null);
   const refTimer = React.useRef<any>();
+  const refProgress = React.useRef<number>(0);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -100,21 +106,24 @@ const ListenAudio = ({
   React.useEffect(() => {
     const stepTimer = (ms: number) => {
       setProgressSeconds(ms / 1000);
+      refProgress.current = ms;
       refTimer.current = setTimeout(() => {
         stepTimer(ms + 200);
       }, 200);
     };
 
     const fnPlaying = () => {
-      stepTimer(0);
+      stepTimer(refProgress.current);
       setTimeout(() => {
         setPlaying(true);
       }, 0);
     };
 
     const fnPause = (e: any) => {
-      setDuration(e.target.currentTime);
-      setProgressSeconds(e.target.currentTime);
+      if (e.target.currentTime >= e.target.duration) {
+        setProgressSeconds(0);
+        refProgress.current = 0;
+      }
       setPlaying(false);
       clearTimeout(refTimer.current);
     };
@@ -123,18 +132,19 @@ const ListenAudio = ({
       const audioDuration: number = await new Promise(resolver => {
         if (e.target.duration !== Infinity) {
           resolver(e.target.duration);
-        }
-        const tempFn = () => {
-          e.target.pause();
-          e.target.volume = 1;
-          e.target.currentTime = 0;
-          resolver(e.target.duration);
-          e.target.removeEventListener('durationchange', tempFn);
-        };
+        } else {
+          const tempFn = () => {
+            e.target.pause();
+            e.target.volume = 1;
+            e.target.currentTime = 0;
+            resolver(e.target.duration);
+            e.target.removeEventListener('durationchange', tempFn);
+          };
 
-        e.target.addEventListener('durationchange', tempFn);
-        e.target.volume = 0;
-        e.target.currentTime = 24 * 60 * 60; // Unprobable time
+          e.target.addEventListener('durationchange', tempFn);
+          e.target.volume = 0;
+          e.target.currentTime = 24 * 60 * 60; // Unprobable time
+        }
       });
       e.target.volume = 1;
       setDuration(audioDuration);
@@ -192,14 +202,19 @@ const ListenAudio = ({
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     if (location.state && location.state.from) {
-      const newRoute = `/submit-steps/step-record/${isCoughLogic ? 'cough' : 'speech'}`;
-      history.push(newRoute);
+      if (isCoughLogic) {
+        history.push('/submit-steps/step-record/cough');
+      } else if (isBreathLogic) {
+        history.push('/submit-steps/step-record/breath');
+      } else {
+        history.push('/submit-steps/step-record/speech');
+      }
     } else if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [location.state, previousStep, history, isCoughLogic]);
+  }, [location.state, previousStep, history, isCoughLogic, isBreathLogic]);
 
   const handleRemoveFile = React.useCallback(() => {
     if (playing) {
@@ -221,9 +236,16 @@ const ListenAudio = ({
 
   const handlePlay = React.useCallback(() => {
     if (!playing) {
-      setProgressSeconds(0);
       if (refAudio.current) {
         refAudio.current.play();
+      }
+    }
+  }, [playing]);
+
+  const handlePause = React.useCallback(() => {
+    if (playing) {
+      if (refAudio.current) {
+        refAudio.current.pause();
       }
     }
   }, [playing]);
@@ -241,6 +263,15 @@ const ListenAudio = ({
   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
   const { isSubmitting } = formState;
 
+  const renderTitle = () => {
+    if (isCoughLogic) {
+      return t('recordingsListen:recordCough.header');
+    } if (isBreathLogic) {
+      return t('recordingsListen:recordBreath.header');
+    }
+    return t('recordingsListen:recordSpeech.header');
+  };
+
   useEffect(() => {
     if (!captchaValue) {
       setSubmitError(null);
@@ -251,8 +282,10 @@ const ListenAudio = ({
   useEffect(() => {
     scrollToTop();
     setSubtitle(t('recordingsListen:title'));
+    setTitle(renderTitle());
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, isCoughLogic, setDoGoBack, setTitle, setSubtitle, t]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleDoBack, isCoughLogic, isBreathLogic, setDoGoBack, setTitle, setSubtitle, t]);
 
   const onSubmitPatientAudioCollection = async (values: AudioType) => {
     if (values) {
@@ -348,11 +381,11 @@ const ListenAudio = ({
           </PlayerContainerBottom>
         </PlayerContainer>
         <PlayerPlayContainer
-          onClick={handlePlay}
+          onClick={playing ? handlePause : handlePlay}
         >
           <PlayerPlayButton>
             <PlayerPlay
-              src={PlaySVG}
+              src={playing ? PauseSVG : PlaySVG}
             />
           </PlayerPlayButton>
         </PlayerPlayContainer>

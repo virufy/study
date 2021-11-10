@@ -6,6 +6,7 @@ const middleComponentPathRecording = 'RecordingsSteps';
 const middleComponentPathQuestionary = 'Questionary';
 const middleComponentPathSubmission = 'Submission';
 const recordYourCoughLogic = 'recordYourCough';
+const recordYourBreathLogic = 'recordYourBreath';
 const recordYourSpeechLogic = 'recordYourSpeech';
 
 export const allowSpeechIn: string[] = [
@@ -76,6 +77,50 @@ function getCoughSteps(storeKey: string, country: string, patientId?: string) {
       props: {
         storeKey,
         previousStep: `${baseUrl}/step-record/cough`,
+        nextStep: `${baseUrl}/step-record/breath`,
+        metadata: {
+          currentLogic: recordYourCoughLogic,
+        },
+      },
+    },
+  ];
+}
+
+function getBreathSteps(storeKey: string, country: string, patientId?: string) {
+  return [
+    {
+      path: '/step-record/breath',
+      componentPath: `${baseComponentPath}/${middleComponentPathRecording}/Introduction`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/step-listen/cough`,
+        nextStep: `${baseUrl}/step-listen/breath`,
+        otherSteps: {
+          manualUploadStep: `${baseUrl}/step-manual-upload/breath`,
+        },
+        metadata: {
+          currentLogic: recordYourBreathLogic,
+        },
+      },
+    },
+    {
+      path: '/step-manual-upload/breath',
+      componentPath: `${baseComponentPath}/${middleComponentPathRecording}/RecordManualUpload`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/step-record/breath`,
+        nextStep: `${baseUrl}/step-listen/breath`,
+        metadata: {
+          currentLogic: recordYourBreathLogic,
+        },
+      },
+    },
+    {
+      path: '/step-listen/breath',
+      componentPath: `${baseComponentPath}/${middleComponentPathRecording}/ListenAudio`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/step-record/breath`,
         nextStep: (() => {
           if (!allowSpeechIn.includes(country)) {
             if (patientId) {
@@ -86,7 +131,7 @@ function getCoughSteps(storeKey: string, country: string, patientId?: string) {
           return `${baseUrl}/step-record/speech`;
         })(),
         metadata: {
-          currentLogic: recordYourCoughLogic,
+          currentLogic: recordYourBreathLogic,
           nextSpeech: !allowSpeechIn.includes(country),
         },
       },
@@ -104,7 +149,7 @@ function getSpeechSteps(storeKey: string, country: string, patientId: string) {
       componentPath: `${baseComponentPath}/${middleComponentPathRecording}/Introduction`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/step-listen/cough`,
+        previousStep: `${baseUrl}/step-listen/breath`,
         nextStep: `${baseUrl}/step-listen/speech`,
         otherSteps: {
           manualUploadStep: `${baseUrl}/step-manual-upload/speech`,
@@ -164,7 +209,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1a`,
       props: {
         storeKey,
-        previousStep: !allowSpeechIn.includes(country) ? `${baseUrl}/step-listen/cough` : `${baseUrl}/step-listen/speech`,
+        previousStep: !allowSpeechIn.includes(country) ? `${baseUrl}/step-listen/breath` : `${baseUrl}/step-listen/speech`,
         nextStep: `${baseUrl}/questionary/step1b`,
         otherSteps: {
           noTestStep: `${baseUrl}/questionary/step2`,
@@ -351,6 +396,8 @@ export default function stepsDefinition(storeKey: string, country: string, patie
   const steps: Wizard.Step[] = [
     // Record Your Cough Steps
     ...getCoughSteps(storeKey, country, patientId),
+    // Record Your Breath Steps
+    ...getBreathSteps(storeKey, country, patientId),
     // Record Your Speech Steps
     ...getSpeechSteps(storeKey, country, patientId),
     // Questionary

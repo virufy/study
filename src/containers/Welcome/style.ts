@@ -105,7 +105,7 @@ export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
     color: ${props => props.theme.colors.mineShaft};
     background-color: ${props => props.theme.colors.midGray};
     font-family: 'Source Sans Pro';
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 1.4;
@@ -313,6 +313,7 @@ export const InstructionContainer = styled.div`
 export const WelcomeBullets = styled.div`
   width: 30px;
   height: 30px;
+  min-width: 30px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.purple_10}; 
   display: inline-flex;

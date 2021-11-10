@@ -124,7 +124,7 @@ const Step1b = ({
     if (patientId) {
       setTitle('');
     } else {
-      setTitle(t('questionary:headerText'));
+      setTitle(t('questionary:headerQuestions'));
     }
     if (patientId) {
       setType('tertiary');
