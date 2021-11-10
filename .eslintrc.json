@@ -40,6 +40,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-props-no-spreading": 0,
     "react/jsx-one-expression-per-line": "off",
+    "react/jsx-indent": ["error", 2, { "indentLogicalExpressions": true }],
     "react/require-default-props": "off",
     "global-require": 0
   },
