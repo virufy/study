@@ -273,7 +273,12 @@
       "header": "咳を録音",
       "title": "説明",
       "intro1": "周囲の人から<strong>6m</strong>以上離れた<strong>静かな場所</strong> で、布もしくは医療用のマスクを着用してください。気分が悪くなった場合は座ってください。",
-      "intro2": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。咳を強くしすぎないように注意しましょう。"
+      "intro2Cough": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。咳を強くしすぎないように注意しましょう。",
+      "intro2Breath": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しく呼吸したり、強すぎたりしないでください",
+      "intro2Speech": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しくまたは強引に話さないでください"
+    },
+    "recordBreath": {
+      "header": "呼吸を記録する"
     },
     "recordSpeech": {
       "header": "咳を録音",
@@ -288,6 +293,9 @@
   "recordingsRecord": {
     "recordCough": {
       "header": "咳を録音"
+    },
+    "recordBreath": {
+      "header": "呼吸を記録する"
     },
     "recordSpeech": {
       "header": "スピーチを録音"
@@ -319,6 +327,9 @@
       "header": "咳を録音",
       "intro1": "周囲の人から離れて咳をしましょう。気分が悪くなったら座ってください。",
       "intro2": "静かな場所で録音ボタンを押し、３～５回意図的に咳をしてください。 "
+    },
+    "recordBreath": {
+      "header": "呼吸を記録する"
     },
     "recordSpeech": {
       "header": "スピーチを録音",

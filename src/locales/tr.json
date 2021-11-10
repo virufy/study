@@ -271,7 +271,12 @@
       "header": "Öksürüğünüzü kaydedin",
       "title": "Talimatlar",
       "intro1": "Diğerlerinden en az <strong>20 ft (6m)</strong> uzakta <strong>sessiz bir ortam</strong> bulun ve bez veya cerrahi maske takın. Kendinizi hasta hissediyorsanız lütfen oturun.",
-      "intro2": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetle veya çok zorla öksürmeyin."
+      "intro2Cough": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetle veya çok zorla öksürmeyin.",
+      "intro2Breath": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetli veya çok kuvvetli nefes almayın.",
+      "intro2Speech": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetle veya çok sert konuşmayın."
+    },
+    "recordBreath": {
+      "header": "Nefesini kaydet"
     },
     "recordSpeech": {
       "header": "Konuşmanızı kaydedin",
@@ -286,6 +291,9 @@
   "recordingsRecord": {
     "recordCough": {
       "header": "Öksürüğünüzü kaydedin"
+    },
+    "recordBreath": {
+      "header": "Nefesini kaydet"
     },
     "recordSpeech": {
       "header": "Konuşmanızı kaydedin"
@@ -317,6 +325,9 @@
       "header": "Öksürüğünüzü kaydedin",
       "intro1": "Lütfen etrafınızdakilerden uzaklaşın! Kendinizi hasta hissediyorsanız lütfen oturun.",
       "intro2": "Sessiz bir ortamda lütfen kayıt tuşuna basın ve kasıtlı olarak 3-5 defa öksürün."
+    },
+    "recordBreath": {
+      "header": "Nefesini kaydet"
     },
     "recordSpeech": {
       "header": "Konuşmanızı kaydedin",

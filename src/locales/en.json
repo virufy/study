@@ -273,7 +273,9 @@
       "header": "Record your cough",
       "title": "Instructions",
       "intro1": "Find a <strong>quiet environment</strong> at least <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask. If you are feeling ill, please sit down.",
-      "intro2": "Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and <strong>do not obstruct</strong> or cover your device with plastic. Do not cough violently or too forcefully."
+      "intro2Cough": "Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and <strong>do not obstruct</strong> or cover your device with plastic. Do not cough violently or too forcefully.",
+      "intro2Breath": "Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and <strong>do not obstruct</strong> or cover your device with plastic. Do not breathe violently or too forcefully.",
+      "intro2Speech": "Hold your device <strong>1-2 ft (30-60 cm)</strong> away from your mouth and <strong>do not obstruct</strong> or cover your device with plastic. Do not speak violently or too forcefully."
     },
     "recordBreath": {
       "header": "Record your breathing"

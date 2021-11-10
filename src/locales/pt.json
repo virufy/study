@@ -273,7 +273,12 @@
       "header": "Gravar sua fala",
       "title": "Instruções",
       "intro1": "Encontre um <strong>ambiente silencioso</strong> a pelo menos <strong>6m</strong> de distância dos outros e use um pano ou máscara cirúrgica. Se você estiver se sentindo doente, por favor, sente-se.",
-      "intro2": "Mantenha seu dispositivo a <strong>30-60 cm</strong> de distância de sua boca e <strong>não obstrua</strong> ou cubra seu dispositivo com plástico. Não tossir violentamente ou com muita força."
+      "intro2Cough": "Mantenha seu dispositivo a <strong>30-60 cm</strong> de distância de sua boca e <strong>não obstrua</strong> ou cubra seu dispositivo com plástico. Não tossir violentamente ou com muita força.",
+      "intro2Breath": "Mantenha seu dispositivo a <strong>30-60 cm</strong> de distância de sua boca e <strong>não obstrua</strong> ou cubra seu dispositivo com plástico. Não respire com violência ou com muita força.",
+      "intro2Speech": "Mantenha seu dispositivo a <strong>30-60 cm</strong> de distância de sua boca e <strong>não obstrua</strong> ou cubra seu dispositivo com plástico. Não fale com violência ou com muita força."
+    },
+    "recordBreath": {
+      "header": "Grave sua respiração"
     },
     "recordSpeech": {
       "header": "Gravar sua fala",
@@ -288,6 +293,9 @@
   "recordingsRecord": {
     "recordCough": {
       "header": "Gravar sua tosse"
+    },
+    "recordBreath": {
+      "header": "Grave sua respiração"
     },
     "recordSpeech": {
       "header": "Gravar sua fala"
@@ -319,6 +327,9 @@
       "header": "Gravar sua tosse",
       "intro1": "Por favor, tussa longe de outras pessoas ao seu redor! Caso esteja se sentindo doente, por favor, sente-se.",
       "intro2": "Em um ambiente silencioso, por favor, pressione o botão gravar e tussa intencionalmente cerca de 3 a 5 vezes."
+    },
+    "recordBreath": {
+      "header": "Grave sua respiração"
     },
     "recordSpeech": {
       "header": "Gravar sua fala",

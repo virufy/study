@@ -273,7 +273,12 @@
       "header": "Grabe su tos",
       "title": "Instrucciones",
       "intro1": "Busque un <strong>entorno tranquilo</strong>, al menos a <strong>6 metros </strong> de distancia de los demás, y utilice una mascarilla quirúrgica o de tela. Si se siente mal, siéntese.",
-      "intro2": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No tosa violentamente o con demasiada fuerza."
+      "intro2Cough": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No tosa violentamente o con demasiada fuerza.",
+      "intro2Breath": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No respire violentamente o con demasiada fuerza.",
+      "intro2Speech": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No hable violentamente o con demasiada fuerza."
+    },
+    "recordBreath": {
+      "header": "Graba tu respiración"
     },
     "recordSpeech": {
       "header": "Grabe su voz",
@@ -288,6 +293,9 @@
   "recordingsRecord": {
     "recordCough": {
       "header": "Grabe su tos"
+    },
+    "recordBreath": {
+      "header": "Graba tu respiración"
     },
     "recordSpeech": {
       "header": "Grabe su voz"
@@ -319,6 +327,9 @@
       "header": "Grabe su tos",
       "intro1": "Busque un entorno tranquilo que esté a 6 metros de los demás",
       "intro2": "Use un tapabocas quirurgico o de tela y sostenga el dispositivo a 30-60 cm de distancia de su cara"
+    },
+    "recordBreath": {
+      "header": "Graba tu respiración"
     },
     "recordSpeech": {
       "header": "Grabe su voz",

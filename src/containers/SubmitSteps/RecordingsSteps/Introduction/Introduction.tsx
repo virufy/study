@@ -99,31 +99,47 @@ const Introduction = ({
     setDoGoBack(() => handleDoBack);
   }, [isCoughLogic, isBreathLogic, setTitle, setSubtitle, setType, handleDoBack, setDoGoBack, t]);
 
-  const renderInstrucion = () => {
+  const [renderInstrucion2, renderInstrucion3] = React.useMemo(() => {
     if (isCoughLogic) {
-      return (
+      return ([
+        <Trans i18nKey="recordingsIntroduction:recordCough.intro2Cough">
+          Hold your device <strong>1-2 ft (30-60 cm)</strong>
+          away from your mouth and <strong>do not obstruct</strong>
+          or cover your device with plastic. Do not cough violently or too forcefully.
+        </Trans>,
         <Trans i18nKey="recordingsRecord:textCough">
           Tap the record button and <strong>cough intentionally</strong>
           into the bottom of your phone <strong>3 times</strong> with a
           <strong> deep breath</strong> between each cough. When you are done, tap the stop button.
-        </Trans>
-      );
+        </Trans>,
+      ]);
     }
     if (isBreathLogic) {
-      return (
+      return ([
+        <Trans i18nKey="recordingsIntroduction:recordCough.intro2Breath">
+          Hold your device <strong>1-2 ft (30-60 cm)</strong>
+          away from your mouth and <strong>do not obstruct</strong>
+          or cover your device with plastic. Do not breathe violently or too forcefully.
+        </Trans>,
         <Trans i18nKey="recordingsRecord:textBreath">
           Tap the record button and <strong>breathe deeply and loudly</strong> into the bottom of your phone
           <strong>5 times.</strong> When you are done, tap the stop button.
-        </Trans>
-      );
+        </Trans>,
+      ]);
     }
-    return (
+    return ([
+      <Trans i18nKey="recordingsIntroduction:recordCough.intro2Speech">
+        Hold your device <strong>1-2 ft (30-60 cm)</strong>
+        away from your mouth and <strong>do not obstruct</strong>
+        or cover your device with plastic. Do not speak violently or too forcefully.
+      </Trans>,
       <Trans i18nKey="recordingsRecord:textSpeech">
         Tap the record button below and <strong>say a sustained ‘aaaaah’ for at least 5 seconds.</strong>
         When you are done, tap the stop button.
-      </Trans>
-    );
-  };
+      </Trans>,
+
+    ]);
+  }, [isBreathLogic, isCoughLogic]);
 
   return (
     <MainContainer>
@@ -145,11 +161,7 @@ const Introduction = ({
           <BulletIndicator>2</BulletIndicator>
         </WelcomeBullets>
         <BlackText>
-          <Trans i18nKey="recordingsIntroduction:recordCough.intro2">
-            Hold your device <strong>1-2 ft (30-60 cm)</strong>
-            away from your mouth and <strong>do not obstruct</strong>
-            or cover your device with plastic. Do not cough violently or too forcefully.
-          </Trans>
+          {renderInstrucion2}
         </BlackText>
       </InstructionContainer>
       <CoughLeft />
@@ -158,7 +170,7 @@ const Introduction = ({
           <BulletIndicator>3</BulletIndicator>
         </WelcomeBullets>
         <BlackText>
-          {renderInstrucion()}
+          {renderInstrucion3}
         </BlackText>
       </InstructionContainer>
       <Record
