@@ -44,6 +44,7 @@ export async function doSubmit({
 
     const {
       recordYourCough,
+      recordYourBreath,
       recordYourSpeech,
 
       testTaken,
@@ -91,6 +92,8 @@ export async function doSubmit({
 
     const coughFile = recordYourCough.recordingFile || recordYourCough.uploadedFile;
     body.append('cough', coughFile, coughFile.name || 'filename.wav');
+    const breathFile = recordYourBreath.recordingFile || recordYourBreath.uploadedFile;
+    body.append('breath', breathFile, breathFile.name || 'filename_breath.wav');
     if (allowSpeechIn.includes(country)) {
       const voiceFile = recordYourSpeech.recordingFile || recordYourSpeech.uploadedFile;
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');

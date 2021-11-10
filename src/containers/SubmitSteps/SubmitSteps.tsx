@@ -19,6 +19,10 @@ createStore({
       recordingFile: null,
       uploadedFile: null,
     },
+    recordYourBreath: {
+      recordingFile: null,
+      uploadedFile: null,
+    },
     recordYourSpeech: {
       recordingFile: null,
       uploadedFile: null,
@@ -45,7 +49,7 @@ const SubmitSteps = () => {
     const checkFileConsistencyProblem = (inputState: Record<string, any>) => {
       let out = null;
       if (!inputState.welcome?.patientId && inputState[StoreKey]) {
-        const { recordYourCough, recordYourSpeech } = inputState[StoreKey];
+        const { recordYourCough, recordYourSpeech, recordYourBreath } = inputState[StoreKey];
         const toTest = [];
 
         if (recordYourCough) {
@@ -57,6 +61,16 @@ const SubmitSteps = () => {
             toTest.push({ file: uploadedFile, route: '/step-manual-upload/cough' });
           }
         }
+        if (recordYourBreath) {
+          const { recordingFile, uploadedFile } = recordYourBreath;
+          if (recordingFile) {
+            toTest.push({ file: recordingFile, route: '/step-record/breath' });
+          }
+          if (uploadedFile) {
+            toTest.push({ file: uploadedFile, route: '/step-manual-upload/breath' });
+          }
+        }
+
         if (recordYourSpeech) {
           const { recordingFile, uploadedFile } = recordYourCough;
           if (recordingFile) {
