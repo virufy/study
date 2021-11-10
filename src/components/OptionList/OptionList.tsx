@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  OptionListAddOtherButton, OptionListCheck, OptionListInput, OptionListInputContainer, OptionListItem,
+  OptionListAddOtherButton,
+  OptionListCheck, OptionListInput,
+  OptionListInputContainer,
+  OptionListItem,
+  OptionListItemLabel,
 } from './style';
 
 interface OptionListItemProps {
@@ -16,17 +20,18 @@ interface OptionListValue {
 interface OptionListProps {
   value?: OptionListValue;
   items: OptionListItemProps[];
-  excludableValue?: string;
+  excludableValues?: string[];
   singleSelection?: boolean;
   onChange?: (value: OptionListValue) => void;
   allowAddOther?: boolean;
   addOtherLabel?: string;
   enableOther?: boolean;
   otherPlaceholder?: string;
+  isCheckbox?: boolean;
 }
 const defaultValue = { selected: [], other: '' };
 const OptionList = ({
-  value = defaultValue, items, excludableValue, singleSelection,
+  value = defaultValue, items, excludableValues, singleSelection, isCheckbox,
   onChange, allowAddOther, addOtherLabel, enableOther, otherPlaceholder,
 }: OptionListProps) => {
   const [showOtherInput, setShowOtherInput] = useState(false);
@@ -48,7 +53,8 @@ const OptionList = ({
     } else if (singleSelection) {
       newSelected = [selectedItem.value];
       newOtherValue = undefined;
-    } else if (selectedItem.value === excludableValue || (excludableValue && selected.includes(excludableValue))) {
+    } else if (excludableValues?.includes(selectedItem.value)
+    || (excludableValues && selected.some(item => excludableValues.includes(item)))) {
       newSelected = [selectedItem.value];
       newOtherValue = undefined;
     } else {
@@ -68,7 +74,7 @@ const OptionList = ({
     const { selected } = value;
     let newSelected: string[];
 
-    if (singleSelection || (excludableValue && selected.includes(excludableValue))) {
+    if (singleSelection || (excludableValues && selected.some(item => excludableValues.includes(item)))) {
       newSelected = [];
     } else {
       newSelected = selected;
@@ -101,10 +107,10 @@ const OptionList = ({
             onClick={() => selectItem(item)}
             isSelected={isSelected}
           >
-            {item.label}
-            {isSelected && (
-              <OptionListCheck />
-            )}
+            <OptionListItemLabel>
+              {item.label}
+            </OptionListItemLabel>
+            <OptionListCheck isSelected={isSelected} checkbox={isCheckbox} />
           </OptionListItem>
         );
       })}
@@ -132,7 +138,7 @@ const OptionList = ({
 
 OptionList.defaultProps = {
   value: defaultValue,
-  excludableValue: undefined,
+  excludableValues: undefined,
   singleSelection: false,
   onChange: undefined,
   allowAddOther: false,

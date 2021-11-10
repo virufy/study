@@ -8,37 +8,40 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
-
-// Hooks
-import useWindowSize from 'hooks/useWindowSize';
-
-// Theme
-import { colors } from 'theme';
+import { BlackText } from 'components/Texts';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
+import { isClinic } from 'helper/basePathHelper';
+
+// Assets
+import HeaderSplash from 'assets/images/baseLogoSplash.png';
 
 // Styles
 import {
-  WelcomeLogo,
-  WelcomeTitle,
+  HeaderImageContainer,
+  HeaderImage,
+  LogoWhiteBG,
+  CustomPurpleText,
   WelcomeContent,
-  WelcomeSubtitle,
+  WelcomeBullets,
+  BulletIndicator,
   WelcomeStyledFormAlternative,
-  WomanWithPhoneFront,
-  SupportersTitle,
-  SupportersLogos,
+  SupportedBy,
+  NuevaLogo,
+  InstructionContainer,
 } from '../style';
 
 const Step2 = (p: Wizard.StepProps) => {
-  const { width } = useWindowSize();
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeStep, setActiveStep] = useState(true);
-  const { setDoGoBack, setLogoSize } = useHeaderContext();
+  const {
+    setType, setDoGoBack, setLogoSize, setSubtitle,
+  } = useHeaderContext();
 
   const history = useHistory();
 
@@ -62,75 +65,82 @@ const Step2 = (p: Wizard.StepProps) => {
     scrollToTop();
     setDoGoBack(() => doBack);
     setLogoSize('regular');
-  }, [doBack, setDoGoBack, setLogoSize]);
+    setSubtitle('About Us');
+    setType('secondary');
+  }, [doBack, setDoGoBack, setLogoSize, setType, setSubtitle]);
 
   const { t } = useTranslation();
 
   return (
     <WelcomeStyledFormAlternative>
-      <WelcomeLogo />
-
-      <WelcomeTitle mt={width && width > 560 ? 38 : 12}>{t('helpVirufy:title')}</WelcomeTitle>
-
-      <WomanWithPhoneFront />
-
-      <WelcomeContent maxWidth={320}>
-        <WelcomeSubtitle fontWeight={400} mt={0} mb={0} textAlign="left" fontColor={colors.darkBlack}>
-          <Trans i18nKey="helpVirufy:aboutParagraph">
-            <p>
-              Virufy is a nonprofit organization that is working to develop the means to use artificial intelligence
-              (Al) to screen for COVID-19 from cough patterns rapidly and at no cost through use of a smartphone.
-            </p>
-            <p>
-              Our team includes researchers from 25 countries and our focus is low-income countries. Our research has
-              shown that Al technology may be able to identify COVID&apos;s unique cough signature.
-            </p>
-            <p>
-              By collecting coughs recordings from people around the world, Virufy is improving the robustness of its AI
-              algorithm in recognizing COVID&apos;s unique sound pattern.
-            </p>
-            <p>
-              You have the power to help benefit millions of people across the globe by contributing your cough in our
-              study.
-            </p>
-          </Trans>
-        </WelcomeSubtitle>
-
-        <SupportersTitle>
-          {t('helpVirufy:ourSupporters', 'Our Supporters')}
-        </SupportersTitle>
-        <SupportersLogos>
-          <picture>
-            <source
-              srcSet={
-                `${require('assets/images/h4r-logo@2x.png')} 2x`
-                + `, ${require('assets/images/h4r-logo@3x.png')} 3x`
-              }
-            />
-            <img src={require('assets/images/h4r-logo.png')} alt="Stanford - Hacking 4 Recovery" />
-          </picture>
-          <picture>
-            <source
-              srcSet={
-                `${require('assets/images/OYW_blue@2x.png')} 2x`
-                + `, ${require('assets/images/OYW_blue@3x.png')} 3x`
-              }
-            />
-            <img src={require('assets/images/OYW_blue.png')} alt="One Young World" />
-          </picture>
-        </SupportersLogos>
-      </WelcomeContent>
-
-      {activeStep && (
-        <Portal>
-          <WizardButtons
-            invert
-            leftLabel={t('helpVirufy:nextButton')}
-            leftHandler={handleNext}
-          />
-        </Portal>
+      <HeaderImageContainer>
+        <HeaderImage
+          src={HeaderSplash}
+        />
+        <LogoWhiteBG />
+      </HeaderImageContainer>
+      <CustomPurpleText mb={isClinic ? 5 : 15}>
+        {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
+      </CustomPurpleText>
+      {isClinic && (
+      <SupportedBy>
+        {t('main:supportedBy', 'Supported by')}
+        <NuevaLogo />
+      </SupportedBy>
       )}
 
+      <WelcomeContent maxWidth={470} mt={0}>
+        <BlackText>
+          <Trans i18nKey="helpVirufy:introParagraph">
+            <p>
+              Welcome to our study! This should only take you about 5 minutes to complete.
+              Before we begin, let’s discuss what we will cover:
+            </p>
+          </Trans>
+        </BlackText>
+        <InstructionContainer>
+          <WelcomeBullets>
+            <BulletIndicator>1</BulletIndicator>
+          </WelcomeBullets>
+          <BlackText>
+            <Trans i18nKey="helpVirufy:bulletsIntro">
+              <strong>Intro: </strong>About us and Safety Reminders
+            </Trans>
+          </BlackText>
+        </InstructionContainer>
+
+        <InstructionContainer>
+          <WelcomeBullets>
+            <BulletIndicator>2</BulletIndicator>
+          </WelcomeBullets>
+          <BlackText>
+            <Trans i18nKey="helpVirufy:bulletCough">
+              <strong>Cough Into Phone</strong>
+            </Trans>
+          </BlackText>
+        </InstructionContainer>
+
+        <InstructionContainer>
+          <WelcomeBullets>
+            <BulletIndicator>3</BulletIndicator>
+          </WelcomeBullets>
+          <BlackText>
+            <Trans i18nKey="helpVirufy:bulletQuestions">
+              <strong>Quick Health Questions</strong>
+            </Trans>
+          </BlackText>
+        </InstructionContainer>
+
+        {activeStep && (
+          <Portal>
+            <WizardButtons
+              invert
+              leftLabel={t('helpVirufy:nextButton')}
+              leftHandler={handleNext}
+            />
+          </Portal>
+        )}
+      </WelcomeContent>
     </WelcomeStyledFormAlternative>
   );
 };

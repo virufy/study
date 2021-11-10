@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import usePortal from 'react-useportal';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -9,10 +8,14 @@ import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
 import * as Yup from 'yup';
 
+// Icons
+import { ReactComponent as ExclamationSVG } from 'assets/icons/exclamationCircle.svg';
+
 // Components
-import WizardButtons from 'components/WizardButtons';
-import Dropdown from 'components/Dropdown';
 import CreatedBy from 'components/CreatedBy';
+
+// Modals
+import CountryErrorModal from 'modals/CountryErrorModal';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -22,41 +25,58 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Data
 import { languageData } from 'data/lang';
-import { countryData, countriesWithStates } from 'data/country';
-
-// Hooks
-import useWindowSize from 'hooks/useWindowSize';
+import { countryData, countriesWithStates, CountryDataProps } from 'data/country';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
+// Helper
+import { isClinic } from 'helper/basePathHelper';
+
 // Styles
 import {
-  WelcomeLogo, WelcomeLogoText, WelcomeNote, WelcomeTitle, WelcomeContent, WelcomeSubtitle, WelcomeStyledForm,
-  WelcomeRequiredFieldText, RegionContainer, WelcomeInput,
+  WelcomeContent, WelcomeStyledForm, LogoSubtitle,
+  RegionContainer, WelcomeInput, ContainerNextButton, NextButton, ArrowRightSVG,
+  BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo, WelcomeSelect, TextErrorContainer,
 } from '../style';
 
+declare interface OptionsProps {
+  label: string;
+  value: string;
+}
+
+let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany'];
+const clinicCountries = ['India', 'Colombia'];
+if (isClinic) {
+  invalidCountries = invalidCountries.filter(a => !clinicCountries.includes(a));
+}
 const schema = Yup.object().shape({
-  country: Yup.string().required(),
+  country: Yup.string().required().notOneOf(invalidCountries),
   language: Yup.string().required(),
   region: Yup.string().when('country', {
     is: (val: string) => countriesWithStates.includes(val),
-    then: Yup.string().required(),
+    then: Yup.string().required('regionRequired'),
     else: Yup.string(),
   }),
-  patientId: Yup.string().notRequired(),
+  patientId: Yup.string().when('$isClinical', {
+    is: true,
+    then: Yup.string().required(),
+    else: Yup.string().notRequired(),
+  }),
+  hospitalId: Yup.string().when('$isClinical', {
+    is: true,
+    then: Yup.string().required(),
+    else: Yup.string().notRequired(),
+  }),
 }).defined();
 
 type Step1Type = Yup.InferType<typeof schema>;
 
 const Step1 = (p: Wizard.StepProps) => {
-  const { width } = useWindowSize();
-
-  const { Portal } = usePortal({
-    bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
-  });
   const [activeStep, setActiveStep] = React.useState(true);
-  const { doGoBack, setDoGoBack, setLogoSize } = useHeaderContext();
+  const {
+    setType, setDoGoBack, setLogoSize,
+  } = useHeaderContext();
 
   const { state, action } = useStateMachine(updateAction(p.storeKey));
 
@@ -69,17 +89,23 @@ const Step1 = (p: Wizard.StepProps) => {
     setValue,
   } = useForm({
     defaultValues: store,
+    context: {
+      isClinical: isClinic,
+    },
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
   const history = useHistory();
-  const { isValid } = formState;
+  const { isValid, errors } = formState;
 
   const onSubmit = async (values: Step1Type) => {
     if (values) {
       action(values);
-      if (p.nextStep) {
+      if (values.patientId && p.otherSteps?.nextStepPatient) {
+        setActiveStep(false);
+        history.push(p.otherSteps.nextStepPatient);
+      } else if (p.nextStep) {
         setActiveStep(false);
         history.push(p.nextStep);
       }
@@ -87,21 +113,17 @@ const Step1 = (p: Wizard.StepProps) => {
   };
 
   const resetRegion = () => {
-    setValue('region', '', {
-      shouldValidate: true,
-    });
+    setValue('region', '');
   };
 
   useEffect(() => {
     scrollToTop();
-
     // Hide back arrow in header if neccesary
-    if (doGoBack) setDoGoBack(null);
-
+    setDoGoBack(null);
+    setType('tertiary');
     setLogoSize('big');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const { t, i18n } = useTranslation();
 
   const lang = watch('language');
@@ -109,151 +131,191 @@ const Step1 = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     i18n.changeLanguage(lang);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n, lang]);
 
-  const countrySelectOptions = useMemo(() => [{ name: t('main:selectCountry'), consentFormUrl: '', val: '' },
-    ...countryData], [t]);
+  const invalidCountryModal = React.useMemo(() => invalidCountries.includes(country),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+    [country]);
 
   const regionSelectOptions = useMemo(() => {
     const output = [
-      { name: t('main:selectRegion'), val: '' },
+      { label: t('main:selectRegion'), value: '' },
     ];
     if (country) {
-      const elem = countryData.find(a => a.val === country);
+      const elem = countryData.find(a => a.value === country);
       if (elem) {
         elem.states.forEach(s => {
-          output.push({ name: s, val: s });
+          output.push({ label: s, value: s });
         });
       }
     }
     return output;
   }, [t, country]);
 
+  const getClinicCountries = () => countryData.filter(item => clinicCountries.includes(item.value));
+
+  const getOptionsCountry = () => {
+    const options = isClinic ? getClinicCountries() : countryData;
+    const formattedOptions = options.reduce((acc: CountryDataProps[], current) => {
+      acc.push({ ...current, label: t(`main:countries.${current.value}`) });
+      return acc;
+    }, []);
+    return formattedOptions;
+  };
+
   return (
     <>
-      <WelcomeStyledForm mt="-4px">
-        <WelcomeLogo />
-        <WelcomeLogoText>
+      <WelcomeStyledForm>
+        <LogoSubtitle>
           {t('main:logoIntro', 'An Independent Nonprofit Research Organization')}
-        </WelcomeLogoText>
+        </LogoSubtitle>
+        <WelcomeContent mt={4}>
+          <CustomPurpleText mb={8}>
+            {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
+          </CustomPurpleText>
+          {isClinic
+          && (
+          <SupportedBy>
+            {t('main:supportedBy', 'Supported by')}
+            <NuevaLogo />
+          </SupportedBy>
+          )}
 
-        <WelcomeTitle
-          fontSize={width && width > 560 ? 32 : 24}
-          mt={48}
-        >
-          {t('main:title')}
-        </WelcomeTitle>
+          <BoldBlackText>
+            {t('main:selectYourLanguage', 'Language')}
+          </BoldBlackText>
 
-        <WelcomeContent>
-          <WelcomeSubtitle
-            fontWeight={700}
-            mb={0}
-            mt={width && width > 560 ? 0 : 18}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            {t('main:paragraph1')}
-          </WelcomeSubtitle>
-
-          <WelcomeSubtitle
-            mt={width && width > 560 ? 50 : 32}
-            mb={width && width > 560 ? 50 : 16}
-            fontWeight={400}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            Please select your language.
-          </WelcomeSubtitle>
+          {/* Language */}
           <Controller
             control={control}
             name="language"
-            defaultValue={i18n.language.split('-')[0] || languageData[0].code}
-            render={({ onChange, value }) => (
-              <Dropdown onChange={e => onChange(e.currentTarget.value)} value={value}>
-                {languageData.map(({ code, label }) => <option key={code} id={code} value={code}>{label}</option>)}
-              </Dropdown>
+            defaultValue={languageData[0].value}
+            render={({ onChange, value: valueController }) => (
+              <WelcomeSelect
+                placeholder={t('main.selectYourLanguage', 'Language')}
+                options={languageData}
+                onChange={(e: any) => { onChange(e?.value); }}
+                value={languageData.filter(({ value }) => value === valueController)}
+                className="custom-select"
+                classNamePrefix="custom-select"
+              />
             )}
           />
 
-          <WelcomeSubtitle
-            mt={width && width > 560 ? 50 : 32}
-            mb={width && width > 560 ? 50 : 16}
-            fontWeight={400}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            {t('main:paragraph2')}
-            <WelcomeRequiredFieldText> *</WelcomeRequiredFieldText>
-          </WelcomeSubtitle>
+          <BoldBlackText>
+            {t('main:selectLocation', 'Location')}
+          </BoldBlackText>
 
           <Controller
             control={control}
             name="country"
-            defaultValue={countrySelectOptions[0].val}
-            render={({ onChange, value }) => (
-              <Dropdown onChange={e => { onChange(e.currentTarget.value); resetRegion(); }} value={value}>
-                {countrySelectOptions.map(({ name, val }) => <option key={name} id={name} value={val}>{name}</option>)}
-              </Dropdown>
+            defaultValue=""
+            render={({ onChange, value: valueController }) => (
+              <WelcomeSelect
+                placeholder={t('main:selectCountry', 'Select country')}
+                options={getOptionsCountry()}
+                onChange={(e: any) => { onChange(e?.value); resetRegion(); }}
+                value={getOptionsCountry().filter(({ value }) => value === valueController)}
+                className="custom-select"
+                classNamePrefix="custom-select"
+                noOptionsMessage={({ inputValue }) => (
+                  !inputValue ? `${t('main:noOptionsError')}` : `${t('main:noValueError')}`
+                )}
+              />
             )}
           />
 
           <Controller
             control={control}
             name="region"
-            defaultValue={regionSelectOptions[0].val}
-            render={({ onChange, value }) => (regionSelectOptions.length > 1 ? (
-              <RegionContainer>
-                <Dropdown onChange={e => onChange(e.currentTarget.value)} value={value}>
-                  {regionSelectOptions.map(({ name, val }) => <option key={name} id={name} value={val}>{name}</option>)}
-                </Dropdown>
-              </RegionContainer>
+            defaultValue=""
+            render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
+              <>
+                <BoldBlackText>
+                  {t('main:region', 'Region')}
+                </BoldBlackText>
+
+                <RegionContainer>
+                  <WelcomeSelect
+                    options={regionSelectOptions}
+                    onChange={(e: any) => { onChange(e?.value); }}
+                    value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
+                    className="custom-select"
+                    classNamePrefix="custom-select"
+                    error={errors.region}
+                  />
+                  {errors.region && (
+                  <TextErrorContainer>
+                    <ExclamationSVG />
+                    {t(errors.region.message, 'Please select a region')}
+                  </TextErrorContainer>
+                  )}
+                </RegionContainer>
+              </>
             ) : <></>)}
           />
-
-          <WelcomeSubtitle
-            mt={width && width > 560 ? 50 : 32}
-            mb={width && width > 560 ? 50 : 16}
-            fontWeight={400}
-            textAlign={width && width > 560 ? 'center' : 'left'}
-          >
-            {t('main:patientId', 'If you are part of a clinical study, please enter your patient ID:')}
-          </WelcomeSubtitle>
-          <Controller
-            control={control}
-            name="patientId"
-            defaultValue=""
-            render={({ onChange, value, name }) => (
-              <WelcomeInput
-                name={name}
-                value={value}
-                onChange={onChange}
-                type="text"
-                placeholder={t('main:enterPatientId', 'Enter your patient ID')}
-                autoComplete="Off"
+          {isClinic && (
+            <>
+              <BoldBlackText>
+                {t('main:patientId', 'Enter patient ID:')}
+              </BoldBlackText>
+              <Controller
+                control={control}
+                name="patientId"
+                defaultValue=""
+                render={({ onChange, value, name }) => (
+                  <WelcomeInput
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    type="text"
+                    autoComplete="Off"
+                  />
+                )}
               />
-            )}
-          />
-
-          <WelcomeNote>
-            <Trans i18nKey="main:note">
-              <strong>Please note:</strong> This form is for data collection only. It will not predict your COVID-19
-              status or diagnose any disease, disorder, or other health condition. Virufy is conducting research and
-              will use the information you provide for that research only. Virufy will not take place of a doctor and
-              would like to remind you it is your responsibility to seek medical advice from your doctor.
-            </Trans>
-          </WelcomeNote>
-
-          {activeStep && (
-            <Portal>
-              <WizardButtons
-                leftLabel={t('main:nextButton')}
-                leftHandler={handleSubmit(onSubmit)}
-                leftDisabled={!isValid}
-                invert
+              <BoldBlackText>
+                {t('main:hospitalId', 'Enter hospital ID:')}
+              </BoldBlackText>
+              <Controller
+                control={control}
+                name="hospitalId"
+                defaultValue=""
+                render={({ onChange, value, name }) => (
+                  <WelcomeInput
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    type="text"
+                    autoComplete="Off"
+                  />
+                )}
               />
-              <CreatedBy inline />
-            </Portal>
+            </>
           )}
-
+          {
+            activeStep && (
+              <>
+                <ContainerNextButton>
+                  <NextButton
+                    onClick={handleSubmit(onSubmit)}
+                    isDisable={!isValid}
+                  >
+                    <ArrowRightSVG />
+                  </NextButton>
+                </ContainerNextButton>
+                <CreatedBy inline />
+              </>
+            )
+          }
         </WelcomeContent>
       </WelcomeStyledForm>
+      <CountryErrorModal
+        isOpen={invalidCountryModal}
+        modalTitle="Oops."
+      >
+        {t('main:errorCountry', 'We are unable to collect coughs from your region at this time. Check back with us soon!')}
+      </CountryErrorModal>
     </>
   );
 };

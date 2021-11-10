@@ -18,13 +18,6 @@ interface StyledCheckboxInputProps {
 }
 
 export const StyledCheckboxContainer = styled(FullWidthDiv)<StyledCheckboxContainerProps>`
-  &:nth-child(odd) {
-    background-color: ${({ isChecked, theme }) => (isChecked ? theme.colors.green_25 : 'transparent')};
-  }
-  &:nth-child(even) {
-    background-color: ${({ isChecked, theme }) => (isChecked ? theme.colors.lightGreen_25 : 'transparent')};
-  }
-  border-top: 1px solid ${props => props.theme.colors.realBlack_4};
   display: flex;
   font-family: "Source Sans Pro";
   font-size: 0.875rem;
@@ -32,10 +25,6 @@ export const StyledCheckboxContainer = styled(FullWidthDiv)<StyledCheckboxContai
   ${({ fontWeight }) => fontWeight && css`font-weight: ${fontWeight};`}
   padding: 15px 0;
   position: relative;
-
-  &:last-of-type {
-    border-bottom: 1px solid ${props => props.theme.colors.realBlack_4};
-  };
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
     max-width: 470px;

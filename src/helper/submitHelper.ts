@@ -4,7 +4,8 @@ import * as H from 'history';
 import { client as axiosClient } from 'hooks/useAxios';
 
 //
-import { removeSpeechIn } from 'helper/stepsDefinitions';
+import { allowSpeechIn } from 'helper/stepsDefinitions';
+import deviceDetect from 'helper/deviceHelper';
 
 interface DoSubmitProps {
   setSubmitError(err: string | null): void;
@@ -36,7 +37,9 @@ export async function doSubmit({
       agreedConsentTerms,
       agreedPolicyTerms,
       agreedCovidDetection,
+      agreedCovidCollection,
       agreedTrainingArtificial,
+      agreedBiometric,
     } = state.welcome;
 
     const {
@@ -49,6 +52,7 @@ export async function doSubmit({
       antigenTestDate,
       antigenTestResult,
 
+      vaccine,
       ageGroup,
       gender,
       biologicalSex,
@@ -63,6 +67,7 @@ export async function doSubmit({
 
     const body = new FormData();
 
+    body.append('device', JSON.stringify(deviceDetect()));
     body.append('language', language);
     body.append('country', country);
     if (region) {
@@ -79,12 +84,14 @@ export async function doSubmit({
 
     body.append('agreedConsentTerms', agreedConsentTerms);
     body.append('agreedPolicyTerms', agreedPolicyTerms);
+    body.append('agreedCovidCollection', agreedCovidCollection);
     body.append('agreedCovidDetection', agreedCovidDetection);
     body.append('agreedTrainingArtificial', agreedTrainingArtificial);
+    body.append('agreedBiometric', agreedBiometric);
 
     const coughFile = recordYourCough.recordingFile || recordYourCough.uploadedFile;
     body.append('cough', coughFile, coughFile.name || 'filename.wav');
-    if (!removeSpeechIn.includes(country)) {
+    if (allowSpeechIn.includes(country)) {
       const voiceFile = recordYourSpeech.recordingFile || recordYourSpeech.uploadedFile;
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
     }
@@ -99,6 +106,10 @@ export async function doSubmit({
     if (testTaken.includes('antigen')) {
       body.append('antigenTestDate', antigenTestDate.toISOString());
       body.append('antigenTestResult', antigenTestResult);
+    }
+
+    if (vaccine) {
+      body.append('vaccine', vaccine);
     }
 
     if (ageGroup !== 'unselected') {
@@ -124,7 +135,7 @@ export async function doSubmit({
     }
 
     if (symptomsStartedDate) {
-      body.append('symptomsStartedDate', symptomsStartedDate.toISOString());
+      body.append('symptomsStartedDate', symptomsStartedDate);
     }
 
     if (currentRespiratoryCondition?.selected?.length > 0) {

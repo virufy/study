@@ -13,9 +13,6 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
-// Components
-import ProgressIndicator from 'components/ProgressIndicator';
-
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
@@ -26,10 +23,8 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, GrayExtraInfo,
+  QuestionText, MainContainer, QuestionAllApply,
 } from '../style';
-
-const covidSymptoms = ['dryCough', 'wetCough', 'feverChillsSweating', 'newOrWorseCough', 'breathShortness'];
 
 const schema = Yup.object({
   currentSymptoms: Yup.object().required(),
@@ -48,7 +43,7 @@ const Step4a = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
@@ -60,10 +55,15 @@ const Step4a = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -76,9 +76,10 @@ const Step4a = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step4aType) => {
@@ -93,7 +94,7 @@ const Step4a = ({
 
       // eslint-disable-next-line no-plusplus
       for (let index = 0; index < currentSymptoms.selected?.length; index++) {
-        if (covidSymptoms.includes(currentSymptoms.selected[index])) {
+        if (currentSymptoms.selected[index] !== 'none') {
           hasSymptom = true;
           break;
         }
@@ -113,15 +114,12 @@ const Step4a = ({
   };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
-      <QuestionText bold={false}>
+    <MainContainer>
+      <QuestionText extraSpace first>
         <Trans i18nKey="questionary:symptoms.question">
-          <strong>Which of the below symptoms do you currently have?</strong> (Select all that apply)
+          <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -129,9 +127,14 @@ const Step4a = ({
         defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
+            isCheckbox
             value={value}
             onChange={v => onChange(v)}
             items={[
+              {
+                value: 'none',
+                label: t('questionary:symptoms.options.none'),
+              },
               {
                 value: 'bodyAches',
                 label: t('questionary:symptoms.options.bodyAches'),
@@ -143,6 +146,10 @@ const Step4a = ({
               {
                 value: 'wetCough',
                 label: t('questionary:symptoms.options.wetCough'),
+              },
+              {
+                value: 'runnyNose',
+                label: t('questionary:symptoms.options.runnyNose'),
               },
               {
                 value: 'feverChillsSweating',
@@ -177,14 +184,15 @@ const Step4a = ({
                 label: t('questionary:symptoms.options.vomitingAndDiarrhea'),
               },
               {
-                value: 'none',
-                label: t('questionary:symptoms.options.none'),
+                value: 'weakness',
+                label: t('questionary:symptoms.options.weakness'),
+              },
+              {
+                value: 'other',
+                label: t('questionary:symptoms.options.other'),
               },
             ]}
-            allowAddOther
-            addOtherLabel={t('questionary:symptoms.options.addOther')}
-            otherPlaceholder={t('questionary:symptoms.addOtherPlaceholder')}
-            excludableValue="none"
+            excludableValues={['none']}
           />
         )}
       />
@@ -192,19 +200,15 @@ const Step4a = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
       <Portal>
-        {metadata && (
-          <QuestionStepIndicator>
-            {metadata.current} {t('questionary:stepOf')} {metadata.total}
-          </QuestionStepIndicator>
-        )}
         <WizardButtons
           leftLabel={t('questionary:nextButton')}
           leftHandler={handleSubmit(onSubmit)}
+          leftDisabled={!isValid}
           invert
         />
       </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

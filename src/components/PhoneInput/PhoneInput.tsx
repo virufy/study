@@ -14,7 +14,7 @@ export interface PhoneInputProps {
   placeholder?: string;
 }
 
-const getTelephonePrefix = (country: string) => countryData.find((element: CountryDataProps) => element.val === country)?.telephonePrefix || '';
+const getTelephonePrefix = (country: string) => countryData.find((element: CountryDataProps) => element.value === country)?.telephonePrefix || '';
 
 const PhoneInput = React.memo(({
   id, value, onChange, country, placeholder,

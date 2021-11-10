@@ -14,21 +14,23 @@ import * as Yup from 'yup';
 import { updateAction } from 'utils/wizard';
 
 // Components
-import ProgressIndicator from 'components/ProgressIndicator';
 import Recaptcha from 'components/Recaptcha';
 
-// Header Control
+// Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import { getPatientId } from 'helper/stepsDefinitions';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmit } from 'helper/submitHelper';
+import { doSubmitPatientQuestionnaire } from 'helper/patientHelper';
 
 // Styles
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionStepIndicator, GrayExtraInfo, TempBeforeSubmitError,
+  QuestionText, TempBeforeSubmitError, MainContainer,
+  QuestionAllApply,
 } from '../style';
 
 const schema = Yup.object({
@@ -47,10 +49,11 @@ const Step6 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const patientId = getPatientId();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -89,6 +92,20 @@ const Step6 = ({
     }
   };
 
+  const onSubmitPatientQuestionnaire = async (values: Step6Type) => {
+    if (values) {
+      await doSubmitPatientQuestionnaire({
+        setSubmitError: s => setSubmitError(!s ? null : t(s)),
+        state,
+        captchaValue,
+        action,
+        nextStep,
+        setActiveStep,
+        history,
+      });
+    }
+  };
+
   /*  */
 
   const handleDoBack = React.useCallback(() => {
@@ -102,9 +119,10 @@ const Step6 = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText'));
+    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
   // const onSubmit = async (values: Step6Type) => {
@@ -118,15 +136,12 @@ const Step6 = ({
   // };
 
   return (
-    <>
-      <ProgressIndicator currentStep={metadata?.progressCurrent || 3} totalSteps={metadata?.progressTotal || 4} />
-
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
-      <QuestionText bold={false}>
+    <MainContainer>
+      <QuestionText extraSpace first>
         <Trans i18nKey="questionary:medical.question">
-          <strong>Which of the below medical conditions do you currently have?</strong> (Select all that apply)
+          <strong>Which of the below medical conditions do you currently have?</strong>
         </Trans>
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -134,50 +149,80 @@ const Step6 = ({
         defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
+            isCheckbox
             value={value}
             onChange={v => onChange(v)}
             items={[
               {
-                value: 'chronicLungDisease',
-                label: t('questionary:medical.options.chronicLung'),
+                value: 'none',
+                label: t('questionary:medical.options.none'),
+              },
+              {
+                value: 'allergies',
+                label: t('questionary:medical.options.allergies'),
+              },
+              {
+                value: 'asthma',
+                label: t('questionary:medical.options.asthma'),
+              },
+              {
+                value: 'bronchitis',
+                label: t('questionary:medical.options.bronchitis'),
               },
               {
                 value: 'congestiveHeartFailure',
                 label: t('questionary:medical.options.congestiveHeart'),
               },
               {
-                value: 'coughFromOtherMedicalConditions',
-                label: t('questionary:medical.options.cough'),
+                value: 'copdEmphysema',
+                label: t('questionary:medical.options.emphysema'),
               },
               {
                 value: 'extremeObesity',
                 label: t('questionary:medical.options.obesity'),
               },
               {
+                value: 'heartDisease',
+                label: t('questionary:medical.options.heartDisease'),
+              },
+              {
                 value: 'hivAidsOrImpairedImmuneSystem',
                 label: t('questionary:medical.options.hiv'),
+              },
+              {
+                value: 'lungCancer',
+                label: t('questionary:medical.options.lungCancer'),
+              },
+              {
+                value: 'otherChronic',
+                label: t('questionary:medical.options.otherChronic'),
+              },
+              {
+                value: 'pneumonia',
+                label: t('questionary:medical.options.pneumonia'),
               },
               {
                 value: 'pulmonaryFibrosis',
                 label: t('questionary:medical.options.pulmonary'),
               },
               {
-                value: 'pregnancy',
-                label: t('questionary:medical.options.pregnancy'),
+                value: 'reflux',
+                label: t('questionary:medical.options.reflux'),
               },
               {
-                value: 'valvularHeartDisease',
-                label: t('questionary:medical.options.valvularHeart'),
+                value: 'sinusitis',
+                label: t('questionary:medical.options.sinusitis'),
               },
               {
-                value: 'none',
-                label: t('questionary:medical.options.none'),
+                value: 'tuberculosis',
+                label: t('questionary:medical.options.tuberculosis'),
+              },
+              {
+                value: 'other',
+                label: t('questionary:medical.options.other'),
               },
             ]}
-            allowAddOther
-            addOtherLabel={t('questionary:medical.options.addOther')}
-            otherPlaceholder={t('questionary:medical.addOtherPlaceholder')}
-            excludableValue="none"
+            excludableValues={['none']}
           />
         )}
       />
@@ -185,11 +230,6 @@ const Step6 = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
-          {metadata && (
-            <QuestionStepIndicator>
-              {metadata.current} {t('questionary:stepOf')} {metadata.total}
-            </QuestionStepIndicator>
-          )}
           { /* ReCaptcha  */}
           <Recaptcha onChange={setCaptchaValue} />
           {submitError && (
@@ -202,11 +242,11 @@ const Step6 = ({
             // leftLabel={t('questionary:proceedButton')}
             leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
             leftDisabled={!captchaValue || isSubmitting}
-            leftHandler={handleSubmit(onSubmit)}
+            leftHandler={patientId ? handleSubmit(onSubmitPatientQuestionnaire) : handleSubmit(onSubmit)}
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

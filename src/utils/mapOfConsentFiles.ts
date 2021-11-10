@@ -19,6 +19,16 @@ export const mapOfConsentFiles = {
       'default.html',
     ],
   },
+  Global: {
+    consentLang: [
+      'default.html',
+    ],
+  },
+  Greece: {
+    consentLang: [
+      'default.html',
+    ],
+  },
   Mexico: {
     consentLang: [
       'default.html',

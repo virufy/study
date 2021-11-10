@@ -2,46 +2,53 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { useStateMachine } from 'little-state-machine';
+import usePortal from 'react-useportal';
 
 // Components
 import StayInTouch from 'components/StayInTouch';
 import SocialIcons from 'components/SocialIcons';
-import Link from 'components/LinkGreen';
 import CreatedBy from 'components/CreatedBy';
+import WizardButtons from 'components/WizardButtons';
 
 // Utils
 import { resetStore } from 'utils/wizard';
 
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
-import { getSpeechContext } from 'helper/stepsDefinitions';
+import { getCountry, getSpeechContext } from 'helper/stepsDefinitions';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
 
 import {
-  BeforeSubmitText, ThankYouLayout, ThankYouLogo, ThankYouTitle, SubmissionIdBox,
+  BeforeSubmitText, ThankYouLayout, ThankYouTitle, SubmissionIdBox,
 } from './style';
 
 interface ThankYouLocation {
-  submissionId: string
+  submissionId: string;
+  patientId?: string;
 }
 
 const ThankYou = (p: Wizard.StepProps) => {
   const { t } = useTranslation();
 
+  const { Portal } = usePortal({
+    bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
+  });
+  const country = getCountry();
   const [, setActiveStep] = useState(true);
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const { action } = useStateMachine(resetStore());
 
   const history = useHistory();
   const location = useLocation<ThankYouLocation>();
 
   const submissionId = location.state?.submissionId;
+  const patientId = location.state?.patientId;
 
   React.useEffect(() => {
-    action({});
-  }, [action]);
+    if (!patientId) { action({}); }
+  }, [action, patientId]);
 
   const handleDoBack = useCallback(() => {
     if (p.previousStep) {
@@ -53,43 +60,69 @@ const ThankYou = (p: Wizard.StepProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleBackMain = React.useCallback(() => {
+    history.push(patientId ? '/Welcome/patientSummary' : '/Welcome');
+  }, [history, patientId]);
+
   useEffect(() => {
     scrollToTop();
     setTitle('');
+    setType('tertiary');
     setDoGoBack(null);
-  }, [handleDoBack, setDoGoBack, setTitle]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType]);
 
   return (
     <ThankYouLayout>
-      <Link to="http://www.virufy.org" target="_blank">
-        <ThankYouLogo />
-      </Link>
       <ThankYouTitle>{t('thankyou:title')}</ThankYouTitle>
-      <BeforeSubmitText>{t('thankyou:paragraph1', { context: getSpeechContext() })}</BeforeSubmitText>
+      {!patientId && <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>}
       {submissionId && (
         <SubmissionIdBox>
-          <Trans i18nKey="thankyou:paragraph2">
-            Your unique submission ID:
-            <br />
-            <strong>{{ submissionId }}</strong>
-          </Trans>
+          {country === 'Colombia' ? (
+            <Trans i18nKey="thankyou:paragraph2Patient">
+              Your unique patient ID:
+              <br />
+              <strong>{{ patientId }}</strong>
+            </Trans>
+          ) : (
+            <Trans i18nKey="thankyou:paragraph2">
+              Your unique submission ID:
+              <br />
+              <strong>{{ submissionId }}</strong>
+            </Trans>
+          )}
         </SubmissionIdBox>
       )}
-      <BeforeSubmitText>
-        <Trans i18nKey="thankyou:paragraph3">
-          Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized
-          data in future.
-          <br /><br />
-          If you later develop symptoms such as cough, fever, or shortness of breath, please come back to resubmit your
-          latest cough sounds.
-        </Trans>
-      </BeforeSubmitText>
+      {!patientId
+      && (
+        <>
+          <BeforeSubmitText>
+            <Trans i18nKey="thankyou:paragraph3">
+              Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized
+              data in future.
+              <br /><br />
+              If you later develop symptoms such as cough, fever, or shortness of breath, please come
+              back to resubmit your
+              latest cough sounds.
+            </Trans>
+          </BeforeSubmitText>
 
-      <StayInTouch />
+          <StayInTouch />
 
-      <SocialIcons />
+          <SocialIcons />
 
-      <CreatedBy inline={false} color="#00A588" mt="72px" />
+          <CreatedBy inline={false} mt="72px" />
+        </>
+      )}
+      {patientId && (
+        <Portal>
+          <WizardButtons
+            leftLabel={t('thankyou:returnMain')}
+            leftHandler={handleBackMain}
+            invert
+          />
+        </Portal>
+      )}
+
     </ThankYouLayout>
   );
 };

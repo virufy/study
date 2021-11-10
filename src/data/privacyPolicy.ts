@@ -1,12 +1,13 @@
 export const privacyPolicy = {
-  Argentina: 'https://virufy.org/ar/privacy_policy.pdf',
-  Bolivia: 'https://virufy.org/bo/privacy_policy.pdf',
-  Brazil: 'https://virufy.org/br/privacy_policy.pdf',
-  Colombia: 'https://virufy.org/co/privacy_policy.pdf',
-  Peru: 'https://virufy.org/pe/privacy_policy.pdf',
-  Mexico: 'https://virufy.org/mx/privacy_policy.pdf',
-  Pakistan: 'https://virufy.org/eu/privacy_policy.pdf',
-  'United States': 'https://virufy.org/us/privacy_policy.pdf',
+  Argentina: 'https://virufy.org/en/privacy_policy/',
+  Bolivia: 'https://virufy.org/en/privacy_policy/',
+  Brazil: 'https://virufy.org/en/privacy_policy/',
+  Colombia: 'https://virufy.org/en/privacy_policy/',
+  Greece: 'https://virufy.org/en/privacy_policy/',
+  Peru: 'https://virufy.org/en/privacy_policy/',
+  Mexico: 'https://virufy.org/en/privacy_policy/',
+  'United States': 'https://virufy.org/en/privacy_policy/',
+  Global: 'https://virufy.org/en/privacy_policy/',
 };
 
 declare global {

@@ -1,69 +1,288 @@
 {
   "main": {
-    "title": "Formulario de Recolección de datos sobre la tos de COVID-19",
-    "logoIntro": "Una organización independiente de investigación sin ánimo de lucro",
-    "note": "<strong>Por favor, tenga en cuenta:</strong> Este formulario es sólo para recopilar datos. No predice su estado de COVID-19 ni diagnostica ninguna enfermedad, trastorno u otra condición de salud. Virufy está llevando a cabo una investigación y utilizará la información que usted proporcione sólo para esa investigación. Virufy no sustituirá a un médico y le recuerda que es su responsabilidad buscar el consejo de su médico.",
-    "paragraph1": "Bienvenido. Este estudio sólo debería tomarle unos 5 minutos en completarse.",
-    "selectYourLanguage": "Por favor, seleccione su idioma.",
-    "paragraph2": "Nuestro estudio actualmente está abierto sólo a personas dentro de los países y/o territorios listados debajo. Por favor confirme que está dentro del territorio de alguno de estos países.",
+    "Brazil": "Brasil",
+    "title": "Formulario para la recolección de datos sobre la tos de la COVID-19",
+    "logoIntro": "Una organización de investigación independiente sin ánimo de lucro",
+    "note": "<strong>Por favor, tenga en cuenta:</strong> Este formulario es solo para recopilar datos. No diagnostica su estado de COVID-19 ni ninguna enfermedad, trastorno u otro problema de salud. Virufy está llevando a cabo una investigación y utilizará la información que usted proporcione solamente para esa investigación. Virufy no sustituye a un médico y le recuerda que es su responsabilidad buscar asesoría médica profesional.",
+    "paragraph1": "¡Bienvenido(a)! Solo debería tomarle unos 5 minutos en completar este formulario.",
+    "selectYourLanguage": "Idioma.",
+    "paragraph2": "Recolección de datos para la investigación sobre la tos de la COVID-19",
     "selectCountry": "Seleccione país",
     "selectRegion": "Seleccione region",
-    "patientId": "Si forma parte de un estudio clínico, ingrese su ID de paciente:",
-    "enterPatientId" : "Ingrese su ID de paciente", 
+    "region": "Región", 
+    "regionRequired": "Por favor ingresar una región",
+    "selectLocation": "Localización",
+    "patientId": "ID del paciente",
+    "hospitalId": "ID del hospital",
+    "enterPatientId" : "Ingresar ID del paciente", 
     "nextButton": "Siguiente",
     "createdBy": "Creado por",
-    "installApp": "Instala la aplicación en tu celular.",
-    "addToHomeScreen": "Agregar a la pantalla principal"
+    "installApp": "Instalar como aplicación",
+    "addToHomeScreen": "Agregar a la pantalla principal",
+    "hello": "Hola,",
+    "patient": "Paciente",
+    "questionnaire": "Cuestionario",
+    "audioCollection": "Recolección de audio",
+    "testResults" : "Resultados del test",
+    "supportedBy": "Apoyado por",
+    "visitWebsite": "Visite nuestra página web",
+    "errorCountry": "En este momento no podemos recoger tos de su región. Vuelva a consultarnos pronto!",
+    "noOptionsError": "No se encontraron opciones",
+    "noValueError": "No se encontraron resultados",
+    "countries": {
+      "Afghanistan":"Afganistán",
+      "Albania":"Albania",
+      "Algeria":"Argelia",
+      "Andorra":"Andorra",
+      "Angola":"Angola",
+      "Antigua and barbuda":"Antigua y Barbuda",
+      "Argentina":"Argentina",
+      "Armenia":"Armenia",
+      "Australia":"Australia",
+      "Austria":"Austria",
+      "Azerbaijan":"Azerbaiyán",
+      "Bahamas":"Bahamas",
+      "Bahrain":"Bahrein",
+      "Bangladesh":"Bangladesh",
+      "Barbados":"Barbados",
+      "Belarus":"Belarús",
+      "Belgium":"Bélgica",
+      "Belize":"Belice",
+      "Benin":"Benin",
+      "Bhutan":"Bhután",
+      "Bolivia ":"Bolivia",
+      "Bosnia and herzegovina":"Bosnia y Herzegovina",
+      "Botswana":"Botswana",
+      "Brazil":"Brasil",
+      "Brunei darussalam":"Brunei Darussalam",
+      "Bulgaria":"Bulgaria",
+      "Burkina faso":"Burkina Faso",
+      "Burundi":"Burundi",
+      "Cabo verde":"Cabo Verde",
+      "Cambodia":"Camboya",
+      "Cameroon":"Camerún",
+      "Canada":"Canadá",
+      "Central african republic":"República Centroafricana",
+      "Chad":"Chad",
+      "Chile":"Chile",
+      "China":"China",
+      "Colombia":"Colombia",
+      "Comoros":"Comoras",
+      "Congo":"Congo",
+      "Cook islands":"Islas Cook",
+      "Costa rica":"Costa Rica",
+      "Croatia":"Croacia",
+      "Cuba":"Cuba",
+      "Cyprus":"Chequia",
+      "Czechia":"Chipre",
+      "Ivory Coast":"Costa de Marfil",
+      "Democratic republic of korea":"República Democrática de Corea",
+      "Democratic republic of the congo":"República Democrática del Congo",
+      "Denmark":"Dinamarca",
+      "Djibouti":"Djibouti",
+      "Dominica":"Dominica",
+      "Dominican republic":"República Dominicana",
+      "Ecuador":"Ecuador",
+      "Egypt":"Egipto",
+      "El salvador":"El Salvador",
+      "Equatorial guinea":"Guinea Ecuatorial",
+      "Eritrea":"Eritrea",
+      "Estonia":"Estonia",
+      "Eswatini":"Eswatini",
+      "Ethiopia":"Etiopía",
+      "Faroe islands":"Islas Feroe",
+      "Fiji":"Fiji",
+      "Finland":"Finlandia",
+      "France":"Francia",
+      "Gabon":"Gabón",
+      "Gambia":"Gambia",
+      "Georgia":"Georgia",
+      "Germany":"Alemania",
+      "Ghana":"Ghana",
+      "Greece":"Grecia",
+      "Grenada":"Granada",
+      "Guatemala":"Guatemala",
+      "Guinea":"Guinea",
+      "Guinea-bissau":"Guinea-Bissau",
+      "Guyana":"Guyana",
+      "Haiti":"Haití",
+      "Honduras":"Honduras",
+      "Hungary":"Hungría",
+      "Iceland":"Islandia",
+      "India":"India",
+      "Indonesia":"Indonesia",
+      "Iran":"Irán ",
+      "Iraq":"Iraq",
+      "Ireland":"Irlanda",
+      "Israel":"Israel",
+      "Italy":"Italia",
+      "Jamaica":"Jamaica",
+      "Japan":"Japón",
+      "Jordan":"Jordania",
+      "Kazakhstan":"Kazajstán",
+      "Kenya":"Kenya",
+      "Kiribati":"Kiribati",
+      "Kuwait":"Kuwait",
+      "Kyrgyzstan":"Kirguistán",
+      "Lao democratic republic":"República Democrática Lao",
+      "Latvia":"Letonia",
+      "Lebanon":"Líbano",
+      "Lesotho":"Lesotho",
+      "Liberia":"Liberia",
+      "Libya":"Libia",
+      "Lithuania":"Lituania",
+      "Luxembourg":"Luxemburgo",
+      "Madagascar":"Madagascar",
+      "Malawi":"Malawi",
+      "Malaysia":"Malasia",
+      "Maldives":"Maldivas",
+      "Mali":"Malí",
+      "Malta":"Malta",
+      "Marshall islands":"Islas Marshall",
+      "Mauritania":"Mauritania",
+      "Mauritius":"Mauricio",
+      "Mexico":"México",
+      "Micronesia":"Micronesia",
+      "Monaco":"Mónaco",
+      "Mongolia":"Mongolia",
+      "Montenegro":"Montenegro",
+      "Morocco":"Marruecos",
+      "Mozambique":"Mozambique",
+      "Myanmar":"Myanmar",
+      "Namibia":"Namibia",
+      "Nauru":"Nauru",
+      "Nepal":"Nepal",
+      "Netherlands":"Países Bajos",
+      "New zealand":"Nueva Zelanda",
+      "Nicaragua":"Nicaragua",
+      "Niger":"Níger",
+      "Nigeria":"Nigeria",
+      "Niue":"Niue",
+      "North macedonia":"Macedonia del Norte",
+      "Norway":"Noruega",
+      "Oman":"Omán",
+      "Pakistan":"Pakistán",
+      "Palau":"Palau",
+      "Palestine":"Palestina",
+      "Panama":"Panamá",
+      "Papua new guinea":"Papua Nueva Guinea",
+      "Paraguay":"Paraguay",
+      "Peru":"Perú",
+      "Philippines":"Filipinas",
+      "Poland":"Polonia",
+      "Portugal":"Portugal",
+      "Qatar":"Qatar",
+      "Republic of korea":"República de Corea",
+      "Republic of moldova":"República de Moldova",
+      "Romania":"Rumania",
+      "Russian federation":"Federación de Rusia",
+      "Rwanda":"Rwanda",
+      "Saint kitts and nevis":"Saint Kitts y Nevis",
+      "Saint lucia":"Santa Lucía",
+      "Saint vincent and the grenadines":"San Vicente y las Granadinas",
+      "Samoa":"Samoa",
+      "San marino":"San Marino",
+      "Sao tome and principe":"Santo Tomé y Príncipe",
+      "Saudi arabia":"Arabia Saudita",
+      "Senegal":"Senegal",
+      "Serbia":"Serbia",
+      "Seychelles":"Seychelles",
+      "Sierra leone":"Sierra Leona",
+      "Singapore":"Singapur",
+      "Slovakia":"Eslovaquia",
+      "Slovenia":"Eslovenia",
+      "Solomon islands":"Islas Salomón",
+      "Somalia":"Somalia",
+      "South africa":"Sudáfrica",
+      "South sudan":"Sudán del Sur",
+      "Spain":"España",
+      "Sri lanka":"Sri Lanka",
+      "Sudan":"Sudán",
+      "Suriname":"Suriname",
+      "Sweden":"Suecia",
+      "Switzerland":"Suiza",
+      "Syrian arab republic":"República Árabe Siria",
+      "Tajikistan":"Tayikistán",
+      "Thailand":"Tailandia",
+      "Timor-leste":"Timor-Leste",
+      "Togo":"Togo",
+      "Tokelau":"Tokelau",
+      "Tonga":"Tonga",
+      "Trinidad and tobago":"Trinidad y Tabago",
+      "Tunisia":"Túnez",
+      "Turkey":"Turquía",
+      "Turkmenistan":"Turkmenistán",
+      "Tuvalu":"Tuvalu",
+      "Uganda":"Uganda",
+      "Ukraine":"Ucrania",
+      "United arab emirates":"Emiratos Árabes Unidos",
+      "United kingdom":"Reino Unido",
+      "United republic of tanzania":"República Unida de Tanzanía",
+      "United States":"Estados Unidos de América",
+      "Uruguay":"Uruguay",
+      "Uzbekistan":"Uzbekistán",
+      "Vanuatu":"Vanuatu",
+      "Venezuela":"Venezuela ",
+      "Vietnam":"Vietnam",
+      "Yemen":"Yemen",
+      "Zambia":"Zambia",
+      "Zimbabwe":"Zimbabwe"
+    }
   },
   "helpVirufy": {
-    "title": "Acerca de Virufy",
+    "title": "Sobre nosotros",
     "ourSupporters": "Nuestros colaboradores",
-    "aboutParagraph": "<p>Virufy es una organización sin ánimo de lucro que está trabajando para desarrollar los medios para utilizar la inteligencia artificial (Al) para detectar el COVID-19 a partir de los patrones de tos de forma rápida y sin coste alguno mediante el uso de un teléfono inteligente.</p><p>Nuestro equipo está formado por investigadores de 25 países y nos centramos en los países de bajos ingresos. Nuestra investigación ha demostrado que la tecnología Al puede ser capaz de identificar la firma única de la tos de COVID.</p><p>Mediante la recopilación de grabaciones de tos de personas de todo el mundo, Virufy está mejorando la solidez de su algoritmo de IA para reconocer el patrón de sonido único de COVID.</p><p>Usted tiene el poder de ayudar a beneficiar a millones de personas en todo el mundo contribuyendo con su tos en nuestro estudio.</p>",
+    "introParagraph": "Bienvenido a nuestro estudio. Sólo le llevará unos 5 minutos completarlo. Antes de empezar, vamos a discutir lo que vamos a cubrir:",
+    "aboutParagraph": "<0>Virufy es una <strong>organización sin ánimo de lucro</strong> que está trabajando para desarrollar medios que utilicen la <strong>inteligencia artificial (IA) para detectar la COVID-19 a partir de los patrones de tos</strong>, de forma rápida y sin costo alguno, mediante el uso de dispositivos electrónicos en beneficio de los países de bajos ingresos.</0><1>Nuestro equipo incluye investigadores de más de <strong>25 países. </strong> <3>Nuestra investigación</3> ha demostrado que la tecnología de IA puede ser capaz de identificar la firma única de la tos de la COVID.</1><2>Al recopilar <strong>grabaciones de tos</strong> de personas de todo el mundo, Virufy está mejorando la solidez de su algoritmo de IA para reconocer el patrón de sonido único de la COVID. </2><3><strong>En sus manos está el poder</strong> para ayudar a que millones de personas de todo el mundo se beneficien de nuestra investigación <strong>contribuyendo con su tos</strong>.</3>",
+    "bulletsIntro":"<strong>Introducción: </strong>Acerca de nosotros y recordatorios de seguridad",
+    "bulletCough": "<strong>Toser en el teléfono</strong>",
+    "bulletQuestions": "<strong>Preguntas rápidas de salud</strong>",
     "nextButton": "Siguiente"
   },
   "consent": {
-    "title": "Consentimiento para el estudio",
-    "paragraph1": "Virufy se preocupa por su privacidad y está asesorado por expertos en privacidad de datos con licencia. La información y las grabaciones que proporciones sólo se utilizarán para los fines descritos en nuestra <1>Política de Privacidad</1> y nuestro Formulario de Consentimiento. Por favor, lea el <3>Formulario de Consentimiento:</3>",
-    "paragraph2Title": "Consentimiento explícito de Virufy para recoger información personal y participar en la investigación",
-    "paragraph2": "\"Recopilación de datos de smartphones para la detección de COVID-19\"",
-    "paragraph3": "Al marcar las casillas que aparecen a continuación, usted otorga su consentimiento explícito, libre e informado a Virufy para que recopile, procese y comparta su información para los fines indicados anteriormente y como se indica con mayor detalle en nuestra <1>Política de Privacidad</1>. Puede imprimir una copia de este Formulario de Consentimiento para sus registros personales accediendo a <3>este archivo PDF</3>.", 
-    "paragraph3_brazil": "Si se encuentra dentro del territorio nacional brasileño, y para los efectos de la Ley General de Protección de Datos Personales (\"LGPD\"), el \"consentimiento\", en su pronunciamiento libre, informado e inequívoco, será la base legal sobre la cual procesamos la información personal.",
-    "certify": "Certifico que tengo al menos 18 años y estoy de acuerdo con los términos del Formulario de Consentimiento.",
-    "agree": "He leído, entendido y acepto los términos de la <1>Política de Privacidad</1> de Virufy.",
+    "title": "Consentimiento para la investigación",
+    "paragraph1": "Virufy se preocupa por su privacidad y está asesorado por expertos legales materia de privacidad de datos. La información y las grabaciones que proporcione solo se utilizarán para los fines descritos en nuestra <1>política de privacidad</1> y nuestro formulario de consentimiento. Por favor, lea el formulario de consentimiento:",
+    "paragraph2Title": "Consentimiento explícito para la recopilación de información personal y participación en la investigación",
+    "paragraph2": "\"Recopilación de datos personales de audio a través de dispositivos electrónicos para el cribado de la COVID-19\"",
+    "paragraph3": "Al marcar las casillas de abajo, usted reconoce que ha leído y entendido la política de privacidad de Virufy y que está otorgando su consentimiento explícito, libre e informado a Virufy para recopilar, procesar y compartir su información biométrica y de salud según se indica a continuación.", 
+    "certifyBrazil": "Certifico que tengo al menos 18 años y acepto los términos de este formulario de consentimiento, autorizando expresamente la recogida y el tratamiento de mis datos personales, biométricos y de salud.",
+    "certify": "Certifico que tengo al menos 18 años y estoy de acuerdo con los términos del formulario de consentimiento.",
+    "agree": "He leído, entendido y acepto los términos de la <1>política de privacidad</1> de Virufy.",
+    "collection": "Doy mi consentimiento expreso para la recogida y el tratamiento de mis datos personales, biométricos y de salud.",
     "detection": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para la investigación y compilación de un conjunto de datos necesarios para el desarrollo de algoritmos de inteligencia artificial para la detección de COVID-19 basada en dispositivos.",
     "signs": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para entrenar algoritmos de inteligencia artificial para analizar grabaciones de audio para determinar mejor los signos de COVID-19.",
-    "collection": "Por la presente, doy mi consentimiento expreso para la recogida, el tratamiento y la transferencia de mis datos personales, biométricos y de salud.",
+    "biometric": "Por la presente, doy mi consentimiento expreso para que se compartan mis datos personales, biométricos y de salud con terceros, tal y como se describe en este Formulario de Consentimiento y/o en la Política de Privacidad de Virufy.",
     "pleaseConfirm": "Por favor, confirme lo siguiente:",
     "nextButton": "Siguiente",
     "jumpToBottom": "Saltar al final"
   },
   "beforeStart": {
-    "title": "Por último, antes de empezar...",
+    "title": "Por último, antes de comenzar",
     "subtitle": "Para garantizar la seguridad, le aconsejamos:",
     "advise_list": [
-      "Utilizar su propio dispositivo para registrar la muestra de tos y usar una máscara cuando sea apropiado.",
-      "Desinfectar su dispositivo y cualquier superficie afectada o cercana después de registrar su tos.",
-      "Si tiene una afección subyacente que aumente el riesgo de toser, consulte con su proveedor de atención médica antes de participar.",
-      "Si tiene algún síntoma o alguna pregunta o preocupación sobre su estado de salud, póngase en contacto con su proveedor de atención médica.",
-      "Si cree que sus síntomas están empeorando, póngase en contacto con los servicios de emergencia médica locales o con el personal de primeros auxilios inmediatamente."
+      "Utilice su propio dispositivo y use un tapabocas cuando sea apropiado.",
+      "Desinfecte su dispositivo y cualquier superficie afectada o cercana después de grabar su tos/habla.",
+      "Si tiene una enfermedad subyacente en la que toser aumente los riesgos, por favor consulte con su profesional médico de cabecera antes de participar.",
+      "Si cree que sus síntomas empeoran, contacte a un profesional médico."
     ],
-    "startButton": "Comenzar"
+    "startButton": "Siguiente"
   },
   "recordingsIntroduction": {
     "recordCough": {
       "header": "Grabe su tos",
       "title": "Instrucciones",
-      "intro1": "Busque un <strong> entorno tranquilo </strong> al menos a <strong> 6 metros </strong> de distancia de los demás y use un paño o una mascarilla quirúrgica. Si se siente mal, siéntese.",
-      "intro2": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong> no obstruya </strong> ni cubra el dispositivo con plástico. No tosa violentamente o con demasiada fuerza."
+      "intro1": "Busque un <strong>entorno tranquilo</strong>, al menos a <strong>6 metros </strong> de distancia de los demás, y utilice una mascarilla quirúrgica o de tela. Si se siente mal, siéntese.",
+      "intro2": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No tosa violentamente o con demasiada fuerza."
     },
     "recordSpeech": {
       "header": "Grabe su voz",
-      "intro1": "¡El sonido de su voz también puede ayudarnos a aprender cómo suena el COVID! Por favor, presione para grabar y cuente claramente del uno al diez."
+      "intro1": "¡El sonido de su voz también puede ayudarnos a aprender cómo suena la COVID! Por favor, haga clic para grabar y cuente claramente del uno al diez."
     },
     "next": "Siguiente",
-    "releaseButtonStart": "Suelte para empezar a grabar",
-    "releaseButtonStop": "Suelte para detener la grabación",
-    "shortRecording": "Por favor, haga una grabación de al menos 3 segundos"
+    "retryButton": "Reintentar",
+    "releaseButtonStart": "Haga clic para empezar a grabar",
+    "releaseButtonStop": "Haga clic para detener la grabación",
+    "shortRecording": "Por favor, haga una grabación de al menos 5 segundos"
   },
   "recordingsRecord": {
     "recordCough": {
@@ -74,93 +293,125 @@
     },
     "next": "Continuar",
     "delete": "Borrar",
-    "text": "Toca el botón del micrófono y <strong>tose intencionadamente</strong> en la parte inferior del teléfono <strong>3 veces</strong> con una <strong>respiración profunda</strong> entre cada tos. Cuando hayas terminado, toca el botón de pausa.",
-    "textCount": "Haga clic en el botón del micrófono y <strong> tosa intencionadamente </strong> en la parte inferior de su teléfono <strong> 3 veces </strong> con una <strong> respiración profunda </strong> entre cada tos. Cuando haya terminado, haga clic en el botón de pausa.",
-    "upload": "Sube tu propio archivo"
+    "textCough": "Haga clic en el botón de grabación (el micrófono) y <strong>tosa intencionalmente tres veces, con una respiración profunda entre cada tos</strong>, dirigiendo su tos a la parte inferior de su dispositivo. Cuando haya terminado, haga clic en el botón de detener (stop)",
+    "textSpeech": "Haga clic en el botón de grabación (micrófono) y <strong>diga un “aaah” sostenido durante al menos 5 segundos.</strong> Cuando haya terminado, haga clic en el botón de detener",
+    "textNext": "Haga clic en Continuar para seguir adelante",
+    "textCount": "Haga clic en el botón de grabación (el micrófono) y <strong>cuente claramente del uno (1) al diez (10)</strong>. Cuando haya terminado, haga clic en el botón de pausa.",
+    "upload": "Suba su propio archivo",
+    "record": "Grabar",
+    "recordStop": "Detener"
   },
   "recordingsRecordManual": {
     "header": "Subir un archivo",
-    "addFile": "Añada su archivo",
+    "addFile": "Añadir un archivo",
     "constraint": "Añada hasta 5 MB",
     "next": "Hecho",
-    "micError": "¿No puede acceder al micrófono?",
+    "micError": "¿No puede acceder al micrófono? Suba un archivo de audio (.wav/.wave/.mp3/.ogg)",
     "micErrorDescription": "Por favor, suba un archivo de audio aquí.",
     "fileDurationTooShort": "Por favor, suba un archivo de al menos 3 segundos",
     "fileSizeTooBig": "Por favor, suba un archivo de menos de 5 MB",
-    "fileRequired": "Por favor, suba un archivo"
+    "fileRequired": "Por favor, suba un archivo",
+    "uploadFile": "Subir Archivo"
   },
   "recordingsListen": {
     "recordCough": {
       "header": "Grabe su tos",
-      "intro1": "Por favor, tosa lejos de las personas a tu alrededor. Si se siente enfermo, por favor siéntese.",
-      "intro2": "En un ambiente silencioso, por favor presione el botón de grabar y tosa intencionalmente de 3 a 5 veces."
+      "intro1": "Busque un entorno tranquilo que esté a 6 metros de los demás",
+      "intro2": "Use un tapabocas quirurgico o de tela y sostenga el dispositivo a 30-60 cm de distancia de su cara"
     },
     "recordSpeech": {
       "header": "Grabe su voz",
-      "intro1": "¡El sonido de su voz también puede ayudarnos a aprender cómo suena el COVID! Por favor, presione para grabar y cuente claramente del uno al diez."
+      "intro1": "¡El sonido de su voz también puede ayudarnos a aprender cómo suena la COVID! Por favor, haga clic para grabar y cuente claramente del uno (1)  al diez (10)."
     },
-    "title": "Grabación enviada",
-    "subtitle": "Siéntase libre de escuchar la grabación.",
-    "next": "Hecho"
+    "title": "Carga completa",
+    "subtitle": "Si lo desea, puede escuchar su grabación.",
+    "next": "Continuar",
+    "retake": "Volver a grabar"
   },
   "questionary": {
-    "headerText": "Responda preguntas cortas",
-    "title": "¡Vamos a responder algunas preguntas!",
-    "caption": "Por favor, contesta lo mejor que puedas.",
+    "headerText": "Preguntas",
+    "title": "¡Vamos a responder unas breves preguntas!",
+    "caption": "Por favor, conteste de la mejor manera posible.",
+    "allThatApply": "(seleccione todas las que correspondan)",
     "testTaken": {
-      "question": "¿Cuáles de los siguientes tests para COVID-19 se ha hecho?",
+      "question": "¿Cuáles de las siguientes pruebas para detectar la COVID-19 se ha hecho?",
       "options": {
-        "pcr": "Test basado en PCR (por ejemplo, con un hisopo nasal o bucal)",
-        "antibody": "Test de anticuerpos (por ejemplo, pinchazo en el dedo o extracción de sangre)",
-        "neither": "Ninguno",
-        "antigen": "Test de antígenos (por ejemplo, con un hisopo nasal o bucal)"
+        "pcr": "Prueba PCR",
+        "antibody": "Prueba de anticuerpos",
+        "unsure": "No está seguro(a)",
+        "antigen": "Prueba de antígenos",
+        "neither": "Ninguno"
       }
+    },
+    "patient":{
+      "resultPcrTest":{
+        "question": " Cuál fue el resultado del test de COVID-19 basado en PCR del paciente <1><0>{{patientId}}</0></1>?"
+      },
+      "resultAntigenTest": "Cuál fue el resultado del test de anticuerpos para COVID-19 del paciente <1><0>{{patientId}}</0></1>?"
     },
     "headerText2": "Pregunta para ampliar",
-    "whenPcrTest": "¿Cuándo se hizo el test de COVID-19 basado en PCR? Por favor, estime si no está seguro.",
+    "whenPcrTest": "¿Cuándo se hizo la prueba PCR para detectar la COVID-19? Por favor, haga una aproximación si no está seguro(a).",
     "resultPcrTest": {
-      "question": "Cuál fue el resultado de su test de COVID-19 basado en PCR?",
+      "question": "¿Cuál fue el resultado de su prueba PCR de COVID-19?",
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Pendiente"
+        "pending": "Pendiente",
+        "unsure": "Inseguro"
       }
     },
-    "whenAntibodyTest": "¿Cuándo se hizo el test de anticuerpos para COVID-19? Por favor, si no está seguro, estime.",
+    "whenAntibodyTest": "¿Cuándo se hizo la prueba de anticuerpos para detectar la COVID-19? Por favor, si no está seguro(a), haga una aproximación.",
     "resultAntibodyTest": {
-      "question": "Cuál fue el resultado de su test de anticuerpos para COVID-19?",
+      "question": "¿Cuál fue el resultado de su prueba de anticuerpos de COVID-19?",
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Pendiente"
+        "pending": "Pendiente",
+        "unsure": "Inseguro"
       }
     },
     "whenAntigenTest": "¿Cuándo se hizo el test de antígenos para COVID-19? Por favor, si no está seguro, estime.",
     "resultAntigenTest": {
-      "question": "Cuál fue el resultado de su test de antígenos para COVID-19?",
+      "question": "¿Cuál fue el resultado de su test de antígenos para COVID-19?",
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
-        "pending": "Pendiente"
+        "pending": "Pendiente",
+        "unsure": "Inseguro"
       }
     },
-    "ageGroup": "Por favor, seleccione su grupo de edad.",
+    "vaccine": {
+      "question": "¿Ha recibido la vacuna de COVID-19?",
+      "options":{
+        "yes": "Si",
+        "no": "No"
+      }
+    },
+    "age": "Edad:",
+    "ageGroup": "Por favor, ingrese su edad.",
+    "enterAge": "Ingrese su edad",
+    "50+": "50 y más",
     "unselectedAgeGroup": "Seleccione el grupo de edad",
     "gender": {
-      "question": "Cuál es su identidad de género?",
+      "gender": "Género: ",
+      "question": "¿Cuál es su identidad de género?",
+      "note": "¿Cómo te describes a ti mismo?",
       "options": {
         "male": "Masculino",
         "female": "Femenino",
         "notToSay": "Prefiero no decirlo",
+        "other": "Otro",
+        "transgender": "Transgénero",
         "selfDescribe": "Prefiero autodescribirme"
       }
     },
     "biologicalSex": {
       "question": "¿Cuál es su sexo biológico?",
-      "note": "El sonido de la voz de los hombres y las mujeres varía. Esto es importante para que la IA ayude a detectar el COVID-19.",
+      "note": "¿Qué sexo se le asignó al nacer, en su certificado de nacimiento original? Esta información es importante para que la IA ayude a detectar el COVID-19, ya que el sonido de la voz varía según el sexo.",
       "options": {
         "male": "Masculino",
-        "female": "Femenino"
+        "female": "Femenino",
+        "notToSay": "Prefiero no decirlo"
       }
     },
     "smokeLastSixMonths": {
@@ -172,27 +423,37 @@
       }
     },
     "symptoms": {
-      "question": "<strong>¿Cuál de los siguientes síntomas tiene actualmente?</strong> (Seleccione todos los que correspondan)",
+      "question": "<strong>¿Cuál de los siguientes síntomas tiene actualmente?</strong>",
       "options": {
-        "bodyAches": "Dolores en el cuerpo",
+        "bodyAches": "Dolores corporales",
         "dryCough": "Tos (Seca)",
-        "wetCough": "Tos (húmeda con mocos)",
+        "wetCough": "Tos (húmeda, con mocos)",
         "feverChillsSweating": "Fiebre, escalofríos o sudor",
         "headaches": "Dolores de cabeza",
         "lossTasteOrSmell": "Pérdida del gusto y/o del olfato",
         "worseCough": "Tos nueva o que empeora",
+        "runnyNose": "Nariz que moquea",
         "breathShortness": "Dificultad para respirar",
         "soreThroat": "Dolor de garganta",
-        "chestTightness": "Opresión en el pecho",
+        "chestTightness": "Presión en el pecho",
         "vomitingAndDiarrhea": "Vómito y diarrea",
         "none": "Ninguno",
+        "weakness": "Debilidad",
+        "other": "Otro",
         "addOther": "+ Añadir otro"
       },
       "addOtherPlaceholder": "Otro síntoma"
     },
-    "symptomsDate": "¿Cuándo compenzó a tener tos, fiebre y/o falta de aliento? Por favor, estime si no está seguro",
+    "symptomsDate": "¿Hace cuántos días aproximadamente comenzaron estos síntomas?",
+    "enterDays": "Ingrese los días",
+    "options":{
+      "today": "Hoy",
+      "days": "1-3 días atrás",
+      "week": "Una semana atrás",
+      "overWeek": "Más de una semana atrás"
+    },
     "respiration": {
-      "question": "<strong>¿Cuál de las siguientes afecciones respiratorias tiene actualmente?</strong> (Seleccione todas las que correspondan)",
+      "question": "<strong>¿Cuál de las siguientes afecciones respiratorias tiene actualmente?</strong>",
       "options": {
         "asthma": "Asma",
         "bronchitis": "Bronquitis",
@@ -206,17 +467,25 @@
       "addOtherPlaceholder": "Otra condición"
     },
     "medical": {
-      "question": "<strong>¿Cuál de las siguientes condiciones médicas tiene usted actualmente?</strong> (Seleccione todas las que correspondan)",
+      "question": "<strong>¿Cuál de las siguientes condiciones médicas tiene usted actualmente?</strong>",
       "options": {
-        "chronicLung": "Enfermedad pulmonar crónica",
+        "allergies": "Alergias",
+        "asthma": "Asma",
+        "bronchitis": "Bronquitis",
         "congestiveHeart": "Insuficiencia cardíaca congestiva",
-        "cough": "Tos por otras condiciones médicas",
+        "emphysema": "EPOC/efisema",
         "obesity": "Obesidad extrema",
-        "hiv": "VIH, SIDA o sistema inmunológico deficiente",
+        "heartDisease": "Cardiopatía",
+        "hiv": "VIH, SIDA o sistema inmunológico deteriorado",
+        "lungCancer": "Cáncer de pulmón",
+        "otherChronic": "Otra enfermedad pulmonar crónica",
+        "pneumonia": "Neumonia",
         "pulmonary": "Fibrosis pulmonar",
-        "pregnancy": "Embarazo",
-        "valvularHeart": "Enfermedad cardíaca valvular",
+        "reflux": "Reflujo",
+        "sinusitis": "Sinusitis",
+        "tuberculosis": "Tuberculosis",
         "none": "Ninguna",
+        "other": "Otro",
         "addOther": "+ Añadir otra"
       },
       "addOtherPlaceholder": "Otra condición"
@@ -231,21 +500,23 @@
     "submitError": "Se produjo un error. Por favor, inténtelo de nuevo."
   },
   "thankyou": {
-    "title": "Gracias por su envío.",
-    "paragraph1_cough": "Su donación de tos acerca a Virufy un paso más a cambiar el mundo.",
-    "paragraph1_voice": "Su donación de tos y voz acercan a Virufy un paso más a cambiar el mundo.",
-    "paragraph2": "Su ID de envío:<br/><2>{{submissionId}}</2>",
-    "paragraph3": "Asegúrese de proteger esta identificación de envío, ya que la necesitará para solicitar a Virufy que elimine sus datos anónimos en el futuro. <br/><br/> Si más tarde presenta síntomas como tos, fiebre o dificultad para respirar, regrese para volver a enviar sus últimos sonidos de tos.",
-    "downloadApp": "Haga clic aquí para <1>Instale la aplicación.</1>",
-    "paragraph4": "¡Proporcione <1>comentarios</1> para mejorar nuestra aplicación y visite nuestro <3>sitio web</3>!",
-    "paragraph5": "Aprende más sobre Virufy con nuestras <1>noticias</1>!",
-    "returnButton": "Enviar otra grabación de tos"
+    "title": "Gracias por su participación.",
+    "paragraph1_cough": "Su donación de tos pone a Virufy un paso más cerca de cambiar el mundo.",
+    "paragraph1_voice": "Su donación de tos y voz ponen a Virufy un paso más cerca de cambiar el mundo.",
+    "paragraph2Patient": "Su identificación (ID) única de paciente:<br/><2>{{patientId}}</2>",
+    "paragraph2": "Su identificación (ID) única de participación:<br/><2>{{submissionId}}</2>",
+    "paragraph3": "Asegúrese de guardar la identificación de participación, ya que la necesitará para solicitar a Virufy que elimine sus datos anónimos en el futuro. <br/><br/> Si más tarde presenta síntomas como tos, fiebre o dificultad para respirar, regrese para volver a enviar sus últimos sonidos de tos.",
+    "downloadApp": "Haga clic aquí para <1>instalar la aplicación.</1>",
+    "paragraph4": "¡Déjenos sus <1>comentarios</1> para mejorar nuestra aplicación y visite nuestro <3>sitio web</3>!",
+    "paragraph5": "¡Aprenda más sobre Virufy con nuestras <1>noticias</1>!",
+    "returnButton": "Enviar otra grabación de tos",
+    "returnMain": "Volver al menú principal"
   },
   "footerReportProblems": {
     "message": "¿Algo mal? Reportar un problema"
   },
   "stayInTouch": {
-    "title": "Manténgase en contacto!",
+    "title": "¡Manténgase en contacto!",
     "cards": [
       {
         "title": "Donar",
@@ -259,21 +530,21 @@
         "title": "Más información",
         "description": "Visite nuestro sitio web para saber más sobre nosotros",
         "cta": {
-          "label": "Visite el sitio web",
+          "label": "Visitar el sitio web",
           "link": "https://virufy.org/"
         }
       },
       {
         "title": "Únete a nosotros",
-        "description": "Contribuye con tus habilidades en la lucha contra el COVID",
+        "description": "Contribuya con sus habilidades en la lucha contra la COVID-19",
         "cta": {
-          "label": "Solicite ahora",
+          "label": "Postular ahora",
           "link": "https://virufy.org/join"
         }
       }
     ]
   },
   "socialIcons": {
-    "title": "Sigue a Virufy"
+    "title": "Síganos"
   }
 }

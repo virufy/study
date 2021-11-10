@@ -1,59 +1,114 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTranslation, Trans } from 'react-i18next';
 import usePortal from 'react-useportal';
+import { isMobile } from 'react-device-detect';
 
-// Header Control
-import { useTranslation } from 'react-i18next';
-import useHeaderContext from 'hooks/useHeaderContext';
+// Form
+import { useForm, Controller } from 'react-hook-form';
+import { useStateMachine } from 'little-state-machine';
+import { yupResolver } from '@hookform/resolvers';
+import { ErrorMessage } from '@hookform/error-message';
+import * as Yup from 'yup';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
+import Link from 'components/Link';
+import Checkbox from 'components/Checkbox';
+import { BlackText } from 'components/Texts';
+
+// Update Action
+import { updateAction } from 'utils/wizard';
+
+// Header Control
+import useHeaderContext from 'hooks/useHeaderContext';
 
 // Hooks
-import useWindowSize from 'hooks/useWindowSize';
-
-// Theme
-import { colors } from 'theme';
+import useEmbeddedFile from 'hooks/useEmbeddedFile';
 
 // Utils
+import { buildConsentFilePath } from 'helper/consentPathHelper';
 import { scrollToTop } from 'helper/scrollHelper';
+
+// Data
+import { consentPdf } from 'data/consentPdf';
 
 // Styles
 import {
-  WelcomeLogo,
-  WelcomeTitle,
+  ContainerShapeDown,
+  InnerContainerShapeDown,
   WelcomeContent,
-  WelcomeSubtitle,
-  WelcomeItemList,
-  WelcomeItemListItem,
   WelcomeStyledFormAlternative,
+  WelcomeConsentForm,
+  CheckboxTitle,
 } from '../style';
 
-const defaultAdviseList = [
-  'Use your own device to record the cough sample and wear a mask when appropriate.',
-  'Disinfect your device and any affected or nearby surfaces after recording your cough.',
-  'If you have an underlying condition that increases your risk from coughing, please check with your healthcare provider before participating.',
-  'If you have any symptoms or any questions or concerns about your health condition, please contact your healthcare provider.',
-  'If you feel your symptoms are getting worse, please contact your local medical emergency services or first responders immediately.',
-];
+const schema = Yup.object().shape({
+  agreedConsentTerms: Yup.boolean().required().default(false).oneOf([true]),
+  agreedPolicyTerms: Yup.boolean().required().default(false).oneOf([true]),
+  agreedCovidCollection: Yup.boolean().when('$country', {
+    is: 'Global',
+    then: Yup.boolean().required().default(false).oneOf([true]),
+    otherwise: Yup.boolean().notRequired(),
+  }),
+  agreedCovidDetection: Yup.boolean().when('$country', {
+    is: 'Brazil',
+    then: Yup.boolean().notRequired(),
+    otherwise: Yup.boolean().required().default(false).oneOf([true]),
+  }),
+  agreedTrainingArtificial: Yup.boolean().required().default(false).oneOf([true]),
+  agreedBiometric: Yup.boolean().when('$country', {
+    is: 'Brazil',
+    then: Yup.boolean().notRequired(),
+    otherwise: Yup.boolean().required().default(false).oneOf([true]),
+  }),
+});
+
+type Step3Type = Yup.InferType<typeof schema>;
 
 const Step4 = (p: Wizard.StepProps) => {
-  const { width } = useWindowSize();
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
+  const [activeStep, setActiveStep] = React.useState(true);
+  const { setType, setDoGoBack, setSubtitle } = useHeaderContext();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeStep, setActiveStep] = useState(true);
-  const { setDoGoBack, setTitle, title } = useHeaderContext();
+  const { state, action } = useStateMachine(updateAction(p.storeKey));
 
-  const history = useHistory();
+  const store = state?.[p.storeKey];
 
-  const handleNext = React.useCallback(() => {
-    if (p.nextStep) {
-      history.push(p.nextStep);
+  const currentCountry: PrivacyPolicyCountry = useMemo(() => {
+    if (['Argentina', 'Bolivia', 'Colombia', 'Greece', 'Peru', 'Mexico', 'Brazil', 'United States'].includes(state.welcome.country)) {
+      return state.welcome.country;
     }
-  }, [history, p.nextStep]);
+    return 'Global';
+  }, [state.welcome.country]);
+
+  const {
+    control, handleSubmit, formState,
+  } = useForm({
+    defaultValues: store,
+    resolver: yupResolver(schema),
+    context: {
+      country: currentCountry,
+    },
+    mode: 'onChange',
+  });
+  const { errors, isValid } = formState;
+  const history = useHistory();
+  const { isLoadingFile, file: consentFormContent } = useEmbeddedFile(
+    buildConsentFilePath(currentCountry, state.welcome.language),
+  );
+
+  const onSubmit = async (values: Step3Type) => {
+    if (values) {
+      action(values);
+      if (p.nextStep) {
+        setActiveStep(false);
+        history.push(p.nextStep);
+      }
+    }
+  };
 
   const doBack = useCallback(() => {
     if (p.previousStep) {
@@ -65,61 +120,203 @@ const Step4 = (p: Wizard.StepProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    // Clear title if needed
-    if (title) setTitle('');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     scrollToTop();
     setDoGoBack(() => doBack);
-  }, [doBack, setDoGoBack]);
+    setType('secondary');
+    setSubtitle(t('consent:title'));
+  }, [doBack, setDoGoBack, setType, setSubtitle, t]);
 
-  const { t } = useTranslation();
-
-  const adviseList: string[] = t('beforeStart:advise_list', { returnObjects: true, defaultValue: defaultAdviseList });
+  const getCurrentCountryCheckbox = (country: PrivacyPolicyCountry) => {
+    if (country === 'Brazil') {
+      return 'pt';
+    }
+    if (country === 'Greece') {
+      return 'el';
+    }
+    if (country === 'Global' || country === 'United States') {
+      return 'en';
+    }
+    return 'es';
+  };
 
   return (
     <WelcomeStyledFormAlternative>
-      <WelcomeLogo />
+      <ContainerShapeDown isMobile={isMobile}>
+        <InnerContainerShapeDown>
+          <BlackText>
+            <Trans i18nKey="consent:paragraph1">
+              Virufy cares about your privacy and is advised by licensed data privacy experts.
+              The information and recordings you provide will only be used for the purposes described in our
+              Privacy Policy and consent form.
+              Please read the consent Form:
+            </Trans>
+          </BlackText>
+        </InnerContainerShapeDown>
+      </ContainerShapeDown>
+      <WelcomeContent>
+        <WelcomeConsentForm dangerouslySetInnerHTML={{ __html: isLoadingFile ? 'Loading...' : consentFormContent }} />
 
-      <WelcomeTitle
-        mt={width && width > 560 ? 38 : 36}
-        textAlign={width && width > 560 ? 'center' : 'left'}
-      >
-        {t('beforeStart:title')}
-      </WelcomeTitle>
+        <BlackText>
+          <Trans i18nKey="consent:paragraph3">
+            By checking the below boxes, you are granting your explicit, freely given, and informed consent to Virufy to
+            collect, process, and share your information for the purposes indicated above and as provided in greater
+            detail in our Privacy Policy. You can print
+            a copy of this Consent Form for your personal records by
+            accessing <Link to={consentPdf[currentCountry]} target="_blank">Consent Form</Link>
+          </Trans>
+        </BlackText>
 
-      <WelcomeContent mt={0}>
-        <WelcomeSubtitle
-          fontWeight={700}
-          fontColor={colors.darkBlack}
-          mb={width && width > 560 ? 11 : 1}
-          mt={width && width > 560 ? -10 : 0}
-          textAlign={width && width > 560 ? 'center' : 'left'}
-        >
-          {t('beforeStart:subtitle')}
-        </WelcomeSubtitle>
-      </WelcomeContent>
+        <CheckboxTitle>
+          {t('consent:pleaseConfirm', 'Please confirm the following:')}
+        </CheckboxTitle>
 
-      <WelcomeItemList>
-        {adviseList.map((advise, idx) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <WelcomeItemListItem key={`advise_${idx}`}>{advise}</WelcomeItemListItem>
-        ))}
-      </WelcomeItemList>
+        <Controller
+          control={control}
+          name="agreedConsentTerms"
+          defaultValue={false}
+          render={({ onChange, value }) => (
+            <Checkbox
+              id="Step2-ConsentTerms"
+              label={(currentCountry !== 'Brazil')
+                ? (
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:certify">
+                    I certify that I am at least 18 years old and agree to the terms of this Consent Form.
+                  </Trans>
+                ) : (
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:certifyBrazil">
+                    I certify that I am at least 18 years old and agree to the terms of this Consent Form,
+                    hereby expressly consenting to the collection and processing of my personal information,
+                    biometric information, and health information.
+                  </Trans>
+                )}
+              name="agreedConsentTerms"
+              onChange={e => onChange(e.target.checked)}
+              value={value}
+            />
+          )}
+        />
 
-      {activeStep && (
-        <Portal>
-          <WizardButtons
-            leftLabel={t('beforeStart:startButton')}
-            leftHandler={handleNext}
-            invert
+        <Controller
+          control={control}
+          name="agreedPolicyTerms"
+          defaultValue={false}
+          render={({ onChange, value }) => (
+            <Checkbox
+              id="Step2-PolicyTerms"
+              label={(
+                <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:agree">
+                  I agree to the terms of the Virufy Privacy Policy
+                </Trans>
+              )}
+              name="agreedPolicyTerms"
+              onChange={e => onChange(e.target.checked)}
+              value={value}
+            />
+          )}
+        />
+
+        {currentCountry === 'Global' && (
+          <Controller
+            control={control}
+            name="agreedCovidCollection"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-CollectionCovid"
+                label={(
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collection">
+                    I hereby expressly consent to the collection and
+                    processing of my personal information, biometric information, and health information.
+                  </Trans>
+            )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
           />
-        </Portal>
-      )}
+        )}
 
+        {currentCountry !== 'Brazil' && (
+          <Controller
+            control={control}
+            name="agreedCovidDetection"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-DetectionCovid"
+                label={(
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:detection">
+                    I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                    and, in particular but without limitation, for research and compiling a dataset needed for the
+                    development of artificial intelligence algorithms for device-based COVID-19 detection.
+                  </Trans>
+            )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
+          />
+        )}
+
+        <Controller
+          control={control}
+          name="agreedTrainingArtificial"
+          defaultValue={false}
+          render={({ onChange, value, name }) => (
+            <Checkbox
+              id="Step2-TrainingArtificial"
+              label={(
+                <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:signs">
+                  I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                  and, in particular but without limitation, for training artificial intelligence algorithms to
+                  analyze cough audio recordings to better determine signs of COVID-19.
+                </Trans>
+          )}
+              name={name}
+              onChange={e => onChange(e.target.checked)}
+              value={value}
+            />
+          )}
+        />
+        {currentCountry !== 'Brazil' && (
+          <Controller
+            control={control}
+            name="agreedBiometric"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-Biometric"
+                label={(
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:biometric">
+                    I hereby expressly consent to the sharing of my personal information,
+                    biometric information, and health information with third parties as described
+                    in this Consent Form and/or the Virufy Privacy Policy.
+                  </Trans>
+            )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
+          />
+        )}
+        <p><ErrorMessage errors={errors} name="name" /></p>
+        {activeStep && (
+          <Portal>
+            <WizardButtons
+              invert
+              leftLabel={t('consent:nextButton')}
+              leftHandler={handleSubmit(onSubmit)}
+              leftDisabled={!isValid}
+            />
+          </Portal>
+        )}
+      </WelcomeContent>
     </WelcomeStyledFormAlternative>
   );
 };

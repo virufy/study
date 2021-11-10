@@ -4,50 +4,267 @@
     "logoIntro": "An Independent Nonprofit Research Organization",
     "note": "<strong>Please note:</strong> This form is for data collection only. It will not predict your COVID-19 status or diagnose any disease, disorder, or other health condition. Virufy is conducting research and will use the information you provide for that research only. Virufy will not take place of a doctor and would like to remind you it is your responsibility to seek medical advice from your doctor.",
     "paragraph1": "Welcome! This study should only take about 5 minutes to complete.",
-    "selectYourLanguage": "Please select your language.",
-    "paragraph2": "Our study is currently only open to people within the below countries and/or territories. Please confirm that you are within one of these locations.",
+    "selectYourLanguage": "Language",
+    "paragraph2": "Covid-19 Cough Data Collection Study",
     "selectCountry": "Select country",
+    "region": "Region",
     "selectRegion": "Select region",
-    "patientId": "If you are part of a clinical study, please enter your patient ID:",
-    "enterPatientId" : "Enter your patient ID", 
+    "selectLocation": "Location",
+    "patientId": "Patient ID",
+    "hospitalId": "Hospital ID",
+    "regionRequired": "Please select region",
+    "enterPatientId" : "Enter patient ID", 
     "nextButton": "Next",
     "createdBy": "Created By",
-    "installApp": "Install the app on your cell phone.",
-    "addToHomeScreen": "Add to Home screen"
+    "installApp": "Install as an app",
+    "addToHomeScreen": "Add to Home screen",
+    "hello": "Hello,",
+    "patient": "Patient",
+    "questionnaire": "Questionnaire",
+    "audioCollection": "Audio Collection",
+    "testResults" : "Test Results",
+    "supportedBy": "Supported by",
+    "visitWebsite": "Visit our website",
+    "errorCountry": "We are unable to collect coughs from your region at this time. Check back with us soon!",
+    "noOptionsError": "No options",
+    "noValueError": "No results found",
+    "countries": {
+      "Afghanistan":"Afghanistan",
+      "Albania":"Albania",
+      "Algeria":"Algeria",
+      "Andorra":"Andorra",
+      "Angola":"Angola",
+      "Antigua and barbuda":"Antigua and Barbuda",
+      "Argentina":"Argentina",
+      "Armenia":"Armenia",
+      "Australia":"Australia",
+      "Austria":"Austria",
+      "Azerbaijan":"Azerbaijan",
+      "Bahamas":"Bahamas",
+      "Bahrain":"Bahrain",
+      "Bangladesh":"Bangladesh",
+      "Barbados":"Barbados",
+      "Belarus":"Belarus",
+      "Belgium":"Belgium",
+      "Belize":"Belize",
+      "Benin":"Benin",
+      "Bhutan":"Bhutan",
+      "Bolivia":"Bolivia ",
+      "Bosnia and herzegovina":"Bosnia and Herzegovina",
+      "Botswana":"Botswana",
+      "Brazil":"Brazil",
+      "Brunei darussalam":"Brunei Darussalam",
+      "Bulgaria":"Bulgaria",
+      "Burkina faso":"Burkina Faso",
+      "Burundi":"Burundi",
+      "Cabo verde":"Cabo Verde",
+      "Cambodia":"Cambodia",
+      "Cameroon":"Cameroon",
+      "Canada":"Canada",
+      "Central african republic":"Central African Republic",
+      "Chad":"Chad",
+      "Chile":"Chile",
+      "China":"China",
+      "Colombia":"Colombia",
+      "Comoros":"Comoros",
+      "Congo":"Congo",
+      "Cook islands":"Cook Islands",
+      "Costa rica":"Costa Rica",
+      "Croatia":"Croatia",
+      "Cuba":"Cuba",
+      "Cyprus":"Cyprus",
+      "Czechia":"Czechia",
+      "Ivory Coast":"Ivory Coast",
+      "Democratic republic of korea":"Democratic Republic of Korea",
+      "Democratic republic of the congo":"Democratic Republic of the Congo",
+      "Denmark":"Denmark",
+      "Djibouti":"Djibouti",
+      "Dominica":"Dominica",
+      "Dominican republic":"Dominican Republic",
+      "Ecuador":"Ecuador",
+      "Egypt":"Egypt",
+      "El salvador":"El Salvador",
+      "Equatorial guinea":"Equatorial Guinea",
+      "Eritrea":"Eritrea",
+      "Estonia":"Estonia",
+      "Eswatini":"Eswatini",
+      "Ethiopia":"Ethiopia",
+      "Faroe islands":"Faroe Islands",
+      "Fiji":"Fiji",
+      "Finland":"Finland",
+      "France":"France",
+      "Gabon":"Gabon",
+      "Gambia":"Gambia",
+      "Georgia":"Georgia",
+      "Germany":"Germany",
+      "Ghana":"Ghana",
+      "Greece":"Greece",
+      "Grenada":"Grenada",
+      "Guatemala":"Guatemala",
+      "Guinea":"Guinea",
+      "Guinea-bissau":"Guinea-Bissau",
+      "Guyana":"Guyana",
+      "Haiti":"Haiti",
+      "Honduras":"Honduras",
+      "Hungary":"Hungary",
+      "Iceland":"Iceland",
+      "India":"India",
+      "Indonesia":"Indonesia",
+      "Iran":"Iran",
+      "Iraq":"Iraq",
+      "Ireland":"Ireland",
+      "Israel":"Israel",
+      "Italy":"Italy",
+      "Jamaica":"Jamaica",
+      "Japan":"Japan",
+      "Jordan":"Jordan",
+      "Kazakhstan":"Kazakhstan",
+      "Kenya":"Kenya",
+      "Kiribati":"Kiribati",
+      "Kuwait":"Kuwait",
+      "Kyrgyzstan":"Kyrgyzstan",
+      "Lao democratic republic":"Lao Democratic Republic",
+      "Latvia":"Latvia",
+      "Lebanon":"Lebanon",
+      "Lesotho":"Lesotho",
+      "Liberia":"Liberia",
+      "Libya":"Libya",
+      "Lithuania":"Lithuania",
+      "Luxembourg":"Luxembourg",
+      "Madagascar":"Madagascar",
+      "Malawi":"Malawi",
+      "Malaysia":"Malaysia",
+      "Maldives":"Maldives",
+      "Mali":"Mali",
+      "Malta":"Malta",
+      "Marshall islands":"Marshall Islands",
+      "Mauritania":"Mauritania",
+      "Mauritius":"Mauritius",
+      "Mexico":"Mexico",
+      "Micronesia":"Micronesia",
+      "Monaco":"Monaco",
+      "Mongolia":"Mongolia",
+      "Montenegro":"Montenegro",
+      "Morocco":"Morocco",
+      "Mozambique":"Mozambique",
+      "Myanmar":"Myanmar",
+      "Namibia":"Namibia",
+      "Nauru":"Nauru",
+      "Nepal":"Nepal",
+      "Netherlands":"Netherlands",
+      "New zealand":"New Zealand",
+      "Nicaragua":"Nicaragua",
+      "Niger":"Niger",
+      "Nigeria":"Nigeria",
+      "Niue":"Niue",
+      "North macedonia":"North Macedonia",
+      "Norway":"Norway",
+      "Oman":"Oman",
+      "Pakistan":"Pakistan",
+      "Palau":"Palau",
+      "Palestine":"Palestine",
+      "Panama":"Panama",
+      "Papua new guinea":"Papua New Guinea",
+      "Paraguay":"Paraguay",
+      "Peru":"Peru",
+      "Philippines":"Philippines",
+      "Poland":"Poland",
+      "Portugal":"Portugal",
+      "Qatar":"Qatar",
+      "Republic of korea":"Republic of Korea",
+      "Republic of moldova":"Republic of Moldova",
+      "Romania":"Romania",
+      "Russian federation":"Russian Federation",
+      "Rwanda":"Rwanda",
+      "Saint kitts and nevis":"Saint Kitts and Nevis",
+      "Saint lucia":"Saint Lucia",
+      "Saint vincent and the grenadines":"Saint Vincent and the Grenadines",
+      "Samoa":"Samoa",
+      "San marino":"San Marino",
+      "Sao tome and principe":"Sao Tome and Principe",
+      "Saudi arabia":"Saudi Arabia",
+      "Senegal":"Senegal",
+      "Serbia":"Serbia",
+      "Seychelles":"Seychelles",
+      "Sierra leone":"Sierra Leone",
+      "Singapore":"Singapore",
+      "Slovakia":"Slovakia",
+      "Slovenia":"Slovenia",
+      "Solomon islands":"Solomon Islands",
+      "Somalia":"Somalia",
+      "South africa":"South Africa",
+      "South sudan":"South Sudan",
+      "Spain":"Spain",
+      "Sri lanka":"Sri Lanka",
+      "Sudan":"Sudan",
+      "Suriname":"Suriname",
+      "Sweden":"Sweden",
+      "Switzerland":"Switzerland",
+      "Syrian arab republic":"Syrian Arab Republic",
+      "Tajikistan":"Tajikistan",
+      "Thailand":"Thailand",
+      "Timor-leste":"Timor-Leste",
+      "Togo":"Togo",
+      "Tokelau":"Tokelau",
+      "Tonga":"Tonga",
+      "Trinidad and tobago":"Trinidad and Tobago",
+      "Tunisia":"Tunisia",
+      "Turkey":"Turkey",
+      "Turkmenistan":"Turkmenistan",
+      "Tuvalu":"Tuvalu",
+      "Uganda":"Uganda",
+      "Ukraine":"Ukraine",
+      "United arab emirates":"United Arab Emirates",
+      "United kingdom":"United Kingdom",
+      "United republic of tanzania":"United Republic of Tanzania",
+      "United States":"United States of America",
+      "Uruguay":"Uruguay",
+      "Uzbekistan":"Uzbekistan",
+      "Vanuatu":"Vanuatu",
+      "Venezuela":"Venezuela",
+      "Vietnam":"Vietnam",
+      "Yemen":"Yemen",
+      "Zambia":"Zambia",
+      "Zimbabwe":"Zimbabwe"
+    }
   },
   "helpVirufy": {
-    "title": "About Virufy",
+    "title": "About Us",
     "ourSupporters": "Our Supporters",
-    "aboutParagraph": "<p>Virufy is a nonprofit organization that is working to develop the means to use artificial intelligence (Al) to screen for COVID-19 from cough patterns rapidly and at no cost through use of a smartphone.</p><p>Our team includes researchers from 25 countries and our focus is low-income countries. Our research has shown that Al technology may be able to identify COVID's unique cough signature.</p><p>By collecting coughs recordings from people around the world, Virufy is improving the robustness of its AI algorithm in recognizing COVID's unique sound pattern.</p><p>You have the power to help benefit millions of people across the globe by contributing your cough in our study.</p>",
+    "introParagraph": "Welcome to our study! This should only take you about 5 minutes to complete. Before we begin, let’s discuss what we will cover:",
+    "aboutParagraph": "<0>Virufy is a <strong>nonprofit organization</strong> that is working to develop the means to use <strong> artificial intelligence (Al) to screen for COVID-19 from cough patterns</strong>rapidly and at no cost through use of a smartphone for the benefit of low-income countries.</0><1>Our team includes researchers from over <strong>25 countries</strong>. <3>Our research</3> has shown that Al technology may be able to identify COVID's unique cough signature.</1><2>By collecting <strong>coughs recordings</strong> from people around the world, Virufy is improving the robustness of its AI algorithm in recognizing COVID's unique sound pattern.</2><3><strong>You have the power</strong> to help benefit millions of people across the globe by <strong>contributing your cough</strong> in our study.</3>",
+    "bulletsIntro":"<strong>Intro: </strong>About us and Safety Reminders",
+    "bulletCough": "<strong>Cough Into Phone</strong>",
+    "bulletQuestions": "<strong>Quick Health Questions</strong>",
     "nextButton": "Next"
   },
   "consent": {
     "title": "Consent to the Study",
-    "paragraph1": "Virufy cares about your privacy and is advised by licensed data privacy experts. The information and recordings you provide will only be used for the purposes described in our <1>Privacy Policy</1> and Consent Form. Please read the <3>Consent Form:</3>",
+    "paragraph1": "Virufy cares about your privacy and is advised by licensed data privacy experts. The information and recordings you provide will only be used for the purposes described in our <1>Privacy Policy</1> and Consent Form. Please read the Consent Form:",
     "paragraph2Title": "Virufy Explicit Consent to Collect Personal Information and Participate in Research Form",
     "paragraph2": "\"Collection of Smartphone Data for Screening of COVID-19\"",
-    "paragraph3": "By checking the below boxes, you are granting your explicit, freely given, and informed consent to Virufy to collect, process, and share your information for the purposes indicated above and as provided in greater detail in our <1>Privacy Policy</1>. You can print a copy of this Consent Form for your personal records by accessing <3>this PDF file</3>.",
-    "paragraph3_brazil": "If you are located inside Brazilian national territory, and for the purposes of the General Personal Data Protection Law (\"LGPD\"), \"consent\", in its free, informed, and unequivocal pronouncement, will be the legal basis on which we process sensitive personal data.",
-    "certify": "I certify that I am at least 18 years old and agree to the terms of the Consent Form.",
-    "agree": "I have read, understand and agree to the terms of Virufy <1>Privacy Policy</1>.",
-    "detection": "I hereby acknowledge and agree that processing shall be done for the purposes indicated above and, in particular but without limitation, for research and compiling a dataset needed for the development of artificial intelligence algorithms for device-based COVID-19 detection.",
+    "paragraph3": "By checking the below boxes, you acknowledge that you have read and understood the Virufy privacy policy, and that you are providing your explicit consent to Virufy’s collection and processing of the categories of biometric and health information enumerated below.",
+    "certifyBrazil": "I certify that I am at least 18 years old and agree to the terms of this Consent Form, hereby expressly consenting to the collection and processing of my personal information, biometric information, and health information.",
+    "certify": "I certify that I am at least 18 years old and agree to the terms of this Consent Form.",
+    "agree": "I have read, understood, and agree to the terms of the Virufy <1>Privacy Policy</1>.",
+    "collection": "I hereby expressly consent to the collection and processing of my personal information, biometric information, and health information.",
+    "detection": "I hereby acknowledge and agree that processing shall be done for the purposes indicated above   and, in particular but without limitation, for research and compiling a dataset needed for the development of artificial intelligence algorithms for device-based COVID-19 detection.",
     "signs": "I hereby acknowledge and agree that processing shall be done for the purposes indicated above and, in particular but without limitation, for training artificial intelligence algorithms to analyze cough audio recordings to better determine signs of COVID-19.",
-    "collection": "I hereby expressly consent to the collection, processing and transfer of my personal, biometric and health data.",
+    "biometric": "I hereby expressly consent to the sharing of my personal information, biometric information, and health information with third parties as described in this Consent Form and/or the Virufy Privacy Policy.",
     "pleaseConfirm": "Please confirm the following:",
     "nextButton": "Next",
     "jumpToBottom": "Jump To Bottom"
   },
   "beforeStart": {
-    "title": "Lastly, before we begin...",
-    "subtitle": "To ensure safety, we advise you to:",
+    "title": "Lastly, before we start...",
+    "subtitle": "<strong>To ensure safety, we advise you to:</strong>",
     "advise_list": [
-      "Use your own device to record the cough sample and wear a mask when appropriate.",
-      "Disinfect your device and any affected or nearby surfaces after recording your cough.",
-      "If you have an underlying condition that increases your risk from coughing, please check with your healthcare provider before participating.",
-      "If you have any symptoms or any questions or concerns about your health condition, please contact your healthcare provider.",
-      "If you feel your symptoms are getting worse, please contact your local medical emergency services or first responders immediately."
+      "Please use your own device and wear a mask when appropriate.",
+      "Disinfect your device and any affected or nearby surfaces after recording your cough/speech.",
+      "If you have an underlying condition that increases your risk from coughing, please check with your health care provider before participating.",
+      "If you feel your symptoms are getting worse, please contact your local medical response."
     ],
-    "startButton": "Start"
+    "startButton": "Next"
   },
   "recordingsIntroduction": {
     "recordCough": {
@@ -61,9 +278,10 @@
       "intro1": "The sound of your voice can also help us learn what COVID sounds like! 'Please press record and count clearly from one to ten."
     },
     "next": "Next",
+    "retryButton": "Retry",
     "releaseButtonStart": "Release to start recording",
     "releaseButtonStop": "Release to stop recording",
-    "shortRecording": "Please make a recording of at least 3 seconds"
+    "shortRecording": "Please make a recording of at least 5 seconds"
   },
   "recordingsRecord": {
     "recordCough": {
@@ -74,20 +292,25 @@
     },
     "next": "Continue",
     "delete": "Delete",
-    "text": "Tap the microphone button and <strong>cough intentionally</strong> into the bottom of your phone <strong>3 times</strong> with a <strong>deep breath</strong> between each cough. When you are done, tap the pause button.",
+    "textCough": "Tap the record button and <strong>cough intentionally</strong> into the bottom of your phone <strong>3 times</strong> with a <strong>deep breath</strong> between each cough. When you are done, tap the stop button. ",
+    "textSpeech": "Tap the record button below and <strong>say a sustained ‘aaaaah’ for at least 5 seconds.</strong> When you are done, tap the stop button.",
+    "textNext": "Click continue to proceed.",
     "textCount": "Click the record button and count clearly from one to ten. When you are done, click continue.",
-    "upload": "Upload your own file"
+    "upload": "Upload your own file",
+    "record": "Record",
+    "recordStop": "Stop"
   },
   "recordingsRecordManual": {
     "header": "Upload a file",
     "addFile": "Add your file",
     "constraint": "Add up to 5 MB",
     "next": "Done",
-    "micError": "Can’t access the mic?",
+    "micError": "Can’t access the mic? Upload an audio file (.wav/.wave/.mp3/.ogg)",
     "micErrorDescription": "Please upload an audio file here.",
     "fileDurationTooShort": "Please upload a file of at least 3 seconds",
     "fileSizeTooBig": "Please upload a file of less than 5 MB",
-    "fileRequired": "Please upload a file"
+    "fileRequired": "Please upload a file",
+    "uploadFile": "Upload File"
   },
   "recordingsListen": {
     "recordCough": {
@@ -99,22 +322,31 @@
       "header": "Record your speech",
       "intro1": "The sound of your voice can also help us learn what COVID sounds like! 'Please press record and count clearly from one to ten."
     },
-    "title": "Recording uploaded",
+    "title": "Upload Complete",
     "subtitle": "Feel free to take a listen.",
-    "next": "Done"
+    "next": "Continue",
+    "retake": "Retake"
   },
   "questionary": {
-    "headerText": "Answer short questions",
-    "title": "Let’s answer some questions!",
+    "headerText": "Question",
+    "title": "Let’s answer some quick questions!",
     "caption": "Please answer to the best of your ability.",
+    "allThatApply": "(select all that apply)",
     "testTaken": {
       "question": "Which of the following tests have you taken for COVID-19?",
       "options": {
-        "pcr": "PCR-based test (e.g. nose or mouth swab)",
-        "antibody": "Antibody test (e.g. finger stick or blood draw)",
-        "neither": "Neither",
-        "antigen": "Antigen test (e.g. nose or mouth swab)"
+        "pcr": "PCR-based test",
+        "antibody": "Antibody test",
+        "unsure": "Unsure",
+        "antigen": "Antigen test(rapid)",
+        "neither": "Neither"
       }
+    },
+    "patient":{
+      "resultPcrTest":{
+        "question": " What was the result of Patient <1><0>{{patientId}}</0></1>'s PCR-based COVID-19 test?"
+      },
+      "resultAntigenTest": "What was the result of Patient <1><0>{{patientId}}</0></1>'s rapid antigen COVID-19 test?"
     },
     "headerText2": "Follow-up question",
     "whenPcrTest": "When did you take your PCR-based COVID-19 test? Please estimate if unsure.",
@@ -123,7 +355,8 @@
       "options": {
         "positive": "Positive",
         "negative": "Negative",
-        "pending": "Pending"
+        "pending": "Pending",
+        "unsure": "Unsure"
       }
     },
     "whenAntibodyTest": "When did you take your antibody test for COVID-19? Please estimate if unsure.",
@@ -132,7 +365,8 @@
       "options": {
         "positive": "Positive",
         "negative": "Negative",
-        "pending": "Pending"
+        "pending": "Pending",
+        "unsure": "Unsure"
       }
     },
     "whenAntigenTest": "When did you take your antigen test for COVID-19? Please estimate if unsure.",
@@ -141,26 +375,42 @@
       "options": {
         "positive": "Positive",
         "negative": "Negative",
-        "pending": "Pending"
+        "pending": "Pending",
+        "unsure": "Unsure"
       }
     },
-    "ageGroup": "Please select your age group.",
+    "vaccine": {
+      "question": "Have you received the COVID-19 vaccine?",
+      "options":{
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "age": "Age:",
+    "ageGroup": "Please enter your age.",
+    "enterAge": "Enter your age",
+    "50+": "50 and over",
     "unselectedAgeGroup": "Select age group",
     "gender": {
+      "gender": "Gender: ",
       "question": "What is your gender identity?",
+      "note": "How do you describe yourself?",
       "options": {
         "male": "Male",
         "female": "Female",
-        "notToSay": "Prefer not to say",
+        "notToSay": "Decline to answer",
+        "other": "Other",
+        "transgender": "Transgender",
         "selfDescribe": "Prefer to self-describe"
       }
     },
     "biologicalSex": {
       "question": "What is your biological sex?",
-      "note": "The sound of the voice for males and females varies. This is important for the AI to help detect COVID-19.",
+      "note": "What sex were you assigned at birth, on your original birth certificate? This information is important for the AI to help detect COVID-19 as the sound of the voice varies across genders.",
       "options": {
         "male": "Male",
-        "female": "Female"
+        "female": "Female",
+        "notToSay": "Decline to answer"
       }
     },
     "smokeLastSixMonths": {
@@ -172,7 +422,7 @@
       }
     },
     "symptoms": {
-      "question": "<strong>Which of the below symptoms do you currently have?</strong> (Select all that apply)",
+      "question": "<strong>Which of the below symptoms do you currently have?</strong>",
       "options": {
         "bodyAches": "Body aches",
         "dryCough": "Cough (dry)",
@@ -181,18 +431,28 @@
         "headaches": "Headaches",
         "lossTasteOrSmell": "Loss of taste and/or smell",
         "worseCough": "New or worsening cough",
+        "runnyNose" : "Runny nose",
         "breathShortness": "Shortness of breath",
         "soreThroat": "Sore throat",
         "chestTightness": "Tightness in chest",
         "vomitingAndDiarrhea": "Vomiting and diarrhea",
         "none": "None",
+        "weakness": "Weakness",
+        "other": "Other",
         "addOther": "+ Add other"
       },
       "addOtherPlaceholder": "Other symptom"
     },
-    "symptomsDate": "When did you begin experiencing cough, fever, and/or shortness of breath? Please estimate if unsure.",
+    "symptomsDate": "Approximately how many days ago did these symptoms start?",
+    "enterDays": "Enter days",
+    "options":{
+      "today": "Today",
+      "days": "1-3 days ago",
+      "week": "A week ago",
+      "overWeek": "Over a week ago"
+    },
     "respiration": {
-      "question": "<strong>Which of the below respiratory conditions do you currently have?</strong> (Select all that apply)",
+      "question": "<strong>Which of the below respiratory conditions do you currently have?</strong>",
       "options": {
         "asthma": "Asthma",
         "bronchitis": "Bronchitis",
@@ -206,17 +466,25 @@
       "addOtherPlaceholder": "Other condition"
     },
     "medical": {
-      "question": "<strong>Which of the below medical conditions do you currently have?</strong> (Select all that apply)",
+      "question": "<strong>Which of the below medical conditions do you currently have?</strong>",
       "options": {
-        "chronicLung": "Chronic lung disease",
+        "allergies": "Allergies",
+        "asthma": "Asthma",
+        "bronchitis": "Bronchitis",
         "congestiveHeart": "Congestive heart failure",
-        "cough": "Cough from other medical conditions",
+        "emphysema": "COPD/emphysema",
         "obesity": "Extreme obesity",
+        "heartDisease": "Heart disease",
         "hiv": "HIV, AIDS, or impaired immune system",
+        "lungCancer": "Lung cancer",
+        "otherChronic": "Other chronic lung disease",
+        "pneumonia": "Pneumonia",
         "pulmonary": "Pulmonary fibrosis",
-        "pregnancy": "Pregnancy",
-        "valvularHeart": "Valvular heart disease",
+        "reflux": "Reflux",
+        "sinusitis": "Sinusitis",
+        "tuberculosis": "Tuberculosis",
         "none": "None",
+        "other": "Other",
         "addOther": "+ Add other"
       },
       "addOtherPlaceholder": "Other condition"
@@ -227,19 +495,21 @@
     "submitting": "Submitting..."
   },
   "beforeSubmit": {
-    "submitButton": "Submit form",
+    "submitButton": "Submit",
     "submitError": "An error occurred. Please try again."
   },
   "thankyou": {
     "title": "Thank you for submitting.",
     "paragraph1_cough": "Your cough donation brings Virufy one step closer to changing the world.",
-    "paragraph1_voice": "Your cough and speech donation brings Virufy one step closer to changing the world.",
+    "paragraph1_voice": "Your cough donation brings Virufy one step closer to changing the world.",
     "paragraph2": "Your unique submission ID:<br/><2>{{submissionId}}</2>",
+    "paragraph2Patient": "Your unique patient ID:<br/><2>{{patientId}}</2>",
     "paragraph3": "Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized data in future.<br/><br/>If you later develop symptoms such as cough, fever, or shortness of breath, please come back to resubmit your latest cough sounds.",
     "downloadApp": "Click here to <1>Install the app.</1>",
     "paragraph4": "Provide <1>feedback</1> for us to improve our application and check out our <3>website</3>!",
     "paragraph5": "Learn more about Virufy with our <1>news</1>!",
-    "returnButton": "Submit another cough"
+    "returnButton": "Submit another cough",
+    "returnMain": "Return to main menu"
   },
   "footerReportProblems": {
     "message": "Something wrong? Report an error"
@@ -265,7 +535,7 @@
       },
       {
         "title": "Join Us",
-        "description": "Contribute your skills in the fight against COVID",
+        "description": "Contribute your skills in the fight against COVID-19",
         "cta": {
           "label": "Apply now",
           "link": "https://virufy.org/join"
@@ -274,6 +544,6 @@
     ]
   },
   "socialIcons": {
-    "title": "Follow Virufy"
+    "title": "Follow us"
   }
 }

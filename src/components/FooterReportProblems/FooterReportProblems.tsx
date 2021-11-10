@@ -20,7 +20,7 @@ const FooterReportProblems = () => {
 
   const lang = i18n.language;
 
-  if (location.pathname === '/welcome') return null;
+  if (location.pathname === '/welcome' || location.pathname === '/welcome/step-2' || location.pathname === '/welcome/patientSummary') return null;
 
   return (
     <FooterContainer>

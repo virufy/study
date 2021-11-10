@@ -19,15 +19,16 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
-// Styles
-import DatePicker from 'components/DatePicker';
+// Components
 import WizardButtons from 'components/WizardButtons';
+
+// Styles
 import {
-  QuestionText, QuestionRequiredIndicatorText, GrayExtraInfo,
+  QuestionText, MainContainer, QuestionInput,
 } from '../style';
 
 const schema = Yup.object({
-  symptomsStartedDate: Yup.date().required(),
+  symptomsStartedDate: Yup.string().required(),
 }).defined();
 
 type Step4bType = Yup.InferType<typeof schema>;
@@ -41,9 +42,9 @@ const Step4b = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
 
   // States
@@ -53,10 +54,15 @@ const Step4b = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
+
+  const {
+    isValid,
+  } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -69,9 +75,10 @@ const Step4b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerText2'));
+    setTitle(t('questionary:headerText'));
+    setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   // Handlers
   const onSubmit = async (values: Step4bType) => {
@@ -85,23 +92,22 @@ const Step4b = ({
   };
 
   return (
-    <>
-      <GrayExtraInfo>{t('questionary:caption')}</GrayExtraInfo>
-
-      <QuestionText>
+    <MainContainer>
+      <QuestionText extraSpace first>
         {t('questionary:symptomsDate')}
-        <QuestionRequiredIndicatorText> *</QuestionRequiredIndicatorText>
       </QuestionText>
       <Controller
         control={control}
         name="symptomsStartedDate"
-        defaultValue={null}
-        render={({ onChange, value }) => (
-          <DatePicker
-            label="Date"
-            value={value ? new Date(value) : null}
-            locale={i18n.language}
+        defaultValue=""
+        render={({ onChange, value, name }) => (
+          <QuestionInput
+            name={name}
+            value={value}
             onChange={onChange}
+            type="text"
+            placeholder={t('questionary:enterDays')}
+            autoComplete="Off"
           />
         )}
       />
@@ -112,11 +118,12 @@ const Step4b = ({
           <WizardButtons
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>
       )}
-    </>
+    </MainContainer>
   );
 };
 

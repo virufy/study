@@ -8,16 +8,24 @@ import { useTranslation } from 'react-i18next';
 
 // Form
 import { useStateMachine } from 'little-state-machine';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers';
+import * as Yup from 'yup';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
+import Recaptcha from 'components/Recaptcha';
 
 // Utils
 import { updateAction } from 'utils/wizard';
+
+// Helpers
+import { getPatientId, getCountry, allowSpeechIn } from 'helper/stepsDefinitions';
 import { scrollToTop } from 'helper/scrollHelper';
+import { doSubmitPatientAudioCollection } from 'helper/patientHelper';
 
 // Images
 import PlaySVG from 'assets/icons/play.svg';
@@ -27,16 +35,15 @@ import CrossSVG from 'assets/icons/cross.svg';
 import fileHelper from 'helper/fileHelper';
 import {
   MainContainer,
-  Title,
-  Text,
+  Subtitle,
+  TitleAudioName,
   PlayerContainer,
   PlayerContainerTop,
   PlayerContainerBottom,
   PlayerPlay,
   PlayerCross,
-  PlayerFileName,
   PlayerTopMiddle,
-  PlayerFileSize,
+  PlayerPlayButton,
   PlayerPlayContainer,
   PlayerCrossContainer,
   PlayerBottomTop,
@@ -44,6 +51,7 @@ import {
   PlayerBottomThumb,
   PlayerBottomBottom,
   PlayerTimeIndicator,
+  TempBeforeSubmitError,
 } from './style';
 
 const ListenAudio = ({
@@ -57,15 +65,23 @@ const ListenAudio = ({
     [metadata],
   );
 
+  const schema = Yup.object({
+    audioCollection: Yup.object(),
+  }).defined();
+
+  type AudioType = Yup.InferType<typeof schema>;
+
   // Hooks
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle } = useHeaderContext();
+  const { setDoGoBack, setTitle, setSubtitle } = useHeaderContext();
   const history = useHistory();
   const location = useLocation<{ from: string }>();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const { t } = useTranslation();
+  const patientId = getPatientId();
+  const country = getCountry();
 
   const myState = state?.[storeKey]?.[metadata?.currentLogic];
   const file: File | null = myState ? myState.recordingFile || myState.uploadedFile : null;
@@ -145,7 +161,6 @@ const ListenAudio = ({
   const {
     fileUrl,
     fileName,
-    fileSize,
   } = React.useMemo(() => {
     const out = {
       fileUrl: '',
@@ -213,16 +228,45 @@ const ListenAudio = ({
     }
   }, [playing]);
 
+  // Form
+  const {
+    handleSubmit, formState,
+  } = useForm({
+    defaultValues: state?.[storeKey],
+    resolver: yupResolver(schema),
+  });
+
+  /* Delete after Contact info step is re-integrated */
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
+  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const { isSubmitting } = formState;
+
+  useEffect(() => {
+    if (!captchaValue) {
+      setSubmitError(null);
+    }
+  }, [captchaValue]);
+
   // Effects
   useEffect(() => {
     scrollToTop();
-    if (isCoughLogic) {
-      setTitle(t('recordingsListen:recordCough.header'));
-    } else {
-      setTitle(t('recordingsListen:recordCough.header'));
-    }
+    setSubtitle(t('recordingsListen:title'));
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, isCoughLogic, setDoGoBack, setTitle, t]);
+  }, [handleDoBack, isCoughLogic, setDoGoBack, setTitle, setSubtitle, t]);
+
+  const onSubmitPatientAudioCollection = async (values: AudioType) => {
+    if (values) {
+      await doSubmitPatientAudioCollection({
+        setSubmitError: s => setSubmitError(!s ? null : t(s)),
+        state,
+        captchaValue,
+        action,
+        nextStep,
+        setActiveStep,
+        history,
+      });
+    }
+  };
 
   // Memos
   const {
@@ -264,28 +308,15 @@ const ListenAudio = ({
         )
       }
       <MainContainer>
-        <Title>
-          {t('recordingsListen:title')}
-        </Title>
-        <Text>
+        <Subtitle>
           {t('recordingsListen:subtitle')}
-        </Text>
+        </Subtitle>
         <PlayerContainer>
           <PlayerContainerTop>
-            <PlayerPlayContainer
-              onClick={handlePlay}
-            >
-              <PlayerPlay
-                src={PlaySVG}
-              />
-            </PlayerPlayContainer>
             <PlayerTopMiddle>
-              <PlayerFileName>
+              <TitleAudioName>
                 {fileName}
-              </PlayerFileName>
-              <PlayerFileSize>
-                {fileSize}
-              </PlayerFileSize>
+              </TitleAudioName>
             </PlayerTopMiddle>
             <PlayerCrossContainer
               onClick={handleRemoveFile}
@@ -297,7 +328,10 @@ const ListenAudio = ({
           </PlayerContainerTop>
           <PlayerContainerBottom>
             <PlayerBottomTop>
-              <PlayerBottomTrack />
+              <PlayerBottomTrack
+                playing={playing}
+                progress={trackProgress}
+              />
               <PlayerBottomThumb
                 playing={playing}
                 progress={trackProgress}
@@ -313,13 +347,41 @@ const ListenAudio = ({
             </PlayerBottomBottom>
           </PlayerContainerBottom>
         </PlayerContainer>
+        <PlayerPlayContainer
+          onClick={handlePlay}
+        >
+          <PlayerPlayButton>
+            <PlayerPlay
+              src={PlaySVG}
+            />
+          </PlayerPlayButton>
+        </PlayerPlayContainer>
       </MainContainer>
-      {activeStep && (
+      {((!patientId && activeStep) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech')) && (
         <Portal>
           <WizardButtons
             invert
             leftLabel={t('recordingsListen:next')}
             leftHandler={handleNext}
+          />
+        </Portal>
+      )}
+
+      {((patientId && !allowSpeechIn.includes(country)) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
+        <Portal>
+          { /* ReCaptcha  */}
+          <Recaptcha onChange={setCaptchaValue} />
+          {submitError && (
+          <TempBeforeSubmitError>
+            {submitError}
+          </TempBeforeSubmitError>
+          )}
+          <WizardButtons
+            invert
+            // leftLabel={t('questionary:proceedButton')}
+            leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
+            leftDisabled={!captchaValue || isSubmitting}
+            leftHandler={handleSubmit(onSubmitPatientAudioCollection)}
           />
         </Portal>
       )}

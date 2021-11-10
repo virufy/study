@@ -3,12 +3,16 @@ import { HeaderContext } from 'components/Header';
 
 const useHeaderContext = () => {
   const {
-    title, setTitle, logoSize, setLogoSize, setDoGoBack, doGoBack,
+    title, setTitle, subtitle, setSubtitle, type, setType, logoSize, setLogoSize, setDoGoBack, doGoBack,
   } = React.useContext(HeaderContext);
 
   return {
     title,
     setTitle,
+    subtitle,
+    setSubtitle,
+    type,
+    setType,
     logoSize,
     setLogoSize,
     doGoBack,
