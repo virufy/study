@@ -24,8 +24,10 @@ export const DatePickerContainer = styled.button`
 export const LabelValueContainer = styled.div`
   flex: 1;
   text-align: left;
-  padding: 7.41px 0 0 14px;
+  padding-left: 14px;
   height: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 export const Label = styled.div`

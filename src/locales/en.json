@@ -341,6 +341,7 @@
   },
   "questionary": {
     "headerText": "Question",
+    "headerQuestions": "Questions",
     "title": "Let’s answer some quick questions!",
     "caption": "Please answer to the best of your ability.",
     "allThatApply": "(select all that apply)",

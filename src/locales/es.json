@@ -330,7 +330,8 @@
     "retake": "Volver a grabar"
   },
   "questionary": {
-    "headerText": "Preguntas",
+    "headerText": "Pregunta",
+    "headerQuestions": "Preguntas",
     "title": "¡Vamos a responder unas breves preguntas!",
     "caption": "Por favor, conteste de la mejor manera posible.",
     "allThatApply": "(seleccione todas las que correspondan)",

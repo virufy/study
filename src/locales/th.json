@@ -329,6 +329,7 @@
     },
     "questionary": {
         "headerText": "คำถาม",
+        "headerQuestions": "คำถาม",
         "title": "มาตอบคำถามสั้นๆ กันเถอะ! ",
         "caption": "กรุณาตอบคำถาม",
         "allThatApply": "เลือกทั้งหมดที่ใช่",
