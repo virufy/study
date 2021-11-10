@@ -223,31 +223,31 @@ const Step4 = (p: Wizard.StepProps) => {
         />
 
         {currentCountry !== 'Brazil' && (
-        <Controller
-          control={control}
-          name="agreedCovidCollection"
-          defaultValue={false}
-          render={({ onChange, value, name }) => (
-            <Checkbox
-              id="Step2-CollectionCovid"
-              label={(currentCountry !== 'Colombia')
-                ? (
-                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collection">
-                    I hereby expressly consent to the collection and
-                    processing of my personal information, biometric information, and health information.
-                  </Trans>
-                ) : (
-                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collectionColombia">
-                    I hereby expressly consent to the collection, processing and transfer of my personal information,
-                    biometric information, and health information.
-                  </Trans>
-                )}
-              name={name}
-              onChange={e => onChange(e.target.checked)}
-              value={value}
-            />
-          )}
-        />
+          <Controller
+            control={control}
+            name="agreedCovidCollection"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-CollectionCovid"
+                label={(currentCountry !== 'Colombia')
+                  ? (
+                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collection">
+                      I hereby expressly consent to the collection and
+                      processing of my personal information, biometric information, and health information.
+                    </Trans>
+                  ) : (
+                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collectionColombia">
+                      I hereby expressly consent to the collection, processing and transfer of my personal information,
+                      biometric information, and health information.
+                    </Trans>
+                  )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
+          />
         )}
 
         {currentCountry !== 'Colombia' && (
@@ -283,49 +283,49 @@ const Step4 = (p: Wizard.StepProps) => {
         )}
 
         {((currentCountry !== 'Colombia') && (currentCountry !== 'Brazil')) && (
-        <Controller
-          control={control}
-          name="agreedTrainingArtificial"
-          defaultValue={false}
-          render={({ onChange, value, name }) => (
-            <Checkbox
-              id="Step2-TrainingArtificial"
-              label={(
-                <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:signs">
-                  I hereby acknowledge and agree that processing shall be done for the purposes indicated above
-                  and, in particular but without limitation, for training artificial intelligence algorithms to
-                  analyze cough audio recordings to better determine signs of COVID-19.
-                </Trans>
+          <Controller
+            control={control}
+            name="agreedTrainingArtificial"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-TrainingArtificial"
+                label={(
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:signs">
+                    I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                    and, in particular but without limitation, for training artificial intelligence algorithms to
+                    analyze cough audio recordings to better determine signs of COVID-19.
+                  </Trans>
                 )}
-              name={name}
-              onChange={e => onChange(e.target.checked)}
-              value={value}
-            />
-          )}
-        />
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
+            )}
+          />
         )}
 
         {currentCountry !== 'Colombia' && (
-        <Controller
-          control={control}
-          name="agreedBiometric"
-          defaultValue={false}
-          render={({ onChange, value, name }) => (
-            <Checkbox
-              id="Step2-Biometric"
-              label={(
-                <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:biometric">
-                  I hereby expressly consent to the sharing of my personal information, biometric information,
-                  and health information with third parties as described in this Consent Form and/or the Virufy
-                  Privacy Policy.
-                </Trans>
+          <Controller
+            control={control}
+            name="agreedBiometric"
+            defaultValue={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                id="Step2-Biometric"
+                label={(
+                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:biometric">
+                    I hereby expressly consent to the sharing of my personal information, biometric information,
+                    and health information with third parties as described in this Consent Form and/or the Virufy
+                    Privacy Policy.
+                  </Trans>
+                )}
+                name={name}
+                onChange={e => onChange(e.target.checked)}
+                value={value}
+              />
             )}
-              name={name}
-              onChange={e => onChange(e.target.checked)}
-              value={value}
-            />
-          )}
-        />
+          />
         )}
 
         <p><ErrorMessage errors={errors} name="name" /></p>
