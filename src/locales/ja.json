@@ -1,563 +1,561 @@
 {
-  "main": {
-    "title": "コロナウイルス　咳データ収集調査",
-    "logoIntro": "非営利研究組織",
-    "note": "<strong>注意事項:</strong> このフォームはデータ収集のためだけに使用されます。コロナウイルスへの罹患の有無を予測したり、病気や障害等の健康状態を診断したりするものではありません。Virufyでは提供された情報を調査のためだけに使用します。また、このアプリは医者の役割を果たすものではありませんので、ご自身の責任で医者からのアドバイスを受けるようにしてください。",
-    "paragraph1": "ようこそ！こちらの調査は５分ほどで終わります。",
-    "selectYourLanguage": "言語",
-    "paragraph2": "コロナウイルス　咳データ収集調査",
-    "selectCountry": "国を選択",
-    "region": "リージョン",
-    "selectRegion": "地域を選択",
-    "selectLocation": "場所",
-    "patientId": "患者 ID",
-    "hospitalId": "病院 ID",
-    "regionRequired": "地域を選択してください",
-    "enterPatientId": "患者 IDを入力",
-    "nextButton": "次へ",
-    "createdBy": "製作",
-    "installApp": "アプリをインストール",
-    "addToHomeScreen": "ホーム画面に追加",
-    "hello": "こんにちは,",
-    "patient": "患者",
-    "questionnaire": "アンケート",
-    "audioCollection": "音声収集",
-    "testResults": "調査結果",
-    "supportedBy": "支援",
-    "visitWebsite": "Webサイトへ",
-    "errorCountry": "現在、お住まいの地域では咳データの収集を行っておりません。後ほどご確認ください。",
-    "noOptionsError": "オプションなし",
-    "noValueError": "結果は見つかりませんでした",
-    "countries": {
-      "Afghanistan": "アフガニスタン",
-      "Albania": "アルバニア",
-      "Algeria": "アルジェリア",
-      "Andorra": "アンドラ",
-      "Angola": "アンゴラ",
-      "Antigua and barbuda": "アンティグアバーブーダ",
-      "Argentina": "アルゼンチン",
-      "Armenia": "アルメニア",
-      "Australia": "オーストラリア",
-      "Austria": "オーストリア",
-      "Azerbaijan": "アゼルバイジャン",
-      "Bahamas": "バハマ",
-      "Bahrain": "バーレーン",
-      "Bangladesh": "バングラデシュ",
-      "Barbados": "バルバドス",
-      "Belarus": "ベラルーシ",
-      "Belgium": "ベルギー",
-      "Belize": "ベリーズ",
-      "Benin": "ベナン",
-      "Bhutan": "ブータン",
-      "Bolivia": "ボリビア",
-      "Bosnia and herzegovina": "ボスニア・ヘルツェゴヴィナ",
-      "Botswana": "ボツワナ",
-      "Brazil": "ブラジル",
-      "Brunei darussalam": "ブルネイダルサラーム",
-      "Bulgaria": "ブルガリア",
-      "Burkina faso": "ブルキナファソ",
-      "Burundi": "ブルンジ",
-      "Cabo verde": "カーボベルデ",
-      "Cambodia": "カンボジア",
-      "Cameroon": "カメルーン",
-      "Canada": "カナダ",
-      "Central african republic": "中央アフリカ共和国",
-      "Chad": "チャド",
-      "Chile": "チリ",
-      "China": "中国",
-      "Colombia": "コロンビア",
-      "Comoros": "コモロ",
-      "Congo": "コンゴ",
-      "Cook islands": "クック諸島",
-      "Costa rica": "コスタリカ",
-      "Croatia": "クロアチア",
-      "Cuba": "キューバ",
-      "Cyprus": "キプロス",
-      "Czechia": "チェコ",
-      "Ivory Coast": "コートジボワール",
-      "Democratic republic of korea": "大韓民国",
-      "Democratic republic of the congo": "コンゴ民主共和国",
-      "Denmark": "デンマーク",
-      "Djibouti": "ジブチ",
-      "Dominica": "ドミニカ",
-      "Dominican republic": "ドミニカ共和国",
-      "Ecuador": "エクアドル",
-      "Egypt": "エジプト",
-      "El salvador": "エルサルバドル",
-      "Equatorial guinea": "赤道ギニア",
-      "Eritrea": "エリトリア",
-      "Estonia": "エストニア",
-      "Eswatini": "エスワティニ王国",
-      "Ethiopia": "エチオピア",
-      "Faroe islands": "フェロー諸島",
-      "Fiji": "フィジー",
-      "Finland": "フィンランド",
-      "France": "フランス",
-      "Gabon": "ガボン",
-      "Gambia": "ガンビア",
-      "Georgia": "ジョージア",
-      "Germany": "ドイツ",
-      "Ghana": "ガーナ",
-      "Greece": "ギリシャ",
-      "Grenada": "グレナダ",
-      "Guatemala": "グアテマラ",
-      "Guinea": "ギニア",
-      "Guinea-bissau": "ギニアビサウ",
-      "Guyana": "ガイアナ",
-      "Haiti": "ハイチ",
-      "Honduras": "ホンジュラス",
-      "Hungary": "ハンガリー",
-      "Iceland": "アイスランド",
-      "India": "インド",
-      "Indonesia": "インドネシア",
-      "Iran": "イラン",
-      "Iraq": "イラク",
-      "Ireland": "アイルランド",
-      "Israel": "イスラエル",
-      "Italy": "イタリア",
-      "Jamaica": "ジャマイカ",
-      "Japan": "日本",
-      "Jordan": "ジョルダン",
-      "Kazakhstan": "カザフスタン",
-      "Kenya": "ケニア",
-      "Kiribati": "キリバス共和国",
-      "Kuwait": "クウェート",
-      "Kyrgyzstan": "キルギスタン",
-      "Lao democratic republic": "ラオス人民民主共和国",
-      "Latvia": "ラトビア",
-      "Lebanon": "レバノン",
-      "Lesotho": "レソト王国",
-      "Liberia": "リベリア",
-      "Libya": "リビア",
-      "Lithuania": "リトアニア",
-      "Luxembourg": "ルクセンブルク",
-      "Madagascar": "マダガスカル",
-      "Malawi": "マラウィ",
-      "Malaysia": "マレーシア",
-      "Maldives": "モルディブ",
-      "Mali": "マリ",
-      "Malta": "マルタ",
-      "Marshall islands": "マーシャル諸島",
-      "Mauritania": "モーリタニア",
-      "Mauritius": "モーリシャス",
-      "Mexico": "メキシコ",
-      "Micronesia": "ミクロネシア",
-      "Monaco": "モナコ",
-      "Mongolia": "モンゴル",
-      "Montenegro": "モンテネグロ",
-      "Morocco": "モロッコ",
-      "Mozambique": "モザンビーク",
-      "Myanmar": "ミャンマー",
-      "Namibia": "ナミビア",
-      "Nauru": "ナウル",
-      "Nepal": "ネパール",
-      "Netherlands": "オランダ",
-      "New zealand": "ニュージーランド",
-      "Nicaragua": "ニカラグア",
-      "Niger": "ニジェール",
-      "Nigeria": "ナイジェリア",
-      "Niue": "ニウエ",
-      "North macedonia": "北マケドニア",
-      "Norway": "ノルウェー",
-      "Oman": "オマーン",
-      "Pakistan": "パキスタン",
-      "Palau": "パラオ",
-      "Palestine": "パレスチナ",
-      "Panama": "パナマ",
-      "Papua new guinea": "パプアニューギニア",
-      "Paraguay": "パラグアイ",
-      "Peru": "ペルー",
-      "Philippines": "フィリピン",
-      "Poland": "ポーランド",
-      "Portugal": "ポルトガル",
-      "Qatar": "カタール",
-      "Republic of korea": "大韓民国",
-      "Republic of moldova": "モルドバ共和国",
-      "Romania": "ルーマニア",
-      "Russian federation": "ロシア連邦",
-      "Rwanda": "ルワンダ",
-      "Saint kitts and nevis": "セントクリストファー・ネービス",
-      "Saint lucia": "セントルシア",
-      "Saint vincent and the grenadines": "セントビンセント及びグレナディーン諸島",
-      "Samoa": "サモア",
-      "San marino": "サン・マリノ",
-      "Sao tome and principe": "サントメ・プリンシペ",
-      "Saudi arabia": "サウジアラビア",
-      "Senegal": "セネガル",
-      "Serbia": "セルビア",
-      "Seychelles": "セイシェル",
-      "Sierra leone": "シエラレオネ",
-      "Singapore": "シンガポール",
-      "Slovakia": "スロヴァキア",
-      "Slovenia": "スロヴェニア",
-      "Solomon islands": "ソロモン諸島",
-      "Somalia": "ソマリア",
-      "South africa": "南アフリカ共和国",
-      "South sudan": "南スーダン",
-      "Spain": "スペイン",
-      "Sri lanka": "スリランカ",
-      "Sudan": "スーダン",
-      "Suriname": "スリナム",
-      "Sweden": "スウェーデン",
-      "Switzerland": "スイス",
-      "Syrian arab republic": "シリア・アラブ共和国",
-      "Tajikistan": "タジキスタン",
-      "Thailand": "タイ",
-      "Timor-leste": "東ティモール",
-      "Togo": "トーゴ",
-      "Tokelau": "トケラウ",
-      "Tonga": "トンガ",
-      "Trinidad and tobago": "トリニダード・トバゴ",
-      "Tunisia": "チュニジア",
-      "Turkey": "トルコ",
-      "Turkmenistan": "トルクメニスタン",
-      "Tuvalu": "ツバル",
-      "Uganda": "ウガンダ",
-      "Ukraine": "ウクライナ",
-      "United arab emirates": "アラブ首長国連邦",
-      "United kingdom": "イギリス",
-      "United republic of tanzania": "タンザニア連合共和国",
-      "United States": "アメリカ合衆国",
-      "Uruguay": "ウルグアイ",
-      "Uzbekistan": "ウズベキスタン",
-      "Vanuatu": "バヌアツ",
-      "Venezuela": "ベネズエラ",
-      "Vietnam": "ベトナム",
-      "Yemen": "イエメン",
-      "Zambia": "ザンビア",
-      "Zimbabwe": "ジンバブエ"
+    "main": {
+        "title": "COVID-19 咳のデータ収集研究",
+        "logoIntro": "独立した非営利研究機関",
+        "note": "<strong>Please note:</strong> このフォームはデータ収集のみを目的としています。COVID-19の状態を予測したり、病気や障害、その他の健康状態を診断したりするものではありません。Virufyは研究を行っており、あなたが提供した情報をその研究のためだけに使用します。また、Virufyは医師の代わりにはなりませんので、ご自身の責任において医師の診断を受けるようにしてください。",
+        "paragraph1": "ようこそ! この調査は、約5分で完了します。",
+        "selectYourLanguage": "言語",
+        "paragraph2": "Covid-19 咳のデータ収集調査",
+        "selectCountry": "国を選択",
+        "region": "リージョン",
+        "selectRegion": "地域を選択",
+        "selectLocation": "所在地",
+        "patientId": "患者ID",
+        "hospitalId": "病院ID",
+        "regionRequired": "地域を選択してください",
+        "enterPatientId": "患者IDの入力",
+        "nextButton": "次のページ",
+        "createdBy": "作成者",
+        "installApp": "アプリとしてインストールする",
+        "addToHomeScreen": "ホーム画面に追加する",
+        "hello": "こんにちは。",
+        "patient": "患者さん",
+        "questionnaire": "アンケート",
+        "audioCollection": "オーディオコレクション",
+        "testResults": "テスト結果",
+        "supportedBy": "対応機種",
+        "visitWebsite": "ウェブサイトを見る",
+        "errorCountry": "現在、あなたの地域の咳を収集することはできません。近いうちにまたチェックしてみてください",
+        "noOptionsError": "オプションなし",
+        "noValueError": "結果は見つかりませんでした",
+        "countries": {
+            "Afghanistan": "アフガニスタン",
+            "Albania": "アルバニア",
+            "Algeria": "アルジェリア",
+            "Andorra": "アンドラ",
+            "Angola": "アンゴラ",
+            "Antigua and barbuda": "アンティグア・バーブーダ",
+            "Argentina": "アルゼンチン",
+            "Armenia": "アルメニア",
+            "Australia": "オーストラリア",
+            "Austria": "オーストリア",
+            "Azerbaijan": "アゼルバイジャン",
+            "Bahamas": "バハマ",
+            "Bahrain": "バーレーン",
+            "Bangladesh": "バングラデシュ",
+            "Barbados": "バルバドス",
+            "Belarus": "ベラルーシ",
+            "Belgium": "ベルギー",
+            "Belize": "ベリーズ",
+            "Benin": "ベナン",
+            "Bhutan": "ブータン",
+            "Bolivia": "ボリビア",
+            "Bosnia and herzegovina": "ボスニア・ヘルツェゴビナ",
+            "Botswana": "ボツワナ",
+            "Brazil": "ブラジル",
+            "Brunei darussalam": "ブルネイ・ダルサラーム",
+            "Bulgaria": "ブルガリア",
+            "Burkina faso": "ブルキナファソ",
+            "Burundi": "ブルンジ",
+            "Cabo verde": "カーボベルデ",
+            "Cambodia": "カンボジア",
+            "Cameroon": "カメルーン",
+            "Canada": "カナダ",
+            "Central african republic": "中央アフリカ共和国",
+            "Chad": "チャド",
+            "Chile": "チリ",
+            "China": "中国",
+            "Colombia": "コロンビア",
+            "Comoros": "コモロ",
+            "Congo": "コンゴ",
+            "Cook islands": "クック諸島",
+            "Costa rica": "コスタリカ",
+            "Croatia": "クロアチア",
+            "Cuba": "キューバ",
+            "Cyprus": "キプロス",
+            "Czechia": "チェコ共和国",
+            "Ivory Coast": "コートジボワール",
+            "Democratic republic of korea": "韓国民主共和国",
+            "Democratic republic of the congo": "コンゴ民主共和国",
+            "Denmark": "デンマーク",
+            "Djibouti": "ジブチ",
+            "Dominica": "ドミニカ共和国",
+            "Dominican republic": "ドミニカ共和国",
+            "Ecuador": "エクアドル",
+            "Egypt": "エジプト",
+            "El salvador": "エルサルバドル",
+            "Equatorial guinea": "赤道ギニア",
+            "Eritrea": "エリトリア",
+            "Estonia": "エストニア",
+            "Eswatini": "エスワティニ",
+            "Ethiopia": "エチオピア",
+            "Faroe islands": "フェロー諸島",
+            "Fiji": "フィジー",
+            "Finland": "フィンランド",
+            "France": "フランス",
+            "Gabon": "ガボン",
+            "Gambia": "ガンビア",
+            "Georgia": "ジョージア",
+            "Germany": "ドイツ",
+            "Ghana": "ガーナ",
+            "Greece": "ギリシャ",
+            "Grenada": "グレナダ",
+            "Guatemala": "グアテマラ",
+            "Guinea": "ギニア",
+            "Guinea-bissau": "ギニア・ビサウ",
+            "Guyana": "ガイアナ",
+            "Haiti": "ハイチ",
+            "Honduras": "ホンジュラス",
+            "Hungary": "ハンガリー",
+            "Iceland": "アイスランド",
+            "India": "インド",
+            "Indonesia": "インドネシア",
+            "Iran": "イラン",
+            "Iraq": "イラク",
+            "Ireland": "アイルランド",
+            "Israel": "イスラエル",
+            "Italy": "イタリア",
+            "Jamaica": "ジャマイカ",
+            "Japan": "日本",
+            "Jordan": "ヨルダン",
+            "Kazakhstan": "カザフスタン",
+            "Kenya": "ケニア",
+            "Kiribati": "キリバス",
+            "Kuwait": "クウェート",
+            "Kyrgyzstan": "キルギス共和国",
+            "Lao democratic republic": "ラオス民主共和国",
+            "Latvia": "ラトビア",
+            "Lebanon": "レバノン",
+            "Lesotho": "レソト",
+            "Liberia": "リベリア",
+            "Libya": "リビア",
+            "Lithuania": "リトアニア",
+            "Luxembourg": "ルクセンブルク",
+            "Madagascar": "マダガスカル",
+            "Malawi": "マラウイ",
+            "Malaysia": "マレーシア",
+            "Maldives": "モルディブ",
+            "Mali": "マリ",
+            "Malta": "マルタ",
+            "Marshall islands": "マーシャル諸島",
+            "Mauritania": "モーリタニア",
+            "Mauritius": "モーリシャス",
+            "Mexico": "メキシコ",
+            "Micronesia": "ミクロネシア",
+            "Monaco": "モナコ",
+            "Mongolia": "モンゴル",
+            "Montenegro": "モンテネグロ",
+            "Morocco": "モロッコ",
+            "Mozambique": "モザンビーク",
+            "Myanmar": "ミャンマー",
+            "Namibia": "ナミビア",
+            "Nauru": "ナウル",
+            "Nepal": "ネパール",
+            "Netherlands": "オランダ",
+            "New zealand": "ニュージーランド",
+            "Nicaragua": "ニカラグア",
+            "Niger": "ニジェール",
+            "Nigeria": "ナイジェリア",
+            "Niue": "ニウエ",
+            "North macedonia": "北マケドニア",
+            "Norway": "ノルウェー",
+            "Oman": "オマーン",
+            "Pakistan": "パキスタン",
+            "Palau": "パラオ",
+            "Palestine": "パレスチナ",
+            "Panama": "パナマ",
+            "Papua new guinea": "パプアニューギニア",
+            "Paraguay": "パラグアイ",
+            "Peru": "ペルー",
+            "Philippines": "フィリピン",
+            "Poland": "ポーランド",
+            "Portugal": "ポルトガル",
+            "Qatar": "カタール",
+            "Republic of korea": "朝鮮民主主義人民共和国",
+            "Republic of moldova": "モルドバ共和国",
+            "Romania": "ルーマニア",
+            "Russian federation": "ロシア連邦",
+            "Rwanda": "ルワンダ",
+            "Saint kitts and nevis": "セントクリストファー・ネイビス",
+            "Saint lucia": "セント・ルシア",
+            "Saint vincent and the grenadines": "セントビンセントおよびグレナディーン諸島",
+            "Samoa": "サモア",
+            "San marino": "サンマリノ",
+            "Sao tome and principe": "サントメ・プリンシペ",
+            "Saudi arabia": "サウジアラビア",
+            "Senegal": "セネガル",
+            "Serbia": "セルビア",
+            "Seychelles": "セーシェル",
+            "Sierra leone": "シエラレオネ",
+            "Singapore": "シンガポール",
+            "Slovakia": "スロバキア",
+            "Slovenia": "スロベニア",
+            "Solomon islands": "ソロモン諸島",
+            "Somalia": "ソマリア",
+            "South africa": "南アフリカ共和国",
+            "South sudan": "南スーダン",
+            "Spain": "スペイン",
+            "Sri lanka": "スリランカ",
+            "Sudan": "スーダン",
+            "Suriname": "スリナム",
+            "Sweden": "スウェーデン",
+            "Switzerland": "スイス",
+            "Syrian arab republic": "シリア・アラブ共和国",
+            "Tajikistan": "タジキスタン共和国",
+            "Thailand": "タイ",
+            "Timor-leste": "東ティモール",
+            "Togo": "トーゴ共和国",
+            "Tokelau": "トケラウ",
+            "Tonga": "トンガ",
+            "Trinidad and tobago": "トリニダード・トバゴ",
+            "Tunisia": "チュニジア",
+            "Turkey": "トルコ",
+            "Turkmenistan": "タークメニスタン",
+            "Tuvalu": "ツバル",
+            "Uganda": "ウガンダ",
+            "Ukraine": "ウクライナ",
+            "United arab emirates": "アメリカ合衆国",
+            "United kingdom": "イギリス",
+            "United republic of tanzania": "タンザニア連合共和国",
+            "United States": "アメリカ連邦",
+            "Uruguay": "ウルグアイ",
+            "Uzbekistan": "ウズベキスタン共和国",
+            "Vanuatu": "バヌアツ",
+            "Venezuela": "ベネズエラ",
+            "Vietnam": "ベトナム",
+            "Yemen": "イエメン",
+            "Zambia": "ザンビア",
+            "Zimbabwe": "ジンバブエ"
+        }
+    },
+    "helpVirufy": {
+        "title": "会社概要",
+        "ourSupporters": "サポーター",
+        "introParagraph": "私たちの研究にようこそ! このページは、5分程度でご覧いただけます。始める前に、何を取り上げるかについて説明します。",
+        "aboutParagraph": "<0>Virufyは<strong>非営利団体</strong>で、低所得国のために、スマートフォンを使って、<strong>人工知能（Al）を使って咳のパターンからCOVID-19をスクリーニングする手段を、迅速かつ無料で開発しようとしています</0><1>。</1><2>世界中の人々から<strong>咳の録音</strong>を集めることで、VirufyはCOVIDのユニークな音のパターンを認識するAIアルゴリズムの堅牢性を向上させています。</2><3><strong>あなたの咳を私たちの研究に<strong>貢献することで、世界中の何百万人もの人々に利益をもたらす力があります。",
+        "bulletsIntro": "<strong>Intro: </strong>会社概要と安全に関する注意事項",
+        "bulletCough": "<strong>電話に向かって咳をする</strong>。",
+        "bulletQuestions": "<strong>健康に関する簡単な質問</strong>",
+        "nextButton": "次のページ"
+    },
+    "consent": {
+        "title": "研究への同意",
+        "paragraph1": "Virufyはお客様のプライバシーを重視しており、ライセンスを受けたデータプライバシーの専門家がアドバイスを行っています。ご提供いただいた情報や記録は、<1>プライバシーポリシー</1>および同意書に記載された目的にのみ使用されます。同意書をお読みください。",
+        "paragraph2Title": "Virufy Explicit Consent to Collect Personal Information and Participate in Research Form（個人情報の収集と研究への参加に関する明確な同意書",
+        "paragraph2": "COVID-19のスクリーニングのためのスマートフォンデータの収集",
+        "paragraph3": "以下のボックスにチェックを入れることで、Virufyのプライバシーポリシーを読み、理解し、Virufyが以下に列挙されているカテゴリーの生体情報および健康情報を収集・処理することに明示的に同意することになります。",
+        "paragraph3_brazil": "お客様がブラジル国内にいる場合、一般個人データ保護法（LGPD）の目的のために、自由、情報提供、および明確な宣告による「同意」は、当社が機密個人データを処理する際の法的根拠となります。",
+        "certifyBrazil": "私は、私が18歳以上であることを証明し、本同意書の条項に同意し、私の個人情報、生体情報、および健康情報の収集および処理に明示的に同意します。",
+        "certify": "私は、私が18歳以上であり、本同意書の条項に同意することを証明します。",
+        "agree": "私は、Virufyの<1>プライバシーポリシー</1>を読み、理解し、その条件に同意します。",
+        "collection": "私はここに、私の個人情報、生体情報、および健康情報の収集と処理に明示的に同意します。",
+        "collectionColombia": "",
+        "detection": "私はここに、処理が上記の目的のために行われること、特に、デバイスベースのCOVID-19検出のための人工知能アルゴリズムの開発に必要なデータセットの研究とコンパイルのために行われることを認め、同意します。",
+        "detectionBrazil": "",
+        "signs": "私はここに、処理が上記の目的のために行われること、特にCOVID-19の兆候をよりよく判断するために咳の音声記録を分析する人工知能アルゴリズムを訓練するために行われることを認め、同意します。",
+        "biometric": "私はここに、本同意書および/またはVirufyプライバシーポリシーに記載されているように、私の個人情報、生体情報、および健康情報が第三者と共有されることに明示的に同意します。",
+        "pleaseConfirm": "以下をご確認ください。",
+        "nextButton": "次へ",
+        "jumpToBottom": "下へジャンプ"
+    },
+    "beforeStart": {
+        "title": "最後に、始める前に...",
+        "subtitle": "<strong>安全性を確保するために、次のことをお勧めします：</strong>。",
+        "advise_list": [
+            "ご自身の機器を使用し、必要に応じてマスクを着用してください。",
+            "咳や話し声を録音した後は、デバイスとその周辺の表面を消毒してください。",
+            "咳のリスクを高める基礎疾患をお持ちの方は、参加する前に医療従事者に確認してください。",
+            "症状が悪化していると感じた場合は、お近くの医療機関にご相談ください。"
+        ],
+        "startButton": "次へ"
+    },
+    "recordingsIntroduction": {
+        "recordCough": {
+            "header": "咳を記録する",
+            "title": "手順",
+            "intro1": "他の人から少なくとも<strong>20フィート（6m）</strong>離れた<strong>静かな環境</strong>を見つけ、布やサージカルマスクを着用してください。体調が悪いときは、座ってください。",
+            "intro2Cough": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。咳を強くしすぎないように注意しましょう。",
+            "intro2Breath": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しく呼吸したり、強すぎたりしないでください",
+            "intro2Speech": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しくまたは強引に話さないでください"
+        },
+        "recordSpeech": {
+            "header": "自分の声を録音する",
+            "intro1": "あなたの声は、COVIDがどんな音なのかを知るのに役立ちます。録音を押して、1から10まではっきりと数えてください」。"
+        },
+        "next": "次へ",
+        "retryButton": "リトライ",
+        "releaseButtonStart": "離すと録音開始",
+        "releaseButtonStop": "手を離すと録音が止まります",
+        "shortRecording": "最低でも5秒間は録音してください"
+    },
+    "recordingsRecord": {
+        "recordCough": {
+            "header": "咳を録音する"
+        },
+        "recordBreath": {
+            "header": "呼吸を記録する"
+          },
+        "recordSpeech": {
+            "header": "スピーチを録音する"
+        },
+        "next": "続ける",
+        "delete": "削除",
+        "textCough": "録音ボタンをタップして、携帯電話の下部に向かって<strong>意図的に</strong>咳を<strong>3回</strong>してください。終わったら、停止ボタンをタップします。",
+        "textSpeech": "下の録画ボタンをタップして、<strong>5秒以上「あーん」と声を出し続けます。</strong>終わったら、停止ボタンをタップします。",
+        "textNext": "続ける」をクリックして次に進みます。",
+        "textCount": "記録ボタンをクリックし、1から10まではっきりと数えます。完了したら、「続ける」をクリックします。",
+        "upload": "自分のファイルをアップロードする",
+        "record": "記録する",
+        "recordStop": "停止する"
+    },
+    "recordingsRecordManual": {
+        "header": "ファイルのアップロード",
+        "addFile": "自分のファイルを追加する",
+        "constraint": "5MBまで追加可能",
+        "next": "完了",
+        "micError": "マイクにアクセスできない場合 音声ファイル（.wav/.wave/.mp3/.ogg）のアップロード",
+        "micErrorDescription": "ここに音声ファイルをアップロードしてください。",
+        "fileDurationTooShort": "3秒以上のファイルをアップロードしてください。",
+        "fileSizeTooBig": "5MB以下のファイルをアップロードしてください。",
+        "fileRequired": "ファイルをアップロードしてください",
+        "uploadFile": "ファイルをアップロードする"
+    },
+    "recordingsListen": {
+        "recordCough": {
+            "header": "咳を録音する",
+            "intro1": "咳をするときは、周りの人に迷惑をかけないようにしてください。体調が悪いときは座ってください。",
+            "intro2": "静かな環境で、録音ボタンを押して、意図的に3～5回程度の咳をしてください。"
+        },
+        "recordBreath": {
+            "header": "呼吸を記録する"
+          },
+        "recordSpeech": {
+            "header": "咳を録音する",
+            "intro1": "あなたの声を録音することで、COVIDの音を知ることができます。録音を押して、1から10まではっきりと数えてください。"
+        },
+        "title": "アップロード完了",
+        "subtitle": "ご自由にお聴きください。",
+        "next": "続ける",
+        "retake": "リテイク"
+    },
+    "questionary": {
+        "headerText": "質問",
+        "headerQuestions": "質問",
+        "title": "簡単な質問に答えてください。",
+        "caption": "あなたの能力の範囲内でお答えください。",
+        "allThatApply": "(該当するものをすべて選択してください。)",
+        "testTaken": {
+            "question": "COVID-19に関する以下のテストのうち、どれを受けましたか？",
+            "options": {
+                "pcr": "PCRベースの検査",
+                "antibody": "抗体検査",
+                "unsure": "わからない",
+                "antigen": "抗原検査(迅速)",
+                "neither": "どちらともいえない"
+            }
+        },
+        "patient": {
+            "resultPcrTest": {
+                "question": "患者さん<1><0>{patientId}}</0></1>のPCR法によるCOVID-19検査の結果はどうでしたか？"
+            },
+            "resultAntigenTest": "患者さん<1><0>{patientId}</0></1>の迅速抗原COVID-19検査の結果はどうでしたか？"
+        },
+        "headerText2": "フォローアップ質問",
+        "whenPcrTest": "PCR法によるCOVID-19検査を受けたのはいつですか？わからない場合は推定してください。",
+        "resultPcrTest": {
+            "question": "PCR法によるCOVID-19検査の結果はどうでしたか？",
+            "options": {
+                "positive": "陽性",
+                "negative": "陰性",
+                "pending": "保留",
+                "unsure": "わからない"
+            }
+        },
+        "whenAntibodyTest": "COVID-19の抗体検査を受けたのはいつですか？不明な場合は推定値を入力してください。",
+        "resultAntibodyTest": {
+            "question": "COVID-19に対する抗体検査の結果はどうでしたか？",
+            "options": {
+                "positive": "陽性",
+                "negative": "陰性",
+                "pending": "保留",
+                "unsure": "わからない"
+            }
+        },
+        "whenAntigenTest": "COVID-19の抗原検査を受けたのはいつですか？不明な場合は推定値を入力してください。",
+        "resultAntigenTest": {
+            "question": "COVID-19の抗原検査の結果はどうでしたか？",
+            "options": {
+                "positive": "陽性",
+                "negative": "陰性",
+                "pending": "保留",
+                "unsure": "わからない"
+            }
+        },
+        "vaccine": {
+            "question": "COVID-19ワクチンを接種しましたか？",
+            "options": {
+                "yes": "はい",
+                "no": "受けていない"
+            }
+        },
+        "age": "年齢を入力してください。",
+        "ageGroup": "あなたの年齢を入力してください。",
+        "enterAge": "年齢を入力してください",
+        "50+": "50歳以上",
+        "unselectedAgeGroup": "年齢区分を選択してください",
+        "gender": {
+            "gender": "性別を入力してください。",
+            "question": "あなたの性別は何ですか？",
+            "note": "自分をどのように表現しますか？",
+            "options": {
+                "male": "男性",
+                "female": "女性",
+                "notToSay": "回答を拒否する",
+                "other": "その他",
+                "transgender": "トランスジェンダー",
+                "selfDescribe": "自分で説明してください"
+            }
+        },
+        "biologicalSex": {
+            "question": "あなたの生物学的性別は何ですか？",
+            "note": "あなたの出生時に割り当てられた性別は、出生証明書の原本では何ですか？この情報は、声の響きが性別によって異なるため、AIがCOVID-19を検出するために重要です。",
+            "options": {
+                "male": "男性",
+                "female": "女性",
+                "notToSay": "回答を拒否する"
+            }
+        },
+        "smokeLastSixMonths": {
+            "question": "過去6ヶ月以内に定期的にタバコを吸ったことがありますか？",
+            "note": "これには、タバコ、フッカー、タバコパイプ、マリファナ、ニコチン入りベイプなどが含まれます。",
+            "options": {
+                "yes": "はい",
+                "no": "いいえ"
+            }
+        },
+        "symptoms": {
+            "question": "<strong>現在、以下のどの症状がありますか</strong>？",
+            "options": {
+                "bodyAches": "体の痛み",
+                "dryCough": "咳（乾いた咳",
+                "wetCough": "咳（湿った、粘液を伴う",
+                "feverChillsSweating": "発熱、寒気、発汗",
+                "headaches": "頭痛",
+                "lossTasteOrSmell": "味覚や嗅覚の喪失",
+                "worseCough": "咳の増加または悪化",
+                "runnyNose": "鼻水が出る",
+                "breathShortness": "息切れ",
+                "soreThroat": "喉の痛み",
+                "chestTightness": "胸の圧迫感",
+                "vomitingAndDiarrhea": "嘔吐と下痢",
+                "none": "なし",
+                "weakness": "体力低下",
+                "other": "その他",
+                "addOther": "+ その他を追加"
+            },
+            "addOtherPlaceholder": "その他の症状"
+        },
+        "symptomsDate": "この症状が始まったのは、およそ何日前ですか？",
+        "enterDays": "日数を入力してください",
+        "options": {
+            "today": "今日",
+            "days": "1-3日前",
+            "week": "1週間前",
+            "overWeek": "1週間以上前"
+        },
+        "respiration": {
+            "question": "<strong>現在かかっている呼吸器系の病気はどれですか</strong>？",
+            "options": {
+                "asthma": "気管支喘息",
+                "bronchitis": "気管支炎",
+                "emphysema": "COPD（慢性閉塞性肺疾患）／肺気腫",
+                "otherChronic": "その他の慢性肺疾患",
+                "pneumonia": "肺炎",
+                "tuberculosis": "結核(Tuberculosis)",
+                "none": "なし",
+                "addOther": "+ その他を追加"
+            },
+            "addOtherPlaceholder": "その他の疾患"
+        },
+        "medical": {
+            "question": "<strong>現在かかっている病気はどれですか？",
+            "options": {
+                "allergies": "アレルギー",
+                "asthma": "気管支喘息",
+                "bronchitis": "気管支炎",
+                "congestiveHeart": "うっ血性心不全",
+                "emphysema": "COPD（慢性閉塞性肺疾患）／肺気腫",
+                "obesity": "極度の肥満",
+                "heartDisease": "心臓病",
+                "hiv": "HIV、AIDS、または免疫機能の低下",
+                "lungCancer": "肺がん",
+                "otherChronic": "その他の慢性肺疾患",
+                "pneumonia": "肺炎",
+                "pulmonary": "肺線維症",
+                "reflux": "逆流性疾患",
+                "sinusitis": "副鼻腔炎",
+                "tuberculosis": "結核(Tuberculosis)",
+                "none": "なし",
+                "other": "その他",
+                "addOther": "+ その他を追加"
+            },
+            "addOtherPlaceholder": "その他の症状"
+        },
+        "proceedButton": "最後のステップに進む",
+        "stepOf": "の",
+        "nextButton": "次の",
+        "submitting": "送信中..."
+    },
+    "beforeSubmit": {
+        "submitButton": "送信",
+        "submitError": "エラーが発生しました。もう一度お試しください。"
+    },
+    "thankyou": {
+        "title": "ご応募ありがとうございました。",
+        "paragraph1_cough": "あなたの咳の寄付でVirufyは世界を変えるために一歩近づきます。",
+        "paragraph1_voice": "あなたの咳の寄付でVirufyは世界を変えるために一歩近づきます。",
+        "paragraph2": "あなた専用の投稿ID:<br/><2>{{submissionId}}</2>を入力してください。",
+        "paragraph2Patient": "あなただけの患者ID:<br/><2>{{patientId}}</2>です。",
+        "paragraph3": "今後、Virufyに匿名化されたデータの削除を依頼する際に必要となりますので、この投稿IDは必ず保管してください。<br/><br/>その後、咳や発熱、息切れなどの症状が出た場合は、再度、最新の咳の音を投稿してください。",
+        "downloadApp": "<1>アプリのインストールはこちら</1>。",
+        "paragraph4": "アプリケーションの改善のために<1>フィードバック</1>を提供し、<3>Webサイト</3>をチェックしてください。",
+        "paragraph5": "<1>ニュース</1>でVirufyについてもっと知ってください!",
+        "returnButton": "別の咳を送信する",
+        "returnMain": "メインメニューに戻る"
+    },
+    "footerReportProblems": {
+        "message": "何か問題がありますか？エラーを報告する"
+    },
+    "stayInTouch": {
+        "title": "お問い合わせはこちらから",
+        "cards": [
+            {
+                "title": "寄付をする",
+                "description": "継続的な研究開発費の支援",
+                "cta": {
+                    "label": "今すぐ寄付する",
+                    "link": "https://charity.gofundme.com/o/en/campaign/virufy"
+                }
+            },
+            {
+                "title": "もっと詳しく",
+                "description": "Virufyについてもっと知りたい方は、こちらをご覧ください。",
+                "cta": {
+                    "label": "Virufyのウェブサイトを見る",
+                    "link": "https://virufy.org/"
+                }
+            },
+            {
+                "title": "参加する",
+                "description": "COVID-19との闘いにあなたのスキルを活かしてみませんか？",
+                "cta": {
+                    "label": "今すぐ応募する",
+                    "link": "https://virufy.org/join"
+                }
+            }
+        ]
+    },
+    "socialIcons": {
+        "title": "フォローする"
     }
-  },
-  "helpVirufy": {
-    "title": "団体概要",
-    "ourSupporters": "協力者",
-    "introParagraph": "ようこそ！こちらの調査は５分ほどで終わります。まずはじめに、私たちの紹介をさせていただきます。:",
-    "aboutParagraph": "<0>Virufy は世界中、特に発展途上国でのコロナウイルス感染症拡大を食い止めるため、<strong>人工知能（AI）を活用し、咳のパターンによってコロナウイルスを検知する</strong>方法を開発している<strong>非営利団体</strong>です。我々の調査はスマートフォンを用いた迅速かつ無料で行われています。</0><1>私たちのチームは<strong>25か国</strong>以上の研究者で構成されています。 <3>私たちの研究</3> から、人工知能によってコロナウイルスに特有な咳の特徴を見分けることができる可能性が示唆されています。</1><2>世界中の人々から <strong>咳の録音データ</strong>を集めることで、コロナウイルスの咳に特徴的な音のパターンをAIが認知する精度をアップさせています。</2><3>私たちの調査に<strong>咳を寄付する</strong>ことで、<strong>あなたの力で</strong>全世界の人々の役に立つことができるのです。</3>",
-    "bulletsIntro": "<strong>はじめに: </strong>団体概要・安全上の留意事項",
-    "bulletCough": "<strong>機器に咳を記録</strong>",
-    "bulletQuestions": "<strong>健康状態に関する質問</strong>",
-    "nextButton": "次へ"
-  },
-  "consent": {
-    "title": "調査への同意",
-    "paragraph1": "Virufy は個人情報保護の専門家の指導の下、プライバシーを保護します。いただいた情報は<1>プライバシーポリシー</1>および同意フォームに記載されている目的のみに使用されます。同意フォームの内容をご確認ください:",
-    "paragraph2Title": "Virufy 個人情報取得および調査への回答に係る同意",
-    "paragraph2": "\"コロナウイルス感染症検査のための音声データ取得\"",
-    "paragraph3": "下のチェックボックスにチェックを入れると、Virufyのプライバシーポリシーを理解し、Virufyが下記に挙げる生体および健康状態に関するの情報を収集し、処理することに同意したことになります。",
-    "certifyBrazil": "私は18歳以上であることを証明し、同意書の内容に同意し、個人情報、生体情報、および健康状態に関する情報の取得及び処理について承諾します。",
-    "certify": "私は18歳以上であることを証明し、同意書の内容を承諾します。",
-    "agree": "Virufyの<1>プライバシーポリシー</1>を読み、理解した上で内容に同意します。 ",
-    "collection": "個人情報、生体情報、および健康状態に関する情報の取得及び処理について承諾します。.",
-    "collectionColombia": "",
-    "detection": "上述の目的、そして特に機器を使ったコロナウイルス検知のための人工知能による処理方法開発に必要なデータ収集のために処理が行われることに同意します。",
-    "detectionBrazil": "",
-    "signs": "上述の目的、そして特にコロナウイルスの特徴を見分けるため、人工知能が咳の音声データを分析するトレーニングのために、処理が行われることに同意します。",
-    "biometric": "個人情報、生体情報および健康状態に関する情報について、同意書やVirufyプライバシーポリシーで説明されているとおり、第三者に提供されることに同意します。",
-    "pleaseConfirm": "以下ご確認ください。:",
-    "nextButton": "次へ",
-    "jumpToBottom": "最下部へ"
-  },
-  "beforeStart": {
-    "title": "始める前に…",
-    "subtitle": "<strong>安全を確保するため、以下をご確認ください:</strong>",
-    "advise_list": [
-      "ご自身の機器を使い、適切にマスクをご着用ください。",
-      "咳や音声を録音した後、機器や周囲にあるものを消毒してください。",
-      "咳をすることで危険を伴うような健康状況の場合、調査に参加する前にかかりつけ医にご相談ください。",
-      "症状が悪化している場合はお近くの医療機関にご連絡ください。"
-    ],
-    "startButton": "次へ"
-  },
-  "recordingsIntroduction": {
-    "recordCough": {
-      "header": "咳を録音",
-      "title": "説明",
-      "intro1": "周囲の人から<strong>6m</strong>以上離れた<strong>静かな場所</strong> で、布もしくは医療用のマスクを着用してください。気分が悪くなった場合は座ってください。",
-      "intro2Cough": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。咳を強くしすぎないように注意しましょう。",
-      "intro2Breath": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しく呼吸したり、強すぎたりしないでください",
-      "intro2Speech": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しくまたは強引に話さないでください"
-    },
-    "recordBreath": {
-      "header": "呼吸を記録する"
-    },
-    "recordSpeech": {
-      "header": "咳を録音",
-      "intro1": "音声データもコロナウイルスの識別に役立ちます！録音ボタンを押して、１から１０まではっきりと声に出して数えてください。"
-    },
-    "next": "次へ",
-    "retryButton": "録音しなおす",
-    "releaseButtonStart": "録音するには解除してください。",
-    "releaseButtonStop": "録音を停止するには解除してください。",
-    "shortRecording": "5秒以上で録音してください。"
-  },
-  "recordingsRecord": {
-    "recordCough": {
-      "header": "咳を録音"
-    },
-    "recordBreath": {
-      "header": "呼吸を記録する"
-    },
-    "recordSpeech": {
-      "header": "スピーチを録音"
-    },
-    "next": "続ける",
-    "delete": "削除",
-    "textCough": "録音ボタンを押して スマートフォンの下部に向かって<strong>咳をしてください。</strong> 咳と咳の間で<strong>深く息を吸って</strong> <strong>３回</strong>咳をしてください。終わったら停止ボタンを押してください。",
-    "textSpeech": "下部にある録音ボタンを押して <strong>「あー」と５秒以上言い続けてください。</strong> 終わったら、停止ボタンを押してください。",
-    "textNext": "次へボタンを押して進んでください。.",
-    "textCount": "録音ボタンを押して、はっきりと１から１０まで声に出して数えてください。終わったら次へボタンを押してください。",
-    "upload": "ご自身のファイルをアップロードしてください。",
-    "record": "録音",
-    "recordStop": "停止"
-  },
-  "recordingsRecordManual": {
-    "header": "ファイルをアップロード",
-    "addFile": "ファイルを追加",
-    "constraint": "5 MBまで追加できます",
-    "next": "完了",
-    "micError": "マイクにアクセスできない場合は、音声ファイル(.wav/.wave/.mp3/.ogg)をアップロードしてください ",
-    "micErrorDescription": "こちらに音声ファイルをアップロードしてください。",
-    "fileDurationTooShort": "３秒以上のファイルをアップロードしてください。",
-    "fileSizeTooBig": "5 MBより小さいファイルをアップロードしてください。",
-    "fileRequired": "ファイルをアップロードしてください。",
-    "uploadFile": "ファイルをアップロード"
-  },
-  "recordingsListen": {
-    "recordCough": {
-      "header": "咳を録音",
-      "intro1": "周囲の人から離れて咳をしましょう。気分が悪くなったら座ってください。",
-      "intro2": "静かな場所で録音ボタンを押し、３～５回意図的に咳をしてください。 "
-    },
-    "recordBreath": {
-      "header": "呼吸を記録する"
-    },
-    "recordSpeech": {
-      "header": "スピーチを録音",
-      "intro1": "音声データもコロナウイルスの識別に役立ちます！録音ボタンを押して、１から１０まではっきりと声に出して数えてください。"
-    },
-    "title": "アップロード完了",
-    "subtitle": "録音を聴くことができます。",
-    "next": "次へ",
-    "retake": "録音しなおす"
-  },
-  "questionary": {
-    "headerText": "質問",
-    "headerQuestions": "質問",
-    "title": "短い質問にご回答ください。",
-    "caption": "差支えない範囲でご回答ください。",
-    "allThatApply": "(複数選択可)",
-    "testTaken": {
-      "question": "コロナウイルス検出のためにどの検査を受けましたか。",
-      "options": {
-        "pcr": "PCR検査",
-        "antibody": "抗体検査",
-        "unsure": "わからない",
-        "antigen": "抗原検査(簡易)",
-        "neither": "受けていない"
-      }
-    },
-    "patient": {
-      "resultPcrTest": {
-        "question": "患者<1><0>{{patientId}}</0></1>のPCR検査の結果はどうでしたか。"
-      },
-      "resultAntigenTest": "患者 <1><0>{{patientId}}</0></1>'の簡易抗原検査の結果はどうでしたか。"
-    },
-    "headerText2": "補足質問",
-    "whenPcrTest": "コロナウイルスのPCR検査を受けたのはいつですか？わからない場合はおおよその時期をお答えください。",
-    "resultPcrTest": {
-      "question": "PCR検査の結果はどうでしたか？",
-      "options": {
-        "positive": "陽性",
-        "negative": "陰性",
-        "pending": "保留",
-        "unsure": "わからない"
-      }
-    },
-    "whenAntibodyTest": "コロナウイルスの抗体検査を受けたのはいつですか？わからない場合はおおよその時期をお答えください。",
-    "resultAntibodyTest": {
-      "question": "抗体検査の結果はどうでしたか。",
-      "options": {
-        "positive": "陽性",
-        "negative": "陰性",
-        "pending": "保留",
-        "unsure": "わからない"
-      }
-    },
-    "whenAntigenTest": "コロナウイルスの抗原検査を受けたのはいつですか？わからない場合はおおよその時期をお答えください。",
-    "resultAntigenTest": {
-      "question": "抗原検査の結果はどうでしたか。",
-      "options": {
-        "positive": "陽性",
-        "negative": "陰性",
-        "pending": "保留",
-        "unsure": "わからない"
-      }
-    },
-    "vaccine": {
-      "question": "コロナウイルスのワクチンを接種しましたか？",
-      "options": {
-        "yes": "はい",
-        "no": "いいえ"
-      }
-    },
-    "age": "年齢:",
-    "ageGroup": "年齢をご入力ください。",
-    "enterAge": "年齢を入力",
-    "50+": "50歳以上",
-    "unselectedAgeGroup": "年代を選択",
-    "gender": {
-      "gender": "性別: ",
-      "question": "性別を教えてください。",
-      "note": "ご自身の性自認についてお答えください。",
-      "options": {
-        "male": "男性",
-        "female": "女性",
-        "notToSay": "答えたくない",
-        "other": "その他",
-        "transgender": "トランスジェンダー",
-        "selfDescribe": "自分の言葉で説明したい"
-      }
-    },
-    "biologicalSex": {
-      "question": "生物学的な性別を教えてください",
-      "note": "出生児に指定された、出生届に記載された性別は何ですか？性別によって音声は多様なため、この情報は人工知能がコロナウイルスを検知するために重要なものとなります。",
-      "options": {
-        "male": "男性",
-        "female": "女性",
-        "notToSay": "答えたくない"
-      }
-    },
-    "smokeLastSixMonths": {
-      "question": "過去６カ月間の間、定期的に喫煙していた期間がありますか？",
-      "note": "タバコ、水ギセル、パイプ、マリファナ、ニコチン入りの電子タバコを含む。",
-      "options": {
-        "yes": "はい",
-        "no": "いいえ"
-      }
-    },
-    "symptoms": {
-      "question": "<strong>現在以下のような症状がありますか？</strong>",
-      "options": {
-        "bodyAches": "体の痛み",
-        "dryCough": "咳 (空咳)",
-        "wetCough": "咳 (粘性のある湿った咳)",
-        "feverChillsSweating": "発熱、悪寒、もしくは発汗",
-        "headaches": "頭痛",
-        "lossTasteOrSmell": "味覚・嗅覚がないl",
-        "worseCough": "最近咳が出始めた、もしくは悪化している",
-        "runnyNose": "鼻水",
-        "breathShortness": "呼吸困難",
-        "soreThroat": "喉の痛み",
-        "chestTightness": "胸が締め付けられる",
-        "vomitingAndDiarrhea": "嘔吐、下痢",
-        "none": "特にない",
-        "weakness": "弱っている",
-        "other": "その他",
-        "addOther": "+ その他を追加"
-      },
-      "addOtherPlaceholder": "その他の症状"
-    },
-    "symptomsDate": "これらの症状はどれくらい前から出始めましたか？",
-    "enterDays": "期間を入力",
-    "options": {
-      "today": "今日",
-      "days": "1-3日前",
-      "week": "1週間前",
-      "overWeek": "1週間以上前"
-    },
-    "respiration": {
-      "question": "<strong>現在以下のような呼吸器の症状はありますか？</strong>",
-      "options": {
-        "asthma": "喘息",
-        "bronchitis": "気管支炎",
-        "emphysema": "慢性閉塞性肺疾患・肺気腫",
-        "otherChronic": "その他の慢性的な肺疾患",
-        "pneumonia": "肺炎",
-        "tuberculosis": "結核",
-        "none": "特になし",
-        "addOther": "+ その他を追加"
-      },
-      "addOtherPlaceholder": "その他の症状"
-    },
-    "medical": {
-      "question": "<strong>現在以下のような症状はありますか？</strong>",
-      "options": {
-        "allergies": "アレルギー",
-        "asthma": "喘息",
-        "bronchitis": "気管支炎",
-        "congestiveHeart": "うっ血性心不全",
-        "emphysema": "慢性閉塞性肺疾患・肺気腫",
-        "obesity": "極度の肥満",
-        "heartDisease": "心臓疾患",
-        "hiv": "HIV・エイズ・もしくは免疫システムの障害",
-        "lungCancer": "肺がん",
-        "otherChronic": "その他の慢性的な肺疾患",
-        "pneumonia": "肺炎",
-        "pulmonary": "肺線維症",
-        "reflux": "胃食道逆流症",
-        "sinusitis": "副鼻腔炎",
-        "tuberculosis": "結核",
-        "none": "特になし",
-        "other": "その他",
-        "addOther": "+ その他を追加"
-      },
-      "addOtherPlaceholder": "その他の症状"
-    },
-    "proceedButton": "最後のページへ",
-    "stepOf": "of",
-    "nextButton": "次へ",
-    "submitting": "提出しています..."
-  },
-  "beforeSubmit": {
-    "submitButton": "提出",
-    "submitError": "エラーが発生しました。再度お試しください。"
-  },
-  "thankyou": {
-    "title": "ご提出ありがとうございます。",
-    "paragraph1_cough": "咳を寄付いただけたことで、Virufyが目指す世界に一歩近づきました。",
-    "paragraph1_voice": "咳を寄付いただけたことで、Virufyが目指す世界に一歩近づきました。",
-    "paragraph2": "あなたの提出ID:<br/><2>{{submissionId}}</2>",
-    "paragraph2Patient": "あなたの患者ID:<br/><2>{{patientId}}</2>",
-    "paragraph3": "ご自身の匿名化データをVirufyに削除依頼する際に必要となりますので、提出IDは大切に保管してください。<br/><br/>今後、咳や熱、呼吸困難等の症状が出てきた場合は、再度最新の咳のデータをご提出願います。",
-    "downloadApp": "こちらをクリックして <1>アプリをインストール</1>",
-    "paragraph4": "アプリ改善のための<1>ご意見</1>をお待ちしております。また、私たちの<3>Webサイト</3>も是非チェックしてください！",
-    "paragraph5": "<1>ニュース</1>でVirufyの最新情報をチェック！",
-    "returnButton": "新しく咳を提出する",
-    "returnMain": "メインメニューに戻る"
-  },
-  "footerReportProblems": {
-    "message": "不具合がありましたか？エラーを報告してください。"
-  },
-  "stayInTouch": {
-    "title": "今後ともよろしくお願いいたします！",
-    "cards": [
-      {
-        "title": "寄付",
-        "description": "現在進行中の研究・開発費を支援する",
-        "cta": {
-          "label": "寄付する",
-          "link": "https://charity.gofundme.com/o/en/campaign/virufy"
-        }
-      },
-      {
-        "title": "詳細",
-        "description": "Webサイトを見てVirufyのことをもっと知る",
-        "cta": {
-          "label": "Virufyのサイトへ",
-          "link": "https://virufy.org/"
-        }
-      },
-      {
-        "title": "プロジェクトに参加",
-        "description": "コロナウイルス感染症を食い止めるために力を貸してください",
-        "cta": {
-          "label": "応募する",
-          "link": "https://virufy.org/join"
-        }
-      }
-    ]
-  },
-  "socialIcons": {
-    "title": "フォロー"
-  }
 }
