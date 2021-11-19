@@ -78,6 +78,10 @@ const Step2 = ({
       } else {
         history.goBack();
       }
+    } else if (previousStep) {
+      history.push(previousStep);
+    } else {
+      history.goBack();
     }
   }, [state, history, otherSteps, previousStep, patientId]);
 
