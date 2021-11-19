@@ -390,7 +390,7 @@ const ListenAudio = ({
           </PlayerPlayButton>
         </PlayerPlayContainer>
       </MainContainer>
-      {((!patientId && activeStep) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech')) && (
+      {((!patientId && activeStep) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech') || (patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourBreath')) && (
         <Portal>
           <WizardButtons
             invert
@@ -400,14 +400,14 @@ const ListenAudio = ({
         </Portal>
       )}
 
-      {((patientId && !allowSpeechIn.includes(country)) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
+      {((patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourBreath') || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
         <Portal>
           { /* ReCaptcha  */}
           <Recaptcha onChange={setCaptchaValue} />
           {submitError && (
-          <TempBeforeSubmitError>
-            {submitError}
-          </TempBeforeSubmitError>
+            <TempBeforeSubmitError>
+              {submitError}
+            </TempBeforeSubmitError>
           )}
           <WizardButtons
             invert
