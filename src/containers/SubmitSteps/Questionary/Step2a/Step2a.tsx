@@ -27,7 +27,13 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.string(),
+  ageGroup: Yup.string().required().test('age-invalid', '', value => {
+    let result = true;
+    if (value && !value.match(/^[0-9]+$/)) {
+      result = false;
+    }
+    return result;
+  }),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
