@@ -301,6 +301,7 @@
     "next": "Devam",
     "delete": "Sil",
     "textCough": "Kayıt düğmesine dokunun ve her öksürük arasında <strong>derin bir nefes</strong> vererek telefonunuzun altına <strong>3 kez</strong> <strong>kasıtlı öksürün</strong>. bitirdiniz, durdur düğmesine dokunun.",
+    "textBreath": "Kayıt düğmesine dokunun ve telefonunuzun alt kısmına <strong>5 kez</strong> derin ve yüksek sesle nefes alın. İşiniz bittiğinde, durdur düğmesine dokunun.",
     "textSpeech": "Aşağıdaki kayıt düğmesine dokunun ve <strong>en az 5 saniye boyunca sürekli bir 'aaaaah' söyleyin.</strong> İşiniz bittiğinde, durdur düğmesine dokunun.",
     "textNext": "Devam etmek için devam et'e tıklayın.",
     "textCount": "Kayıt düğmesine tıklayın ve birden ona kadar net bir şekilde sayın. İşiniz bittiğinde, devam düğmesine tıklayın.",
