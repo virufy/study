@@ -303,6 +303,7 @@
     "next": "Continuar",
     "delete": "Borrar",
     "textCough": "Haga clic en el botón de grabación (el micrófono) y <strong>tosa intencionalmente tres veces, con una respiración profunda entre cada tos</strong>, dirigiendo su tos a la parte inferior de su dispositivo. Cuando haya terminado, haga clic en el botón de detener (stop)",
+    "textBreath": "Haga clic en el botón de grabación y <strong> respire profunda y ruidosamente </strong> en la parte inferior de su teléfono <strong> 5 veces. </strong> Cuando haya terminado, toque el botón de detener.",
     "textSpeech": "Haga clic en el botón de grabación (micrófono) y <strong>diga un “aaah” sostenido durante al menos 5 segundos.</strong> Cuando haya terminado, haga clic en el botón de detener",
     "textNext": "Haga clic en Continuar para seguir adelante",
     "textCount": "Haga clic en el botón de grabación (el micrófono) y <strong>cuente claramente del uno (1) al diez (10)</strong>. Cuando haya terminado, haga clic en el botón de pausa.",
