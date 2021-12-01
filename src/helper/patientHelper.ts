@@ -10,7 +10,7 @@ import deviceDetect from 'helper/deviceHelper';
 interface DoSubmitProps {
   setSubmitError(err: string | null): void;
   state: CommonJSON;
-  captchaValue: string | null;
+  // captchaValue: string | null;
   action(payload: Object): void;
   nextStep?: string;
   setActiveStep(status: boolean): void;
@@ -20,7 +20,7 @@ interface DoSubmitProps {
 export async function doSubmitPatientQuestionnaire({
   setSubmitError,
   state,
-  captchaValue,
+  // captchaValue,
   nextStep,
   setActiveStep,
   history,
@@ -116,9 +116,9 @@ export async function doSubmitPatientQuestionnaire({
       body.append('otherMedicalConditions', currentMedicalCondition?.other);
     }
 
-    if (captchaValue) {
+    /* if (captchaValue) {
       body.append('captchaValue', captchaValue);
-    }
+    } */
 
     const response = await axiosClient.post(`/patient/${patientId}/questionary`, body, {
       headers: {
@@ -139,7 +139,7 @@ export async function doSubmitPatientQuestionnaire({
 export async function doSubmitPatientAudioCollection({
   setSubmitError,
   state,
-  captchaValue,
+  // captchaValue,
   nextStep,
   setActiveStep,
   history,
@@ -187,9 +187,9 @@ export async function doSubmitPatientAudioCollection({
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
     }
 
-    if (captchaValue) {
+    /* if (captchaValue) {
       body.append('captchaValue', captchaValue);
-    }
+    } */
 
     const response = await axiosClient.post(`/patient/${patientId}/audioCollection`, body, {
       headers: {
@@ -210,7 +210,7 @@ export async function doSubmitPatientAudioCollection({
 export async function doSubmitPatientTestResults({
   setSubmitError,
   state,
-  captchaValue,
+  // captchaValue,
   nextStep,
   setActiveStep,
   history,
@@ -256,9 +256,9 @@ export async function doSubmitPatientTestResults({
       body.append('patientPcrTestResult', patientPcrTestResult);
     }
 
-    if (captchaValue) {
+    /* if (captchaValue) {
       body.append('captchaValue', captchaValue);
-    }
+    } */
 
     const response = await axiosClient.post(`/patient/${patientId}/testResult`, body, {
       headers: {

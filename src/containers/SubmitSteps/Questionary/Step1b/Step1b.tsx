@@ -27,7 +27,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 import OptionList from 'components/OptionList';
 import DatePicker from 'components/DatePicker';
 import WizardButtons from 'components/WizardButtons';
-import Recaptcha from 'components/Recaptcha';
+// import Recaptcha from 'components/Recaptcha';
 
 // Styles
 import {
@@ -101,14 +101,14 @@ const Step1b = ({
 
   /* Delete after Contact info step is re-integrated */
   const [submitError, setSubmitError] = React.useState<string | null>(null);
-  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  // const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
   const { isSubmitting } = formState;
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!captchaValue) {
       setSubmitError(null);
     }
-  }, [captchaValue]);
+  }, [captchaValue]); */
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -168,7 +168,6 @@ const Step1b = ({
               ...values,
             },
           },
-          captchaValue,
           action,
           nextStep,
           setActiveStep,
@@ -411,18 +410,12 @@ const Step1b = ({
       {activeStep && (
         <Portal>
           {(() => {
-            if (patientId) {
-              if (submitError) {
-                return (
-                  <>
-                    <Recaptcha onChange={setCaptchaValue} />
-                    <TempBeforeSubmitError>
-                      {submitError}
-                    </TempBeforeSubmitError>
-                  </>
-                );
-              }
-              return <Recaptcha onChange={setCaptchaValue} />;
+            if (patientId && submitError) {
+              return (
+                <TempBeforeSubmitError>
+                  {submitError}
+                </TempBeforeSubmitError>
+              );
             }
             return null;
           })()}
@@ -437,7 +430,7 @@ const Step1b = ({
               return t('questionary:nextButton');
             })()}
             leftHandler={handleSubmit(onSubmit)}
-            leftDisabled={patientId ? (!captchaValue || isSubmitting) : !isValid}
+            leftDisabled={patientId ? (!isValid || isSubmitting) : !isValid}
             invert
           />
         </Portal>

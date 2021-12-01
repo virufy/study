@@ -17,7 +17,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
-import Recaptcha from 'components/Recaptcha';
+// import Recaptcha from 'components/Recaptcha';
 
 // Utils
 import { updateAction } from 'utils/wizard';
@@ -260,7 +260,7 @@ const ListenAudio = ({
 
   /* Delete after Contact info step is re-integrated */
   const [submitError, setSubmitError] = React.useState<string | null>(null);
-  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  // const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
   const { isSubmitting } = formState;
 
   const renderTitle = () => {
@@ -272,11 +272,11 @@ const ListenAudio = ({
     return t('recordingsListen:recordSpeech.header');
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!captchaValue) {
       setSubmitError(null);
     }
-  }, [captchaValue]);
+  }, [captchaValue]); */
 
   // Effects
   useEffect(() => {
@@ -292,7 +292,7 @@ const ListenAudio = ({
       await doSubmitPatientAudioCollection({
         setSubmitError: s => setSubmitError(!s ? null : t(s)),
         state,
-        captchaValue,
+        // captchaValue,
         action,
         nextStep,
         setActiveStep,
@@ -390,7 +390,7 @@ const ListenAudio = ({
           </PlayerPlayButton>
         </PlayerPlayContainer>
       </MainContainer>
-      {((!patientId && activeStep) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech')) && (
+      {((!patientId && activeStep) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech') || (patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourBreath')) && (
         <Portal>
           <WizardButtons
             invert
@@ -400,20 +400,18 @@ const ListenAudio = ({
         </Portal>
       )}
 
-      {((patientId && !allowSpeechIn.includes(country)) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
+      {((patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech') || (patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourBreath')) && (
         <Portal>
-          { /* ReCaptcha  */}
-          <Recaptcha onChange={setCaptchaValue} />
           {submitError && (
-          <TempBeforeSubmitError>
-            {submitError}
-          </TempBeforeSubmitError>
+            <TempBeforeSubmitError>
+              {submitError}
+            </TempBeforeSubmitError>
           )}
           <WizardButtons
             invert
             // leftLabel={t('questionary:proceedButton')}
             leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
-            leftDisabled={!captchaValue || isSubmitting}
+            leftDisabled={isSubmitting}
             leftHandler={handleSubmit(onSubmitPatientAudioCollection)}
           />
         </Portal>
