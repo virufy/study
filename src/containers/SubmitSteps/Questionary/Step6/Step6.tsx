@@ -97,7 +97,7 @@ const Step6 = ({
       await doSubmitPatientQuestionnaire({
         setSubmitError: s => setSubmitError(!s ? null : t(s)),
         state,
-        captchaValue,
+        // captchaValue,
         action,
         nextStep,
         setActiveStep,
@@ -105,8 +105,6 @@ const Step6 = ({
       });
     }
   };
-
-  /*  */
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -231,17 +229,17 @@ const Step6 = ({
       {activeStep && (
         <Portal>
           { /* ReCaptcha  */}
-          <Recaptcha onChange={setCaptchaValue} />
+          {!patientId && (<Recaptcha onChange={setCaptchaValue} />)}
           {submitError && (
-          <TempBeforeSubmitError>
-            {submitError}
-          </TempBeforeSubmitError>
+            <TempBeforeSubmitError>
+              {submitError}
+            </TempBeforeSubmitError>
           )}
           <WizardButtons
             invert
             // leftLabel={t('questionary:proceedButton')}
             leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
-            leftDisabled={!captchaValue || isSubmitting}
+            leftDisabled={patientId ? isSubmitting : (!captchaValue || isSubmitting)}
             leftHandler={patientId ? handleSubmit(onSubmitPatientQuestionnaire) : handleSubmit(onSubmit)}
           />
         </Portal>
