@@ -273,7 +273,12 @@
       "header": "Grabe su tos",
       "title": "Instrucciones",
       "intro1": "Busque un <strong>entorno tranquilo</strong>, al menos a <strong>6 metros </strong> de distancia de los demás, y utilice una mascarilla quirúrgica o de tela. Si se siente mal, siéntese.",
-      "intro2": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No tosa violentamente o con demasiada fuerza."
+      "intro2Cough": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No tosa violentamente o con demasiada fuerza.",
+      "intro2Breath": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No respire violentamente o con demasiada fuerza.",
+      "intro2Speech": "Mantenga el dispositivo a una distancia de <strong> 30-60 centímetros </strong> de su boca y <strong>no obstruya</strong> ni cubra el dispositivo con plástico. No hable violentamente o con demasiada fuerza."
+    },
+    "recordBreath": {
+      "header": "Graba tu respiración"
     },
     "recordSpeech": {
       "header": "Grabe su voz",
@@ -289,12 +294,16 @@
     "recordCough": {
       "header": "Grabe su tos"
     },
+    "recordBreath": {
+      "header": "Graba tu respiración"
+    },
     "recordSpeech": {
       "header": "Grabe su voz"
     },
     "next": "Continuar",
     "delete": "Borrar",
     "textCough": "Haga clic en el botón de grabación (el micrófono) y <strong>tosa intencionalmente tres veces, con una respiración profunda entre cada tos</strong>, dirigiendo su tos a la parte inferior de su dispositivo. Cuando haya terminado, haga clic en el botón de detener (stop)",
+    "textBreath": "Haga clic en el botón de grabación y <strong> respire profunda y ruidosamente </strong> en la parte inferior de su teléfono <strong> 5 veces. </strong> Cuando haya terminado, toque el botón de detener.",
     "textSpeech": "Haga clic en el botón de grabación (micrófono) y <strong>diga un “aaah” sostenido durante al menos 5 segundos.</strong> Cuando haya terminado, haga clic en el botón de detener",
     "textNext": "Haga clic en Continuar para seguir adelante",
     "textCount": "Haga clic en el botón de grabación (el micrófono) y <strong>cuente claramente del uno (1) al diez (10)</strong>. Cuando haya terminado, haga clic en el botón de pausa.",
@@ -319,6 +328,9 @@
       "header": "Grabe su tos",
       "intro1": "Busque un entorno tranquilo que esté a 6 metros de los demás",
       "intro2": "Use un tapabocas quirurgico o de tela y sostenga el dispositivo a 30-60 cm de distancia de su cara"
+    },
+    "recordBreath": {
+      "header": "Graba tu respiración"
     },
     "recordSpeech": {
       "header": "Grabe su voz",

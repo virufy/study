@@ -271,7 +271,12 @@
       "header": "Öksürüğünüzü kaydedin",
       "title": "Talimatlar",
       "intro1": "Diğerlerinden en az <strong>20 ft (6m)</strong> uzakta <strong>sessiz bir ortam</strong> bulun ve bez veya cerrahi maske takın. Kendinizi hasta hissediyorsanız lütfen oturun.",
-      "intro2": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetle veya çok zorla öksürmeyin."
+      "intro2Cough": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetle veya çok zorla öksürmeyin.",
+      "intro2Breath": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetli veya çok kuvvetli nefes almayın.",
+      "intro2Speech": "Cihazınızı ağzınızdan <strong>1-2 ft (30-60 cm)</strong> uzakta tutun ve cihazınızın <strong>görüşünü engellemeyin</strong> veya plastikle kapatmayın. Şiddetle veya çok sert konuşmayın."
+    },
+    "recordBreath": {
+      "header": "Nefesini kaydet"
     },
     "recordSpeech": {
       "header": "Konuşmanızı kaydedin",
@@ -287,12 +292,16 @@
     "recordCough": {
       "header": "Öksürüğünüzü kaydedin"
     },
+    "recordBreath": {
+      "header": "Nefesini kaydet"
+    },
     "recordSpeech": {
       "header": "Konuşmanızı kaydedin"
     },
     "next": "Devam",
     "delete": "Sil",
     "textCough": "Kayıt düğmesine dokunun ve her öksürük arasında <strong>derin bir nefes</strong> vererek telefonunuzun altına <strong>3 kez</strong> <strong>kasıtlı öksürün</strong>. bitirdiniz, durdur düğmesine dokunun.",
+    "textBreath": "Kayıt düğmesine dokunun ve telefonunuzun alt kısmına <strong>5 kez derin ve yüksek sesle nefes alın</strong>. İşiniz bittiğinde, durdur düğmesine dokunun.",
     "textSpeech": "Aşağıdaki kayıt düğmesine dokunun ve <strong>en az 5 saniye boyunca sürekli bir 'aaaaah' söyleyin.</strong> İşiniz bittiğinde, durdur düğmesine dokunun.",
     "textNext": "Devam etmek için devam et'e tıklayın.",
     "textCount": "Kayıt düğmesine tıklayın ve birden ona kadar net bir şekilde sayın. İşiniz bittiğinde, devam düğmesine tıklayın.",
@@ -317,6 +326,9 @@
       "header": "Öksürüğünüzü kaydedin",
       "intro1": "Lütfen etrafınızdakilerden uzaklaşın! Kendinizi hasta hissediyorsanız lütfen oturun.",
       "intro2": "Sessiz bir ortamda lütfen kayıt tuşuna basın ve kasıtlı olarak 3-5 defa öksürün."
+    },
+    "recordBreath": {
+      "header": "Nefesini kaydet"
     },
     "recordSpeech": {
       "header": "Konuşmanızı kaydedin",

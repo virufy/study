@@ -18,6 +18,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
+import { getPatientId } from 'helper/stepsDefinitions';
 
 // Styles
 import WizardButtons from 'components/WizardButtons';
@@ -26,7 +27,13 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  ageGroup: Yup.string(),
+  ageGroup: Yup.string().required().test('age-invalid', '', value => {
+    let result = true;
+    if (value && !value.match(/^[0-9]+$/)) {
+      result = false;
+    }
+    return result;
+  }),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
@@ -45,6 +52,7 @@ const Step2a = ({
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
+  const patientId = getPatientId();
   const { state, action } = useStateMachine(updateAction(storeKey));
 
   // States
@@ -63,14 +71,20 @@ const Step2a = ({
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     const { testTaken } = state['submit-steps'];
-    if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
-      history.push(otherSteps.noTestStep);
+    if (!patientId) {
+      if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
+        history.push(otherSteps.noTestStep);
+      } else if (previousStep) {
+        history.push(previousStep);
+      } else {
+        history.goBack();
+      }
     } else if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [state, history, otherSteps, previousStep]);
+  }, [state, patientId, otherSteps, previousStep, history]);
 
   const {
     isValid,

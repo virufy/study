@@ -70,7 +70,7 @@ export async function doSubmitPatientQuestionnaire({
       body.append('vaccine', vaccine);
     }
 
-    if (ageGroup !== 'unselected') {
+    if (ageGroup) {
       body.append('ageGroup', ageGroup);
     }
 
