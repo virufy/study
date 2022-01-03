@@ -3,14 +3,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { useTranslation, Trans } from 'react-i18next';
 
-// Form
-// import { useStateMachine } from 'little-state-machine';
-
 // Components
 import WizardButtons from 'components/WizardButtons';
-
-// Update Action
-// import { resetStore } from 'utils/wizard';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -30,7 +24,6 @@ const PredictionResult2 = ({
   previousStep,
   nextStep,
   // storeKey,
-  // likelihood,  TODO: FROM PREDICTIONRESULT1
 }: Wizard.StepProps) => {
   // Hooks
   const { Portal } = usePortal({
@@ -42,10 +35,6 @@ const PredictionResult2 = ({
   const history = useHistory();
   const { t } = useTranslation();
   const location = useLocation<{ errorCode: string, prediction: string }>();
-  // const { state, actions } = useStateMachine({ resetStore: resetStore() });
-
-  // States
-  // const [activeStep, setActiveStep] = React.useState(true);
 
   const prediction: string = location?.state?.prediction;
   const errorCode: string = location?.state?.errorCode;

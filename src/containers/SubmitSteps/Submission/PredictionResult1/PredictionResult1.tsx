@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { Trans, useTranslation } from 'react-i18next';
-// import axios from 'axios';
+import axios from 'axios';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -35,7 +35,7 @@ const schema = Yup.object({
 
 type PredictionResult1Type = Yup.InferType<typeof schema>;
 
-// const predictionEndpointUrl = process.env.REACT_APP_PREDICTION_ENDPOINT || '';
+const predictionEndpointUrl = 'http://ec2-18-189-150-137.us-east-2.compute.amazonaws.com/predict' || '';
 
 const PredictionResult1 = ({
   previousStep,
@@ -57,7 +57,7 @@ const PredictionResult1 = ({
   // States
   const [activeStep, setActiveStep] = React.useState(true);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
-  const [processing/* , setProcessing */] = React.useState<boolean>(false);
+  const [processing, setProcessing] = React.useState<boolean>(false);
 
   // Form
   const {
@@ -73,48 +73,31 @@ const PredictionResult1 = ({
     isValid,
   } = formState;
 
-  // Handlers
-  /* const handleStartAgain = React.useCallback(() => {
-    history.replace('');
-  }, [history]); */
-
-  const onSubmit = async () => {
+  const onSubmit = async (value: any) => {
     try {
-      if (nextStep) {
-        setActiveStep(false);
-        history.push(nextStep, { prediction: 'positive', errorCode: 'everything_ok' }); // TODO: RETREIVE FROM AXIOS
-      }
-      /* setSubmitError(null);
-      if (state && state.welcome && state['submit-steps']) {
-
-        // Records
-        if (recordYourCough?.recordingFile || recordYourCough?.uploadedFile) {
-          body.append('cough', recordYourCough.recordingFile! || recordYourCough.uploadedFile!);
-        }
-
-        // Restart
-        actions.resetStore({});
-
-        const predictionResult = await axios.post(predictionEndpointUrl, body, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        if (predictionResult.data && ('prediction' in predictionResult.data)) {
-          setProcessing(false);
-          const result = predictionResult.data.prediction;
-          console.log('Prediction: ', predictionResult.data.prediction, ' - ', typeof predictionResult.data.prediction);
-          console.log('Result: ', result);
-          if (nextStep) {
-            setActiveStep(false);
-            history.push(nextStep);
-          }
-        } else {
-          setProcessing(false);
+      setSubmitError(null);
+      setProcessing(true);
+      const predictionResult = await axios.post(predictionEndpointUrl, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        body: {
+          // file_path: '',
+          access_code: value.accessCode,
+        },
+      });
+      if (predictionResult.data) {
+        setProcessing(false);
+        if (nextStep) {
+          setActiveStep(false);
+          history.push(nextStep, {
+            prediction: predictionResult.data.prediction,
+            errorCode: predictionResult.data.error_code,
+          });
         }
       } else {
-        handleStartAgain();
-      } */
+        setProcessing(false);
+      }
     } catch (error) {
       console.log('Error', error);
       setSubmitError(t('beforeSubmit:submitError'));
@@ -185,7 +168,7 @@ const PredictionResult1 = ({
           )}
           <WizardButtons
             leftLabel={t('beforeSubmit:submitButton')}
-            leftHandler={handleSubmit(onSubmit, console.log)}
+            leftHandler={handleSubmit(onSubmit)}
             leftDisabled={!isValid || processing}
             invert
           />
