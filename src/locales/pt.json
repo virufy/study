@@ -24,11 +24,14 @@
     "questionnaire": "Questionário",
     "audioCollection": "Coleta de áudio",
     "testResults": "Resultados do teste",
+    "screeningResults": "Resultados da triagem",
     "supportedBy": "Apoiado por",
     "visitWebsite": "Visite nosso website",
     "errorCountry": "Neste momento, não podemos recolher tosse de sua região. Consulte-nos em breve!",
     "noOptionsError": "Sem opções",
     "noValueError": "Nenhum resultado encontrado",
+    "accessCode": "Código de acesso",
+    "enterAccessCode": "Digite o código de acesso",
     "countries": {
       "Afghanistan": "Afeganistão",
       "Albania": "Albânia",
@@ -513,6 +516,15 @@
   "beforeSubmit": {
     "submitButton": "Enviar",
     "submitError": "Aconteceu um erro. Por favor, tente novamente."
+  },
+  "predictionResult": { 
+    "predictionResultTitle": "Resultados",
+    "result_unable": "Incapaz de analisar a tosse",
+    "result_unable_text": "Nosso algoritmo não é capaz de determinar seu status COVID-19. <strong>Envie outra tosse.</strong>",
+    "result_positive": "COVID-19: Resultados de triagem positivos",
+    "result_positive_text": "Sua voz tem indicadores de COVID-19. <strong>Contacte o seu profissional de saúde </strong> e tome precauções adicionais.",
+    "result_negative": "COVID-19: NÃO DETECTADO",
+    "result_negative_text": "Sua voz não parece ter indicadores de COVID-19. <strong> Continue a tomar as medidas adequadas com base no conselho do seu profissional de saúde </strong> ou órgão regulador aplicável e reavalie-se em nosso aplicativo diariamente."
   },
   "thankyou": {
     "title": "Obrigada por submeter suas respostas!",

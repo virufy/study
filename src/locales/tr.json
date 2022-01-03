@@ -23,11 +23,14 @@
     "questionnaire": "Anket",
     "audioCollection": "Ses Koleksiyonu",
     "testResults": "Test Sonuçları",
+    "screeningResults": "Tarama Sonuçları",
     "supportedBy": "Destekleyen",
     "visitWebsite": "Web sitemizi ziyaret ediniz",
     "errorCountry": "Şu anda bölgenizden öksürük toplayamıyoruz. Kısa süre sonra tekrar kontrol edin!",
     "noOptionsError": "Seçenek yok",
     "noValueError": "Sonuç bulunamadı",
+    "accessCode": "Giriş kodu",
+    "enterAccessCode": "Erişim kodunu giriniz",
     "countries": {
       "Afghanistan": "Afganistan",
       "Albania": "Arnavutluk",
@@ -510,6 +513,15 @@
   "beforeSubmit": {
     "submitButton": "Gönder",
     "submitError": "Bir hata oluştu. Lütfen tekrar deneyin."
+  },
+  "predictionResult": { 
+    "predictionResultTitle": "Sonuçlar",
+    "result_unable": "Öksürük Analiz Edilemiyor",
+    "result_unable_text": "Algoritmamız COVID-19 durumunuzu belirleyemiyor. <strong>Lütfen başka bir öksürük gönderin </strong>",
+    "result_positive": "COVID-19: Pozitif Tarama Sonuçları",
+    "result_positive_text": "Sesinizde COVID-19 belirtileri var. <strong> Lütfen sağlık uzmanınıza başvurun </strong> ve ek önlemler alın.",
+    "result_negative": "COVID-19: ALGILANMADI",
+    "result_negative_text": "Sesinizde COVID-19 semptomları yok gibi görünüyor. <stong>Lütfen sağlık uzmanınızın </strong> veya ilgili düzenleyici kurumun tavsiyelerine göre uygun önlemleri almaya devam edin ve uygulamamızda her gün kendinizi yeniden değerlendirin."
   },
   "thankyou": {
     "title": "Gönderdiğiniz için teşekkür ederiz.",

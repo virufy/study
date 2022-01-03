@@ -23,11 +23,14 @@
         "questionnaire": "แบบสอบถาม",
         "audioCollection": "การเก็บเสียง",
         "testResults": "ผลการทดสอบ",
+        "screeningResults": "ผลการคัดกรอง",
         "supportedBy": "สนับสนุนด้วย",
         "visitWebsite": "เยี่ยมชมเว็บไซต์ของเรา",
         "errorCountry": "เราไม่สามารถรวบรวมข้อมูลอาการไอในภูมิภาคของท่านได้ในขณะนี้ โปรดกลับมาตรวจสอบอีกครั้งเร็ว ๆ นี้!",
         "noOptionsError": "ไม่มีตัวเลือก",
         "noValueError": "ไม่พบผลลัพธ์",
+        "accessCode": "รหัสการเข้าถึง",
+        "enterAccessCode": "ใส่รหัสการเข้าถึง",
         "countries": {
             "Afghanistan": "อัฟกานิสถาน",
             "Albania": "แอลเบเนีย",
@@ -510,6 +513,15 @@
     "beforeSubmit": {
         "submitButton": "ส่งแล้ว",
         "submitError": "เกิดข้อผิดพลาด กรุณาลองอีกครั้ง"
+    },
+    "predictionResult": { 
+        "predictionResultTitle": "ผล",
+        "result_unable": "ไม่สามารถวิเคราะห์อาการไอได้",
+        "result_unable_text": "อัลกอริทึมของเราไม่สามารถระบุสถานะ COVID-19 ของคุณได้ <strong>กรุณาส่งอาการไออีกครั้ง</strong>",
+        "result_positive": "COVID-19: ผลการตรวจคัดกรองเชิงบวก",
+        "result_positive_text": "เสียงของคุณส่งสัญญาณว่าคุณติดเชื้อ COVID-19 <strong>โปรดติดต่อผู้เชี่ยวชาญด้านการดูแลสุขภาพ </strong> และใช้มาตรการป้องกันเพิ่มเติม",
+        "result_negative": "COVID-19: ตรวจไม่พบ",
+        "result_negative_text": "เสียงของคุณบ่งบอกว่าติดเชื้อโควิด-19 <strong>โปรดดำเนินมาตรการที่เหมาะสมต่อไปตามคำแนะนำของบุคลากรทางการแพทย์ที่เกี่ยวข้อง </strong> หรือหน่วยงานกำกับดูแล และการประเมินตนเองในแอปของเราทุกวัน"
     },
     "thankyou": {
         "title": "ขอบคุณที่ส่ง",

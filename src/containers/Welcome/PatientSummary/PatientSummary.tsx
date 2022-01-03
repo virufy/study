@@ -36,6 +36,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
     gender: '',
     audioCollection: false,
     testResult: false,
+    screeningResults: false,
   });
   const {
     setType, setDoGoBack, setTitle, setLogoSize,
@@ -51,11 +52,14 @@ const PatientSummary = (p: Wizard.StepProps) => {
         data: {},
       }));
       if (res.status === 200) {
-        setPatientInformation(res.data);
+        setPatientInformation(res.data); // TODO: add sceeningResults to BE data
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // eslint-disable-next-line max-len
+  const enableScreeningResults = patientInformation.questionary && patientInformation.audioCollection && patientInformation.testResult;
 
   const handleNextQuestionnaire = React.useCallback(() => {
     history.push('/submit-steps/questionary/step2');
@@ -68,6 +72,12 @@ const PatientSummary = (p: Wizard.StepProps) => {
   const handleNextTestResults = React.useCallback(() => {
     history.push('/submit-steps/questionary/step1b');
   }, [history]);
+
+  const handleNextScreeningResults = React.useCallback(() => {
+    if (enableScreeningResults) {
+      history.push('/submit-steps/prediction-result1');
+    }
+  }, [history, enableScreeningResults]);
 
   const doBack = useCallback(() => {
     if (p.previousStep) {
@@ -127,6 +137,13 @@ const PatientSummary = (p: Wizard.StepProps) => {
           <OptionsHeader onClick={handleNextTestResults}>
             {t('main:testResults', 'Test Results')}
             {patientInformation.testResult ? <CheckCircle /> : <ChevronRight />}
+          </OptionsHeader>
+        </OptionsContainer>
+
+        <OptionsContainer>
+          <OptionsHeader onClick={handleNextScreeningResults} isDisabled={!enableScreeningResults}>
+            {t('main:screeningResults', 'Screening Results')}
+            {patientInformation.screeningResults ? <CheckCircle /> : <ChevronRight />}
           </OptionsHeader>
         </OptionsContainer>
       </WelcomeContent>

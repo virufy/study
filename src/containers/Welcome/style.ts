@@ -491,12 +491,13 @@ export const OptionsContainer = styled.div<{ isFirst?: boolean }>`
   line-height: 20px;
 `;
 
-export const OptionsHeader = styled.div`
+export const OptionsHeader = styled.div<{ isDisabled?: boolean }>`
   display: flex; 
   justify-content: space-between;
   align-items: center;
   height: 60px;
   cursor: pointer;
+  opacity: ${({ isDisabled }) => (isDisabled ? '0.5' : '1')};
 `;
 
 export const OptionsBody = styled.div`

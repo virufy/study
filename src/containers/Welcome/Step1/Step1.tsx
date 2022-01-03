@@ -176,10 +176,10 @@ const Step1 = (p: Wizard.StepProps) => {
           </CustomPurpleText>
           {isClinic
           && (
-          <SupportedBy>
-            {t('main:supportedBy', 'Supported by')}
-            <NuevaLogo />
-          </SupportedBy>
+            <SupportedBy>
+              {t('main:supportedBy', 'Supported by')}
+              <NuevaLogo />
+            </SupportedBy>
           )}
 
           <BoldBlackText>
@@ -246,10 +246,10 @@ const Step1 = (p: Wizard.StepProps) => {
                     error={errors.region}
                   />
                   {errors.region && (
-                  <TextErrorContainer>
-                    <ExclamationSVG />
-                    {t(errors.region.message, 'Please select a region')}
-                  </TextErrorContainer>
+                    <TextErrorContainer>
+                      <ExclamationSVG />
+                      {t(errors.region.message, 'Please select a region')}
+                    </TextErrorContainer>
                   )}
                 </RegionContainer>
               </>

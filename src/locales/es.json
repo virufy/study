@@ -24,11 +24,14 @@
     "questionnaire": "Cuestionario",
     "audioCollection": "Recolección de audio",
     "testResults": "Resultados del test",
+    "screeningResults": "Resultados de la evaluación",
     "supportedBy": "Apoyado por",
     "visitWebsite": "Visite nuestra página web",
     "errorCountry": "En este momento no podemos recoger tos de su región. Vuelva a consultarnos pronto!",
     "noOptionsError": "No se encontraron opciones",
     "noValueError": "No se encontraron resultados",
+    "accessCode": "Código de acceso",
+    "enterAccessCode": "Ingresar código de acceso",
     "countries": {
       "Afghanistan": "Afganistán",
       "Albania": "Albania",
@@ -512,6 +515,15 @@
   "beforeSubmit": {
     "submitButton": "Enviar formulario",
     "submitError": "Se produjo un error. Por favor, inténtelo de nuevo."
+  },
+  "predictionResult": { 
+    "predictionResultTitle": "Resultados",
+    "result_unable": "Incapaz de analizar la tos",
+    "result_unable_text": "Nuestro algoritmo no puede determinar su estado de COVID-19. <strong> Envíe otra tos. </strong>",
+    "result_positive": "COVID-19: Resultados de la evaluación positivos",
+    "result_positive_text": "Su voz tiene indicadores de COVID-19. <strong>Póngase en contacto con su profesional sanitario </strong> y tome precauciones adicionales.",
+    "result_negative": "COVID-19: NO DETECTADO",
+    "result_negative_text": "Su voz no parece tener indicadores de COVID-19. <strong>Continúe tomando las medidas adecuadas según los consejos de su profesional de la salud </strong> o el organismo regulador correspondiente y vuelva a evaluarse diariamente en nuestra aplicación."
   },
   "thankyou": {
     "title": "Gracias por su participación.",

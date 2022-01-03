@@ -392,6 +392,29 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
   return output;
 }
 
+function getSubmissionSteps(storeKey: string) {
+  return [
+    {
+      path: '/prediction-result1',
+      componentPath: `${baseComponentPath}/${middleComponentPathSubmission}/PredictionResult1`,
+      props: {
+        storeKey,
+        previousStep: '/welcome/patientSummary',
+        nextStep: `${baseUrl}/prediction-result2`,
+      },
+    },
+    {
+      path: '/prediction-result2',
+      componentPath: `${baseComponentPath}/${middleComponentPathSubmission}/PredictionResult2`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/prediction-result1`,
+        nextStep: '/welcome/patientSummary',
+      },
+    },
+  ];
+}
+
 export default function stepsDefinition(storeKey: string, country: string, patientId: string) {
   const steps: Wizard.Step[] = [
     // Record Your Cough Steps
@@ -402,6 +425,8 @@ export default function stepsDefinition(storeKey: string, country: string, patie
     ...getSpeechSteps(storeKey, country, patientId),
     // Questionary
     ...getQuestionarySteps(storeKey, country, patientId),
+    // Submission
+    ...getSubmissionSteps(storeKey),
     {
       path: '/thank-you',
       componentPath: `${baseComponentPath}/${middleComponentPathSubmission}/ThankYou`,
