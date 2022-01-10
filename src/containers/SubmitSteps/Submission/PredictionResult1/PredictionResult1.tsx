@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { Trans, useTranslation } from 'react-i18next';
 import axios from 'axios';
@@ -35,7 +35,13 @@ const schema = Yup.object({
 
 type PredictionResult1Type = Yup.InferType<typeof schema>;
 
-const predictionEndpointUrl = 'http://ec2-18-189-150-137.us-east-2.compute.amazonaws.com/predict' || '';
+const predictionEndpointUrl = 'http://3.139.230.240:8000/predict' || '';
+
+declare interface AudioInfoProp {
+  breath: string;
+  cough: string;
+  voice: string;
+}
 
 const PredictionResult1 = ({
   previousStep,
@@ -59,6 +65,11 @@ const PredictionResult1 = ({
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [processing, setProcessing] = React.useState<boolean>(false);
 
+  // Location
+  const location = useLocation<{ audioInfo: AudioInfoProp }>();
+
+  const coughAudioPath: string = location?.state?.audioInfo?.cough;
+
   // Form
   const {
     control, handleSubmit, formState,
@@ -77,15 +88,8 @@ const PredictionResult1 = ({
     try {
       setSubmitError(null);
       setProcessing(true);
-      const predictionResult = await axios.post(predictionEndpointUrl, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        body: {
-          // file_path: '',
-          access_code: value.accessCode,
-        },
-      });
+      const url = `${predictionEndpointUrl}?file_path=${encodeURIComponent(coughAudioPath)}&access_code=${encodeURIComponent(value.accessCode)}`;
+      const predictionResult = await axios.post(url);
       if (predictionResult.data) {
         setProcessing(false);
         if (nextStep) {

@@ -121,10 +121,7 @@ const PredictionResult2 = ({
       <Title>
         {t('predictionResult:predictionResultTitle')}
       </Title>
-
-      <ResultTitle>
-        {renderResult}
-      </ResultTitle>
+      {renderResult}
       <ImportantNote>
         <Trans i18nKey="main:note">
           <strong>Please note:</strong> This form is for data collection only. It will not predict your COVID-19

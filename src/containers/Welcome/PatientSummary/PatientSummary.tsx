@@ -35,8 +35,8 @@ const PatientSummary = (p: Wizard.StepProps) => {
     age: undefined,
     gender: '',
     audioCollection: false,
+    audioInfo: null,
     testResult: false,
-    screeningResults: false,
   });
   const {
     setType, setDoGoBack, setTitle, setLogoSize,
@@ -52,14 +52,14 @@ const PatientSummary = (p: Wizard.StepProps) => {
         data: {},
       }));
       if (res.status === 200) {
-        setPatientInformation(res.data); // TODO: add sceeningResults to BE data
+        setPatientInformation(res.data);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // eslint-disable-next-line max-len
-  const enableScreeningResults = patientInformation.questionary && patientInformation.audioCollection && patientInformation.testResult;
+  const enableScreeningResults = patientInformation.questionary && patientInformation.audioCollection && patientInformation.audioInfo && patientInformation.testResult;
 
   const handleNextQuestionnaire = React.useCallback(() => {
     history.push('/submit-steps/questionary/step2');
@@ -75,9 +75,9 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   const handleNextScreeningResults = React.useCallback(() => {
     if (enableScreeningResults) {
-      history.push('/submit-steps/prediction-result1');
+      history.push('/submit-steps/prediction-result1', { audioInfo: patientInformation.audioInfo });
     }
-  }, [history, enableScreeningResults]);
+  }, [enableScreeningResults, history, patientInformation]);
 
   const doBack = useCallback(() => {
     if (p.previousStep) {
@@ -143,7 +143,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
         <OptionsContainer>
           <OptionsHeader onClick={handleNextScreeningResults} isDisabled={!enableScreeningResults}>
             {t('main:screeningResults', 'Screening Results')}
-            {patientInformation.screeningResults ? <CheckCircle /> : <ChevronRight />}
+            <ChevronRight />
           </OptionsHeader>
         </OptionsContainer>
       </WelcomeContent>
