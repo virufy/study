@@ -23,11 +23,14 @@
         "questionnaire": "アンケート",
         "audioCollection": "オーディオコレクション",
         "testResults": "テスト結果",
+        "screeningResults": "スクリーニング結果",
         "supportedBy": "対応機種",
         "visitWebsite": "ウェブサイトを見る",
         "errorCountry": "現在、あなたの地域の咳を収集することはできません。近いうちにまたチェックしてみてください",
         "noOptionsError": "オプションなし",
         "noValueError": "結果は見つかりませんでした",
+        "accessCode": "アクセスコード",
+        "enterAccessCode": "アクセスコードを入力してください",
         "countries": {
             "Afghanistan": "アフガニスタン",
             "Albania": "アルバニア",
@@ -511,6 +514,15 @@
         "submitButton": "送信",
         "submitError": "エラーが発生しました。もう一度お試しください。"
     },
+    "predictionResult": { 
+        "predictionResultTitle": "結果",
+        "result_unable": "咳を分析できません",
+        "result_unable_text": "私たちのアルゴリズムはあなたのCOVID-19ステータスを決定することができません。<strong>別の咳を提出してください。</strong>",
+        "result_positive": "COVID-19: ポジティブスクリーニング結果",
+        "result_positive_text": "あなたの声にはCOVID-19の指標があります。<strong>医療専門家に連絡</strong>し、追加の予防措置を講じてください。",
+        "result_negative": "COVID-19: 見つかりませんでした",        
+        "result_negative_text": "あなたの声にはCOVID-19の指標がないようです。<strong>引き続き、医療専門家または該 当する規制機関のアドバイスに基づいて適切な措置を講じ、</strong> アプリで毎日自分自身を再評価してください。"
+      },
     "thankyou": {
         "title": "ご応募ありがとうございました。",
         "paragraph1_cough": "あなたの咳の寄付でVirufyは世界を変えるために一歩近づきます。",

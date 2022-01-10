@@ -23,11 +23,14 @@
     "questionnaire": "Questionnaire",
     "audioCollection": "Audio Collection",
     "testResults": "Test Results",
+    "screeningResults": "Screening Results",
     "supportedBy": "Supported by",
     "visitWebsite": "Visit our website",
     "errorCountry": "We are unable to collect coughs from your region at this time. Check back with us soon!",
     "noOptionsError": "No options",
     "noValueError": "No results found",
+    "accessCode": "Access Code",
+    "enterAccessCode": "Enter Access Code",
     "countries": {
       "Afghanistan": "Afghanistan",
       "Albania": "Albania",
@@ -512,6 +515,15 @@
   "beforeSubmit": {
     "submitButton": "Submit",
     "submitError": "An error occurred. Please try again."
+  },
+  "predictionResult": { 
+    "predictionResultTitle": "Results",
+    "result_unable": "Unable to Analyze Cough",
+    "result_unable_text": "Our algorithm is not able to determine your COVID-19 status. <strong>Please submit another cough.</strong>",
+    "result_positive": "COVID-19: Positive Screening Results",
+    "result_positive_text": "Your voice has indicators of COVID-19. <strong>Please contact your healthcare professional</strong> and take additional precautions.",
+    "result_negative": "COVID-19: NOT DETECTED",
+    "result_negative_text": "Your voice does not seem to have indicators of COVID-19. Please <strong>continue to take appropriate measures</strong> based on the advice of your healthcare professional or applicable regulatory body and reassess yourself in our app daily."
   },
   "thankyou": {
     "title": "Thank you for submitting.",
