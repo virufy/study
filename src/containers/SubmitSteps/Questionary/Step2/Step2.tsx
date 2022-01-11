@@ -69,16 +69,10 @@ const Step2 = ({
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (state['submit-steps']) {
+    if ((state['submit-steps'] || !patientId)) {
       const { testTaken } = state['submit-steps'];
-      if (!patientId) {
-        if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
-          history.push(otherSteps.noTestStep);
-        } else if (previousStep) {
-          history.push(previousStep);
-        } else {
-          history.goBack();
-        }
+      if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
+        history.push(otherSteps.noTestStep);
       } else if (previousStep) {
         history.push(previousStep);
       } else {
