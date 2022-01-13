@@ -35,7 +35,7 @@ const schema = Yup.object({
 
 type PredictionResult1Type = Yup.InferType<typeof schema>;
 
-const predictionEndpointUrl = 'http://3.139.230.240:8000/predict' || '';
+const predictionEndpointUrl = 'https://demo.virufy.dev/predict' || '';
 
 declare interface AudioInfoProp {
   breath: string;

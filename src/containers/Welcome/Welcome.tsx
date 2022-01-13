@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
 import { createStore, setStorageType } from 'little-state-machine';
+
+// Helper
 import { localstoragePrefix } from 'helper/basePathHelper';
 
 // Wizard
