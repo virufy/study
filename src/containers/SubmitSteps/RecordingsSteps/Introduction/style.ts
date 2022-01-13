@@ -3,7 +3,6 @@ import { colors } from 'theme';
 import { BlackText } from 'components/Texts';
 
 import { ReactComponent as SocialDistancingSVG } from 'assets/images/social-distancing.svg';
-import { ReactComponent as CoughLeftSVG } from 'assets/images/cough-left.svg';
 
 /* Containers */
 export const MainContainer = styled.div``;
@@ -116,12 +115,17 @@ export const SocialDistancing = styled(SocialDistancingSVG)`
   }
 `;
 
-export const CoughLeft = styled(CoughLeftSVG)`
+export const HoldCelImage = styled.div`
   width: 99px;
   height: 108px;
   margin: 30px auto;
   display: block;
 
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+  
   @media screen and (${props => props.theme.breakpoints.tablet}) {
     width: 126px;
     height: 158px;
