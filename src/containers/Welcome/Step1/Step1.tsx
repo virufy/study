@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useStateMachine } from 'little-state-machine';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
-import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
 import * as Yup from 'yup';
 
@@ -18,7 +18,7 @@ import CreatedBy from 'components/CreatedBy';
 import CountryErrorModal from 'modals/CountryErrorModal';
 
 // Update Action
-import { updateAction } from 'utils/wizard';
+import { updateAction, resetStore } from 'utils/wizard';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -27,10 +27,8 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { languageData } from 'data/lang';
 import { countryData, countriesWithStates, CountryDataProps } from 'data/country';
 
-// Utils
-import { scrollToTop } from 'helper/scrollHelper';
-
 // Helper
+import { scrollToTop } from 'helper/scrollHelper';
 import { isClinic } from 'helper/basePathHelper';
 
 // Styles
@@ -78,9 +76,9 @@ const Step1 = (p: Wizard.StepProps) => {
     setType, setDoGoBack, setLogoSize,
   } = useHeaderContext();
 
-  const { state, action } = useStateMachine(updateAction(p.storeKey));
+  const { state, actions } = useStateMachine({ update: updateAction(p.storeKey), reset: resetStore() });
 
-  const store = state?.[p.storeKey];
+  const store = isClinic ? {} : state?.[p.storeKey];
   const {
     control,
     formState,
@@ -99,9 +97,15 @@ const Step1 = (p: Wizard.StepProps) => {
   const history = useHistory();
   const { isValid, errors } = formState;
 
+  useEffect(() => {
+    if (isClinic) {
+      actions.reset({});
+    }
+  }, []);
+
   const onSubmit = async (values: Step1Type) => {
     if (values) {
-      action(values);
+      actions.update(values);
       if (values.patientId && p.otherSteps?.nextStepPatient) {
         setActiveStep(false);
         history.push(p.otherSteps.nextStepPatient);

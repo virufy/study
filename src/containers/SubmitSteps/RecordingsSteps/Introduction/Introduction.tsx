@@ -16,6 +16,10 @@ import { scrollToTop } from 'helper/scrollHelper';
 import { updateAction } from 'utils/wizard';
 
 // Images
+import { ReactComponent as ImageCoughSVG } from 'assets/images/cough-right.svg';
+import { ReactComponent as ImageVoiceSVG } from 'assets/images/voice-right.svg';
+import { ReactComponent as ImageBreathSVG } from 'assets/images/breath-right.svg';
+
 import Record from './Record';
 
 // Styles
@@ -24,7 +28,7 @@ import {
   InstructionContainer,
   WelcomeBullets,
   BulletIndicator,
-  CoughLeft,
+  HoldCelImage,
   SocialDistancing,
 } from './style';
 
@@ -99,7 +103,7 @@ const Introduction = ({
     setDoGoBack(() => handleDoBack);
   }, [isCoughLogic, isBreathLogic, setTitle, setSubtitle, setType, handleDoBack, setDoGoBack, t]);
 
-  const [renderInstrucion2, renderInstrucion3] = React.useMemo(() => {
+  const [renderInstrucion2, renderImage2, renderInstrucion3] = React.useMemo(() => {
     if (isCoughLogic) {
       return ([
         <Trans i18nKey="recordingsIntroduction:recordCough.intro2Cough">
@@ -107,6 +111,7 @@ const Introduction = ({
           away from your mouth and <strong>do not obstruct</strong>
           or cover your device with plastic. Do not cough violently or too forcefully.
         </Trans>,
+        <ImageCoughSVG />,
         <Trans i18nKey="recordingsRecord:textCough">
           Tap the record button and <strong>cough intentionally</strong>
           into the bottom of your phone <strong>3 times</strong> with a
@@ -121,6 +126,7 @@ const Introduction = ({
           away from your mouth and <strong>do not obstruct</strong>
           or cover your device with plastic. Do not breathe violently or too forcefully.
         </Trans>,
+        <ImageBreathSVG />,
         <Trans i18nKey="recordingsRecord:textBreath">
           Tap the record button and <strong>breathe deeply and loudly</strong> into the bottom of your phone
           <strong>5 times.</strong> When you are done, tap the stop button.
@@ -133,6 +139,7 @@ const Introduction = ({
         away from your mouth and <strong>do not obstruct</strong>
         or cover your device with plastic. Do not speak violently or too forcefully.
       </Trans>,
+      <ImageVoiceSVG />,
       <Trans i18nKey="recordingsRecord:textSpeech">
         Tap the record button below and <strong>say a sustained ‘aaaaah’ for at least 5 seconds.</strong>
         When you are done, tap the stop button.
@@ -164,7 +171,9 @@ const Introduction = ({
           {renderInstrucion2}
         </BlackText>
       </InstructionContainer>
-      <CoughLeft />
+      <HoldCelImage>
+        {renderImage2}
+      </HoldCelImage>
       <InstructionContainer>
         <WelcomeBullets>
           <BulletIndicator>3</BulletIndicator>
