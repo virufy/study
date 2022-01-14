@@ -14,7 +14,7 @@ import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
 import {
-  MainContainer, Title, ImportantNote, ResultTitle, ResultNote,
+  MainContainer, Title, ImportantNote, ResultTitle, ResultNote, BeforeSubmitText,
 } from '../style';
 
 // Theme
@@ -132,6 +132,11 @@ const PredictionResult2 = ({
       </ImportantNote>
 
       <Portal>
+        {(errorCode !== 'everything_ok') && (
+          <BeforeSubmitText>
+            {`Error Code: ${errorCode}`}
+          </BeforeSubmitText>
+        )}
         <WizardButtons
           invert
           leftLabel={t('thankyou:returnButton')}
