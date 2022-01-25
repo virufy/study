@@ -30,6 +30,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeStep, setActiveStep] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [patientInformation, setPatientInformation] = useState({
     questionary: false,
     age: undefined,
@@ -47,12 +48,17 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get(`/patient/${patientId}`).catch(() => ({
-        status: 404,
-        data: {},
-      }));
+      const res = await axios.get(`/patient/${patientId}`)
+        .catch(() => {
+          setLoading(false);
+          return {
+            status: 404,
+            data: {},
+          };
+        });
       if (res.status === 200) {
         setPatientInformation(res.data);
+        setLoading(false);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,43 +115,50 @@ const PatientSummary = (p: Wizard.StepProps) => {
           {`${t('main:patient', 'Patient')} ${patientId}`}
         </CustomPurpleText>
 
-        <OptionsContainer isFirst>
-          <OptionsHeader onClick={handleNextQuestionnaire}>{t('main:questionnaire', 'Questionnaire')}
-            {patientInformation.questionary ? <CheckCircle /> : <ChevronRight />}
-          </OptionsHeader>
-          {patientInformation.questionary && (
-            <OptionsBody>
-              <OptionsText>
-                {t('questionary:age', 'Age: ')} <strong>{patientInformation.age}</strong>
-              </OptionsText>
-              <OptionsText>
-                {t('questionary:gender.gender', 'Gender: ')} <strong>{t(`questionary:gender.options.${patientInformation.gender}`, `${patientInformation.gender}`)}</strong>
-              </OptionsText>
-            </OptionsBody>
-          )}
-        </OptionsContainer>
+        {loading ? (
+          <CustomPurpleText left mt={0}>Loading....</CustomPurpleText>
+        ) : (
+          <>
+            <OptionsContainer isFirst>
+              <OptionsHeader onClick={handleNextQuestionnaire}>{t('main:questionnaire', 'Questionnaire')}
+                {patientInformation.questionary ? <CheckCircle /> : <ChevronRight />}
+              </OptionsHeader>
+              {patientInformation.questionary && (
+                <OptionsBody>
+                  <OptionsText>
+                    {t('questionary:age', 'Age: ')} <strong>{patientInformation.age}</strong>
+                  </OptionsText>
+                  <OptionsText>
+                    {t('questionary:gender.gender', 'Gender: ')} <strong>{t(`questionary:gender.options.${patientInformation.gender}`, `${patientInformation.gender}`)}</strong>
+                  </OptionsText>
+                </OptionsBody>
+              )}
+            </OptionsContainer>
 
-        <OptionsContainer>
-          <OptionsHeader onClick={handleNextAudioCollection}>
-            {t('main:audioCollection', 'Audio Collection')}
-            {patientInformation.audioCollection ? <CheckCircle />
-              : <ChevronRight />}
-          </OptionsHeader>
-        </OptionsContainer>
+            <OptionsContainer>
+              <OptionsHeader onClick={handleNextAudioCollection}>
+                {t('main:audioCollection', 'Audio Collection')}
+                {patientInformation.audioCollection ? <CheckCircle />
+                  : <ChevronRight />}
+              </OptionsHeader>
+            </OptionsContainer>
 
-        <OptionsContainer>
-          <OptionsHeader onClick={handleNextTestResults}>
-            {t('main:testResults', 'Test Results')}
-            {patientInformation.testResult ? <CheckCircle /> : <ChevronRight />}
-          </OptionsHeader>
-        </OptionsContainer>
+            <OptionsContainer>
+              <OptionsHeader onClick={handleNextTestResults}>
+                {t('main:testResults', 'Test Results')}
+                {patientInformation.testResult ? <CheckCircle /> : <ChevronRight />}
+              </OptionsHeader>
+            </OptionsContainer>
 
-        <OptionsContainer>
-          <OptionsHeader onClick={handleNextScreeningResults} isDisabled={!enableScreeningResults}>
-            {t('main:screeningResults', 'Screening Results')}
-            <ChevronRight />
-          </OptionsHeader>
-        </OptionsContainer>
+            <OptionsContainer>
+              <OptionsHeader onClick={handleNextScreeningResults} isDisabled={!enableScreeningResults}>
+                {t('main:screeningResults', 'Screening Results')}
+                <ChevronRight />
+              </OptionsHeader>
+            </OptionsContainer>
+          </>
+        )}
+
       </WelcomeContent>
     </WelcomeStyledFormAlternative>
   );
