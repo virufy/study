@@ -289,7 +289,7 @@
         "retryButton": "আবার চেষ্টা করুন",
         "releaseButtonStart": "রেকর্ড শুরু করুন",
         "releaseButtonStop": "রেকর্ড শেষ করুন",
-        "shortRecording": "কমপক্ষে ৫ সেকেন্ডের রেকর্ডিং করুন"
+        "shortRecording": "অনুগ্রহ করে কমপক্ষে {{seconds}} সেকেন্ডের একটি রেকর্ডিং করুন৷"
     },
     "recordingsRecord": {
         "recordCough": {

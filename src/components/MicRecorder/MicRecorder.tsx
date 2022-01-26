@@ -36,6 +36,7 @@ import {
 interface MicRecorderProps {
   className?: string;
   maxTimeInSeconds?: number;
+  minTimeInSeconds?: number;
   onNewRecord: (file: File, humanReadableSize: string) => void;
   delay?: number;
   recordingFile: any;
@@ -71,6 +72,7 @@ export interface RecorderServiceType {
 const MicRecorder = ({
   className = '',
   maxTimeInSeconds = 30, // 30 segs
+  minTimeInSeconds = 5, // 5 segs
   onNewRecord,
   delay = 500, // 500ms
   recordingFile,
@@ -184,13 +186,13 @@ const MicRecorder = ({
       recordingService.current.stopRecording();
       setRecordingInProgress(false);
       if (timerRef.current) {
-        if (timerRef.current.getTime() / 1000 < 5) {
+        if (timerRef.current.getTime() / 1000 < minTimeInSeconds) {
           setShowShortRecordingText(true);
         }
         timerRef.current.stop();
       }
     }
-  }, []);
+  }, [minTimeInSeconds]);
 
   const handleFormatValue = React.useCallback((value: number) => (value < 10 ? `0${value}` : value), []);
 
@@ -245,7 +247,7 @@ const MicRecorder = ({
           modalTitle="Oops."
           onConfirm={handleStartRecording}
         >
-          {t('recordingsIntroduction:shortRecording')}
+          {t('recordingsIntroduction:shortRecording', { seconds: minTimeInSeconds })}
         </RecordErrorModal>
       </MicRecorderTimerReleaseTextContainer>
       <MicRecorderTimerContainer>

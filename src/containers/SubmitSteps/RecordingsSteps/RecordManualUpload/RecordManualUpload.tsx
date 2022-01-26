@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
-import * as Yup from 'yup';
+import Yup from 'utils/yup';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
@@ -35,32 +35,21 @@ import {
 } from './style';
 
 const audioMaxSizeInMb = 5;
-const audioMinLength = 5; // in seconds
+const audioMinLength: CommonJSON<number> = {
+  recordYourBreath: 5,
+  recordYourSpeech: 5,
+  recordYourCough: 3,
+}; // in seconds
 
 const mimeTypes = 'audio/wav,audio/wave,audio/wav,audio/x-wav,audio/x-pn-wav,audio/mp3,audio/ogg';
 
 const schema = Yup.object({
   uploadedFile: Yup.mixed()
     .required('ERROR.FILE_REQUIRED')
-    .test('fileSize', 'ERROR.FILE_SIZE', (value?: any) => {
-      if (value) {
-        const file = value as File;
-        const { size } = file;
-        return size <= ((1024 ** 3) * audioMaxSizeInMb);
-      }
-      return !!value;
-    })
-    .test('fileDuration', 'ERROR.FILE_DURATION', async (value?: any) => {
-      if (value) {
-        const file = value as File;
-        const audio = new Audio(URL.createObjectURL(file));
-
-        audio.load();
-        await new Promise(resolver => audio.addEventListener('loadedmetadata', resolver));
-        return (audio.duration >= audioMinLength);
-      }
-      return !!value;
-    }),
+  // @ts-ignore
+    .validateAudioSize(audioMaxSizeInMb)
+  // @ts-ignore
+    .when('$_currentLogic', (value: string, _schema: Yup.MixedSchema) => _schema.validateAudioLength(audioMinLength[value] || 5)),
 }).defined();
 
 const RecordManualUpload = ({

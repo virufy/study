@@ -75,16 +75,19 @@ const Step1 = (p: Wizard.StepProps) => {
   const {
     setType, setDoGoBack, setLogoSize,
   } = useHeaderContext();
+  const resetExecuted = React.useRef(false);
 
   const { state, actions } = useStateMachine({ update: updateAction(p.storeKey), reset: resetStore() });
 
-  const store = isClinic ? {} : state?.[p.storeKey];
+  const store = state?.[p.storeKey];
+
   const {
     control,
     formState,
     handleSubmit,
     watch,
     setValue,
+    reset,
   } = useForm({
     defaultValues: store,
     context: {
@@ -98,8 +101,16 @@ const Step1 = (p: Wizard.StepProps) => {
   const { isValid, errors } = formState;
 
   useEffect(() => {
+    if (resetExecuted.current) {
+      resetExecuted.current = false;
+      reset(store);
+    }
+  }, [store, reset]);
+
+  useEffect(() => {
     if (isClinic) {
       actions.reset({});
+      resetExecuted.current = true;
     }
   }, []);
 
