@@ -291,7 +291,7 @@
     "retryButton": "Tente novamente",
     "releaseButtonStart": "Lançamento para iniciar a gravação",
     "releaseButtonStop": "Liberação para parar a gravação",
-    "shortRecording": "Por favor, faça uma gravação de pelo menos 5 segundos"
+    "shortRecording": "Por favor, faça uma gravação de pelo menos {{seconds}} segundos"
   },
   "recordingsRecord": {
     "recordCough": {

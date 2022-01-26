@@ -289,7 +289,7 @@
         "retryButton": "リトライ",
         "releaseButtonStart": "離すと録音開始",
         "releaseButtonStop": "手を離すと録音が止まります",
-        "shortRecording": "最低でも5秒間は録音してください"
+        "shortRecording": "最低でも{{seconds}}秒間は録音してください"
     },
     "recordingsRecord": {
         "recordCough": {
