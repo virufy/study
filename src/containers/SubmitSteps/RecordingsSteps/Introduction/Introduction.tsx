@@ -128,8 +128,9 @@ const Introduction = ({
         </Trans>,
         <ImageBreathSVG />,
         <Trans i18nKey="recordingsRecord:textBreath">
-          Tap the record button and <strong>breathe deeply and loudly</strong> into the bottom of your phone
-          <strong>5 times.</strong> When you are done, tap the stop button.
+          Tap the record button and
+          <strong> breathe deeply and loudly </strong> with your mouth into the bottom of your phone
+          <strong> 3 times</strong>, leaving a space between each breath. When you are done, tap the stop button.
         </Trans>,
       ]);
     }
@@ -141,7 +142,8 @@ const Introduction = ({
       </Trans>,
       <ImageVoiceSVG />,
       <Trans i18nKey="recordingsRecord:textSpeech">
-        Tap the record button below and <strong>say a sustained ‘aaaaah’ for at least 5 seconds.</strong>
+        Tap the record button below, inhale deeply, and then
+        <strong> say a sustained ‘aaaaah’ for at least 5 seconds.</strong>
         When you are done, tap the stop button.
       </Trans>,
 
