@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useStateMachine } from 'little-state-machine';
 
 // Header Control
 import { useTranslation } from 'react-i18next';
@@ -28,7 +27,6 @@ import {
 
 const PatientSummary = (p: Wizard.StepProps) => {
   const patientId = getPatientId();
-  const { state } = useStateMachine();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeStep, setActiveStep] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -47,10 +45,8 @@ const PatientSummary = (p: Wizard.StepProps) => {
   const history = useHistory();
   const axios = useAxios();
 
-  const currentState = state?.[p.storeKey];
-
   useEffect(() => {
-    if (!currentState?.patientId) {
+    if (!patientId) {
       history.replace('');
     } else {
       (async () => {
