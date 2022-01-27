@@ -27,7 +27,6 @@ import {
 
 const PatientSummary = (p: Wizard.StepProps) => {
   const patientId = getPatientId();
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeStep, setActiveStep] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -42,25 +41,29 @@ const PatientSummary = (p: Wizard.StepProps) => {
   const {
     setType, setDoGoBack, setTitle, setLogoSize,
   } = useHeaderContext();
-
+  const { t } = useTranslation();
   const history = useHistory();
   const axios = useAxios();
 
   useEffect(() => {
-    (async () => {
-      const res = await axios.get(`/patient/${patientId}`)
-        .catch(() => {
+    if (!patientId) {
+      history.replace('');
+    } else {
+      (async () => {
+        const res = await axios.get(`/patient/${patientId}`)
+          .catch(() => {
+            setLoading(false);
+            return {
+              status: 404,
+              data: {},
+            };
+          });
+        if (res.status === 200) {
+          setPatientInformation(res.data);
           setLoading(false);
-          return {
-            status: 404,
-            data: {},
-          };
-        });
-      if (res.status === 200) {
-        setPatientInformation(res.data);
-        setLoading(false);
-      }
-    })();
+        }
+      })();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -94,8 +97,6 @@ const PatientSummary = (p: Wizard.StepProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     scrollToTop();
