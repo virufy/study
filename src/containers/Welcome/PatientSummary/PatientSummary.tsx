@@ -127,7 +127,11 @@ const PatientSummary = (p: Wizard.StepProps) => {
         ) : (
           <>
             <OptionsContainer isFirst>
-              <OptionsHeader onClick={handleNextQuestionnaire}>{t('main:questionnaire', 'Questionnaire')}
+              <OptionsHeader
+                onClick={handleNextQuestionnaire}
+                isButton={!patientInformation.questionary}
+              >
+                {t('main:questionnaire', 'Questionnaire')}
                 {patientInformation.questionary ? <CheckCircle /> : <ChevronRight />}
               </OptionsHeader>
               {patientInformation.questionary && (
@@ -143,7 +147,10 @@ const PatientSummary = (p: Wizard.StepProps) => {
             </OptionsContainer>
 
             <OptionsContainer>
-              <OptionsHeader onClick={handleNextAudioCollection}>
+              <OptionsHeader
+                onClick={handleNextAudioCollection}
+                isButton={!patientInformation.audioCollection}
+              >
                 {t('main:audioCollection', 'Audio Collection')}
                 {patientInformation.audioCollection ? <CheckCircle />
                   : <ChevronRight />}
@@ -151,14 +158,21 @@ const PatientSummary = (p: Wizard.StepProps) => {
             </OptionsContainer>
 
             <OptionsContainer>
-              <OptionsHeader onClick={handleNextTestResults}>
+              <OptionsHeader
+                onClick={handleNextTestResults}
+                isButton={!patientInformation.testResult}
+              >
                 {t('main:testResults', 'Test Results')}
                 {patientInformation.testResult ? <CheckCircle /> : <ChevronRight />}
               </OptionsHeader>
             </OptionsContainer>
 
             <OptionsContainer>
-              <OptionsHeader onClick={handleNextScreeningResults} isDisabled={!enableScreeningResults}>
+              <OptionsHeader
+                onClick={handleNextScreeningResults}
+                isDisabled={!enableScreeningResults}
+                isButton={!!enableScreeningResults}
+              >
                 {t('main:screeningResults', 'Screening Results')}
                 <ChevronRight />
               </OptionsHeader>
