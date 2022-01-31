@@ -71,16 +71,22 @@ const PatientSummary = (p: Wizard.StepProps) => {
   const enableScreeningResults = patientInformation.questionary && patientInformation.audioCollection && patientInformation.audioInfo && patientInformation.testResult;
 
   const handleNextQuestionnaire = React.useCallback(() => {
-    history.push('/submit-steps/questionary/step2');
-  }, [history]);
+    if (!patientInformation.questionary) {
+      history.push('/submit-steps/questionary/step2');
+    }
+  }, [history, patientInformation.questionary]);
 
   const handleNextAudioCollection = React.useCallback(() => {
-    history.push('/submit-steps/step-record/cough');
-  }, [history]);
+    if (!patientInformation.audioCollection) {
+      history.push('/submit-steps/step-record/cough');
+    }
+  }, [history, patientInformation.audioCollection]);
 
   const handleNextTestResults = React.useCallback(() => {
-    history.push('/submit-steps/questionary/step1b');
-  }, [history]);
+    if (!patientInformation.testResult) {
+      history.push('/submit-steps/questionary/step1b');
+    }
+  }, [history, patientInformation.testResult]);
 
   const handleNextScreeningResults = React.useCallback(() => {
     if (enableScreeningResults) {
