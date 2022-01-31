@@ -145,6 +145,8 @@ const MicRecorder = ({
       const file = recordingFile as File;
       if (file.size) {
         const audio = new Audio(URL.createObjectURL(file));
+        audio.defaultMuted = true;
+        audio.muted = true;
         audio.load();
         const listenerFn = () => {
           timerRef.current?.setTime(audio.duration * 1000);

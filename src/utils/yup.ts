@@ -6,6 +6,8 @@ Yup.addMethod(Yup.mixed, 'validateAudioLength', function validate(maxDuration: n
     if (value) {
       const file = value as File;
       const audio = new Audio(URL.createObjectURL(file));
+      audio.defaultMuted = true;
+      audio.muted = true;
       audio.load();
       await new Promise(resolver => audio.addEventListener('loadedmetadata', resolver));
       const duration: number = await new Promise(resolver => {
@@ -16,7 +18,6 @@ Yup.addMethod(Yup.mixed, 'validateAudioLength', function validate(maxDuration: n
           audio.remove();
           resolver(audio.duration);
         });
-        audio.volume = 0;
         audio.currentTime = 24 * 60 * 60; // Unprobable time
         audio.play();
       });
