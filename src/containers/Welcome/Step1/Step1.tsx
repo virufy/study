@@ -26,6 +26,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Data
 import { languageData } from 'data/lang';
 import { countryData, countriesWithStates, CountryDataProps } from 'data/country';
+import { hospitalIdData } from 'data/hospitalId';
 
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
@@ -45,9 +46,11 @@ declare interface OptionsProps {
 
 let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany'];
 const clinicCountries = ['India', 'Colombia'];
+
 if (isClinic) {
   invalidCountries = invalidCountries.filter(a => !clinicCountries.includes(a));
 }
+
 const schema = Yup.object().shape({
   country: Yup.string().required().notOneOf(invalidCountries),
   language: Yup.string().required(),
@@ -296,14 +299,25 @@ const Step1 = (p: Wizard.StepProps) => {
                 control={control}
                 name="hospitalId"
                 defaultValue=""
-                render={({ onChange, value, name }) => (
-                  <WelcomeInput
-                    name={name}
-                    value={value}
-                    onChange={onChange}
-                    type="text"
-                    autoComplete="Off"
-                  />
+                render={({ onChange, value: valueController, name }) => (
+                  country === 'Colombia'
+                    ? (
+                      <WelcomeSelect
+                        options={hospitalIdData}
+                        onChange={(e: any) => { onChange(e?.value); }}
+                        value={hospitalIdData.filter(({ value }) => value === valueController) || ''}
+                        className="custom-select"
+                        classNamePrefix="custom-select"
+                      />
+                    ) : (
+                      <WelcomeInput
+                        name={name}
+                        value={valueController}
+                        onChange={onChange}
+                        type="text"
+                        autoComplete="Off"
+                      />
+                    )
                 )}
               />
             </>
