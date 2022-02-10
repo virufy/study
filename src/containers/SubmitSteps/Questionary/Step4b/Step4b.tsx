@@ -115,12 +115,18 @@ const Step4b = ({
       }
     }
   };
-
   const onSubmitPatientShortQuestionnaire = async (values: Step4bType) => {
     if (values) {
+      action(values);
       await doSubmitPatientShortQuestionnaire({
         setSubmitError: s => setSubmitError(!s ? null : t(s)),
-        state,
+        state: {
+          ...state,
+          'submit-steps': {
+            ...state['submit-steps'],
+            ...values,
+          },
+        },
         captchaValue,
         action,
         nextStep,

@@ -46,7 +46,6 @@ export async function doSubmitPatientQuestionnaire({
       symptomsStartedDate,
       currentRespiratoryCondition,
       currentMedicalCondition,
-
     } = state['submit-steps'];
 
     const body = new FormData();
@@ -159,7 +158,6 @@ export async function doSubmitPatientShortQuestionnaire({
       gender,
       currentSymptoms,
       symptomsStartedDate,
-
     } = state['submit-steps'];
 
     const body = new FormData();

@@ -82,7 +82,13 @@ const Step6 = ({
     if (values) {
       await doSubmit({
         setSubmitError: s => setSubmitError(!s ? null : t(s)),
-        state,
+        state: {
+          ...state,
+          'submit-steps': {
+            ...state['submit-steps'],
+            ...values,
+          },
+        },
         captchaValue,
         action,
         nextStep,
@@ -96,7 +102,13 @@ const Step6 = ({
     if (values) {
       await doSubmitPatientQuestionnaire({
         setSubmitError: s => setSubmitError(!s ? null : t(s)),
-        state,
+        state: {
+          ...state,
+          'submit-steps': {
+            ...state['submit-steps'],
+            ...values,
+          },
+        },
         captchaValue,
         action,
         nextStep,
