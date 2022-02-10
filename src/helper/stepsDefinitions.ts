@@ -202,6 +202,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
     })(),
     progressCurrent: !allowSpeechIn.includes(country) ? 1 : 2,
     progressTotal: !allowSpeechIn.includes(country) ? 1 : 2,
+    isShortQuestionary: false,
   };
   const output = [
     {
@@ -392,6 +393,73 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
   return output;
 }
 
+/***/
+
+function getShortQuestionarySteps(storeKey: string) {
+  const baseMetadata = {
+    total: 3,
+    isShortQuestionary: true,
+  };
+  const output = [
+    {
+      path: '/shortQuestionary/step1',
+      componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2a`,
+      props: {
+        storeKey,
+        previousStep: '/welcome/patientSummary',
+        nextStep: `${baseUrl}/shortQuestionary/step2`,
+        metadata: {
+          current: 1,
+          ...baseMetadata,
+        },
+      },
+    },
+    {
+      path: '/shortQuestionary/step2',
+      componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2b`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/shortQuestionary/step1`,
+        nextStep: `${baseUrl}/shortQuestionary/step3`,
+        metadata: {
+          current: 2,
+          ...baseMetadata,
+        },
+      },
+    },
+    {
+      path: '/shortQuestionary/step3',
+      componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step4a`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/shortQuestionary/step2`,
+        nextStep: `${baseUrl}/thank-you`,
+        otherSteps: {
+          covidSymptomsStep: `${baseUrl}/shortQuestionary/step3b`,
+        },
+        metadata: {
+          current: 3,
+          ...baseMetadata,
+        },
+      },
+    },
+    {
+      path: '/shortQuestionary/step3b',
+      componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step4b`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/shortQuestionary/step3`,
+        nextStep: `${baseUrl}/thank-you`,
+        metadata: {
+          ...baseMetadata,
+        },
+      },
+    },
+  ];
+
+  return output;
+}
+
 function getSubmissionSteps(storeKey: string) {
   return [
     {
@@ -425,6 +493,8 @@ export default function stepsDefinition(storeKey: string, country: string, patie
     ...getSpeechSteps(storeKey, country, patientId),
     // Questionary
     ...getQuestionarySteps(storeKey, country, patientId),
+    // Short Questionary
+    ...getShortQuestionarySteps(storeKey),
     // Submission
     ...getSubmissionSteps(storeKey),
     {
