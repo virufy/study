@@ -18,12 +18,16 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
+import { doSubmitPatientShortQuestionnaire } from 'helper/patientHelper';
 
-// Styles
+// Components
+import Recaptcha from 'components/Recaptcha';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
+
+// Styles
 import {
-  QuestionText, MainContainer, QuestionAllApply,
+  QuestionText, MainContainer, QuestionAllApply, TempBeforeSubmitError,
 } from '../style';
 
 const schema = Yup.object({
@@ -50,20 +54,51 @@ const Step4a = ({
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
+  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
 
   // Form
   const {
-    control, handleSubmit, formState,
+    control, handleSubmit, formState, watch,
   } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
-  const { errors } = formState;
+  const { errors, isSubmitting, isValid } = formState;
 
-  const {
-    isValid,
-  } = formState;
+  useEffect(() => {
+    if (!captchaValue) {
+      setSubmitError(null);
+    }
+  }, [captchaValue]);
+
+  const watchSymptoms = watch('currentSymptoms');
+  const isShortQuestionary = metadata?.isShortQuestionary;
+
+  const isFinalStep = React.useMemo(() => {
+    if (isShortQuestionary && ((watchSymptoms?.selected.length === 0) || watchSymptoms?.selected?.some((item: string) => item === 'none'))) {
+      return true;
+    }
+    return false;
+  }, [watchSymptoms]);
+
+  const renderCaptcha = React.useMemo(() => {
+    if (isFinalStep) {
+      if (submitError) {
+        return (
+          <>
+            <Recaptcha onChange={setCaptchaValue} />
+            <TempBeforeSubmitError>
+              {submitError}
+            </TempBeforeSubmitError>
+          </>
+        );
+      }
+      return <Recaptcha onChange={setCaptchaValue} />;
+    }
+    return null;
+  }, [isFinalStep, submitError]);
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -111,6 +146,30 @@ const Step4a = ({
         history.push(nextStep);
       }
     }
+  };
+
+  const onSubmitPatientShortQuestionnaire = async (values: Step4aType) => {
+    if (values) {
+      await doSubmitPatientShortQuestionnaire({
+        setSubmitError: s => setSubmitError(!s ? null : t(s)),
+        state,
+        captchaValue,
+        action,
+        nextStep,
+        setActiveStep,
+        history,
+      });
+    }
+  };
+
+  const getLeftLabel = () => {
+    if (isFinalStep) {
+      if (isSubmitting) {
+        return t('questionary:submitting');
+      }
+      return t('beforeSubmit:submitButton');
+    }
+    return t('questionary:nextButton');
   };
 
   return (
@@ -199,14 +258,15 @@ const Step4a = ({
       {/* Bottom Buttons */}
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
-      <Portal>
-        <WizardButtons
-          leftLabel={t('questionary:nextButton')}
-          leftHandler={handleSubmit(onSubmit)}
-          leftDisabled={!isValid}
-          invert
-        />
-      </Portal>
+        <Portal>
+          {renderCaptcha}
+          <WizardButtons
+            leftLabel={getLeftLabel()}
+            leftDisabled={isFinalStep ? (!captchaValue || isSubmitting) : !isValid}
+            leftHandler={isFinalStep ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
+            invert
+          />
+        </Portal>
       )}
     </MainContainer>
   );

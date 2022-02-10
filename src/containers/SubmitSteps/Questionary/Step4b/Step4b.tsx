@@ -18,13 +18,15 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
+import { doSubmitPatientShortQuestionnaire } from 'helper/patientHelper';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
+import Recaptcha from 'components/Recaptcha';
 
 // Styles
 import {
-  QuestionText, MainContainer, QuestionInput,
+  QuestionText, MainContainer, QuestionInput, TempBeforeSubmitError,
 } from '../style';
 
 const schema = Yup.object({
@@ -43,6 +45,7 @@ const Step4b = ({
   previousStep,
   nextStep,
   storeKey,
+  metadata,
 }: Wizard.StepProps) => {
   // Hooks
   const { Portal } = usePortal({
@@ -55,6 +58,9 @@ const Step4b = ({
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
+  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const isShortQuestionary = metadata?.isShortQuestionary;
 
   // Form
   const {
@@ -64,11 +70,32 @@ const Step4b = ({
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
-  const { errors } = formState;
+  const { errors, isSubmitting, isValid } = formState;
 
-  const {
-    isValid,
-  } = formState;
+  useEffect(() => {
+    if (!captchaValue) {
+      setSubmitError(null);
+    }
+  }, [captchaValue]);
+
+  const renderCaptcha = React.useMemo(() => {
+    if (isShortQuestionary) {
+      if (submitError) {
+        return (
+          <>
+            <Recaptcha onChange={setCaptchaValue} />
+            <TempBeforeSubmitError>
+              {submitError}
+            </TempBeforeSubmitError>
+          </>
+        );
+      }
+      return <Recaptcha onChange={setCaptchaValue} />;
+    }
+    return null;
+  }, [isShortQuestionary, submitError]);
+
+  // Handlers
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -79,14 +106,6 @@ const Step4b = ({
     }
   }, [history, previousStep]);
 
-  useEffect(() => {
-    scrollToTop();
-    setTitle(t('questionary:headerQuestions'));
-    setType('primary');
-    setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
-
-  // Handlers
   const onSubmit = async (values: Step4bType) => {
     if (values) {
       action(values);
@@ -95,6 +114,37 @@ const Step4b = ({
         history.push(nextStep);
       }
     }
+  };
+
+  const onSubmitPatientShortQuestionnaire = async (values: Step4bType) => {
+    if (values) {
+      await doSubmitPatientShortQuestionnaire({
+        setSubmitError: s => setSubmitError(!s ? null : t(s)),
+        state,
+        captchaValue,
+        action,
+        nextStep,
+        setActiveStep,
+        history,
+      });
+    }
+  };
+
+  useEffect(() => {
+    scrollToTop();
+    setTitle(t('questionary:headerQuestions'));
+    setType('primary');
+    setDoGoBack(() => handleDoBack);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+
+  const getLeftLabel = () => {
+    if (isShortQuestionary) {
+      if (isSubmitting) {
+        return t('questionary:submitting');
+      }
+      return t('beforeSubmit:submitButton');
+    }
+    return t('questionary:nextButton');
   };
 
   return (
@@ -121,10 +171,11 @@ const Step4b = ({
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
+          {renderCaptcha}
           <WizardButtons
-            leftLabel={t('questionary:nextButton')}
-            leftHandler={handleSubmit(onSubmit)}
-            leftDisabled={!isValid}
+            leftLabel={getLeftLabel()}
+            leftHandler={isShortQuestionary ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
+            leftDisabled={isShortQuestionary ? (!captchaValue || isSubmitting) : !isValid}
             invert
           />
         </Portal>

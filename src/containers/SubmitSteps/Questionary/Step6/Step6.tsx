@@ -233,9 +233,9 @@ const Step6 = ({
           { /* ReCaptcha  */}
           <Recaptcha onChange={setCaptchaValue} />
           {submitError && (
-          <TempBeforeSubmitError>
-            {submitError}
-          </TempBeforeSubmitError>
+            <TempBeforeSubmitError>
+              {submitError}
+            </TempBeforeSubmitError>
           )}
           <WizardButtons
             invert

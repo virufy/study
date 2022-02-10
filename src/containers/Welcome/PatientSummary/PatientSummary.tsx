@@ -9,7 +9,7 @@ import useAxios from 'hooks/useAxios';
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Helpers
-import { getPatientId } from 'helper/stepsDefinitions';
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
@@ -32,6 +32,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
   const [loading, setLoading] = useState(true);
   const [patientInformation, setPatientInformation] = useState({
     questionary: false,
+    shortQuestionary: false,
     age: undefined,
     gender: '',
     audioCollection: false,
@@ -44,6 +45,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
   const { t } = useTranslation();
   const history = useHistory();
   const axios = useAxios();
+  const country = getCountry();
 
   useEffect(() => {
     if (!patientId) {
@@ -68,13 +70,19 @@ const PatientSummary = (p: Wizard.StepProps) => {
   }, []);
 
   // eslint-disable-next-line max-len
-  const enableScreeningResults = patientInformation.questionary && patientInformation.audioCollection && patientInformation.audioInfo && patientInformation.testResult;
+  const enableScreeningResults = (patientInformation.questionary || patientInformation.shortQuestionary) && patientInformation.audioCollection && patientInformation.audioInfo && patientInformation.testResult;
 
   const handleNextQuestionnaire = React.useCallback(() => {
-    if (!patientInformation.questionary) {
+    if (!patientInformation.questionary && !patientInformation.shortQuestionary) {
       history.push('/submit-steps/questionary/step2');
     }
-  }, [history, patientInformation.questionary]);
+  }, [history, patientInformation.questionary, patientInformation.shortQuestionary]);
+
+  const handleNextShortQuestionnaire = React.useCallback(() => {
+    if (!patientInformation.shortQuestionary && !patientInformation.questionary) {
+      history.push('/submit-steps/shortQuestionary/step1');
+    }
+  }, [history, patientInformation.questionary, patientInformation.shortQuestionary]);
 
   const handleNextAudioCollection = React.useCallback(() => {
     if (!patientInformation.audioCollection) {
@@ -129,10 +137,11 @@ const PatientSummary = (p: Wizard.StepProps) => {
             <OptionsContainer isFirst>
               <OptionsHeader
                 onClick={handleNextQuestionnaire}
-                isButton={!patientInformation.questionary}
+                isButton={(!patientInformation.questionary && !patientInformation.shortQuestionary)}
               >
                 {t('main:questionnaire', 'Questionnaire')}
-                {patientInformation.questionary ? <CheckCircle /> : <ChevronRight />}
+                {(patientInformation.shortQuestionary || patientInformation.questionary)
+                  ? <CheckCircle /> : <ChevronRight />}
               </OptionsHeader>
               {patientInformation.questionary && (
                 <OptionsBody>
@@ -145,6 +154,31 @@ const PatientSummary = (p: Wizard.StepProps) => {
                 </OptionsBody>
               )}
             </OptionsContainer>
+
+            {
+              (country === 'Colombia') && (
+                <OptionsContainer>
+                  <OptionsHeader
+                    onClick={handleNextShortQuestionnaire}
+                    isButton={(!patientInformation.questionary && !patientInformation.shortQuestionary)}
+                  >
+                    {t('main:shortQuestionnaire', 'Short Questionnaire')}
+                    {(patientInformation.shortQuestionary || patientInformation.questionary) ? <CheckCircle />
+                      : <ChevronRight />}
+                  </OptionsHeader>
+                  {patientInformation.shortQuestionary && (
+                    <OptionsBody>
+                      <OptionsText>
+                        {t('questionary:age', 'Age: ')} <strong>{patientInformation.age}</strong>
+                      </OptionsText>
+                      <OptionsText>
+                        {t('questionary:gender.gender', 'Gender: ')} <strong>{t(`questionary:gender.options.${patientInformation.gender}`, `${patientInformation.gender}`)}</strong>
+                      </OptionsText>
+                    </OptionsBody>
+                  )}
+                </OptionsContainer>
+              )
+            }
 
             <OptionsContainer>
               <OptionsHeader
