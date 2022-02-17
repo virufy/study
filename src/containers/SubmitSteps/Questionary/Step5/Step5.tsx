@@ -55,6 +55,7 @@ const Step5 = ({
   const [activeStep, setActiveStep] = React.useState(true);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const [recaptchaAvailable, setRecaptchaAvailable] = React.useState(true);
 
   // Form
   const {
@@ -164,7 +165,7 @@ const Step5 = ({
       {activeStep && (
         <Portal>
           {(metadata?.current ?? 5) === (metadata?.total ?? 6) && (
-            <Recaptcha onChange={setCaptchaValue} />
+            <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
           )}
           {submitError && (
             <TempBeforeSubmitError>
@@ -175,7 +176,7 @@ const Step5 = ({
             invert
             leftLabel={t('questionary:nextButton')}
             leftHandler={handleSubmit(onSubmit)}
-            leftDisabled={!isValid}
+            leftDisabled={!isValid || !recaptchaAvailable}
           />
         </Portal>
       )}

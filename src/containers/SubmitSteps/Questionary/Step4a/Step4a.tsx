@@ -56,6 +56,7 @@ const Step4a = ({
   const [activeStep, setActiveStep] = React.useState(true);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const [recaptchaAvailable, setRecaptchaAvailable] = React.useState(true);
 
   // Form
   const {
@@ -88,14 +89,14 @@ const Step4a = ({
       if (submitError) {
         return (
           <>
-            <Recaptcha onChange={setCaptchaValue} />
+            <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
             <TempBeforeSubmitError>
               {submitError}
             </TempBeforeSubmitError>
           </>
         );
       }
-      return <Recaptcha onChange={setCaptchaValue} />;
+      return <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />;
     }
     return null;
   }, [isFinalStep, submitError]);
@@ -269,7 +270,7 @@ const Step4a = ({
           {renderCaptcha}
           <WizardButtons
             leftLabel={getLeftLabel()}
-            leftDisabled={isFinalStep ? (!captchaValue || isSubmitting) : !isValid}
+            leftDisabled={isFinalStep ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
             leftHandler={isFinalStep ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
             invert
           />
