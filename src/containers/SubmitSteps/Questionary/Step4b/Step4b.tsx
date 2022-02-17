@@ -60,6 +60,7 @@ const Step4b = ({
   const [activeStep, setActiveStep] = React.useState(true);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const [recaptchaAvailable, setRecaptchaAvailable] = React.useState(true);
   const isShortQuestionary = metadata?.isShortQuestionary;
 
   // Form
@@ -83,14 +84,14 @@ const Step4b = ({
       if (submitError) {
         return (
           <>
-            <Recaptcha onChange={setCaptchaValue} />
+            <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
             <TempBeforeSubmitError>
               {submitError}
             </TempBeforeSubmitError>
           </>
         );
       }
-      return <Recaptcha onChange={setCaptchaValue} />;
+      return <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />;
     }
     return null;
   }, [isShortQuestionary, submitError]);
@@ -181,7 +182,7 @@ const Step4b = ({
           <WizardButtons
             leftLabel={getLeftLabel()}
             leftHandler={isShortQuestionary ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
-            leftDisabled={isShortQuestionary ? (!captchaValue || isSubmitting) : !isValid}
+            leftDisabled={isShortQuestionary ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
             invert
           />
         </Portal>

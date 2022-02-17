@@ -101,6 +101,7 @@ const ListenAudio = ({
   const [playing, setPlaying] = React.useState(false);
   const [duration, setDuration] = React.useState<number>(0);
   const [progressSeconds, setProgressSeconds] = React.useState<number>(0);
+  const [recaptchaAvailable, setRecaptchaAvailable] = React.useState(true);
 
   // Effects
   React.useEffect(() => {
@@ -403,7 +404,7 @@ const ListenAudio = ({
       {((patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourBreath') || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
         <Portal>
           { /* ReCaptcha  */}
-          <Recaptcha onChange={setCaptchaValue} />
+          <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
           {submitError && (
             <TempBeforeSubmitError>
               {submitError}
@@ -413,7 +414,7 @@ const ListenAudio = ({
             invert
             // leftLabel={t('questionary:proceedButton')}
             leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
-            leftDisabled={!captchaValue || isSubmitting}
+            leftDisabled={isSubmitting || (recaptchaAvailable && !captchaValue)}
             leftHandler={handleSubmit(onSubmitPatientAudioCollection)}
           />
         </Portal>

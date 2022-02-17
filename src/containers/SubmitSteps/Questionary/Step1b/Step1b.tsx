@@ -102,6 +102,7 @@ const Step1b = ({
   /* Delete after Contact info step is re-integrated */
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const [recaptchaAvailable, setRecaptchaAvailable] = React.useState(true);
   const { isSubmitting } = formState;
 
   useEffect(() => {
@@ -415,14 +416,14 @@ const Step1b = ({
               if (submitError) {
                 return (
                   <>
-                    <Recaptcha onChange={setCaptchaValue} />
+                    <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
                     <TempBeforeSubmitError>
                       {submitError}
                     </TempBeforeSubmitError>
                   </>
                 );
               }
-              return <Recaptcha onChange={setCaptchaValue} />;
+              return <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />;
             }
             return null;
           })()}
@@ -437,7 +438,7 @@ const Step1b = ({
               return t('questionary:nextButton');
             })()}
             leftHandler={handleSubmit(onSubmit)}
-            leftDisabled={patientId ? (!captchaValue || isSubmitting) : !isValid}
+            leftDisabled={patientId ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
             invert
           />
         </Portal>
