@@ -49,7 +49,9 @@ const Step2a = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle, setType } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setType, setSubtitle,
+  } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const patientId = getPatientId();
@@ -93,9 +95,10 @@ const Step2a = ({
   useEffect(() => {
     scrollToTop();
     setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setSubtitle(t(''));
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, metadata, t]);
 
   // Handlers
   const onSubmit = async (values: Step2Type) => {

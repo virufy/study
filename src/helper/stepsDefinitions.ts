@@ -9,11 +9,10 @@ const recordYourCoughLogic = 'recordYourCough';
 const recordYourBreathLogic = 'recordYourBreath';
 const recordYourSpeechLogic = 'recordYourSpeech';
 
-export const allowSpeechIn: string[] = [
-  'Colombia',
-];
+export const allowSpeechIn: string[] = ['Colombia'];
 export const removeQuestionaryStep6In: string[] = [];
 export const removeQuestionaryStep2cIn: string[] = ['Colombia'];
+export const allowConsenstIn: string[] = ['Colombia'];
 
 function getWizardData() {
   try {
@@ -204,7 +203,23 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
     progressTotal: !allowSpeechIn.includes(country) ? 1 : 2,
     isShortQuestionary: false,
   };
-  const output = [
+  const output = [];
+  if (patientId && (allowConsenstIn.includes(country))) {
+    output.push({
+      path: '/questionary/consent',
+      componentPath: 'Welcome/Step4',
+      props: {
+        storeKey,
+        previousStep: '/welcome/patientSummary',
+        nextStep: `${baseUrl}/questionary/step2`,
+        metadata: {
+          ...baseMetadata,
+        },
+      },
+    });
+  }
+
+  output.push(
     {
       path: '/questionary/step1a',
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1a`,
@@ -239,7 +254,15 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2`,
       props: {
         storeKey,
-        previousStep: patientId ? '/welcome/patientSummary' : `${baseUrl}/questionary/step1b`,
+        previousStep: (() => {
+          if (patientId) {
+            if (allowConsenstIn.includes(country)) {
+              return `${baseUrl}/questionary/consent`;
+            }
+            return '/welcome/patientSummary';
+          }
+          return `${baseUrl}/questionary/step1b`;
+        })(),
         nextStep: `${baseUrl}/questionary/step2a`,
         otherSteps: {
           noTestStep: `${baseUrl}/questionary/step1a`,
@@ -365,7 +388,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
         },
       },
     }, */
-  ];
+  );
 
   if (!removeQuestionaryStep6In.includes(country)) {
     output.push({
@@ -395,18 +418,31 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
 
 /***/
 
-function getShortQuestionarySteps(storeKey: string) {
+function getShortQuestionarySteps(storeKey: string, country: string, patientId: string) {
   const baseMetadata = {
     total: 3,
     isShortQuestionary: true,
   };
-  const output = [
+  const output = [];
+  if (patientId && (allowConsenstIn.includes(country))) {
+    output.push({
+      path: '/shortQuestionary/consent',
+      componentPath: 'Welcome/Step4',
+      props: {
+        storeKey,
+        previousStep: '/welcome/patientSummary',
+        nextStep: `${baseUrl}/shortQuestionary/step1`,
+      },
+    });
+  }
+
+  output.push(
     {
       path: '/shortQuestionary/step1',
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2a`,
       props: {
         storeKey,
-        previousStep: '/welcome/patientSummary',
+        previousStep: allowConsenstIn.includes(country) ? `${baseUrl}/shortQuestionary/consent` : '/welcome/patientSummary',
         nextStep: `${baseUrl}/shortQuestionary/step2`,
         metadata: {
           current: 1,
@@ -455,7 +491,7 @@ function getShortQuestionarySteps(storeKey: string) {
         },
       },
     },
-  ];
+  );
 
   return output;
 }
@@ -494,7 +530,7 @@ export default function stepsDefinition(storeKey: string, country: string, patie
     // Questionary
     ...getQuestionarySteps(storeKey, country, patientId),
     // Short Questionary
-    ...getShortQuestionarySteps(storeKey),
+    ...getShortQuestionarySteps(storeKey, country, patientId),
     // Submission
     ...getSubmissionSteps(storeKey),
     {
