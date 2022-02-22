@@ -25,6 +25,7 @@
     "audioCollection": "Recolección de audio",
     "testResults": "Envío de resultados del test",
     "screeningResults": "Resultados de la predicción de Virufy",
+    "shortQuestionnaire": "Cuestionario abreviado",
     "supportedBy": "Apoyado por",
     "visitWebsite": "Visite nuestra página web",
     "errorCountry": "En este momento no podemos recoger tos de su región. Vuelva a consultarnos pronto!",
@@ -401,7 +402,8 @@
       "question": "¿Ha recibido la vacuna de COVID-19?",
       "options": {
         "yes": "Si",
-        "no": "No"
+        "no": "No",
+        "decline": "Prefiero no decirlo"
       }
     },
     "age": "Edad:",

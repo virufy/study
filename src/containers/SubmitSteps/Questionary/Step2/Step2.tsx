@@ -132,6 +132,10 @@ const Step2 = ({
                 value: 'false',
                 label: t('questionary:vaccine.options.no'),
               },
+              {
+                value: 'decline',
+                label: t('questionary:vaccine.options.decline'),
+              },
             ]}
           />
         )}
