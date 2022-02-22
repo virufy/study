@@ -400,7 +400,8 @@
       "question": "COVID-19 aşısını oldunuz mu?",
       "options": {
         "yes": "Evet",
-        "no": "Hayir"
+        "no": "Hayir",
+        "decline": "Yanıtlamayı reddet"
       }
     },
     "age": "Yaş:",

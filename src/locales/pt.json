@@ -402,7 +402,8 @@
       "question": "Você já recebeu a vacina de COVID-19?",
       "options": {
         "yes": "Sim",
-        "no": "Não"
+        "no": "Não",
+        "decline": "Recusar-se a responder"
       }
     },
     "age": "Idade:",
