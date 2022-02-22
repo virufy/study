@@ -74,15 +74,23 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   const handleNextQuestionnaire = React.useCallback(() => {
     if (!patientInformation.questionary && !patientInformation.shortQuestionary) {
-      history.push('/submit-steps/questionary/step2');
+      if (country === 'Colombia') {
+        history.push('/submit-steps/questionary/consent');
+      } else {
+        history.push('/submit-steps/questionary/step2');
+      }
     }
-  }, [history, patientInformation.questionary, patientInformation.shortQuestionary]);
+  }, [country, history, patientInformation.questionary, patientInformation.shortQuestionary]);
 
   const handleNextShortQuestionnaire = React.useCallback(() => {
     if (!patientInformation.shortQuestionary && !patientInformation.questionary) {
-      history.push('/submit-steps/shortQuestionary/step1');
+      if (country === 'Colombia') {
+        history.push('/submit-steps/shortQuestionary/consent');
+      } else {
+        history.push('/submit-steps/shortQuestionary/step1');
+      }
     }
-  }, [history, patientInformation.questionary, patientInformation.shortQuestionary]);
+  }, [country, history, patientInformation.questionary, patientInformation.shortQuestionary]);
 
   const handleNextAudioCollection = React.useCallback(() => {
     if (!patientInformation.audioCollection) {
