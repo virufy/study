@@ -22,6 +22,7 @@
     "patient": "Patient",
     "questionnaire": "Questionnaire",
     "audioCollection": "Audio Collection",
+    "shortAudioCollection": "Short Audio Collection",
     "testResults": "Test Result Submission",
     "screeningResults": "Virufy Screening Prediction",
     "shortQuestionnaire": "Short questionnaire",

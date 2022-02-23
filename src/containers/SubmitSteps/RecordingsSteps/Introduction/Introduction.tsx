@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
 // Form
@@ -51,12 +51,14 @@ const Introduction = ({
 
   const { state, action } = useStateMachine(updateAction(storeKey));
 
-  // Hooks
   const {
     setDoGoBack, setTitle, setType, setSubtitle,
   } = useHeaderContext();
   const history = useHistory();
+  const location = useLocation<{ isShortAudioCollection: boolean }>();
   const { t } = useTranslation();
+
+  const isShortAudioCollection = location?.state?.isShortAudioCollection || false;
 
   // Handlers
   const handleDoBack = React.useCallback(() => {
@@ -69,9 +71,9 @@ const Introduction = ({
 
   const handleManualUpload = React.useCallback(() => {
     if (otherSteps && otherSteps.manualUploadStep) {
-      history.push(otherSteps.manualUploadStep);
+      history.push(otherSteps.manualUploadStep, { isShortAudioCollection });
     }
-  }, [otherSteps, history]);
+  }, [otherSteps, history, isShortAudioCollection]);
 
   const handleNext = React.useCallback(
     values => {
@@ -82,10 +84,10 @@ const Introduction = ({
             uploadedFile: null,
           },
         });
-        history.push(nextStep, { from: 'step-record' });
+        history.push(nextStep, { from: 'step-record', isShortAudioCollection });
       }
     },
-    [nextStep, action, metadata, history],
+    [nextStep, action, metadata?.currentLogic, history, isShortAudioCollection],
   );
 
   // Effects
@@ -191,6 +193,7 @@ const Introduction = ({
         onNext={handleNext}
         currentLogic={metadata?.currentLogic || ''}
         action={action}
+        isShortAudioCollection={isShortAudioCollection}
       />
 
       <InstructionContainer>

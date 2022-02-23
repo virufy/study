@@ -40,6 +40,7 @@ interface MicRecorderProps {
   onNewRecord: (file: File, humanReadableSize: string) => void;
   delay?: number;
   recordingFile: any;
+  isShortAudioCollection?: boolean;
 }
 
 const baseConfig = {
@@ -48,7 +49,6 @@ const baseConfig = {
   manualEncoderId: 'wav', // wav / mp3 / flac
   processorBufferSize: 2048, // 4096 flac / 2048 wav
 };
-
 export interface RecorderServiceType {
   config: {
     broadcastAudioProcessEvents: boolean; // default: false
@@ -76,6 +76,7 @@ const MicRecorder = ({
   onNewRecord,
   delay = 500, // 500ms
   recordingFile,
+  isShortAudioCollection,
 }: MicRecorderProps) => {
   // Hooks
   const { t } = useTranslation();
@@ -123,6 +124,7 @@ const MicRecorder = ({
   React.useEffect(() => {
     recordingService.current = new RecorderService({
       ...baseConfig,
+      sampleRate: isShortAudioCollection ? 16000 : baseConfig.sampleRate,
       onRecording: onNewRecording,
       onAudioProcesss: onAudioProcess,
     }) as RecorderServiceType;

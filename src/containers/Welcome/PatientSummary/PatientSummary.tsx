@@ -92,9 +92,9 @@ const PatientSummary = (p: Wizard.StepProps) => {
     }
   }, [country, history, patientInformation.questionary, patientInformation.shortQuestionary]);
 
-  const handleNextAudioCollection = React.useCallback(() => {
+  const handleNextAudioCollection = React.useCallback((isShortAudio: boolean) => {
     if (!patientInformation.audioCollection) {
-      history.push('/submit-steps/step-record/cough');
+      history.push('/submit-steps/step-record/cough', { isShortAudioCollection: isShortAudio });
     }
   }, [history, patientInformation.audioCollection]);
 
@@ -190,7 +190,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
             <OptionsContainer>
               <OptionsHeader
-                onClick={handleNextAudioCollection}
+                onClick={() => handleNextAudioCollection(false)}
                 isButton={!patientInformation.audioCollection}
               >
                 {t('main:audioCollection', 'Audio Collection')}
@@ -198,6 +198,21 @@ const PatientSummary = (p: Wizard.StepProps) => {
                   : <ChevronRight />}
               </OptionsHeader>
             </OptionsContainer>
+
+            {
+              (country === 'Colombia') && (
+                <OptionsContainer>
+                  <OptionsHeader
+                    onClick={() => handleNextAudioCollection(true)}
+                    isButton={(!patientInformation.audioCollection)}
+                  >
+                    {t('main:shortAudioCollection', 'Short Audio Collection')}
+                    {(patientInformation.audioCollection) ? <CheckCircle />
+                      : <ChevronRight />}
+                  </OptionsHeader>
+                </OptionsContainer>
+              )
+            }
 
             <OptionsContainer>
               <OptionsHeader

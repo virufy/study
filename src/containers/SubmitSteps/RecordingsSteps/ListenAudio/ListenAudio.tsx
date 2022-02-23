@@ -59,6 +59,7 @@ const ListenAudio = ({
   storeKey,
   previousStep,
   nextStep,
+  otherSteps,
   metadata,
 }: Wizard.StepProps) => {
   const isCoughLogic = React.useMemo(
@@ -81,12 +82,13 @@ const ListenAudio = ({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
   const { setDoGoBack, setTitle, setSubtitle } = useHeaderContext();
-  const history = useHistory();
-  const location = useLocation<{ from: string }>();
+  const history = useHistory<{isShortAudioCollection: boolean}>();
+  const location = useLocation<{ from: string, isShortAudioCollection: boolean }>();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const { t } = useTranslation();
   const patientId = getPatientId();
   const country = getCountry();
+  const isShortAudioCollection = location?.state?.isShortAudioCollection || false;
 
   const myState = state?.[storeKey]?.[metadata?.currentLogic];
   const file: File | null = myState ? myState.recordingFile || myState.uploadedFile : null;
@@ -204,7 +206,7 @@ const ListenAudio = ({
     setActiveStep(false);
     if (location.state && location.state.from) {
       if (isCoughLogic) {
-        history.push('/submit-steps/step-record/cough');
+        history.push('/submit-steps/step-record/cough', { isShortAudioCollection });
       } else if (isBreathLogic) {
         history.push('/submit-steps/step-record/breath');
       } else {
@@ -215,7 +217,7 @@ const ListenAudio = ({
     } else {
       history.goBack();
     }
-  }, [location.state, previousStep, history, isCoughLogic, isBreathLogic]);
+  }, [location.state, previousStep, history, isCoughLogic, isBreathLogic, isShortAudioCollection]);
 
   const handleRemoveFile = React.useCallback(() => {
     if (playing) {
@@ -296,8 +298,10 @@ const ListenAudio = ({
         captchaValue,
         action,
         nextStep,
+        otherSteps,
         setActiveStep,
         history,
+        isShortAudioCollection: isShortAudioCollection.toString(),
       });
     }
   };
@@ -391,7 +395,11 @@ const ListenAudio = ({
           </PlayerPlayButton>
         </PlayerPlayContainer>
       </MainContainer>
-      {((!patientId && activeStep) || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech') || (patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourBreath')) && (
+      {(
+        (!patientId && activeStep)
+      || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourSpeech' && !isShortAudioCollection)
+      || (patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic !== 'recordYourBreath')
+      ) && (
         <Portal>
           <WizardButtons
             invert
@@ -401,7 +409,7 @@ const ListenAudio = ({
         </Portal>
       )}
 
-      {((patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourBreath') || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech')) && (
+      {((patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourBreath') || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech') || (patientId && isShortAudioCollection && metadata?.currentLogic === 'recordYourCough')) && (
         <Portal>
           { /* ReCaptcha  */}
           <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />

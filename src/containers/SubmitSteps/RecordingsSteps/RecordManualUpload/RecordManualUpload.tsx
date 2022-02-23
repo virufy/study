@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { useTranslation } from 'react-i18next';
 
@@ -77,6 +77,8 @@ const RecordManualUpload = ({
     resolver: yupResolver(schema),
   });
   const { t } = useTranslation();
+  const location = useLocation<{ isShortAudioCollection: boolean }>();
+  const isShortAudioCollection = location?.state?.isShortAudioCollection || false;
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -92,18 +94,18 @@ const RecordManualUpload = ({
         },
       });
       setActiveStep(false);
-      history.push(nextStep, { from: 'step-manual-upload' });
+      history.push(nextStep, { from: 'step-manual-upload', isShortAudioCollection });
     }
-  }, [nextStep, action, metadata, history]);
+  }, [nextStep, action, metadata, history, isShortAudioCollection]);
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     if (previousStep) {
-      history.push(previousStep);
+      history.push(previousStep, { isShortAudioCollection });
     } else {
       history.goBack();
     }
-  }, [history, previousStep]);
+  }, [history, previousStep, isShortAudioCollection]);
 
   const handleUpload = React.useCallback(e => {
     schema.validate({ uploadedFile: e }).then(() => {

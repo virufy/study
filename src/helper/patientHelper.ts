@@ -13,8 +13,10 @@ interface DoSubmitProps {
   captchaValue: string | null;
   action(payload: Object): void;
   nextStep?: string;
+  otherSteps?: { isShortAudioStep?: string };
   setActiveStep(status: boolean): void;
   history: H.History;
+  isShortAudioCollection?: string;
 }
 
 export async function doSubmitPatientQuestionnaire({
@@ -220,8 +222,10 @@ export async function doSubmitPatientAudioCollection({
   state,
   captchaValue,
   nextStep,
+  otherSteps,
   setActiveStep,
   history,
+  isShortAudioCollection,
 }: DoSubmitProps) {
   try {
     setSubmitError(null);
@@ -231,14 +235,12 @@ export async function doSubmitPatientAudioCollection({
       region,
       patientId,
       hospitalId,
-
     } = state.welcome;
 
     const {
       recordYourCough,
       recordYourBreath,
       recordYourSpeech,
-
     } = state['submit-steps'];
 
     const body = new FormData();
@@ -257,11 +259,17 @@ export async function doSubmitPatientAudioCollection({
     if (window.sourceCampaign) {
       body.append('source', window.sourceCampaign);
     }
-    const coughFile = recordYourCough.recordingFile || recordYourCough.uploadedFile;
-    body.append('cough', coughFile, coughFile.name || 'filename.wav');
-    const breathFile = recordYourBreath.recordingFile || recordYourBreath.uploadedFile;
-    body.append('breath', breathFile, breathFile.name || 'filename_breath.wav');
-    if (allowSpeechIn.includes(country)) {
+
+    if (recordYourCough) {
+      const coughFile = recordYourCough.recordingFile || recordYourCough.uploadedFile;
+      body.append('cough', coughFile, coughFile.name || 'filename.wav');
+    }
+
+    if (recordYourBreath) {
+      const breathFile = recordYourBreath.recordingFile || recordYourBreath.uploadedFile;
+      body.append('breath', breathFile, breathFile.name || 'filename_breath.wav');
+    }
+    if (allowSpeechIn.includes(country) && recordYourSpeech) {
       const voiceFile = recordYourSpeech.recordingFile || recordYourSpeech.uploadedFile;
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
     }
@@ -270,13 +278,18 @@ export async function doSubmitPatientAudioCollection({
       body.append('captchaValue', captchaValue);
     }
 
+    body.append('shortAudioCollection', isShortAudioCollection || 'false');
+
     const response = await axiosClient.post(`/patient/${patientId}/audioCollection`, body, {
       headers: {
         'Content-Type': 'multipart/form-data; boundary=AudioCollection',
       },
     });
 
-    if (nextStep && response.data?.submissionId) {
+    if (isShortAudioCollection && otherSteps?.isShortAudioStep) {
+      setActiveStep(false);
+      history.push(otherSteps?.isShortAudioStep, { submissionId: response.data?.submissionId, patientId });
+    } else if (nextStep && response.data?.submissionId) {
       setActiveStep(false);
       history.push(nextStep, { submissionId: response.data?.submissionId, patientId });
     }
