@@ -23,6 +23,7 @@
     "patient": "Paciente",
     "questionnaire": "Cuestionario",
     "audioCollection": "Recolección de audio",
+    "shortAudioCollection": "Recolección de audio abreviada",
     "testResults": "Envío de resultados del test",
     "screeningResults": "Resultados de la predicción de Virufy",
     "shortQuestionnaire": "Cuestionario abreviado",

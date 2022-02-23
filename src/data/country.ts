@@ -117,7 +117,7 @@ export const countryData: CountryDataProps[] = [
     label: 'China', value: 'China', telephonePrefix: '', states: states.China,
   },
   {
-    label: 'Colombia', value: 'Colombia', telephonePrefix: '+57', states: states.Colombia,
+    label: 'Colombia', value: 'Colombia', telephonePrefix: '+57', states: [],
   },
   {
     label: 'Comoros', value: 'Comoros', telephonePrefix: '', states: states.Comoros,

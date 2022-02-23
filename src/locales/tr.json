@@ -22,6 +22,7 @@
     "patient": "Hasta",
     "questionnaire": "Anket",
     "audioCollection": "Ses Koleksiyonu",
+    "shortAudioCollection":  "Kısa Ses Koleksiyonu",
     "testResults": "Test Sonucu Gönderimi",
     "screeningResults": "Virufy Tarama Tahmini",
     "shortQuestionnaire": "Kısa anket",

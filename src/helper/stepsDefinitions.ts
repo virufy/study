@@ -77,6 +77,9 @@ function getCoughSteps(storeKey: string, country: string, patientId?: string) {
         storeKey,
         previousStep: `${baseUrl}/step-record/cough`,
         nextStep: `${baseUrl}/step-record/breath`,
+        otherSteps: {
+          isShortAudioStep: `${baseUrl}/thank-you`,
+        },
         metadata: {
           currentLogic: recordYourCoughLogic,
         },

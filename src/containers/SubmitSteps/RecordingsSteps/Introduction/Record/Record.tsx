@@ -43,11 +43,12 @@ type RecordType = Yup.InferType<typeof schema>;
 
 interface RecordProps {
   // isCoughLogic: boolean,
-  onNext: (values: RecordType) => void,
-  onManualUpload: () => void,
-  defaultValues: RecordType,
-  currentLogic: string,
-  action:any,
+  onNext: (values: RecordType) => void;
+  onManualUpload: () => void;
+  defaultValues: RecordType;
+  currentLogic: string;
+  action:any;
+  isShortAudioCollection?: boolean;
 }
 
 const Record = ({
@@ -56,6 +57,7 @@ const Record = ({
   defaultValues,
   currentLogic,
   action,
+  isShortAudioCollection,
 }: RecordProps) => {
   // Hooks
   const { Portal } = usePortal({
@@ -102,6 +104,7 @@ const Record = ({
                 onNewRecord={onChange}
                 recordingFile={defaultValues?.recordingFile}
                 minTimeInSeconds={audioMinLength[currentLogic]}
+                isShortAudioCollection={isShortAudioCollection}
               />
             )}
           />
