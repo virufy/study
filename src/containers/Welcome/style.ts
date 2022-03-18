@@ -194,6 +194,7 @@ export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
       .custom-select__menu-list {
         padding-bottom: 0;
         padding-top: 0;
+        max-height: 270px !important;
         
         .custom-select__option {
           padding-left: 15px;
