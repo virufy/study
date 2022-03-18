@@ -70,7 +70,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
   }, []);
 
   // eslint-disable-next-line max-len
-  const enableScreeningResults = (patientInformation.questionary || patientInformation.shortQuestionary) && patientInformation.audioCollection && patientInformation.audioInfo && patientInformation.testResult;
+  const enableScreeningResults = patientInformation.audioCollection && patientInformation.audioInfo;
 
   const handleNextQuestionnaire = React.useCallback(() => {
     if (!patientInformation.questionary && !patientInformation.shortQuestionary) {
@@ -216,16 +216,6 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
             <OptionsContainer>
               <OptionsHeader
-                onClick={handleNextTestResults}
-                isButton={!patientInformation.testResult}
-              >
-                {t('main:testResults', 'Test Results')}
-                {patientInformation.testResult ? <CheckCircle /> : <ChevronRight />}
-              </OptionsHeader>
-            </OptionsContainer>
-
-            <OptionsContainer>
-              <OptionsHeader
                 onClick={handleNextScreeningResults}
                 isDisabled={!enableScreeningResults}
                 isButton={!!enableScreeningResults}
@@ -234,6 +224,17 @@ const PatientSummary = (p: Wizard.StepProps) => {
                 <ChevronRight />
               </OptionsHeader>
             </OptionsContainer>
+
+            <OptionsContainer>
+              <OptionsHeader
+                onClick={handleNextTestResults}
+                isButton={!patientInformation.testResult}
+              >
+                {t('main:testResults', 'Test Results')}
+                {patientInformation.testResult ? <CheckCircle /> : <ChevronRight />}
+              </OptionsHeader>
+            </OptionsContainer>
+
           </>
         )}
 
