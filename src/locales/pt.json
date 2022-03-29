@@ -520,12 +520,13 @@
     "submitButton": "Enviar",
     "submitError": "Aconteceu um erro. Por favor, tente novamente."
   },
-  "predictionResult": { 
+  "predictionResult": {
+    "important_note": "<strong>Important note:</strong> Este aplicativo não irá prever seu status de COVID-19 ou diagnosticar qualquer doença, desordem ou outra condição de saúde. A Virufy está realizando pesquisas e utilizará as informações que você fornecer somente para essa pesquisa. A Virufy não realizará pesquisas com um médico e gostaria de lembrá-lo que é sua responsabilidade buscar aconselhamento médico de seu médico.", 
     "predictionResultTitle": "Resultados",
     "result_unable": "Incapaz de analisar a tosse",
     "result_unable_text": "Nosso algoritmo não é capaz de determinar seu status COVID-19. <strong>Envie outra tosse.</strong>",
     "result_positive": "COVID-19: Resultados de triagem positivos",
-    "result_positive_text": "Sua voz tem indicadores de COVID-19. <strong>Contacte o seu profissional de saúde </strong> e tome precauções adicionais.",
+    "result_positive_text": "Sua voz tem possíveis indicadores COVID-19. <strong>Contacte o seu profissional de saúde </strong> e tome precauções adicionais.",
     "result_negative": "COVID-19: NÃO DETECTADO",
     "result_negative_text": "Sua voz não parece ter indicadores de COVID-19. <strong> Continue a tomar as medidas adequadas com base no conselho do seu profissional de saúde </strong> ou órgão regulador aplicável e reavalie-se em nosso aplicativo diariamente."
   },

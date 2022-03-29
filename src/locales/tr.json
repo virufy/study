@@ -518,11 +518,12 @@
     "submitError": "Bir hata oluştu. Lütfen tekrar deneyin."
   },
   "predictionResult": { 
+    "important_note": "<strong>Önemli not: </strong>Bu uygulama, COVID-19 durumunuzu tahmin etmeyecek veya herhangi bir hastalık, bozukluk veya diğer sağlık durumlarını teşhis etmeyecektir. Virufy araştırma yürütüyor ve sağladığınız bilgileri yalnızca bu araştırma için kullanacak. Virufy bir doktorun yerini tutmayacaktır ve doktorunuzdan tıbbi yardım almanın sizin sorumluluğunuzda olduğunu hatırlatmak isteriz.",
     "predictionResultTitle": "Sonuçlar",
     "result_unable": "Öksürük Analiz Edilemiyor",
     "result_unable_text": "Algoritmamız COVID-19 durumunuzu belirleyemiyor. <strong>Lütfen başka bir öksürük gönderin </strong>",
     "result_positive": "COVID-19: Pozitif Tarama Sonuçları",
-    "result_positive_text": "Sesinizde COVID-19 belirtileri var. <strong> Lütfen sağlık uzmanınıza başvurun </strong> ve ek önlemler alın.",
+    "result_positive_text": "Sesinizde olası COVID-19 semptomları var. <strong> Lütfen sağlık uzmanınıza başvurun </strong> ve ek önlemler alın.",
     "result_negative": "COVID-19: ALGILANMADI",
     "result_negative_text": "Sesinizde COVID-19 semptomları yok gibi görünüyor. <stong>Lütfen sağlık uzmanınızın </strong> veya ilgili düzenleyici kurumun tavsiyelerine göre uygun önlemleri almaya devam edin ve uygulamamızda her gün kendinizi yeniden değerlendirin."
   },

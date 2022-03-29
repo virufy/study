@@ -83,23 +83,6 @@ const PredictionResult2 = ({
           </>
         );
       }
-      if (prediction === 'negative') {
-        return (
-          <>
-            <ResultTitle color={colors.green}>
-              {t('predictionResult:result_negative')}
-            </ResultTitle>
-            <ResultNote>
-              <Trans i18nKey="predictionResult:result_negative_text">
-                Your voice does not seem to have indicators of COVID-19. Please
-                <strong>continue to take appropriate measures</strong>
-                based on the advice of your healthcare professional or applicable
-                regulatory body and reassess yourself in our app daily.
-              </Trans>
-            </ResultNote>
-          </>
-        );
-      }
     }
     return (
       <>
@@ -123,11 +106,11 @@ const PredictionResult2 = ({
       </Title>
       {renderResult}
       <ImportantNote>
-        <Trans i18nKey="main:note">
-          <strong>Please note:</strong> This form is for data collection only. It will not predict your COVID-19
-          status or diagnose any disease, disorder, or other health condition. Virufy is conducting research and
-          will use the information you provide for that research only. Virufy will not take place of a doctor and
-          would like to remind you it is your responsibility to seek medical advice from your doctor.
+        <Trans i18nKey="predictionResult:important_note">
+          <strong>Important note:</strong> This app will not predict your COVID-19 status or diagnose any disease,
+          disorder, or other health condition. Virufy is conducting research and will use the
+          information you provide for that research only. Virufy will not take place of a doctor and would
+          like to remind you it is your responsibility to seek medical advice from your doctor.
         </Trans>
       </ImportantNote>
 
