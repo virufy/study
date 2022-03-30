@@ -412,7 +412,9 @@ const ListenAudio = ({
       {((patientId && !allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourBreath') || (patientId && allowSpeechIn.includes(country) && metadata?.currentLogic === 'recordYourSpeech') || (patientId && isShortAudioCollection && metadata?.currentLogic === 'recordYourCough')) && (
         <Portal>
           { /* ReCaptcha  */}
-          <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
+          {(country !== 'Colombia') && (
+            <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
+          ) }
           {submitError && (
             <TempBeforeSubmitError>
               {submitError}
@@ -422,7 +424,7 @@ const ListenAudio = ({
             invert
             // leftLabel={t('questionary:proceedButton')}
             leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
-            leftDisabled={isSubmitting || (recaptchaAvailable && !captchaValue)}
+            leftDisabled={(country !== 'Colombia') ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : isSubmitting}
             leftHandler={handleSubmit(onSubmitPatientAudioCollection)}
           />
         </Portal>

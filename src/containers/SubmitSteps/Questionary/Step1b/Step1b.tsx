@@ -11,7 +11,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
 
 // Helper
-import { getPatientId } from 'helper/stepsDefinitions';
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
 import { doSubmitPatientTestResults } from 'helper/patientHelper';
 
 // Update Action
@@ -67,6 +67,7 @@ const Step1b = ({
   const { t, i18n } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -412,7 +413,7 @@ const Step1b = ({
       {activeStep && (
         <Portal>
           {(() => {
-            if (patientId) {
+            if (patientId && (country !== 'Colombia')) {
               if (submitError) {
                 return (
                   <>
@@ -438,7 +439,7 @@ const Step1b = ({
               return t('questionary:nextButton');
             })()}
             leftHandler={handleSubmit(onSubmit)}
-            leftDisabled={patientId ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
+            leftDisabled={(patientId && (country !== 'Colombia')) ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
             invert
           />
         </Portal>

@@ -18,7 +18,7 @@ import Recaptcha from 'components/Recaptcha';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
-import { getPatientId } from 'helper/stepsDefinitions';
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
@@ -54,6 +54,7 @@ const Step6 = ({
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -244,7 +245,9 @@ const Step6 = ({
       {activeStep && (
         <Portal>
           { /* ReCaptcha  */}
-          <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
+          {(!patientId || (patientId && (country !== 'Colombia'))) && (
+            <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
+          )}
           {submitError && (
             <TempBeforeSubmitError>
               {submitError}
@@ -254,7 +257,7 @@ const Step6 = ({
             invert
             // leftLabel={t('questionary:proceedButton')}
             leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
-            leftDisabled={isSubmitting || (recaptchaAvailable && !captchaValue)}
+            leftDisabled={(country !== 'Colombia') ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : isSubmitting}
             leftHandler={patientId ? handleSubmit(onSubmitPatientQuestionnaire) : handleSubmit(onSubmit)}
           />
         </Portal>

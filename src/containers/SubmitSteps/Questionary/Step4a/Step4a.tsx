@@ -19,6 +19,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmitPatientShortQuestionnaire } from 'helper/patientHelper';
+import { getCountry } from 'helper/stepsDefinitions';
 
 // Components
 import Recaptcha from 'components/Recaptcha';
@@ -51,6 +52,7 @@ const Step4a = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -82,10 +84,10 @@ const Step4a = ({
       return true;
     }
     return false;
-  }, [watchSymptoms]);
+  }, [isShortQuestionary, watchSymptoms?.selected]);
 
   const renderCaptcha = React.useMemo(() => {
-    if (isFinalStep) {
+    if (isFinalStep && (country !== 'Colombia')) {
       if (submitError) {
         return (
           <>
@@ -270,7 +272,7 @@ const Step4a = ({
           {renderCaptcha}
           <WizardButtons
             leftLabel={getLeftLabel()}
-            leftDisabled={isFinalStep ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
+            leftDisabled={(isFinalStep && (country !== 'Colombia')) ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
             leftHandler={isFinalStep ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
             invert
           />
