@@ -19,6 +19,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmitPatientShortQuestionnaire } from 'helper/patientHelper';
+import { getCountry } from 'helper/stepsDefinitions';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
@@ -55,6 +56,7 @@ const Step4b = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -80,7 +82,7 @@ const Step4b = ({
   }, [captchaValue]);
 
   const renderCaptcha = React.useMemo(() => {
-    if (isShortQuestionary) {
+    if (isShortQuestionary && (country !== 'Colombia')) {
       if (submitError) {
         return (
           <>
@@ -94,7 +96,7 @@ const Step4b = ({
       return <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />;
     }
     return null;
-  }, [isShortQuestionary, submitError]);
+  }, [country, isShortQuestionary, submitError]);
 
   // Handlers
 
@@ -182,7 +184,7 @@ const Step4b = ({
           <WizardButtons
             leftLabel={getLeftLabel()}
             leftHandler={isShortQuestionary ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
-            leftDisabled={isShortQuestionary ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
+            leftDisabled={(isShortQuestionary && (country !== 'Colombia')) ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
             invert
           />
         </Portal>
