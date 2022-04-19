@@ -14,7 +14,7 @@
         "hospitalId": "病院ID",
         "regionRequired": "地域を選択してください",
         "enterPatientId": "患者IDの入力",
-        "nextButton": "次のページ",
+        "nextButton": "次へ",
         "createdBy": "作成者",
         "installApp": "アプリとしてインストールする",
         "addToHomeScreen": "ホーム画面に追加する",
@@ -241,7 +241,7 @@
         "bulletsIntro": "<strong>Intro: </strong>会社概要と安全に関する注意事項",
         "bulletCough": "<strong>電話に向かって咳をする</strong>。",
         "bulletQuestions": "<strong>健康に関する簡単な質問</strong>",
-        "nextButton": "次のページ"
+        "nextButton": "次へ"
     },
     "consent": {
         "title": "研究への同意",
@@ -306,7 +306,7 @@
         "recordSpeech": {
             "header": "スピーチを録音する"
         },
-        "next": "続ける",
+        "next": "次へ",
         "delete": "削除",
         "textCough": "録音ボタンをタップして、携帯電話の下部に向かって<strong>意図的に</strong>咳を<strong>3回</strong>してください。終わったら、停止ボタンをタップします。",
         "textBreath": "録音ボタンをタップし、<strong>深く大声で</ strong>口でスマートフォンの底に<strong> 3回</ strong>息を吹き込み、各呼吸の間にスペースを残します。完了したら、停止ボタンをタップします。",
@@ -321,7 +321,7 @@
         "header": "ファイルのアップロード",
         "addFile": "自分のファイルを追加する",
         "constraint": "5MBまで追加可能",
-        "next": "完了",
+        "next": "次へ",
         "micError": "マイクにアクセスできない場合 音声ファイル（.wav/.wave/.mp3/.ogg）のアップロード",
         "micErrorDescription": "ここに音声ファイルをアップロードしてください。",
         "fileDurationTooShort": "3秒以上のファイルをアップロードしてください。",
@@ -344,7 +344,7 @@
         },
         "title": "アップロード完了",
         "subtitle": "ご自由にお聴きください。",
-        "next": "続ける",
+        "next": "次へ",
         "retake": "リテイク"
     },
     "questionary": {
@@ -502,7 +502,7 @@
                 "otherChronic": "その他の慢性肺疾患",
                 "pneumonia": "肺炎",
                 "pulmonary": "肺線維症",
-                "reflux": "逆流性疾患",
+                "reflux": "ひどい胸焼け(胃食道逆流症)",
                 "sinusitis": "副鼻腔炎",
                 "tuberculosis": "結核(Tuberculosis)",
                 "none": "なし",
@@ -513,7 +513,7 @@
         },
         "proceedButton": "最後のステップに進む",
         "stepOf": "の",
-        "nextButton": "次の",
+        "nextButton": "次へ",
         "submitting": "送信中..."
     },
     "beforeSubmit": {
