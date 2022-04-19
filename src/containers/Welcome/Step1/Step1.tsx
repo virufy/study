@@ -212,7 +212,7 @@ const Step1 = (p: Wizard.StepProps) => {
             render={({ onChange, value: valueController }) => (
               <WelcomeSelect
                 placeholder={t('main.selectYourLanguage', 'Language')}
-                options={languageData}
+                options={isClinic ? languageData : languageData.filter(l => l.value !== 'ja')}
                 onChange={(e: any) => { onChange(e?.value); }}
                 value={languageData.filter(({ value }) => value === valueController)}
                 className="custom-select"
