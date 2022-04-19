@@ -24,6 +24,8 @@
         "audioCollection": "オーディオコレクション",
         "testResults": "テスト結果の提出",
         "screeningResults": "Virufyスクリーニング予測",
+        "shortAudioCollection": "短編オーディオコレクション",
+        "shortQuestionnaire": "ショートアンケート",
         "supportedBy": "対応機種",
         "visitWebsite": "ウェブサイトを見る",
         "errorCountry": "現在、あなたの地域の咳を収集することはできません。近いうちにまたチェックしてみてください",
@@ -281,6 +283,9 @@
             "intro2Breath": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しく呼吸したり、強すぎたりしないでください",
             "intro2Speech": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しくまたは強引に話さないでください"
         },
+        "recordBreath": {
+            "header": "呼吸を記録する"
+          },
         "recordSpeech": {
             "header": "自分の声を録音する",
             "intro1": "あなたの声は、COVIDがどんな音なのかを知るのに役立ちます。録音を押して、1から10まではっきりと数えてください」。"
@@ -399,7 +404,8 @@
             "question": "COVID-19ワクチンを接種しましたか？",
             "options": {
                 "yes": "はい",
-                "no": "受けていない"
+                "no": "受けていない",
+                "decline": "記載を辞退する"
             }
         },
         "age": "年齢を入力してください。",
@@ -515,6 +521,7 @@
         "submitError": "エラーが発生しました。もう一度お試しください。"
     },
     "predictionResult": { 
+        "important_note": "<strong>重要なお知らせです。</strong> このアプリは、あなたのCOVID-19の状態を予測したり、病気や障害、その他の健康状態を診断するものではありません。Virufyは研究を行っており、提供された情報はその研究のためにのみ使用されます。Virufyは医師の代わりを務めるものではありませんので、医師の診断を受けるのはお客様の責任であることをご理解ください。",
         "predictionResultTitle": "結果",
         "result_unable": "咳を分析できません",
         "result_unable_text": "私たちのアルゴリズムはあなたのCOVID-19ステータスを決定することができません。<strong>別の咳を提出してください。</strong>",

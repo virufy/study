@@ -8,6 +8,6 @@ export const languageData = [
   // { value: 'mn', label: 'монгол хэл' },
   // { value: 'th', label: 'ภาษาไทย' },
   { value: 'tr', label: 'Türkçe' },
-  // { value: 'ja', label: '日本語' },
+  { value: 'ja', label: '日本語' },
   // { value: 'hi', label: 'हिन्दी' },
 ];
