@@ -43,12 +43,12 @@ const PredictionResult1 = ({
           .catch(() => ({
             status: 404,
             data: {
-              prediction: 'unknown',
+              result: 'unknown',
               errorCode: 'unknown_error',
             },
           }));
         history.push(nextStep, {
-          prediction: res.data.prediction,
+          prediction: res.data.result,
           errorCode: res.data.error_code,
         });
       })();
