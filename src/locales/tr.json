@@ -574,5 +574,8 @@
   },
   "socialIcons": {
     "title": "Bizi takip edin"
+  },
+  "predictionScreen": {
+    "titleProcessing": "İşleme..."
   }
 }

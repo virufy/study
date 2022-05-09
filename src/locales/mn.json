@@ -570,5 +570,8 @@
     },
     "socialIcons": {
         "title": "Биднийг дага"
+    },
+    "predictionScreen": {
+      "titleProcessing": "Боловсруулж байна..."
     }
 }

@@ -570,5 +570,8 @@
     },
     "socialIcons": {
         "title": "Ακολουθήστε μας"
+    },
+    "predictionScreen": {
+      "titleProcessing": "Επεξεργασία..."
     }
 }

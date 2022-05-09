@@ -572,5 +572,8 @@
     },
     "socialIcons": {
         "title": "हमारा अनुसरण करें"
+    },
+    "predictionScreen": {
+      "titleProcessing": "प्रसंस्करण..."
     }
 }

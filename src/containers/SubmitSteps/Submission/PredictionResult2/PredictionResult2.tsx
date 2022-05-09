@@ -67,22 +67,20 @@ const PredictionResult2 = ({
   }, [handleDoBack, setDoGoBack, setType, setTitle, setLogoSize, t]);
 
   const renderResult = React.useMemo(() => {
-    if (errorCode === 'everything_ok') {
-      if (prediction === 'positive') {
-        return (
-          <>
-            <ResultTitle color={colors.red}>
-              {t('predictionResult:result_positive')}
-            </ResultTitle>
-            <ResultNote>
-              <Trans i18nKey="predictionResult:result_positive_text">
-                Your voice has indicators of COVID-19.
-                <strong>Please contact your healthcare professional</strong> and take additional precautions.
-              </Trans>
-            </ResultNote>
-          </>
-        );
-      }
+    if (prediction === 'positive') {
+      return (
+        <>
+          <ResultTitle color={colors.red}>
+            {t('predictionResult:result_positive')}
+          </ResultTitle>
+          <ResultNote>
+            <Trans i18nKey="predictionResult:result_positive_text">
+              Your voice has indicators of COVID-19.
+              <strong>Please contact your healthcare professional</strong> and take additional precautions.
+            </Trans>
+          </ResultNote>
+        </>
+      );
     }
     return (
       <>
@@ -96,7 +94,7 @@ const PredictionResult2 = ({
         </ResultNote>
       </>
     );
-  }, [errorCode, prediction, t]);
+  }, [prediction, t]);
 
   return (
     <MainContainer>
@@ -115,7 +113,7 @@ const PredictionResult2 = ({
       </ImportantNote>
 
       <Portal>
-        {(errorCode !== 'everything_ok') && (
+        {!!errorCode && (
           <BeforeSubmitText>
             {`Error Code: ${errorCode}`}
           </BeforeSubmitText>

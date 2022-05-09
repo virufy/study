@@ -577,5 +577,8 @@
   },
   "socialIcons": {
     "title": "Siga-nos"
+  },
+  "predictionScreen": {
+    "titleProcessing": "Em processamento..."
   }
 }
