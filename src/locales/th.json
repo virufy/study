@@ -570,5 +570,8 @@
     },
     "socialIcons": {
         "title": "ติดตามเรา"
+    },
+    "predictionScreen": {
+      "titleProcessing": "กำลังประมวลผล..."
     }
 }

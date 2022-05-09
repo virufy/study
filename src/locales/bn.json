@@ -570,5 +570,8 @@
     },
     "socialIcons": {
         "title": "আমাদের ফলো করুন"
+    },
+    "predictionScreen": {
+      "titleProcessing": "প্রক্রিয়াকরণ..."
     }
 }

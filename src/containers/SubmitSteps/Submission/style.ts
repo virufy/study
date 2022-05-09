@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-interface WelcomeNoteProps {
-  isBold?: boolean;
-}
+import { ReactComponent as ProcessingSVG } from 'assets/images/processing.svg';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -121,4 +119,15 @@ export const BeforeSubmitText = styled.p`
   color: ${props => props.theme.colors.red};
   text-align: center;
   margin-bottom: 16px;
+`;
+
+export const ImageProcessing = styled(ProcessingSVG)`
+  width: 100%;
+  height: 371px;
+  display: block;
+  margin-top: 69px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    width: 100%;
+  }
 `;

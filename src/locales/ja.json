@@ -577,5 +577,8 @@
     },
     "socialIcons": {
         "title": "フォローする"
+    },
+    "predictionScreen": {
+      "titleProcessing": "加工..."
     }
 }
