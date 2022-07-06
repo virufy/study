@@ -399,7 +399,9 @@ export const countryData: CountryDataProps[] = [
   {
     label: 'Oman', value: 'Oman', telephonePrefix: '', states: states.Oman,
   },
-  // { label: 'Pakistan', value: 'Pakistan', telephonePrefix: '', states: [] },
+  {
+    label: 'Pakistan', value: 'Pakistan', telephonePrefix: '', states: [],
+  },
   {
     label: 'Palau', value: 'Palau', telephonePrefix: '', states: states.Palau,
   },

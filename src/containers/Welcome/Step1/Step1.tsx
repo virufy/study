@@ -26,7 +26,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Data
 import { languageData } from 'data/lang';
 import { countryData, countriesWithStates, CountryDataProps } from 'data/country';
-import { hospitalIdData } from 'data/hospitalId';
+import { getHospitalIdFor } from 'data/hospitalId';
 
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
@@ -44,8 +44,8 @@ declare interface OptionsProps {
   value: string;
 }
 
-let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany'];
-const clinicCountries = ['India', 'Colombia'];
+let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany', 'Pakistan'];
+const clinicCountries = ['India', 'Colombia', 'Pakistan'];
 
 if (isClinic) {
   invalidCountries = invalidCountries.filter(a => !clinicCountries.includes(a));
@@ -170,6 +170,8 @@ const Step1 = (p: Wizard.StepProps) => {
     }
     return output;
   }, [t, country]);
+
+  const hospitalIdOptions = useMemo(() => getHospitalIdFor(country), [country]);
 
   const getClinicCountries = () => countryData.filter(item => clinicCountries.includes(item.value));
 
@@ -300,24 +302,23 @@ const Step1 = (p: Wizard.StepProps) => {
                 name="hospitalId"
                 defaultValue=""
                 render={({ onChange, value: valueController, name }) => (
-                  country === 'Colombia'
-                    ? (
-                      <WelcomeSelect
-                        options={hospitalIdData}
-                        onChange={(e: any) => { onChange(e?.value); }}
-                        value={hospitalIdData.filter(({ value }) => value === valueController) || ''}
-                        className="custom-select"
-                        classNamePrefix="custom-select"
-                      />
-                    ) : (
-                      <WelcomeInput
-                        name={name}
-                        value={valueController}
-                        onChange={onChange}
-                        type="text"
-                        autoComplete="Off"
-                      />
-                    )
+                  hospitalIdOptions?.length > 0 ? (
+                    <WelcomeSelect
+                      options={hospitalIdOptions}
+                      onChange={(e: any) => { onChange(e?.value); }}
+                      value={hospitalIdOptions.filter(({ value }) => value === valueController) || ''}
+                      className="custom-select"
+                      classNamePrefix="custom-select"
+                    />
+                  ) : (
+                    <WelcomeInput
+                      name={name}
+                      value={valueController}
+                      onChange={onChange}
+                      type="text"
+                      autoComplete="Off"
+                    />
+                  )
                 )}
               />
             </>
