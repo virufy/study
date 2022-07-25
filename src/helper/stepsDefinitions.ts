@@ -12,7 +12,7 @@ const recordYourSpeechLogic = 'recordYourSpeech';
 export const allowSpeechIn: string[] = ['Colombia'];
 export const removeQuestionaryStep6In: string[] = [];
 export const removeQuestionaryStep2cIn: string[] = ['Colombia'];
-export const allowConsenstIn: string[] = ['Colombia'];
+export const allowConsenstIn: string[] = ['Colombia', 'Pakistan'];
 
 function getWizardData() {
   try {

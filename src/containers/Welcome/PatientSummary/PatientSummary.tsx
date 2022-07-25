@@ -9,7 +9,7 @@ import useAxios from 'hooks/useAxios';
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Helpers
-import { getPatientId, getCountry } from 'helper/stepsDefinitions';
+import { getPatientId, getCountry, allowConsenstIn } from 'helper/stepsDefinitions';
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
@@ -74,7 +74,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   const handleNextQuestionnaire = React.useCallback(() => {
     if (!patientInformation.questionary && !patientInformation.shortQuestionary) {
-      if (country === 'Colombia') {
+      if (allowConsenstIn.includes(country)) {
         history.push('/submit-steps/questionary/consent');
       } else {
         history.push('/submit-steps/questionary/step2');
@@ -84,7 +84,7 @@ const PatientSummary = (p: Wizard.StepProps) => {
 
   const handleNextShortQuestionnaire = React.useCallback(() => {
     if (!patientInformation.shortQuestionary && !patientInformation.questionary) {
-      if (country === 'Colombia') {
+      if (allowConsenstIn.includes(country)) {
         history.push('/submit-steps/shortQuestionary/consent');
       } else {
         history.push('/submit-steps/shortQuestionary/step1');
