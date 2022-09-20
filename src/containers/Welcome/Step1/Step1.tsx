@@ -44,7 +44,7 @@ declare interface OptionsProps {
   value: string;
 }
 
-let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany', 'Pakistan'];
+let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Germany', 'Pakistan'];
 const clinicCountries = ['India', 'Colombia', 'Pakistan'];
 
 if (isClinic) {
@@ -214,7 +214,7 @@ const Step1 = (p: Wizard.StepProps) => {
             render={({ onChange, value: valueController }) => (
               <WelcomeSelect
                 placeholder={t('main.selectYourLanguage', 'Language')}
-                options={isClinic ? languageData : languageData.filter(l => l.value !== 'ja')}
+                options={languageData}
                 onChange={(e: any) => { onChange(e?.value); }}
                 value={languageData.filter(({ value }) => value === valueController)}
                 className="custom-select"
