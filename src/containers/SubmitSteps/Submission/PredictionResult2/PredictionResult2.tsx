@@ -102,6 +102,11 @@ const PredictionResult2 = ({
       <Title>
         {t('predictionResult:predictionResultTitle')}
       </Title>
+      {!!errorCode && (
+        <BeforeSubmitText>
+          {`Error Code: ${errorCode}`}
+        </BeforeSubmitText>
+      )}
       {renderResult}
       <ImportantNote>
         <Trans i18nKey="predictionResult:important_note">
@@ -113,11 +118,6 @@ const PredictionResult2 = ({
       </ImportantNote>
 
       <Portal>
-        {!!errorCode && (
-          <BeforeSubmitText>
-            {`Error Code: ${errorCode}`}
-          </BeforeSubmitText>
-        )}
         <WizardButtons
           invert
           leftLabel={t('thankyou:returnButton')}
