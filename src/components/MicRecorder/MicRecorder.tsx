@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import * as Sentry from '@sentry/react';
 
 // Utils
+import { isSafari } from 'react-device-detect';
 import RecorderService from 'helper/audio/RecorderService';
 import FileHelper from 'helper/fileHelper';
 
@@ -46,8 +47,8 @@ interface MicRecorderProps {
 const baseConfig = {
   usingMediaRecorder: false,
   sampleRate: 48000,
-  manualEncoderId: 'flac', // wav / mp3 / flac
-  processorBufferSize: 4096, // 4096 flac / 2048 wav
+  manualEncoderId: isSafari ? 'wav' : 'flac', // wav / mp3 / flac
+  processorBufferSize: isSafari ? 2048 : 4096, // 4096 flac / 2048 wav
 };
 export interface RecorderServiceType {
   config: {
