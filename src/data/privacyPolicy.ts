@@ -6,6 +6,7 @@ export const privacyPolicy = {
   Greece: 'https://virufy.org/en/privacy_policy/',
   Peru: 'https://virufy.org/en/privacy_policy/',
   Mexico: 'https://virufy.org/en/privacy_policy/',
+  Japan: 'https://virufy.org/ja/privacy_policy/',
   'United States': 'https://virufy.org/en/privacy_policy/',
   Global: 'https://virufy.org/en/privacy_policy/',
 };

@@ -82,7 +82,7 @@ const Step4 = (p: Wizard.StepProps) => {
   const store = state?.[p.storeKey];
 
   const currentCountry: PrivacyPolicyCountry = useMemo(() => {
-    if (['Argentina', 'Bolivia', 'Colombia', 'Greece', 'Peru', 'Mexico', 'Brazil', 'United States'].includes(state.welcome.country)) {
+    if (['Argentina', 'Bolivia', 'Colombia', 'Greece', 'Peru', 'Mexico', 'Brazil', 'United States', 'Japan'].includes(state.welcome.country)) {
       return state.welcome.country;
     }
     return 'Global';
@@ -139,6 +139,9 @@ const Step4 = (p: Wizard.StepProps) => {
     }
     if (country === 'Greece') {
       return 'el';
+    }
+    if (country === 'Japan') {
+      return 'ja';
     }
     if (country === 'Global' || country === 'United States') {
       return 'en';
