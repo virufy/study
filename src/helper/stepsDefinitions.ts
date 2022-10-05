@@ -9,7 +9,7 @@ const recordYourCoughLogic = 'recordYourCough';
 const recordYourBreathLogic = 'recordYourBreath';
 const recordYourSpeechLogic = 'recordYourSpeech';
 
-export const allowSpeechIn: string[] = ['Colombia'];
+export const allowSpeechIn: string[] = ['Colombia', 'Pakistan'];
 export const removeQuestionaryStep6In: string[] = [];
 export const removeQuestionaryStep2cIn: string[] = ['Colombia'];
 export const allowConsenstIn: string[] = ['Colombia', 'Pakistan'];
