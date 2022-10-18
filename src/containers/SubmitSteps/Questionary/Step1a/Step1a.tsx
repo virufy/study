@@ -15,6 +15,7 @@ import { updateAction } from 'utils/wizard';
 
 // Components
 import { TitleBlack } from 'components/Texts';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -112,6 +113,11 @@ const Step1a = ({
     <MainContainer>
       <TitleBlack>{t('questionary:title')}</TitleBlack>
       <WomanWithPhone />
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText>{t('questionary:testTaken.question')}
         <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>

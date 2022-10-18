@@ -15,6 +15,7 @@ import { updateAction } from 'utils/wizard';
 
 // Components
 import OptionList from 'components/OptionList';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 // Helper
 import { getPatientId } from 'helper/stepsDefinitions';
@@ -112,6 +113,11 @@ const Step2 = ({
 
   return (
     <MainContainer>
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText first>{t('questionary:vaccine.question')}
       </QuestionText>
       <Controller

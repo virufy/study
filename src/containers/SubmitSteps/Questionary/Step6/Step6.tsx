@@ -15,6 +15,7 @@ import { updateAction } from 'utils/wizard';
 
 // Components
 import Recaptcha from 'components/Recaptcha';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -151,6 +152,11 @@ const Step6 = ({
 
   return (
     <MainContainer>
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText extraSpace first>
         <Trans i18nKey="questionary:medical.question">
           <strong>Which of the below medical conditions do you currently have?</strong>

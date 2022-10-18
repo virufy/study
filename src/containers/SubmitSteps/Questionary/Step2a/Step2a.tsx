@@ -20,6 +20,9 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { scrollToTop } from 'helper/scrollHelper';
 import { getPatientId } from 'helper/stepsDefinitions';
 
+// Components
+import ProgressIndicator from 'components/ProgressIndicator';
+
 // Styles
 import WizardButtons from 'components/WizardButtons';
 import {
@@ -113,6 +116,11 @@ const Step2a = ({
 
   return (
     <MainContainer>
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText extraSpace first>{t('questionary:ageGroup')}</QuestionText>
 
       <Controller

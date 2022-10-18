@@ -16,6 +16,7 @@ import { updateAction } from 'utils/wizard';
 // Components
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -95,6 +96,11 @@ const Step2b = ({
 
   return (
     <MainContainer>
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText first>{t('questionary:gender.question')}
         <QuestionNote>{t('questionary:gender.note')}</QuestionNote>
       </QuestionText>
