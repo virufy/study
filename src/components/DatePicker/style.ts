@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledReactDatePickerContainer = styled.div`
   .react-datepicker-wrapper {
     display: block;
-    max-width: 362px;
     margin-left: auto;
     margin-right: auto;
   }

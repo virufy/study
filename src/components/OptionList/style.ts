@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const OptionListItem = styled.button<{lastItem: boolean; isSelected?: boolean}>`
   width: 100%;
-  max-width: 335px;
-  height: 50px; 
+  height: 50px;
   position: relative;
   font-family: 'Source Sans Pro'; /* It could be removed if default on body changes */
   color: ${props => props.theme.colors.darkBlack};

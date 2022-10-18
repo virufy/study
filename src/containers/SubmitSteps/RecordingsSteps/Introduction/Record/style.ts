@@ -36,7 +36,7 @@ export const UploadContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 5px 20px 12px;
   width: fit-content;
   margin: 0 auto;
 

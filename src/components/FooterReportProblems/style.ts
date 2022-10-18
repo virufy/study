@@ -6,7 +6,7 @@ export const FooterContainer = styled.div`
   align-items: center;
   text-decoration-line: underline;
 
-  margin-bottom: 43px;
+  margin-bottom: 35px;
   
   @media screen and (${props => props.theme.breakpoints.tablet}){
     margin-bottom: 80px;
