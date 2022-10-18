@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import Select from 'react-select';
+import { colors } from 'theme';
 
 import { ReactComponent as ArrowRight } from 'assets/icons/arrowRight.svg';
 import { ReactComponent as AboutUs } from 'assets/images/about-us.svg';
@@ -49,12 +50,26 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
   @media screen and (${props => props.theme.breakpoints.tablet}){
     text-align: center;
   };
+
+  h2 {
+    max-width: inherit;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+  }
 `;
 
 export const ContainerShapeDown = styled.div<{ isMobile?: boolean }>`
   width:100%;
   background-color: ${({ theme, isMobile }) => (isMobile ? theme.colors.purple_10 : '#FFF')};
   padding-top: 55px;
+
+  h2 {
+    max-width: inherit;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 0;
+  }
 `;
 
 export const InnerContainerShapeDown = styled.div`
@@ -419,13 +434,31 @@ export const CheckboxTitle = styled.div`
 `;
 
 export const WelcomeConsentForm = styled.div`
-    max-width: 320px;
-    margin: 10px auto 20px auto;
+  margin: 10px auto 20px auto;
+  padding-left: 20px;
+  padding-right: 20px;
 
-    @media screen and (${props => props.theme.breakpoints.tablet}){
-      margin: 24px auto 28 auto;
-      max-width: 470px;
-    }
+  .WordSection1 > p,
+  .Section1 > p {
+    margin-bottom: 0;
+    text-align: left!important;
+    margin-left: inherit!important;
+    text-indent: inherit!important;
+  }
+  
+  span {
+    font-family: "Source Sans Pro"!important;
+    font-size: 14px!important;
+    line-height: 20px!important;
+    font-weight: 400!important;
+    color: ${colors.mineShaft}!important;
+    background: transparent!important;
+  }
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    margin: 24px auto 28 auto;
+    max-width: 470px;
+  }
 `;
 
 /* Step 5 */

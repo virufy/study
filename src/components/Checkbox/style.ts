@@ -23,7 +23,7 @@ export const StyledCheckboxContainer = styled(FullWidthDiv)<StyledCheckboxContai
   font-size: 0.875rem;
   line-height: 1.25rem;
   ${({ fontWeight }) => fontWeight && css`font-weight: ${fontWeight};`}
-  padding: 15px 0;
+  padding: 0 0 16px 0;
   position: relative;
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
