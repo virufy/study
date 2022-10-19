@@ -19,6 +19,9 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
+// Components
+import ProgressIndicator from 'components/ProgressIndicator';
+
 // Styles
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
@@ -93,6 +96,11 @@ const Step2d = ({
 
   return (
     <MainContainer>
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText first hasNote>
         {t('questionary:biologicalSex.question')}
       </QuestionText>

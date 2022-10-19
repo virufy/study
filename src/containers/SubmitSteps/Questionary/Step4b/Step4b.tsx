@@ -24,6 +24,7 @@ import { getCountry } from 'helper/stepsDefinitions';
 // Components
 import WizardButtons from 'components/WizardButtons';
 import Recaptcha from 'components/Recaptcha';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
 import {
@@ -158,6 +159,11 @@ const Step4b = ({
 
   return (
     <MainContainer>
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText extraSpace first>
         {t('questionary:symptomsDate')}
       </QuestionText>

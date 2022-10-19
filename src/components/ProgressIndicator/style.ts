@@ -38,3 +38,36 @@ export const ProgressIndicatorText = styled.div`
   font-size: 16px;
   line-height: 24px;
 `;
+
+export const BarIndicatorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  color: ${({ theme }) => theme.colors.purple};
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  `;
+
+export const BarIndicator = styled.div<{ currentStep?: number, totalSteps?: number }>`
+  width: 120px;
+  height: 10px;
+  background: ${({ theme }) => theme.colors.midGrayBlue};
+  position: relative;
+  border-radius: 24px;
+  margin-top: 12px;
+  
+  &:after {
+    content:'';
+    width: ${({ currentStep, totalSteps }) => `calc((100%/${totalSteps}) * ${currentStep})`};
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: ${({ theme }) => theme.colors.purple};
+    border-radius: 24px;
+  }
+`;

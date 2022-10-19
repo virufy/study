@@ -25,6 +25,7 @@ import { getCountry } from 'helper/stepsDefinitions';
 import Recaptcha from 'components/Recaptcha';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
 import {
@@ -184,6 +185,11 @@ const Step4a = ({
 
   return (
     <MainContainer>
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={metadata?.total}
+        progressBar
+      />
       <QuestionText extraSpace first>
         <Trans i18nKey="questionary:symptoms.question">
           <strong>Which of the below symptoms do you currently have?</strong>

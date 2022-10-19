@@ -517,7 +517,8 @@
         "proceedButton": "最後のステップに進む",
         "stepOf": "の",
         "nextButton": "次へ",
-        "submitting": "送信中..."
+        "submitting": "送信中...",
+        "progressBar": "質問 {{currentStep}}/{{totalSteps}}"
     },
     "beforeSubmit": {
         "submitButton": "送信",

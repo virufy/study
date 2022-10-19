@@ -508,7 +508,8 @@
         "proceedButton": "Сүүлийн алхам руу үргэлжлүүлнэ үү",
         "stepOf": "-ийн",
         "nextButton": "Дараачийн",
-        "submitting": "Илгээж байна ..."
+        "submitting": "Илгээж байна ...",
+        "progressBar": "Асуулт {{currentStep}}/{{totalSteps}}"
     },
     "beforeSubmit": {
         "submitButton": "Илгээх",

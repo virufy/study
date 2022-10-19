@@ -508,7 +508,8 @@
         "proceedButton": "শেষ ধাপ",
         "stepOf": "এর",
         "nextButton": "পরবর্তী ",
-        "submitting": "জমা দেয়া হচ্ছে...."
+        "submitting": "জমা দেয়া হচ্ছে....",
+        "progressBar": "প্রশ্ন {{currentStep}}/{{totalSteps}}"
     },
     "beforeSubmit": {
         "submitButton": "জমা দিন",

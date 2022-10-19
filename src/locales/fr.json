@@ -492,7 +492,8 @@
     "proceedButton": "Passer à la dernière étape",
     "stepOf": "de",
     "nextButton": "Suivant",
-    "submitting": "En cours de soumission"
+    "submitting": "En cours de soumission",
+    "progressBar": "Question {{currentStep}}/{{totalSteps}}"
   },
   "beforeSubmit": {
     "submitButton": "Soumettre",
