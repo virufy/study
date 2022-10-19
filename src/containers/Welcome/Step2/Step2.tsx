@@ -8,7 +8,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
-import { BlackText } from 'components/Texts';
+import { BlackText, JapanTitle, JapanFooter } from 'components/Texts';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
@@ -18,6 +18,7 @@ import { isClinic } from 'helper/basePathHelper';
 import HeaderSplash from 'assets/images/baseLogoSplash.png';
 
 // Styles
+import { getCountry } from 'helper/stepsDefinitions';
 import {
   HeaderImageContainer,
   HeaderImage,
@@ -44,6 +45,7 @@ const Step2 = (p: Wizard.StepProps) => {
   } = useHeaderContext();
 
   const history = useHistory();
+  const country = getCountry();
 
   const handleNext = React.useCallback(() => {
     if (p.nextStep) {
@@ -79,14 +81,16 @@ const Step2 = (p: Wizard.StepProps) => {
         />
         <LogoWhiteBG />
       </HeaderImageContainer>
-      <CustomPurpleText mb={isClinic ? 5 : 15}>
-        {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
-      </CustomPurpleText>
+      {country && country !== 'Japan' && (
+        <CustomPurpleText mb={isClinic ? 5 : 15}>
+          {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
+        </CustomPurpleText>
+      ) }
       {isClinic && (
-      <SupportedBy>
-        {t('main:supportedBy', 'Supported by')}
-        <NuevaLogo />
-      </SupportedBy>
+        <SupportedBy>
+          {t('main:supportedBy', 'Supported by')}
+          <NuevaLogo />
+        </SupportedBy>
       )}
 
       <WelcomeContent maxWidth={470} mt={0}>
@@ -98,39 +102,62 @@ const Step2 = (p: Wizard.StepProps) => {
             </p>
           </Trans>
         </BlackText>
-        <InstructionContainer>
-          <WelcomeBullets>
-            <BulletIndicator>1</BulletIndicator>
-          </WelcomeBullets>
-          <BlackText>
-            <Trans i18nKey="helpVirufy:bulletsIntro">
-              <strong>Intro: </strong>About us and Safety Reminders
-            </Trans>
-          </BlackText>
-        </InstructionContainer>
 
-        <InstructionContainer>
-          <WelcomeBullets>
-            <BulletIndicator>2</BulletIndicator>
-          </WelcomeBullets>
-          <BlackText>
-            <Trans i18nKey="helpVirufy:bulletCough">
-              <strong>Cough Into Phone</strong>
-            </Trans>
-          </BlackText>
-        </InstructionContainer>
+        {country && country === 'Japan' && (
+          <>
+            <JapanTitle className="">
+              {t('helpVirufy:introParagraphJapanTitle')}
+            </JapanTitle>
+            <BlackText>
+              <p>
+                {t('helpVirufy:introParagraphJapanDesc')}
+              </p>
+            </BlackText>
+            <JapanFooter>
+              <Trans i18nKey="helpVirufy:introParagraphJapanFooter">
+                <p>
+                  {t('helpVirufy:introParagraphJapanFooter')}
+                </p>
+              </Trans>
+            </JapanFooter>
+          </>
+        )}
+        {country && country !== 'Japan' && (
+          <>
+            <InstructionContainer>
+              <WelcomeBullets>
+                <BulletIndicator>1</BulletIndicator>
+              </WelcomeBullets>
+              <BlackText>
+                <Trans i18nKey="helpVirufy:bulletsIntro">
+                  <strong>Intro: </strong>About us and Safety Reminders
+                </Trans>
+              </BlackText>
+            </InstructionContainer>
 
-        <InstructionContainer>
-          <WelcomeBullets>
-            <BulletIndicator>3</BulletIndicator>
-          </WelcomeBullets>
-          <BlackText>
-            <Trans i18nKey="helpVirufy:bulletQuestions">
-              <strong>Quick Health Questions</strong>
-            </Trans>
-          </BlackText>
-        </InstructionContainer>
+            <InstructionContainer>
+              <WelcomeBullets>
+                <BulletIndicator>2</BulletIndicator>
+              </WelcomeBullets>
+              <BlackText>
+                <Trans i18nKey="helpVirufy:bulletCough">
+                  <strong>Cough Into Phone</strong>
+                </Trans>
+              </BlackText>
+            </InstructionContainer>
 
+            <InstructionContainer>
+              <WelcomeBullets>
+                <BulletIndicator>3</BulletIndicator>
+              </WelcomeBullets>
+              <BlackText>
+                <Trans i18nKey="helpVirufy:bulletQuestions">
+                  <strong>Quick Health Questions</strong>
+                </Trans>
+              </BlackText>
+            </InstructionContainer>
+          </>
+        )}
         {activeStep && (
           <Portal>
             <WizardButtons

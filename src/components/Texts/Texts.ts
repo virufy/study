@@ -23,11 +23,11 @@ export const BaseTitle = styled.div`
 export const TitlePurple = styled.div`
   text-align: center; 
   font-family: 'Biko';
-  font-weight: 700;
-  line-height: 34.24px;
+  font-weight: 400;
+  line-height: 30.59px;
   color: ${colors.purple};
-  font-size: 32px;
-  margin-top: 54px;
+  font-size: 24px;
+  margin-top: 34px;
   margin-right: 20px;
   margin-left: 20px;
 `;
@@ -39,6 +39,7 @@ export const TitleBlack = styled.div`
   color: ${colors.mineShaft};
   font-size: 1.5rem;
   margin-bottom: 20px;
+  text-align: center;
 `;
 
 export const BlackText = styled.h2`
@@ -52,7 +53,8 @@ export const BlackText = styled.h2`
   margin-right: auto;
   white-space: pre-wrap;
 
-  max-width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
   
   > p {
@@ -75,4 +77,14 @@ export const PurpleTextBold = styled.h2`
   color: ${colors.purple};
   font-weight: 600;
   text-align: center;
+`;
+
+export const JapanTitle = styled(BaseTitle)`
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 10px;
+`;
+
+export const JapanFooter = styled(BaseTitle)`
+  font-size: 16px;
 `;

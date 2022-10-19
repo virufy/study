@@ -3,7 +3,8 @@ import { colors } from 'theme/index';
 
 export const ThankYouLayout = styled.div`
   text-align: left;
-  max-width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 0 auto;
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
@@ -18,8 +19,8 @@ export const ThankYouTitle = styled.h1`
   line-height: 142.69%;
   text-align: left;
   color: ${props => props.theme.colors.darkBlack};
-  margin-bottom: 8px;
-  margin-top: 25px;
+  margin-bottom: 18px;
+  margin-top: 34px;
 `;
 
 export const SubmissionIdBox = styled.div`

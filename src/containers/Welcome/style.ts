@@ -472,8 +472,7 @@ export const WelcomeItemList = styled.ul`
   line-height: 1.25rem;
   list-style: none;
   margin: 11px auto 30px;
-  max-width: 290px;
-  padding: 0;
+  padding: 0 32px;
 
   width: 100%;
 

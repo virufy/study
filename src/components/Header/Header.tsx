@@ -84,7 +84,7 @@ const Header = () => {
   if (location.pathname === '/welcome/step-2') return null;
 
   return (
-    <HeaderContainer type={type} isMobile={isMobile}>
+    <HeaderContainer type={type} isMobile={isMobile} hasSubtitle={!!subtitle}>
       {(doGoBack && location.pathname !== '/welcome') && <ArrowLefContainer onClick={doGoBack}><ArrowLeft /></ArrowLefContainer>}
       <TitleContainer>
         {(type === 'primary' && !subtitle) && <HeaderTitle>{title}</HeaderTitle>}
