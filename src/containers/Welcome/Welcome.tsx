@@ -10,6 +10,7 @@ import Wizard from 'components/Wizard';
 
 // Components
 import DotIndicators from 'components/DotIndicators';
+import { getCountry } from 'helper/stepsDefinitions';
 
 setStorageType(window.localStorage);
 
@@ -22,6 +23,8 @@ createStore({
 });
 
 const baseUrl = '/welcome';
+
+const country = getCountry();
 
 const stepsWithoutDots: Wizard.Step[] = [
   {
@@ -41,7 +44,7 @@ const stepsWithoutDots: Wizard.Step[] = [
     props: {
       storeKey: StoreKey,
       previousStep: `${baseUrl}`,
-      nextStep: `${baseUrl}/step-3`,
+      nextStep: country !== 'Japan' ? `${baseUrl}/step-3` : `${baseUrl}/step-4`,
     },
   },
   {
@@ -91,7 +94,8 @@ const Welcome = () => {
   const match = useRouteMatch();
 
   const url = location.pathname.replace(match.url, '');
-  const active = steps.findIndex(step => step.path === url);
+  const currentSteps = country !== 'Japan' ? steps : steps.slice(1, steps.length);
+  const active = currentSteps.findIndex(step => step.path === url);
 
   return (
     <Wizard
@@ -100,7 +104,7 @@ const Welcome = () => {
       {active >= 0 && (
         <DotIndicators
           current={active}
-          total={steps.length}
+          total={currentSteps.length}
         />
       )}
     </Wizard>

@@ -76,3 +76,13 @@ export const PurpleTextBold = styled.h2`
   font-weight: 600;
   text-align: center;
 `;
+
+export const JapanTitle = styled(BaseTitle)`
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 10px;
+`;
+
+export const JapanFooter = styled(BaseTitle)`
+  font-size: 16px;
+`;
