@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import Select from 'react-select';
-import { colors } from 'theme';
 
 import { ReactComponent as ArrowRight } from 'assets/icons/arrowRight.svg';
 import { ReactComponent as AboutUs } from 'assets/images/about-us.svg';
@@ -451,7 +450,7 @@ export const WelcomeConsentForm = styled.div`
     font-size: 14px!important;
     line-height: 20px!important;
     font-weight: 400!important;
-    color: ${colors.mineShaft}!important;
+    color: ${props => props.theme.colors.mineShaft}!important;
     background: transparent!important;
   }
 
