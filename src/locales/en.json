@@ -513,7 +513,8 @@
     "proceedButton": "Proceed to last step",
     "stepOf": "of",
     "nextButton": "Next",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "progressBar": "Question {{currentStep}}/{{totalSteps}}"
   },
   "beforeSubmit": {
     "submitButton": "Submit",

@@ -45,7 +45,7 @@ const ProgressIndicator = ({
         progressBar
           ? (
             <BarIndicatorContainer>
-              {t('questionary:headerText')} {`${currentStep}/${totalSteps}`}
+              {t('questionary:progressBar', { currentStep, totalSteps })}
               <BarIndicator
                 currentStep={currentStep}
                 totalSteps={totalSteps}

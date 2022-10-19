@@ -513,7 +513,8 @@
     "proceedButton": "Proceder al último paso",
     "stepOf": "de",
     "nextButton": "Siguiente",
-    "submitting": "Enviando..."
+    "submitting": "Enviando...",
+    "progressBar": "Pregunta {{currentStep}}/{{totalSteps}}"
   },
   "beforeSubmit": {
     "submitButton": "Enviar formulario",

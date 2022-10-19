@@ -510,7 +510,8 @@
         "proceedButton": "अंतिम चरण पर आगे बढ़ें",
         "stepOf": "का",
         "nextButton": "अगला",
-        "submitting": "सबमिट किया जा रहा है..."
+        "submitting": "सबमिट किया जा रहा है...",
+        "progressBar": "प्रश्न {{currentStep}}/{{totalSteps}}"
     },
     "beforeSubmit": {
         "submitButton": "प्रस्तुत करना",

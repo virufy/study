@@ -508,7 +508,8 @@
         "proceedButton": "ไปขั้นตอนสุดท้าย",
         "stepOf": "ของ",
         "nextButton": "ต่อไป",
-        "submitting": "กำลังส่ง"
+        "submitting": "กำลังส่ง",
+        "progressBar": "คำถาม {{currentStep}}/{{totalSteps}}"
     },
     "beforeSubmit": {
         "submitButton": "ส่งแล้ว",

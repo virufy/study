@@ -508,7 +508,8 @@
         "proceedButton": "Προχωρήστε στο τελευταίο βήμα",
         "stepOf": "του",
         "nextButton": "Επόμενο",
-        "submitting": "Υποβολλάται.."
+        "submitting": "Υποβολλάται..",
+        "progressBar": "Ερώτηση {{currentStep}}/{{totalSteps}}"
     },
     "beforeSubmit": {
         "submitButton": "Υποβολή",

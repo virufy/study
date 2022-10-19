@@ -511,7 +511,8 @@
     "proceedButton": "Son adıma geç",
     "stepOf": "of",
     "nextButton": "Sonraki",
-    "submitting": "Gönderiliyor..."
+    "submitting": "Gönderiliyor...",
+    "progressBar": "Soru {{currentStep}}/{{totalSteps}}"
   },
   "beforeSubmit": {
     "submitButton": "Gönder",
