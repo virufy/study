@@ -120,7 +120,7 @@ const PredictionResult2 = ({
       <Portal>
         <WizardButtons
           invert
-          leftLabel={t('thankyou:returnButton')}
+          leftLabel={t('thankyou:returnMain')}
           leftHandler={handleSubmitAnotherCough}
           leftDisabled={false}
         />
