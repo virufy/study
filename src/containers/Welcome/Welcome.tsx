@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
 import { createStore, setStorageType } from 'little-state-machine';
 
@@ -10,7 +10,9 @@ import Wizard from 'components/Wizard';
 
 // Components
 import DotIndicators from 'components/DotIndicators';
-import { getCountry } from 'helper/stepsDefinitions';
+import {
+  getCountry, getWelcomeStepsWithoutDots, welcomeStepsDefinitions,
+} from 'helper/stepsDefinitions';
 
 setStorageType(window.localStorage);
 
@@ -22,84 +24,23 @@ createStore({
   name: `${localstoragePrefix}_VirufyWizard`,
 });
 
-const baseUrl = '/welcome';
-
-const country = getCountry();
-
-const stepsWithoutDots: Wizard.Step[] = [
-  {
-    path: '',
-    componentPath: 'Welcome/Step1',
-    props: {
-      storeKey: StoreKey,
-      nextStep: `${baseUrl}/step-2`,
-      otherSteps: {
-        nextStepPatient: `${baseUrl}/patientSummary`,
-      },
-    },
-  },
-  {
-    path: '/step-2',
-    componentPath: 'Welcome/Step2',
-    props: {
-      storeKey: StoreKey,
-      previousStep: `${baseUrl}`,
-      nextStep: country !== 'Japan' ? `${baseUrl}/step-3` : `${baseUrl}/step-4`,
-    },
-  },
-  {
-    path: '/patientSummary',
-    componentPath: 'Welcome/PatientSummary',
-    props: {
-      storeKey: StoreKey,
-      previousStep: `${baseUrl}`,
-      // nextStep: `${baseUrl}/step-3`,
-    },
-  },
-];
-
-const steps: Wizard.Step[] = [
-  {
-    path: '/step-3',
-    componentPath: 'Welcome/Step3',
-    props: {
-      storeKey: StoreKey,
-      previousStep: `${baseUrl}/step-2`,
-      nextStep: `${baseUrl}/step-4`,
-    },
-  },
-  {
-    path: '/step-4',
-    componentPath: 'Welcome/Step4',
-    props: {
-      storeKey: StoreKey,
-      previousStep: `${baseUrl}/step-3`,
-      nextStep: `${baseUrl}/step-5`,
-    },
-  },
-  {
-    path: '/step-5',
-    componentPath: 'Welcome/Step5',
-    props: {
-      storeKey: StoreKey,
-      previousStep: `${baseUrl}/step-4`,
-      nextStep: '/submit-steps/step-record/cough',
-    },
-  },
-];
-
 const Welcome = () => {
   // Hooks
   const location = useLocation();
   const match = useRouteMatch();
+  const country = getCountry();
 
   const url = location.pathname.replace(match.url, '');
-  const currentSteps = country !== 'Japan' ? steps : steps.slice(1, steps.length);
+
+  const stepsWithoutDots = useMemo(() => getWelcomeStepsWithoutDots(StoreKey, country), [country]);
+
+  const currentSteps = useMemo(() => welcomeStepsDefinitions(StoreKey, country), [country]);
+
   const active = currentSteps.findIndex(step => step.path === url);
 
   return (
     <Wizard
-      steps={[...stepsWithoutDots, ...steps]}
+      steps={[...stepsWithoutDots, ...currentSteps]}
     >
       {active >= 0 && (
         <DotIndicators

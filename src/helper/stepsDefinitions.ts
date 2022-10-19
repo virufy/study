@@ -1,6 +1,8 @@
 import { localstoragePrefix } from 'helper/basePathHelper';
 
 const baseUrl = '/submit-steps';
+const welcomeUrl = '/welcome';
+
 const baseComponentPath = 'SubmitSteps';
 const middleComponentPathRecording = 'RecordingsSteps';
 const middleComponentPathQuestionary = 'Questionary';
@@ -520,6 +522,81 @@ function getSubmissionSteps(storeKey: string) {
       },
     },
   ];
+}
+
+/** Welcome Steps */
+
+export function getWelcomeStepsWithoutDots(storeKey: string, country: string) {
+  const stepsWithoutDots: Wizard.Step[] = [
+    {
+      path: '',
+      componentPath: 'Welcome/Step1',
+      props: {
+        storeKey,
+        nextStep: `${welcomeUrl}/step-2`,
+        otherSteps: {
+          nextStepPatient: `${welcomeUrl}/patientSummary`,
+        },
+      },
+    },
+    {
+      path: '/step-2',
+      componentPath: 'Welcome/Step2',
+      props: {
+        storeKey,
+        previousStep: `${welcomeUrl}`,
+        nextStep: country !== 'Japan' ? `${welcomeUrl}/step-3` : `${welcomeUrl}/step-4`,
+      },
+    },
+    {
+      path: '/patientSummary',
+      componentPath: 'Welcome/PatientSummary',
+      props: {
+        storeKey,
+        previousStep: `${welcomeUrl}`,
+        // nextStep: `${welcomeUrl}/step-3`,
+      },
+    },
+  ];
+
+  return stepsWithoutDots;
+}
+
+export function welcomeStepsDefinitions(storeKey: string, country: string) {
+  const steps: Wizard.Step[] = [];
+
+  if (country !== 'Japan') {
+    steps.push({
+      path: '/step-3',
+      componentPath: 'Welcome/Step3',
+      props: {
+        storeKey,
+        previousStep: `${welcomeUrl}/step-2`,
+        nextStep: `${welcomeUrl}/step-4`,
+      },
+    });
+  }
+
+  return steps.concat([
+    {
+      path: '/step-4',
+      componentPath: 'Welcome/Step4',
+      props: {
+        storeKey,
+        previousStep: country !== 'Japan' ? `${welcomeUrl}/step-3` : `${welcomeUrl}/step-2`,
+        nextStep: `${welcomeUrl}/step-5`,
+      },
+    },
+    {
+      path: '/step-5',
+      componentPath: 'Welcome/Step5',
+      props: {
+        storeKey,
+        previousStep: `${welcomeUrl}/step-4`,
+        nextStep: '/submit-steps/step-record/cough',
+      },
+    },
+  ]);
 }
 
 export default function stepsDefinition(storeKey: string, country: string, patientId: string) {

@@ -109,9 +109,11 @@ const Step2 = (p: Wizard.StepProps) => {
               {t('helpVirufy:introParagraphJapanTitle')}
             </JapanTitle>
             <BlackText>
-              <p>
-                {t('helpVirufy:introParagraphJapanDesc')}
-              </p>
+              <Trans i18nKey="helpVirufy:introParagraphJapanDesc">
+                <p>
+                  {t('helpVirufy:introParagraphJapanDesc')}
+                </p>
+              </Trans>
             </BlackText>
             <JapanFooter>
               <Trans i18nKey="helpVirufy:introParagraphJapanFooter">
