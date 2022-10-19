@@ -25,7 +25,7 @@ export default function () {
 
   // HELPER: handle initialization of flac encoder
   function initFlac() {
-    flacEncoder = Flac.init_libflac_encoder(SAMPLERATE, CHANNELS, BPS, COMPRESSION, 0);
+    flacEncoder = Flac.create_libflac_encoder(SAMPLERATE, CHANNELS, BPS, COMPRESSION, 0);
     /// /
     if (flacEncoder !== 0) {
       const statusEncoder = Flac.init_encoder_stream(flacEncoder, writeCallbackFn);
