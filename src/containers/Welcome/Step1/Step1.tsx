@@ -185,6 +185,12 @@ const Step1 = (p: Wizard.StepProps) => {
     return formattedOptions;
   };
 
+  useEffect(() => {
+    if (country === 'Japan') {
+      setValue('language', 'ja');
+    }
+  }, [country, setValue]);
+
   return (
     <>
       <WelcomeStyledForm>
@@ -220,6 +226,7 @@ const Step1 = (p: Wizard.StepProps) => {
                 value={languageData.filter(({ value }) => value === valueController)}
                 className="custom-select"
                 classNamePrefix="custom-select"
+                isDisabled={country === 'Japan'}
               />
             )}
           />
