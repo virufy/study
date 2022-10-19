@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { ReactComponent as CloseX } from 'assets/icons/crossPurple.svg';
 import { ReactComponent as ArrowftSvg } from 'assets/icons/arrowLeft.svg';
 
-export const HeaderContainer = styled.div<{ type?: string, isMobile?: boolean }>`
+export const HeaderContainer = styled.div<{ type?: string, isMobile?: boolean, hasSubtitle?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-top: 20px;
+  padding-top: 27px;
 
   width: 100%;
 
-  background-color: ${({ type, isMobile }) => ((type === 'secondary' && isMobile) ? 'rgba(53, 120, 222, 0.1)' : '#FFF')};
+  background-color: ${({ type, isMobile }) => ((type === 'secondary' && isMobile) ? 'rgba(53, 120, 222, 0.1)' : '#EBF1FC')};
   margin-bottom: ${({ type }) => {
     switch (type) {
       case 'primary':
@@ -21,6 +21,18 @@ export const HeaderContainer = styled.div<{ type?: string, isMobile?: boolean }>
         return '0px';
     }
   }};
+  
+  ${({ type, hasSubtitle }) => (type === 'primary' && hasSubtitle && `
+    border-radius: 0 0 70px 70px;
+  `)}
+
+  ${({ type, hasSubtitle }) => (type === 'primary' && !hasSubtitle && `
+    border-radius: 0 0 50px 50px;
+  `)}
+
+  ${({ type }) => (type === 'tertiary' && `
+    background-color: #FFFFFF;
+  `)}
 `;
 
 export type LogoSize = 'regular' | 'big';
@@ -57,8 +69,8 @@ export const ArrowLefContainer = styled.div`
   padding-bottom: 10px;
   padding-left: 20px;
   position: absolute;
-  left:-8px;
-  top: 20px;
+  left: 0px;
+  top: 24px;
   > svg {
     width: 13.62px;
     height: 23.1px;

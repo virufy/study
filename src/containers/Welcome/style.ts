@@ -54,7 +54,7 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
 export const ContainerShapeDown = styled.div<{ isMobile?: boolean }>`
   width:100%;
   background-color: ${({ theme, isMobile }) => (isMobile ? theme.colors.purple_10 : '#FFF')};
-  padding-top: 55px;
+  padding-top: 38px;
 `;
 
 export const InnerContainerShapeDown = styled.div`
@@ -419,7 +419,8 @@ export const CheckboxTitle = styled.div`
 `;
 
 export const WelcomeConsentForm = styled.div`
-    max-width: 320px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 10px auto 20px auto;
 
     @media screen and (${props => props.theme.breakpoints.tablet}){
@@ -440,8 +441,7 @@ export const WelcomeItemList = styled.ul`
   line-height: 1.25rem;
   list-style: none;
   margin: 11px auto 30px;
-  max-width: 290px;
-  padding: 0;
+  padding: 0 32px;
 
   width: 100%;
 

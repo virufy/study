@@ -6,8 +6,9 @@ import { colors } from 'theme/index';
 
 export const MainContainer = styled.div`
   width: 100%;
-  max-width: 320px;
   margin: 0px auto;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 export const Title = styled.h1`
@@ -109,8 +110,6 @@ export const QuestionInput = styled.input`
 
   height: 48px;
   width: 100%;
-  max-width: 320px;
-  
 
   ::placeholder {
     color: #A3A3A3;

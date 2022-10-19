@@ -9,9 +9,9 @@ export const MainContainer = styled.div``;
 
 export const InstructionContainer = styled.div`
   display: flex; 
-  margin-left: 10px; 
-  max-width: 330px;
   width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
 
   @media screen and (${props => props.theme.breakpoints.tablet}) {
     max-width: 475px;
