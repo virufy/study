@@ -74,7 +74,7 @@ const Record = ({
     },
     resolver: yupResolver(schema),
   });
-  console.log(formState);
+
   const { t } = useTranslation();
 
   const { isValid } = formState;
