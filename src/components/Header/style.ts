@@ -12,7 +12,7 @@ export const HeaderContainer = styled.div<{ type?: string, isMobile?: boolean, h
 
   width: 100%;
 
-  background-color: ${({ type, isMobile }) => ((type === 'secondary' && isMobile) ? 'rgba(53, 120, 222, 0.1)' : '#EBF1FC')};
+  background-color: ${({ type }) => ((type === 'secondary') ? 'rgba(53, 120, 222, 0.1)' : '#EBF1FC')};
   margin-bottom: ${({ type }) => {
     switch (type) {
       case 'primary':

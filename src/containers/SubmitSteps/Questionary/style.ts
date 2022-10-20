@@ -9,6 +9,13 @@ export const MainContainer = styled.div`
   margin: 0px auto;
   padding-left: 20px;
   padding-right: 20px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    max-width: 470px;
+    margin: auto;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -117,6 +124,6 @@ export const QuestionInput = styled.input`
   }
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 348px;
+    max-width: 470px;
     }
 `;

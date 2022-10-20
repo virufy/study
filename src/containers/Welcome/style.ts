@@ -36,6 +36,10 @@ export const WelcomeStyledForm = styled.form``;
 export const WelcomeStyledFormAlternative = styled.form`
     padding: 0px !important; 
     text-align: center !important;
+
+    @media screen and (${props => props.theme.breakpoints.tablet}){
+      margin: auto;
+    }
 `;
 
 export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
@@ -46,21 +50,26 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
   height: 100%;
   ${({ maxWidth }) => maxWidth !== undefined && css`max-width: ${maxWidth}px;`}
 
-  @media screen and (${props => props.theme.breakpoints.tablet}){
-    text-align: center;
-  };
-
   h2 {
     max-width: inherit;
     padding-left: 20px;
     padding-right: 20px;
     margin-top: 20px;
   }
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    text-align: center;
+    h2 {
+      max-width: 470px;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  };
 `;
 
 export const ContainerShapeDown = styled.div<{ isMobile?: boolean }>`
   width:100%;
-  background-color: ${({ theme, isMobile }) => (isMobile ? theme.colors.purple_10 : '#FFF')};
+  background-color: ${({ theme }) => theme.colors.purple_10};
   padding-top: 55px;
 
   h2 {
@@ -78,6 +87,13 @@ export const InnerContainerShapeDown = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 37px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    h2 {
+      max-width: 470px;
+      margin: auto;
+    }
+  }
 `;
 
 /* Step 1 */
@@ -123,13 +139,12 @@ export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
     font-style: normal;
     font-weight: 500;
     line-height: 1.4;
-    width: 100%;
+    width: calc(100% - 40px);
     height: 48px;
-    max-width: 320px;
     align-items: center;
     border: 2px solid ${props => (props.error ? '#FF0000' : 'transparent')};
     border-radius: 15px;
-    margin: auto;
+    margin: 0 20px;
     padding: 12px 15px;
   
     .custom-select__control {
@@ -221,7 +236,9 @@ export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
   }
   
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 348px;
+    max-width: 470px;
+    margin: auto;
+    width: 100%;
   }
 `;
 
@@ -314,14 +331,16 @@ export const NuevaLogo = styled(NuevaLogoSVG)`
 
 export const InstructionContainer = styled.div`
   display: flex; 
-  margin-left: 10px; 
-  max-width: 330px;
   width: 100%;
   align-items: center;
-
+  padding-left: 20px;
+  padding-right: 20px;
+  
   @media screen and (${props => props.theme.breakpoints.tablet}) {
-    max-width: 475px;
+    max-width: 470px;
     margin: auto;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 `;
 
@@ -387,12 +406,15 @@ export const CustomPurpleText = styled.h2<{ mb?: number; mt?: number; isLight?: 
   margin: ${({ mt = 32 }) => mt}px auto ${({ mb = 32 }) => mb}px auto;
   white-space: pre-wrap;
 
-  max-width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 348px;
+    max-width: 470px;
     text-align: center;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 `;
 
@@ -416,8 +438,14 @@ export const WelcomeNote = styled.span<WelcomeNoteProps>`
   line-height: 1.42;
   font-style: italic;
   font-weight: ${({ isBold }) => (isBold ? 700 : 400)};
-  max-width: 320px;
   margin: 52px auto 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 `;
 
 /* Step 4 */
@@ -455,8 +483,10 @@ export const WelcomeConsentForm = styled.div`
   }
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    margin: 24px auto 28 auto;
+    margin: 24px auto 28px auto;
     max-width: 470px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 `;
 
@@ -479,7 +509,8 @@ export const WelcomeItemList = styled.ul`
   @media screen and (${props => props.theme.breakpoints.tablet}){
     margin: auto;
     font-size: 1rem;
-    max-width: 347px;
+    max-width: 470px;
+    padding: 0 13px;
   };
 `;
 
@@ -562,7 +593,7 @@ export const WelcomeJumpToBottomContainer = styled.div`
     margin: 25px auto;
 
     @media screen and (${props => props.theme.breakpoints.tablet}){
-      margin: 24px auto 28 auto;
+      margin: 24px auto 28px auto;
       max-width: 470px;
     }
 `;

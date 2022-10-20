@@ -9,6 +9,8 @@ export const ThankYouLayout = styled.div`
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
     max-width: 470px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 `;
 
