@@ -5,6 +5,11 @@ import { colors } from 'theme';
 /* Containers */
 export const MainContainer = styled.div`
   margin-bottom: 77px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}) {
+    max-width: 470px;
+    margin: auto;
+  }
 `;
 
 export const PlayerContainer = styled.div`

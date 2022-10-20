@@ -14,8 +14,10 @@ export const InstructionContainer = styled.div`
   padding-right: 20px;
 
   @media screen and (${props => props.theme.breakpoints.tablet}) {
-    max-width: 475px;
+    max-width: 470px;
     margin: auto;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 `;
 

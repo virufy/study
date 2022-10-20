@@ -67,6 +67,7 @@ export const BlackText = styled.h2`
   @media screen and (${props => props.theme.breakpoints.tablet}){
     font-size: 1rem;
     max-width: 470px;
+    padding: 0!important;
   }
 `;
 
@@ -83,8 +84,22 @@ export const JapanTitle = styled(BaseTitle)`
   font-size: 16px;
   text-align: left;
   margin-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 `;
 
 export const JapanFooter = styled(BaseTitle)`
   font-size: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 `;

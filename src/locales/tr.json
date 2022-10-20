@@ -351,6 +351,7 @@
     "caption": "Lütfen elinizden gelenin en iyisini yapın.",
     "allThatApply": "(geçerli olan tüm seçenekleri seçin)",
     "testTaken": {
+      "title": "COVID-19 testi",
       "question": "COVID-19 için aşağıdaki testlerden hangisini yaptırdınız?",
       "options": {
         "pcr": "PCR tabanlı test",
@@ -398,6 +399,7 @@
       }
     },
     "vaccine": {
+      "title": "Aşılama",
       "question": "COVID-19 aşısını oldunuz mu?",
       "options": {
         "yes": "Evet",
@@ -406,12 +408,15 @@
       }
     },
     "age": "Yaş:",
+    "ageTitle": "Yaş",
     "ageGroup": "Lütfen yaşınızı girin.",
     "enterAge": "Yaşınızı girin",
     "50+": "50 ve üzeri",
     "unselectedAgeGroup": "Yaş grubunu seçin",
     "gender": {
+      "title": "Irk/Etnik Köken",
       "gender": "Cinsiyet:",
+      "genderTitle": "Cinsiyet",
       "question": "Cinsiyet kimliğiniz nedir?",
       "note": "Kendini nasıl tanımlarsın?",
       "options": {
@@ -424,6 +429,7 @@
       }
     },
     "biologicalSex": {
+      "title": "Biyolojik cinsiyet",
       "question": "Biyolojik cinsiyetiniz nedir?",
       "note": "Orijinal doğum belgenizde doğumda size hangi cinsiyet atandı? Sesin sesi cinsiyete göre değiştiği için bu bilgi yapay zekanın COVID-19'u tespit etmesine yardımcı olması açısından önemlidir.",
       "options": {
@@ -433,6 +439,7 @@
       }
     },
     "smokeLastSixMonths": {
+      "title": "Sigara içmek",
       "question": "Son altı ay içinde herhangi bir zamanda düzenli olarak sigara içtiniz mi?",
       "note": "Buna sigara, nargile, pipo, esrar ve nikotinli vape dahildir.",
       "options": {
@@ -441,6 +448,7 @@
       }
     },
     "symptoms": {
+      "title": "Mevcut semptomlar",
       "question": "<strong>Şu anda aşağıdaki belirtilerden hangilerine sahipsiniz?</strong>",
       "options": {
         "bodyAches": "Vücut ağrıları",
@@ -471,6 +479,7 @@
       "overWeek": "Bir haftadan fazla bir süre önce"
     },
     "respiration": {
+      "title": "Güncel hastalıklar",
       "question": "<strong>Şu anda aşağıdaki solunum rahatsızlıklarından hangisine sahipsiniz?</strong>",
       "options": {
         "asthma": "Astım",

@@ -126,7 +126,7 @@ const Step1b = ({
     if (patientId) {
       setTitle('');
     } else {
-      setTitle(t('questionary:headerQuestions'));
+      setTitle(t('questionary:testTaken.title'));
     }
     if (patientId) {
       setType('tertiary');

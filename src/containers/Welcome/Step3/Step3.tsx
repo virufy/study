@@ -71,7 +71,7 @@ const Step3 = (p: Wizard.StepProps) => {
           <AboutUsSVG />
         </InnerContainerShapeDown>
       </ContainerShapeDown>
-      <WelcomeContent maxWidth={335} mt={0}>
+      <WelcomeContent maxWidth={470} mt={0}>
         <BlackText>
           <Trans i18nKey="helpVirufy:aboutParagraph">
             <p>

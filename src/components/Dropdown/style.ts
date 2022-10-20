@@ -24,6 +24,6 @@ export const StyledSelect = styled.select<StyledSelectProps>`
 
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 348px;
-    }
+    max-width: 470px;
+  }
 `;
