@@ -353,6 +353,7 @@
     "caption": "Por favor, conteste de la mejor manera posible.",
     "allThatApply": "(seleccione todas las que correspondan)",
     "testTaken": {
+      "title": "Prueba de COVID-19",
       "question": "¿Cuáles de las siguientes pruebas para detectar la COVID-19 se ha hecho?",
       "options": {
         "pcr": "Prueba PCR",
@@ -400,6 +401,7 @@
       }
     },
     "vaccine": {
+      "title": "Vacunación",
       "question": "¿Ha recibido la vacuna de COVID-19?",
       "options": {
         "yes": "Si",
@@ -408,12 +410,15 @@
       }
     },
     "age": "Edad:",
+    "ageTitle": "Edad",
     "ageGroup": "Por favor, ingrese su edad.",
     "enterAge": "Ingrese su edad",
     "50+": "50 y más",
     "unselectedAgeGroup": "Seleccione el grupo de edad",
     "gender": {
+      "title": "Raza/Etnia",
       "gender": "Género: ",
+      "genderTitle": "Género",
       "question": "¿Cuál es su identidad de género?",
       "note": "¿Cómo te describes a ti mismo?",
       "options": {
@@ -426,6 +431,7 @@
       }
     },
     "biologicalSex": {
+      "title": "Sexo biológico",
       "question": "¿Cuál es su sexo biológico?",
       "note": "¿Qué sexo se le asignó al nacer, en su certificado de nacimiento original? Esta información es importante para que la IA ayude a detectar el COVID-19, ya que el sonido de la voz varía según el sexo.",
       "options": {
@@ -435,6 +441,7 @@
       }
     },
     "smokeLastSixMonths": {
+      "title": "Fumar",
       "question": "¿Ha fumado frecuentemente en algún momento de los últimos seis meses?",
       "note": "Esto incluye cigarrillos, narcóticos, pipas de tabaco, marihuana y vapeo con nicotina.",
       "options": {
@@ -443,6 +450,7 @@
       }
     },
     "symptoms": {
+      "title": "Síntomas actuales",
       "question": "<strong>¿Cuál de los siguientes síntomas tiene actualmente?</strong>",
       "options": {
         "bodyAches": "Dolores corporales",
@@ -473,6 +481,7 @@
       "overWeek": "Más de una semana atrás"
     },
     "respiration": {
+      "title": "Enfermedades actuales",
       "question": "<strong>¿Cuál de las siguientes afecciones respiratorias tiene actualmente?</strong>",
       "options": {
         "asthma": "Asma",

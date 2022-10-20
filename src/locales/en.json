@@ -353,6 +353,7 @@
     "caption": "Please answer to the best of your ability.",
     "allThatApply": "(select all that apply)",
     "testTaken": {
+      "title": "COVID-19 Test",
       "question": "Which of the following tests have you taken for COVID-19?",
       "options": {
         "pcr": "PCR-based test",
@@ -400,6 +401,7 @@
       }
     },
     "vaccine": {
+      "title": "Vaccination",
       "question": "Have you received the COVID-19 vaccine?",
       "options": {
         "yes": "Yes",
@@ -408,12 +410,15 @@
       }
     },
     "age": "Age:",
+    "ageTitle": "Age",
     "ageGroup": "Please enter your age.",
     "enterAge": "Enter your age",
     "50+": "50 and over",
     "unselectedAgeGroup": "Select age group",
     "gender": {
+      "title": "Race/Ethnicity",
       "gender": "Gender: ",
+      "genderTitle": "Gender",
       "question": "What is your gender identity?",
       "note": "How do you describe yourself?",
       "options": {
@@ -426,6 +431,7 @@
       }
     },
     "biologicalSex": {
+      "title": "Biological sex",
       "question": "What is your biological sex?",
       "note": "What sex were you assigned at birth, on your original birth certificate? This information is important for the AI to help detect COVID-19 as the sound of the voice varies across genders.",
       "options": {
@@ -435,6 +441,7 @@
       }
     },
     "smokeLastSixMonths": {
+      "title": "Smoking",
       "question": "Have you smoked regularly any time within the last six months?",
       "note": "This includes cigarettes, hookah, tobacco pipes, marijuana, and vape with nicotine.",
       "options": {
@@ -443,6 +450,7 @@
       }
     },
     "symptoms": {
+      "title": "Current symptoms",
       "question": "<strong>Which of the below symptoms do you currently have?</strong>",
       "options": {
         "bodyAches": "Body aches",
@@ -473,6 +481,7 @@
       "overWeek": "Over a week ago"
     },
     "respiration": {
+      "title": "Current diseases",
       "question": "<strong>Which of the below respiratory conditions do you currently have?</strong>",
       "options": {
         "asthma": "Asthma",

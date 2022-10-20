@@ -357,6 +357,7 @@
         "caption": "あなたの能力の範囲内でお答えください。",
         "allThatApply": "(該当するものをすべて選択してください。)",
         "testTaken": {
+            "title": "コロナ検査",
             "question": "COVID-19に関する以下のテストのうち、どれを受けましたか？",
             "options": {
                 "pcr": "PCRベースの検査",
@@ -404,6 +405,7 @@
             }
         },
         "vaccine": {
+            "title": "ワクチン接種",
             "question": "COVID-19ワクチンを接種しましたか？",
             "options": {
                 "yes": "はい",
@@ -412,12 +414,15 @@
             }
         },
         "age": "年齢を入力してください。",
+        "ageTitle": "年齢",
         "ageGroup": "あなたの年齢を入力してください。",
         "enterAge": "年齢を入力してください",
         "50+": "50歳以上",
         "unselectedAgeGroup": "年齢区分を選択してください",
         "gender": {
+            "title": "人種・民族",
             "gender": "性別を入力してください。",
+            "genderTitle": "性別",
             "question": "あなたの性別は何ですか？",
             "note": "自分をどのように表現しますか？",
             "options": {
@@ -430,6 +435,7 @@
             }
         },
         "biologicalSex": {
+            "title": "生物学的性別",
             "question": "あなたの生物学的性別は何ですか？",
             "note": "あなたの出生時に割り当てられた性別は、出生証明書の原本では何ですか？この情報は、声の響きが性別によって異なるため、AIがCOVID-19を検出するために重要です。",
             "options": {
@@ -439,6 +445,7 @@
             }
         },
         "smokeLastSixMonths": {
+            "title": "喫煙",
             "question": "過去6ヶ月以内に定期的にタバコを吸ったことがありますか？",
             "note": "これには、タバコ、フッカー、タバコパイプ、マリファナ、ニコチン入りベイプなどが含まれます。",
             "options": {
@@ -447,6 +454,7 @@
             }
         },
         "symptoms": {
+            "title": "現在の症状",
             "question": "<strong>現在、以下のどの症状がありますか</strong>？",
             "options": {
                 "bodyAches": "体の痛み",
@@ -477,6 +485,7 @@
             "overWeek": "1週間以上前"
         },
         "respiration": {
+            "title": "現在の病気",
             "question": "<strong>現在かかっている呼吸器系の病気はどれですか</strong>？",
             "options": {
                 "asthma": "気管支喘息",

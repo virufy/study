@@ -78,7 +78,7 @@ const Step3 = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setTitle(`${t('questionary:smokeLastSixMonths.title')}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
   }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);

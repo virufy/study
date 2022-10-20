@@ -78,7 +78,7 @@ const Step2b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setTitle(`${t('questionary:gender.genderTitle')}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
   }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);

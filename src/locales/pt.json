@@ -353,6 +353,7 @@
     "caption": "Por favor, responda o melhor que puder.",
     "allThatApply": "(selecione tudo que se aplica)",
     "testTaken": {
+      "title": "Teste COVID-19",
       "question": "Qual desses testes para COVID-19 você já realizou?",
       "options": {
         "pcr": "Baseado em PCR",
@@ -400,6 +401,7 @@
       }
     },
     "vaccine": {
+      "title": "Vacinação",
       "question": "Você já recebeu a vacina de COVID-19?",
       "options": {
         "yes": "Sim",
@@ -408,12 +410,15 @@
       }
     },
     "age": "Idade:",
+    "ageTitle": "Idade",
     "ageGroup": "Por favor, entre sua idade.",
     "enterAge": "Entre sua idade",
     "50+": "50 e mais",
     "unselectedAgeGroup": "Selecione sua faixa etária",
     "gender": {
+      "title": "Raça/Etnia",
       "gender": "Gênero: ",
+      "genderTitle": "Gênero",
       "question": "Com qual gênero você se identifica?",
       "note": "Como você se descreve?",
       "options": {
@@ -426,6 +431,7 @@
       }
     },
     "biologicalSex": {
+      "title": "Sexo biológico",
       "question": "Qual o seu sexo biológico?",
       "note": "Que sexo lhe foi designado ao nascer, em sua certidão de nascimento original? Esta informação é importante para que a IA ajude a detectar a COVID-19, pois o som da voz varia entre os gêneros.",
       "options": {
@@ -435,6 +441,7 @@
       }
     },
     "smokeLastSixMonths": {
+      "title": "Fumar",
       "question": "Você fumou regularmente nos últimos seis meses?",
       "note": "Isso inclui cigarros, narguilé, cigarros eletrônicos, cachimbos, Vape com nicotina e maconha.",
       "options": {
@@ -443,6 +450,7 @@
       }
     },
     "symptoms": {
+      "title": "Sintomas actuais",
       "question": "<strong>Qual dos sintomas abaixo você tem atualmente?</strong>",
       "options": {
         "bodyAches": "Dores no corpo",
@@ -473,6 +481,7 @@
       "overWeek": "Mais de uma semana atrás"
     },
     "respiration": {
+      "title": "Doenças actuais",
       "question": "<strong>Qual das condições respiratórias abaixo você tem atualmente?</strong>",
       "options": {
         "asthma": "Asma",

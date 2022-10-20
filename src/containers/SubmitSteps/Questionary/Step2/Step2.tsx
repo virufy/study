@@ -94,7 +94,7 @@ const Step2 = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:headerText')} ${metadata?.current} ${t('questionary:stepOf')} ${metadata?.total}`);
+    setTitle(`${t('questionary:vaccine.title')}`);
     setType('primary');
     setSubtitle('');
     setDoGoBack(() => handleDoBack);
