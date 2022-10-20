@@ -67,7 +67,7 @@ export const BlackText = styled.h2`
   @media screen and (${props => props.theme.breakpoints.tablet}){
     font-size: 1rem;
     max-width: 470px;
-    padding: 0!important;
+    padding: 0 !important;
   }
 `;
 

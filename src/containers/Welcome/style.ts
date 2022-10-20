@@ -468,18 +468,18 @@ export const WelcomeConsentForm = styled.div`
   .WordSection1 > p,
   .Section1 > p {
     margin-bottom: 0;
-    text-align: left!important;
-    margin-left: inherit!important;
-    text-indent: inherit!important;
+    text-align: left !important;
+    margin-left: inherit !important;
+    text-indent: inherit !important;
   }
   
   span {
-    font-family: "Source Sans Pro"!important;
-    font-size: 14px!important;
-    line-height: 20px!important;
-    font-weight: 400!important;
-    color: ${props => props.theme.colors.mineShaft}!important;
-    background: transparent!important;
+    font-family: "Source Sans Pro" !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+    color: ${props => props.theme.colors.mineShaft} !important;
+    background: transparent !important;
   }
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
