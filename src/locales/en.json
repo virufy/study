@@ -472,6 +472,7 @@
       },
       "addOtherPlaceholder": "Other symptom"
     },
+    "symptomsDateTitle": "Cough, fever, shortness of breath",
     "symptomsDate": "Approximately how many days ago did these symptoms start?",
     "enterDays": "Enter days",
     "options": {

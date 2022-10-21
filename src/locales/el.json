@@ -467,6 +467,7 @@
             },
             "addOtherPlaceholder": "Άλλο σύμπτωμα"
         },
+        "symptomsDateTitle": "Βήχας, πυρετός, δύσπνοια",
         "symptomsDate": "Πριν από πόσες ημέρες περίπου άρχισαν αυτά τα συμπτώματα;",
         "enterDays": "Εισάγετε ημέρες",
         "options": {

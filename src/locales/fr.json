@@ -451,6 +451,7 @@
       },
       "addOtherPlaceholder": "Autres symptômes"
     },
+    "symptomsDateTitle": "Toux, fièvre, essoufflement",
     "symptomsDate": "Depuis combien de jours ces symptômes se présentent-ils?",
     "enterDays": "Entrez le nombre de jours",
     "options":{

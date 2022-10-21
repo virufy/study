@@ -470,6 +470,7 @@
       },
       "addOtherPlaceholder": "Diğer belirti"
     },
+    "symptomsDateTitle": "Öksürük, ateş, nefes darlığı",
     "symptomsDate": "Bu belirtiler yaklaşık olarak kaç gün önce başladı?",
     "enterDays": "Günleri girin",
     "options": {

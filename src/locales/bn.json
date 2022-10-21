@@ -467,6 +467,7 @@
             },
             "addOtherPlaceholder": "অন্য উপসর্গ"
         },
+        "symptomsDateTitle": "কাশি, জ্বর, শ্বাসকষ্ট",
         "symptomsDate": "আনুমানিক কত দিন আগে এই উপসর্গগুলি শুরু হয়েছিল?",
         "enterDays": "দিন উল্লেখ করুন",
         "options": {

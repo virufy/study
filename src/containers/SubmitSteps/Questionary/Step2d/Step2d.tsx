@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -9,15 +9,9 @@ import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
-import { getCountry } from 'helper/stepsDefinitions';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
-
-// Components
-import OptionList from 'components/OptionList';
-import WizardButtons from 'components/WizardButtons';
-import ProgressIndicator from 'components/ProgressIndicator';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -25,21 +19,27 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
+// Components
+import OptionList from 'components/OptionList';
+import WizardButtons from 'components/WizardButtons';
+import ProgressIndicator from 'components/ProgressIndicator';
+
 // Styles
 import {
   QuestionText, MainContainer, QuestionNote,
 } from '../style';
 
 const schema = Yup.object({
-  gender: Yup.object().required(),
+  race: Yup.object().required(),
 }).defined();
 
-type Step2Type = Yup.InferType<typeof schema>;
+type Step4aType = Yup.InferType<typeof schema>;
 
-const Step2b = ({
+const Step2d = ({
   previousStep,
   nextStep,
   storeKey,
+  otherSteps,
   metadata,
 }: Wizard.StepProps) => {
   // Hooks
@@ -50,7 +50,6 @@ const Step2b = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
-  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -63,11 +62,7 @@ const Step2b = ({
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
-  const { errors } = formState;
-
-  const {
-    isValid,
-  } = formState;
+  const { errors, isValid } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -80,67 +75,42 @@ const Step2b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:gender.genderTitle')}`);
+    setTitle(`${t('questionary:symptoms.title')}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
   }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
-  const onSubmit = async (values: Step2Type) => {
+  const onSubmit = async (values: Step4aType) => {
     if (values) {
+      const {
+        race,
+      } = (values as any);
+
       action(values);
+
+      let hasSymptom = false;
+
+      // eslint-disable-next-line no-plusplus
+      for (let index = 0; index < race.selected?.length; index++) {
+        if (race.selected[index] !== 'none') {
+          hasSymptom = true;
+          break;
+        }
+      }
+
+      if (hasSymptom && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.covidSymptomsStep);
+        return;
+      }
+
       if (nextStep) {
         setActiveStep(false);
         history.push(nextStep);
       }
     }
   };
-
-  // Memos
-  const genderOptions = React.useMemo(() => {
-    if (country === 'Japan') {
-      return [
-        {
-          value: 'female',
-          label: t('questionary:gender.options.female'),
-        },
-        {
-          value: 'male',
-          label: t('questionary:gender.options.male'),
-        },
-        {
-          value: 'transgender',
-          label: t('questionary:gender.options.transgender'),
-        },
-        {
-          value: 'notToSay',
-          label: t('questionary:gender.options.notToSay'),
-        },
-      ];
-    }
-    return [
-      {
-        value: 'female',
-        label: t('questionary:gender.options.female'),
-      },
-      {
-        value: 'male',
-        label: t('questionary:gender.options.male'),
-      },
-      {
-        value: 'transgender',
-        label: t('questionary:gender.options.transgender'),
-      },
-      {
-        value: 'other',
-        label: t('questionary:gender.options.other'),
-      },
-      {
-        value: 'notToSay',
-        label: t('questionary:gender.options.notToSay'),
-      },
-    ];
-  }, [country, t]);
 
   return (
     <MainContainer>
@@ -149,19 +119,48 @@ const Step2b = ({
         totalSteps={metadata?.total}
         progressBar
       />
-      <QuestionText first>{t('questionary:gender.question')}
-        <QuestionNote>{t('questionary:gender.note')}</QuestionNote>
+      <QuestionText extraSpace first>
+        <Trans i18nKey="questionary:race.question">
+          <strong>Which of the below symptoms do you currently have?</strong>
+        </Trans>
       </QuestionText>
+      <QuestionNote>{t('questionary:race.note')}</QuestionNote>
       <Controller
         control={control}
-        name="gender"
+        name="race"
         defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
-            singleSelection
+            isCheckbox
             value={value}
             onChange={v => onChange(v)}
-            items={genderOptions}
+            items={[
+              {
+                value: 'asian',
+                label: t('questionary:race.options.asian'),
+              },
+              {
+                value: 'nativeAmericanOrArab',
+                label: t('questionary:race.options.nativeAmericanOrArab'),
+              },
+              {
+                value: 'blackOrAfrican',
+                label: t('questionary:race.options.blackOrAfrican'),
+              },
+              {
+                value: 'hispanicOrLatin',
+                label: t('questionary:race.options.hispanicOrLatin'),
+              },
+              {
+                value: 'nativeHawaiianOrPacific',
+                label: t('questionary:race.options.nativeHawaiianOrPacific'),
+              },
+              {
+                value: 'white',
+                label: t('questionary:race.options.white'),
+              },
+            ]}
+            excludableValues={['none']}
           />
         )}
       />
@@ -181,4 +180,4 @@ const Step2b = ({
   );
 };
 
-export default React.memo(Step2b);
+export default React.memo(Step2d);

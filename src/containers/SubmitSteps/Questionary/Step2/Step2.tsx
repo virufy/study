@@ -18,7 +18,7 @@ import OptionList from 'components/OptionList';
 import ProgressIndicator from 'components/ProgressIndicator';
 
 // Helper
-import { getPatientId } from 'helper/stepsDefinitions';
+import { getCountry, getPatientId } from 'helper/stepsDefinitions';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -56,6 +56,7 @@ const Step2 = ({
   const { t } = useTranslation();
   const patientId = getPatientId();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -111,6 +112,52 @@ const Step2 = ({
     }
   };
 
+  // Memos
+  const vaccineOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: '1',
+          label: t('questionary:vaccine.options.1'),
+        },
+        {
+          value: '2',
+          label: t('questionary:vaccine.options.2'),
+        },
+        {
+          value: '3',
+          label: t('questionary:vaccine.options.3'),
+        },
+        {
+          value: '4',
+          label: t('questionary:vaccine.options.4'),
+        },
+        {
+          value: 'false',
+          label: t('questionary:vaccine.options.no'),
+        },
+        {
+          value: 'decline',
+          label: t('questionary:vaccine.options.decline'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'true',
+        label: t('questionary:vaccine.options.yes'),
+      },
+      {
+        value: 'false',
+        label: t('questionary:vaccine.options.no'),
+      },
+      {
+        value: 'decline',
+        label: t('questionary:vaccine.options.decline'),
+      },
+    ];
+  }, [country, t]);
+
   return (
     <MainContainer>
       <ProgressIndicator
@@ -129,20 +176,7 @@ const Step2 = ({
             singleSelection
             value={{ selected: value ? [value] : [] }}
             onChange={v => onChange(v.selected[0])}
-            items={[
-              {
-                value: 'true',
-                label: t('questionary:vaccine.options.yes'),
-              },
-              {
-                value: 'false',
-                label: t('questionary:vaccine.options.no'),
-              },
-              {
-                value: 'decline',
-                label: t('questionary:vaccine.options.decline'),
-              },
-            ]}
+            items={vaccineOptions}
           />
         )}
       />

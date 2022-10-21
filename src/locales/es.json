@@ -472,6 +472,7 @@
       },
       "addOtherPlaceholder": "Otro síntoma"
     },
+    "symptomsDateTitle": "Tos, fiebre, dificultad para respirar",
     "symptomsDate": "¿Hace cuántos días aproximadamente comenzaron estos síntomas?",
     "enterDays": "Ingrese los días",
     "options": {

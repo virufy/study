@@ -381,7 +381,7 @@
                 "positive": "陽性",
                 "negative": "陰性",
                 "pending": "保留",
-                "unsure": "わからない"
+                "unsure": "不明"
             }
         },
         "whenAntibodyTest": "COVID-19の抗体検査を受けたのはいつですか？不明な場合は推定値を入力してください。",
@@ -395,8 +395,16 @@
             }
         },
         "whenAntigenTest": "COVID-19の抗原検査を受けたのはいつですか？不明な場合は推定値を入力してください。",
+        "whatAntigenTest": {
+            "question": "どんな抗原検査を受けましたか？",
+            "options": {
+                "medical": "医療用抗原検査",
+                "research": "研究用抗原検査",
+                "unknown": "不明"
+            }
+        },
         "resultAntigenTest": {
-            "question": "COVID-19の抗原検査の結果はどうでしたか？",
+            "question": "検査の結果はどうでしたか？",
             "options": {
                 "positive": "陽性",
                 "negative": "陰性",
@@ -409,8 +417,12 @@
             "question": "COVID-19ワクチンを接種しましたか？",
             "options": {
                 "yes": "はい",
-                "no": "受けていない",
-                "decline": "記載を辞退する"
+                "no": "打っていない",
+                "decline": "回答を拒否する",
+                "1": "一回",
+                "2": "二回",
+                "3": "三回",
+                "4": "四回"
             }
         },
         "age": "年齢を入力してください。",
@@ -432,6 +444,19 @@
                 "other": "その他",
                 "transgender": "トランスジェンダー",
                 "selfDescribe": "自分で説明してください"
+            }
+        },
+        "race": {
+            "title": "人種・民族",
+            "question": "あなたの人種・民族は何ですか？",
+            "note": "(該当するものをすべて選択してください)",
+            "options": {
+                "asian": "アジア系",
+                "nativeAmericanOrArab": "ネイティブアメリカンまたはアラブ系",
+                "blackOrAfrican": "黒人、またはアフリカ系",
+                "hispanicOrLatin": "ヒスパニック、またはラテン系",
+                "nativeHawaiianOrPacific": "ハワイ先住民族または太平洋諸島民",
+                "white": "白人"
             }
         },
         "biologicalSex": {
@@ -476,13 +501,15 @@
             },
             "addOtherPlaceholder": "その他の症状"
         },
+        "symptomsDateTitle": "咳、発熱、息切れ",
         "symptomsDate": "この症状が始まったのは、およそ何日前ですか？",
         "enterDays": "日数を入力してください",
         "options": {
+            "none": "なし",
             "today": "今日",
-            "days": "1-3日前",
-            "week": "1週間前",
-            "overWeek": "1週間以上前"
+            "days": "1-3 日前",
+            "week": "一週間前",
+            "overWeek": "＞一週間前"
         },
         "respiration": {
             "title": "現在の病気",
