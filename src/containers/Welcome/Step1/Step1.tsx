@@ -75,6 +75,9 @@ type Step1Type = Yup.InferType<typeof schema>;
 
 const Step1 = (p: Wizard.StepProps) => {
   const [activeStep, setActiveStep] = React.useState(true);
+  const [ip, setIP] = React.useState('');
+  const [ipCountry, setIPCountry] = React.useState('');
+
   const {
     setType, setDoGoBack, setLogoSize,
   } = useHeaderContext();
@@ -185,11 +188,47 @@ const Step1 = (p: Wizard.StepProps) => {
     return formattedOptions;
   };
 
+  const getIp = async () => {
+    const res = await fetch('https://geolocation-db.com/json/');
+    const data = await res.json();
+    setIP(data);
+  };
+
   useEffect(() => {
     if (country === 'Japan') {
       setValue('language', 'ja');
     }
   }, [country, setValue]);
+
+  useEffect(() => {
+    try {
+      getIp();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    const getCountry = async () => {
+      const res = await fetch(`https://ipwho.is/${ip}`);
+      const data = await res.json();
+      setIPCountry(data.country);
+    };
+    const localStorageCountry = localStorage.getItem('countryResult');
+    if (localStorageCountry) {
+      setValue('country', localStorageCountry);
+    } else {
+      try {
+        getCountry();
+      } catch (error) {
+        console.error(error);
+      }
+      if (ipCountry) {
+        localStorage.setItem('countryResult', ipCountry);
+        setValue('country', ipCountry);
+      }
+    }
+  }, [ip, ipCountry, setValue]);
 
   return (
     <>
