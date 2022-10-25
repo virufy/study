@@ -380,7 +380,7 @@ const Step1b = ({
             )}
           />
           <QuestionText extraSpace>
-            <Trans i18nKey="questionary:patient:resultAntigenTest.question'">
+            <Trans i18nKey="questionary:patient:resultAntigenTest">
               What was the result of Patient {patientId}&apos;s rapid antigen COVID-19 test?
             </Trans>
           </QuestionText>

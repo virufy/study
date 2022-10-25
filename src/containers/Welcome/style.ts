@@ -117,8 +117,8 @@ export const WelcomeInput = styled.input`
   padding: 12px 15px;
 
   height: 48px;
-  width: 100%;
-  max-width: 320px;
+  width: calc(100% - 40px);
+  max-width: 470px;
   
 
   ::placeholder {
@@ -127,7 +127,7 @@ export const WelcomeInput = styled.input`
   }
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 348px;
+    max-width: 470px;
     }
 `;
 
@@ -243,7 +243,7 @@ export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
 `;
 
 export const TextErrorContainer = styled.div`
-  width: 348px;
+  width: 470px;
   margin: 10px auto;
 
   text-align: left;
@@ -267,7 +267,7 @@ export const ContainerNextButton = styled.div`
   justify-content:flex-end;
 
   @media screen and (${({ theme }) => theme.breakpoints.tablet}){
-    max-width: 348px;
+    max-width: 470px;
     display:flex;
     justify-content: center;
   }
@@ -310,7 +310,7 @@ export const BoldBlackText = styled.h2`
   width: 100%;
 
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    max-width: 348px;
+    max-width: 470px;
   }
 `;
 
