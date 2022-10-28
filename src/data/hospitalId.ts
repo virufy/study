@@ -16,6 +16,9 @@ export const hospitalIdData: CommonJSON<HospitalData[]> = {
   Pakistan: [
     { value: 'indus-hospital', label: 'Indus Hospital' },
   ],
+  Japan: [
+    { value: 'PCRNOW-AKASAKA', label: 'PCRNOW-AKASAKA' },
+  ],
 };
 
 export function getHospitalIdFor(country: string) {

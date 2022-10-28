@@ -45,7 +45,7 @@ declare interface OptionsProps {
 }
 
 let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Germany', 'Pakistan'];
-const clinicCountries = ['India', 'Colombia', 'Pakistan'];
+const clinicCountries = ['India', 'Colombia', 'Pakistan', 'Japan'];
 
 if (isClinic) {
   invalidCountries = invalidCountries.filter(a => !clinicCountries.includes(a));
