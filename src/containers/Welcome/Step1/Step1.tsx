@@ -73,8 +73,16 @@ const schema = Yup.object().shape({
 
 type Step1Type = Yup.InferType<typeof schema>;
 
+const getCountry = async () => {
+  const res = await fetch('https://ipwho.is/');
+  const data = await res.json();
+
+  return data.country;
+};
+
 const Step1 = (p: Wizard.StepProps) => {
   const [activeStep, setActiveStep] = React.useState(true);
+
   const {
     setType, setDoGoBack, setLogoSize,
   } = useHeaderContext();
@@ -190,6 +198,21 @@ const Step1 = (p: Wizard.StepProps) => {
       setValue('language', 'ja');
     }
   }, [country, setValue]);
+
+  useEffect(() => {
+    const localStorageCountry = localStorage.getItem('countryResult');
+    if (localStorageCountry) {
+      setValue('country', localStorageCountry);
+    } else {
+      getCountry()
+        .then(countryName => {
+          localStorage.setItem('countryResult', countryName);
+          setValue('country', countryName);
+        })
+        .catch(error => { console.error(error); });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
