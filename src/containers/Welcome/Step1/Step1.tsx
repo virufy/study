@@ -30,8 +30,8 @@ import { getHospitalIdFor } from 'data/hospitalId';
 import { timeZones } from 'data/timeZones';
 
 // Helper
+import { localstoragePrefix, isClinic } from 'helper/basePathHelper';
 import { scrollToTop } from 'helper/scrollHelper';
-import { isClinic } from 'helper/basePathHelper';
 
 // Styles
 import {
@@ -204,14 +204,19 @@ const Step1 = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     const localStorageCountry = localStorage.getItem('countryResult');
-    const virufyWizard = localStorage.getItem('_VirufyWizard');
+    const virufyWizard = localStorage.getItem(`${localstoragePrefix}_VirufyWizard`);
     if (virufyWizard) {
-      setValue('country', JSON.parse(virufyWizard).welcome.country);
-      setValue('language', JSON.parse(virufyWizard).welcome.language);
+      const parsedVirufyWizard = JSON.parse(virufyWizard);
+      setValue('country', parsedVirufyWizard.welcome.country);
+      setValue('language', parsedVirufyWizard.welcome.language);
+      if (localStorageCountry) {
+        setSupportedLang(JSON.parse(localStorageCountry)?.supported);
+      }
     } else if (localStorageCountry) {
-      setValue('country', JSON.parse(localStorageCountry).country);
-      setValue('language', JSON.parse(localStorageCountry).lang[0].value);
-      setSupportedLang(JSON.parse(localStorageCountry).supported);
+      const parsedLocalStorageCountry = JSON.parse(localStorageCountry);
+      setValue('country', parsedLocalStorageCountry.country);
+      setValue('language', parsedLocalStorageCountry.lang[0].value);
+      setSupportedLang(parsedLocalStorageCountry.supported);
     } else {
       getCountry()
         .then(countryName => {
