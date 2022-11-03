@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -13,32 +13,29 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
-// Components
-import OptionList from 'components/OptionList';
-import ProgressIndicator from 'components/ProgressIndicator';
-
-// Helper
-import { getCountry, getPatientId } from 'helper/stepsDefinitions';
-
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
-// Styles
+// Components
+import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
+import ProgressIndicator from 'components/ProgressIndicator';
+
+// Styles
 import {
-  QuestionText, MainContainer,
+  QuestionText, MainContainer, QuestionNote,
 } from '../style';
 
 const schema = Yup.object({
-  vaccine: Yup.string(),
+  ethnicity: Yup.string(),
 }).defined();
 
-type Step2Type = Yup.InferType<typeof schema>;
+type Step4aType = Yup.InferType<typeof schema>;
 
-const Step2 = ({
+const Step2d = ({
   previousStep,
   nextStep,
   storeKey,
@@ -49,14 +46,10 @@ const Step2 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const {
-    setDoGoBack, setTitle, setSubtitle, setType,
-  } = useHeaderContext();
+  const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
-  const patientId = getPatientId();
   const { state, action } = useStateMachine(updateAction(storeKey));
-  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -69,94 +62,55 @@ const Step2 = ({
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
-  const { errors } = formState;
+  const { errors, isValid } = formState;
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (state['submit-steps'] && !patientId) {
-      const { testTaken } = state['submit-steps'];
-      if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
-        history.push(otherSteps.noTestStep);
-      } else if (previousStep) {
-        history.push(previousStep);
-      } else {
-        history.goBack();
-      }
-    } else if (previousStep) {
+    if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [state, history, otherSteps, previousStep, patientId]);
-
-  const {
-    isValid,
-  } = formState;
+  }, [history, previousStep]);
 
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:vaccine.title')}`);
+    setTitle(`${t('questionary:symptoms.title')}`);
     setType('primary');
-    setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setSubtitle, setType, metadata, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
 
   // Handlers
-  const onSubmit = async (values: Step2Type) => {
+  const onSubmit = async (values: Step4aType) => {
     if (values) {
+      const {
+        ethnicity,
+      } = (values as any);
+
       action(values);
+
+      let hasSymptom = false;
+
+      // eslint-disable-next-line no-plusplus
+      for (let index = 0; index < ethnicity.selected?.length; index++) {
+        if (ethnicity.selected[index] !== 'none') {
+          hasSymptom = true;
+          break;
+        }
+      }
+
+      if (hasSymptom && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.covidSymptomsStep);
+        return;
+      }
+
       if (nextStep) {
         setActiveStep(false);
         history.push(nextStep);
       }
     }
   };
-
-  // Memos
-  const vaccineOptions = React.useMemo(() => {
-    if (country === 'Japan') {
-      return [
-        {
-          value: 'one',
-          label: t('questionary:vaccine.options.1'),
-        },
-        {
-          value: 'two',
-          label: t('questionary:vaccine.options.2'),
-        },
-        {
-          value: 'three',
-          label: t('questionary:vaccine.options.3'),
-        },
-        {
-          value: 'four',
-          label: t('questionary:vaccine.options.4'),
-        },
-        {
-          value: 'false',
-          label: t('questionary:vaccine.options.no'),
-        },
-        {
-          value: 'decline',
-          label: t('questionary:vaccine.options.decline'),
-        },
-      ];
-    }
-    return [
-      {
-        value: 'true',
-        label: t('questionary:vaccine.options.yes'),
-      },
-      {
-        value: 'false',
-        label: t('questionary:vaccine.options.no'),
-      },
-      {
-        value: 'decline',
-        label: t('questionary:vaccine.options.decline'),
-      },
-    ];
-  }, [country, t]);
 
   return (
     <MainContainer>
@@ -165,18 +119,48 @@ const Step2 = ({
         totalSteps={metadata?.total}
         progressBar
       />
-      <QuestionText first>{t('questionary:vaccine.question')}
+      <QuestionText extraSpace first>
+        <Trans i18nKey="questionary:ethnicity.question">
+          <strong>Which of the below symptoms do you currently have?</strong>
+        </Trans>
       </QuestionText>
+      <QuestionNote>{t('questionary:ethnicity.note')}</QuestionNote>
       <Controller
         control={control}
-        name="vaccine"
+        name="ethnicity"
         defaultValue=""
         render={({ onChange, value }) => (
           <OptionList
             singleSelection
             value={{ selected: value ? [value] : [] }}
             onChange={v => onChange(v.selected[0])}
-            items={vaccineOptions}
+            items={[
+              {
+                value: 'asian',
+                label: t('questionary:ethnicity.options.asian'),
+              },
+              {
+                value: 'nativeAmericanOrArab',
+                label: t('questionary:ethnicity.options.nativeAmericanOrArab'),
+              },
+              {
+                value: 'blackOrAfrican',
+                label: t('questionary:ethnicity.options.blackOrAfrican'),
+              },
+              {
+                value: 'hispanicOrLatin',
+                label: t('questionary:ethnicity.options.hispanicOrLatin'),
+              },
+              {
+                value: 'nativeHawaiianOrPacific',
+                label: t('questionary:ethnicity.options.nativeHawaiianOrPacific'),
+              },
+              {
+                value: 'white',
+                label: t('questionary:ethnicity.options.white'),
+              },
+            ]}
+            excludableValues={['none']}
           />
         )}
       />
@@ -196,4 +180,4 @@ const Step2 = ({
   );
 };
 
-export default React.memo(Step2);
+export default React.memo(Step2d);

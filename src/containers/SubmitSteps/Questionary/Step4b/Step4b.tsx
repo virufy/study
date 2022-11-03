@@ -24,20 +24,24 @@ import { getCountry } from 'helper/stepsDefinitions';
 // Components
 import WizardButtons from 'components/WizardButtons';
 import Recaptcha from 'components/Recaptcha';
-import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
+import OptionList from 'components/OptionList';
 import {
   QuestionText, MainContainer, QuestionInput, TempBeforeSubmitError,
 } from '../style';
 
 const schema = Yup.object({
-  symptomsStartedDate: Yup.string().required().test('symptomsStartedDate-invalid', '', value => {
-    let result = true;
-    if (value && !value.match(/^[0-9]+$/)) {
-      result = false;
-    }
-    return result;
+  symptomsStartedDate: Yup.string().when('$country', {
+    is: 'Japan',
+    then: Yup.string().required(),
+    else: Yup.string().required().test('symptomsStartedDate-invalid', '', value => {
+      let result = true;
+      if (value && !value.match(/^[0-9]+$/)) {
+        result = false;
+      }
+      return result;
+    }),
   }),
 }).defined();
 
@@ -73,6 +77,9 @@ const Step4b = ({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
+    context: {
+      country,
+    },
   });
   const { errors, isSubmitting, isValid } = formState;
 
@@ -142,7 +149,7 @@ const Step4b = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:headerQuestions'));
+    setTitle(t('questionary:symptomsDateTitle'));
     setType('primary');
     setDoGoBack(() => handleDoBack);
   }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
@@ -159,11 +166,6 @@ const Step4b = ({
 
   return (
     <MainContainer>
-      <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
-        progressBar
-      />
       <QuestionText extraSpace first>
         {t('questionary:symptomsDate')}
       </QuestionText>
@@ -172,14 +174,44 @@ const Step4b = ({
         name="symptomsStartedDate"
         defaultValue=""
         render={({ onChange, value, name }) => (
-          <QuestionInput
-            name={name}
-            value={value}
-            onChange={onChange}
-            type="text"
-            placeholder={t('questionary:enterDays')}
-            autoComplete="Off"
-          />
+          country === 'Japan' ? (
+            <OptionList
+              singleSelection
+              value={{ selected: value ? [value] : [] }}
+              onChange={v => onChange(v.selected[0])}
+              items={[
+                {
+                  value: 'none',
+                  label: t('questionary:options.none'),
+                },
+                {
+                  value: 'today',
+                  label: t('questionary:options.today'),
+                },
+                {
+                  value: 'days',
+                  label: t('questionary:options.days'),
+                },
+                {
+                  value: 'week',
+                  label: t('questionary:options.week'),
+                },
+                {
+                  value: 'overWeek',
+                  label: t('questionary:options.overWeek'),
+                },
+              ]}
+            />
+          ) : (
+            <QuestionInput
+              name={name}
+              value={value}
+              onChange={onChange}
+              type="text"
+              placeholder={t('questionary:enterDays')}
+              autoComplete="Off"
+            />
+          )
         )}
       />
       {/* Bottom Buttons */}

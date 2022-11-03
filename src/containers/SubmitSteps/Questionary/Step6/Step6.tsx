@@ -150,6 +150,148 @@ const Step6 = ({
   //   }
   // };
 
+  // Memos
+  const medicalOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: 'none',
+          label: t('questionary:medical.options.none'),
+        },
+        {
+          value: 'allergies',
+          label: t('questionary:medical.options.allergies'),
+        },
+        {
+          value: 'asthma',
+          label: t('questionary:medical.options.asthma'),
+        },
+        {
+          value: 'bronchitis',
+          label: t('questionary:medical.options.bronchitis'),
+        },
+        {
+          value: 'congestiveHeartFailure',
+          label: t('questionary:medical.options.congestiveHeart'),
+        },
+        {
+          value: 'copdEmphysema',
+          label: t('questionary:medical.options.emphysema'),
+        },
+        {
+          value: 'extremeObesity',
+          label: t('questionary:medical.options.obesity'),
+        },
+        {
+          value: 'heartDisease',
+          label: t('questionary:medical.options.heartDisease'),
+        },
+        {
+          value: 'hivAidsOrImpairedImmuneSystem',
+          label: t('questionary:medical.options.hiv'),
+        },
+        {
+          value: 'lungCancer',
+          label: t('questionary:medical.options.lungCancer'),
+        },
+        {
+          value: 'otherChronic',
+          label: t('questionary:medical.options.otherChronic'),
+        },
+        {
+          value: 'pneumonia',
+          label: t('questionary:medical.options.pneumonia'),
+        },
+        {
+          value: 'pulmonaryFibrosis',
+          label: t('questionary:medical.options.pulmonary'),
+        },
+        {
+          value: 'sinusitis',
+          label: t('questionary:medical.options.sinusitis'),
+        },
+        {
+          value: 'tuberculosis',
+          label: t('questionary:medical.options.tuberculosis'),
+        },
+        {
+          value: 'other',
+          label: t('questionary:medical.options.other'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'none',
+        label: t('questionary:medical.options.none'),
+      },
+      {
+        value: 'allergies',
+        label: t('questionary:medical.options.allergies'),
+      },
+      {
+        value: 'asthma',
+        label: t('questionary:medical.options.asthma'),
+      },
+      {
+        value: 'bronchitis',
+        label: t('questionary:medical.options.bronchitis'),
+      },
+      {
+        value: 'congestiveHeartFailure',
+        label: t('questionary:medical.options.congestiveHeart'),
+      },
+      {
+        value: 'copdEmphysema',
+        label: t('questionary:medical.options.emphysema'),
+      },
+      {
+        value: 'extremeObesity',
+        label: t('questionary:medical.options.obesity'),
+      },
+      {
+        value: 'heartDisease',
+        label: t('questionary:medical.options.heartDisease'),
+      },
+      {
+        value: 'hivAidsOrImpairedImmuneSystem',
+        label: t('questionary:medical.options.hiv'),
+      },
+      {
+        value: 'lungCancer',
+        label: t('questionary:medical.options.lungCancer'),
+      },
+      {
+        value: 'otherChronic',
+        label: t('questionary:medical.options.otherChronic'),
+      },
+      {
+        value: 'pneumonia',
+        label: t('questionary:medical.options.pneumonia'),
+      },
+      {
+        value: 'pulmonaryFibrosis',
+        label: t('questionary:medical.options.pulmonary'),
+      },
+      {
+        value: 'reflux',
+        label: t('questionary:medical.options.reflux'),
+      },
+      {
+        value: 'sinusitis',
+        label: t('questionary:medical.options.sinusitis'),
+      },
+      {
+        value: 'tuberculosis',
+        label: t('questionary:medical.options.tuberculosis'),
+      },
+      {
+        value: 'other',
+        label: t('questionary:medical.options.other'),
+      },
+    ];
+  }, [country, t]);
+
   return (
     <MainContainer>
       <ProgressIndicator
@@ -172,76 +314,7 @@ const Step6 = ({
             isCheckbox
             value={value}
             onChange={v => onChange(v)}
-            items={[
-              {
-                value: 'none',
-                label: t('questionary:medical.options.none'),
-              },
-              {
-                value: 'allergies',
-                label: t('questionary:medical.options.allergies'),
-              },
-              {
-                value: 'asthma',
-                label: t('questionary:medical.options.asthma'),
-              },
-              {
-                value: 'bronchitis',
-                label: t('questionary:medical.options.bronchitis'),
-              },
-              {
-                value: 'congestiveHeartFailure',
-                label: t('questionary:medical.options.congestiveHeart'),
-              },
-              {
-                value: 'copdEmphysema',
-                label: t('questionary:medical.options.emphysema'),
-              },
-              {
-                value: 'extremeObesity',
-                label: t('questionary:medical.options.obesity'),
-              },
-              {
-                value: 'heartDisease',
-                label: t('questionary:medical.options.heartDisease'),
-              },
-              {
-                value: 'hivAidsOrImpairedImmuneSystem',
-                label: t('questionary:medical.options.hiv'),
-              },
-              {
-                value: 'lungCancer',
-                label: t('questionary:medical.options.lungCancer'),
-              },
-              {
-                value: 'otherChronic',
-                label: t('questionary:medical.options.otherChronic'),
-              },
-              {
-                value: 'pneumonia',
-                label: t('questionary:medical.options.pneumonia'),
-              },
-              {
-                value: 'pulmonaryFibrosis',
-                label: t('questionary:medical.options.pulmonary'),
-              },
-              {
-                value: 'reflux',
-                label: t('questionary:medical.options.reflux'),
-              },
-              {
-                value: 'sinusitis',
-                label: t('questionary:medical.options.sinusitis'),
-              },
-              {
-                value: 'tuberculosis',
-                label: t('questionary:medical.options.tuberculosis'),
-              },
-              {
-                value: 'other',
-                label: t('questionary:medical.options.other'),
-              },
-            ]}
+            items={medicalOptions}
             excludableValues={['none']}
           />
         )}

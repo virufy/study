@@ -9,6 +9,7 @@ import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
+import { getCountry } from 'helper/stepsDefinitions';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -49,6 +50,7 @@ const Step2b = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -94,6 +96,52 @@ const Step2b = ({
     }
   };
 
+  // Memos
+  const genderOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: 'female',
+          label: t('questionary:gender.options.female'),
+        },
+        {
+          value: 'male',
+          label: t('questionary:gender.options.male'),
+        },
+        {
+          value: 'transgender',
+          label: t('questionary:gender.options.transgender'),
+        },
+        {
+          value: 'notToSay',
+          label: t('questionary:gender.options.notToSay'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'female',
+        label: t('questionary:gender.options.female'),
+      },
+      {
+        value: 'male',
+        label: t('questionary:gender.options.male'),
+      },
+      {
+        value: 'transgender',
+        label: t('questionary:gender.options.transgender'),
+      },
+      {
+        value: 'other',
+        label: t('questionary:gender.options.other'),
+      },
+      {
+        value: 'notToSay',
+        label: t('questionary:gender.options.notToSay'),
+      },
+    ];
+  }, [country, t]);
+
   return (
     <MainContainer>
       <ProgressIndicator
@@ -113,28 +161,7 @@ const Step2b = ({
             singleSelection
             value={value}
             onChange={v => onChange(v)}
-            items={[
-              {
-                value: 'female',
-                label: t('questionary:gender.options.female'),
-              },
-              {
-                value: 'male',
-                label: t('questionary:gender.options.male'),
-              },
-              {
-                value: 'transgender',
-                label: t('questionary:gender.options.transgender'),
-              },
-              {
-                value: 'other',
-                label: t('questionary:gender.options.other'),
-              },
-              {
-                value: 'notToSay',
-                label: t('questionary:gender.options.notToSay'),
-              },
-            ]}
+            items={genderOptions}
           />
         )}
       />

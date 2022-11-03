@@ -469,6 +469,7 @@
             },
             "addOtherPlaceholder": "अन्य लक्षण"
         },
+        "symptomsDateTitle": "खांसी, बुखार, सांस की तकलीफ",
         "symptomsDate": "ये लक्षण लगभग कितने दिन पहले शुरू हुए थे?",
         "enterDays": "दिन दर्ज करें",
         "options": {

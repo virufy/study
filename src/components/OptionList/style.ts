@@ -15,7 +15,7 @@ export const OptionListItem = styled.button<{lastItem: boolean; isSelected?: boo
   background-color: ${props => (props.isSelected ? props.theme.colors.purple_10 : props.theme.colors.mercury)};
   @media screen and (${props => props.theme.breakpoints.tablet}){
     max-width: 470px;
-    text-align: center;
+    text-align: left;
   }
 `;
 
@@ -23,8 +23,8 @@ export const OptionListItemLabel = styled.span`
   display: block;
   width: 250px;
   @media screen and (${props => props.theme.breakpoints.tablet}){
-    width: 210px;
-    text-align: center;
+    width: auto;
+    text-align: left;
     margin: auto;
   }
 `;

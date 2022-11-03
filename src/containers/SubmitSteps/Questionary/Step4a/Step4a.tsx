@@ -223,10 +223,6 @@ const Step4a = ({
                 label: t('questionary:symptoms.options.wetCough'),
               },
               {
-                value: 'runnyNose',
-                label: t('questionary:symptoms.options.runnyNose'),
-              },
-              {
                 value: 'feverChillsSweating',
                 label: t('questionary:symptoms.options.feverChillsSweating'),
               },
@@ -241,6 +237,10 @@ const Step4a = ({
               {
                 value: 'newOrWorseCough',
                 label: t('questionary:symptoms.options.worseCough'),
+              },
+              {
+                value: 'runnyNose',
+                label: t('questionary:symptoms.options.runnyNose'),
               },
               {
                 value: 'breathShortness',

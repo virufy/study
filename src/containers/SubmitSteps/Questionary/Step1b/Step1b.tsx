@@ -38,6 +38,11 @@ const schemaWithoutPatient = Yup.object({
   pcrTestDate: Yup.date().when('$hasPcr', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
   pcrTestResult: Yup.string().when('$hasPcr', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
   antigenTestDate: Yup.date().when('$hasAntigen', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
+  whatAntigenTestResult: Yup.string().when('$country', {
+    is: 'Japan',
+    then: Yup.string().when('$hasAntigen', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
+    otherwise: Yup.string().notRequired(),
+  }),
   antigenTestResult: Yup.string().when('$hasAntigen', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
 /* antibodyTestDate: Yup.date().when('$hasAntibody', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
 antibodyTestResult: Yup.string().when('$hasAntibody', { is: true, then: Yup.string().required(),
@@ -95,6 +100,7 @@ const Step1b = ({
       hasPcr: state['submit-steps']?.testTaken?.includes('pcr') ?? false,
       hasAntigen: state['submit-steps']?.testTaken?.includes('antigen') ?? false,
       // hasAntibody: state['submit-steps'].testTaken.includes('antibody'),
+      country,
     },
     resolver: yupResolver(patientId ? schemaWithPatient : schemaWithoutPatient),
   });
@@ -145,11 +151,15 @@ const Step1b = ({
         pcrTestResult,
         antigenTestDate,
         antigenTestResult,
+        whatAntigenTestResult,
         // antibodyTestDate,
         // antibodyTestResult,
       } = (values as any);
       // if patient
       if (hasPcrTest && (!pcrTestDate || !pcrTestResult)) {
+        return;
+      }
+      if (country === 'Japan' && hasAntigenTest && (!antigenTestDate || !antigenTestResult || !whatAntigenTestResult)) {
         return;
       }
       if (hasAntigenTest && (!antigenTestDate || !antigenTestResult)) {
@@ -182,6 +192,77 @@ const Step1b = ({
       }
     }
   };
+
+  // Memos
+  const pcrOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: 'positive',
+          label: t('questionary:resultPcrTest.options.positive'),
+        },
+        {
+          value: 'negative',
+          label: t('questionary:resultPcrTest.options.negative'),
+        },
+        {
+          value: 'unsure',
+          label: t('questionary:resultPcrTest.options.unsure'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'positive',
+        label: t('questionary:resultPcrTest.options.positive'),
+      },
+      {
+        value: 'negative',
+        label: t('questionary:resultPcrTest.options.negative'),
+      },
+      {
+        value: 'pending',
+        label: t('questionary:resultPcrTest.options.pending'),
+      },
+      {
+        value: 'unsure',
+        label: t('questionary:resultPcrTest.options.unsure'),
+      },
+    ];
+  }, [country, t]);
+
+  const antigenOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: 'positive',
+          label: t('questionary:resultAntigenTest.options.positive'),
+        },
+        {
+          value: 'negative',
+          label: t('questionary:resultAntigenTest.options.negative'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'positive',
+        label: t('questionary:resultAntigenTest.options.positive'),
+      },
+      {
+        value: 'negative',
+        label: t('questionary:resultAntigenTest.options.negative'),
+      },
+      {
+        value: 'pending',
+        label: t('questionary:resultAntigenTest.options.pending'),
+      },
+      {
+        value: 'unsure',
+        label: t('questionary:resultAntigenTest.options.unsure'),
+      },
+    ];
+  }, [country, t]);
 
   return (
     <MainContainer>
@@ -217,24 +298,7 @@ const Step1b = ({
                 singleSelection
                 value={{ selected: value ? [value] : [] }}
                 onChange={v => onChange(v.selected[0])}
-                items={[
-                  {
-                    value: 'positive',
-                    label: t('questionary:resultPcrTest.options.positive'),
-                  },
-                  {
-                    value: 'negative',
-                    label: t('questionary:resultPcrTest.options.negative'),
-                  },
-                  {
-                    value: 'pending',
-                    label: t('questionary:resultPcrTest.options.pending'),
-                  },
-                  {
-                    value: 'unsure',
-                    label: t('questionary:resultPcrTest.options.unsure'),
-                  },
-                ]}
+                items={pcrOptions}
               />
             )}
           />
@@ -260,6 +324,42 @@ const Step1b = ({
             )}
           />
 
+          {
+            country === 'Japan' && (
+              <>
+                <QuestionText extraSpace>
+                  {t('questionary:whatAntigenTest.question')}
+                </QuestionText>
+                <Controller
+                  control={control}
+                  name="whatAntigenTestResult"
+                  defaultValue={undefined}
+                  render={({ onChange, value }) => (
+                    <OptionList
+                      singleSelection
+                      value={{ selected: value ? [value] : [] }}
+                      onChange={v => onChange(v.selected[0])}
+                      items={[
+                        {
+                          value: 'medical',
+                          label: t('questionary:whatAntigenTest.options.medical'),
+                        },
+                        {
+                          value: 'research',
+                          label: t('questionary:whatAntigenTest.options.research'),
+                        },
+                        {
+                          value: 'unknown',
+                          label: t('questionary:whatAntigenTest.options.unknown'),
+                        },
+                      ]}
+                    />
+                  )}
+                />
+              </>
+            )
+          }
+
           <QuestionText extraSpace>
             {t('questionary:resultAntigenTest.question')}
           </QuestionText>
@@ -272,24 +372,7 @@ const Step1b = ({
                 singleSelection
                 value={{ selected: value ? [value] : [] }}
                 onChange={v => onChange(v.selected[0])}
-                items={[
-                  {
-                    value: 'positive',
-                    label: t('questionary:resultAntigenTest.options.positive'),
-                  },
-                  {
-                    value: 'negative',
-                    label: t('questionary:resultAntigenTest.options.negative'),
-                  },
-                  {
-                    value: 'pending',
-                    label: t('questionary:resultAntigenTest.options.pending'),
-                  },
-                  {
-                    value: 'unsure',
-                    label: t('questionary:resultAntigenTest.options.unsure'),
-                  },
-                ]}
+                items={antigenOptions}
               />
             )}
           />

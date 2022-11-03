@@ -472,6 +472,7 @@
       },
       "addOtherPlaceholder": "Outro sintoma"
     },
+    "symptomsDateTitle": "Tosse, febre, falta de ar",
     "symptomsDate": "Há quantos dias, aproximadamente, esses sintomas começaram?",
     "enterDays": "Entrar dias",
     "options": {
