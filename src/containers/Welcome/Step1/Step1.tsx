@@ -81,16 +81,10 @@ const getCountry = async () => {
   return data.country;
 };
 
-const getDefaultLang = (countryName: string) => {
-  const countrySelected = countryData.filter(item => item.label === countryName);
+const getCountryInfo = (countryName: string) => {
+  const countrySelected = countryData.find(country => country.label === countryName);
 
-  return countrySelected[0].defaultLang;
-};
-
-const getSupportedtLang = (countryName: string) => {
-  const countrySelected = countryData.filter(item => item.label === countryName);
-
-  return countrySelected[0].supportedLang;
+  return countrySelected;
 };
 
 const Step1 = (p: Wizard.StepProps) => {
@@ -210,22 +204,29 @@ const Step1 = (p: Wizard.StepProps) => {
 
   useEffect(() => {
     const localStorageCountry = localStorage.getItem('countryResult');
-    if (localStorageCountry) {
+    const virufyWizard = localStorage.getItem('_VirufyWizard');
+    if (virufyWizard) {
+      setValue('country', JSON.parse(virufyWizard).welcome.country);
+      setValue('language', JSON.parse(virufyWizard).welcome.language);
+    } else if (localStorageCountry) {
       setValue('country', JSON.parse(localStorageCountry).country);
       setValue('language', JSON.parse(localStorageCountry).lang[0].value);
       setSupportedLang(JSON.parse(localStorageCountry).supported);
     } else {
       getCountry()
         .then(countryName => {
+          const cInfo = getCountryInfo(countryName);
           const countryDataLS = {
             country: countryName,
-            lang: getDefaultLang(countryName),
-            supported: getSupportedtLang(countryName),
+            lang: cInfo?.defaultLang,
+            supported: cInfo?.supportedLang,
           };
           localStorage.setItem('countryResult', JSON.stringify(countryDataLS));
           setValue('country', countryName);
-          setValue('language', getDefaultLang(countryName)[0].value);
-          setSupportedLang(getSupportedtLang(countryName));
+          if (cInfo) {
+            setValue('language', cInfo.defaultLang[0].value);
+            setSupportedLang(cInfo.supportedLang);
+          }
           setIpLimit(false);
         })
         .catch(error => {
@@ -242,9 +243,12 @@ const Step1 = (p: Wizard.StepProps) => {
       const tzArr = userTimeZone.split('/');
       const userCity = tzArr[tzArr.length - 1];
       const userCountry = timeZones[userCity];
+      const cInfo = getCountryInfo(userCountry);
       setValue('country', userCountry);
-      setValue('language', getDefaultLang(userCountry)[0].value);
-      setSupportedLang(getSupportedtLang(userCountry));
+      if (cInfo) {
+        setValue('language', cInfo.defaultLang[0].value);
+        setSupportedLang(cInfo.supportedLang);
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ipLimit]);
@@ -284,7 +288,7 @@ const Step1 = (p: Wizard.StepProps) => {
                 value={languageData.filter(({ value }) => value === valueController)}
                 className="custom-select"
                 classNamePrefix="custom-select"
-                isDisabled={supportedLang.length <= 1}
+                isDisabled={supportedLang?.length <= 1}
               />
             )}
           />
@@ -301,7 +305,15 @@ const Step1 = (p: Wizard.StepProps) => {
               <WelcomeSelect
                 placeholder={t('main:selectCountry', 'Select country')}
                 options={getOptionsCountry()}
-                onChange={(e: any) => { onChange(e?.value); resetRegion(); }}
+                onChange={(e: any) => {
+                  onChange(e?.value);
+                  resetRegion();
+                  const cInfo = getCountryInfo(e.value);
+                  if (cInfo) {
+                    setSupportedLang(cInfo.supportedLang);
+                    setValue('language', cInfo.defaultLang[0].value);
+                  }
+                }}
                 value={getOptionsCountry().filter(({ value }) => value === valueController)}
                 className="custom-select"
                 classNamePrefix="custom-select"
