@@ -27,10 +27,11 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { languageData } from 'data/lang';
 import { countryData, countriesWithStates, CountryDataProps } from 'data/country';
 import { getHospitalIdFor } from 'data/hospitalId';
+import { timeZones } from 'data/timeZones';
 
 // Helper
+import { localstoragePrefix, isClinic } from 'helper/basePathHelper';
 import { scrollToTop } from 'helper/scrollHelper';
-import { isClinic } from 'helper/basePathHelper';
 
 // Styles
 import {
@@ -80,8 +81,16 @@ const getCountry = async () => {
   return data.country;
 };
 
+const getCountryInfo = (countryName: string) => {
+  const countrySelected = countryData.find(country => country.label === countryName);
+
+  return countrySelected;
+};
+
 const Step1 = (p: Wizard.StepProps) => {
   const [activeStep, setActiveStep] = React.useState(true);
+  const [supportedLang, setSupportedLang] = React.useState<{ value: string; label: string; }[]>([]);
+  const [ipLimit, setIpLimit] = React.useState(false);
 
   const {
     setType, setDoGoBack, setLogoSize,
@@ -194,25 +203,60 @@ const Step1 = (p: Wizard.StepProps) => {
   };
 
   useEffect(() => {
-    if (country === 'Japan') {
-      setValue('language', 'ja');
-    }
-  }, [country, setValue]);
-
-  useEffect(() => {
     const localStorageCountry = localStorage.getItem('countryResult');
-    if (localStorageCountry) {
-      setValue('country', localStorageCountry);
+    const virufyWizard = localStorage.getItem(`${localstoragePrefix}_VirufyWizard`);
+    if (virufyWizard) {
+      const parsedVirufyWizard = JSON.parse(virufyWizard);
+      setValue('country', parsedVirufyWizard.welcome.country);
+      setValue('language', parsedVirufyWizard.welcome.language);
+      if (localStorageCountry) {
+        setSupportedLang(JSON.parse(localStorageCountry)?.supported);
+      }
+    } else if (localStorageCountry) {
+      const parsedLocalStorageCountry = JSON.parse(localStorageCountry);
+      setValue('country', parsedLocalStorageCountry.country);
+      setValue('language', parsedLocalStorageCountry.lang[0].value);
+      setSupportedLang(parsedLocalStorageCountry.supported);
     } else {
       getCountry()
         .then(countryName => {
-          localStorage.setItem('countryResult', countryName);
+          const cInfo = getCountryInfo(countryName);
+          const countryDataLS = {
+            country: countryName,
+            lang: cInfo?.defaultLang,
+            supported: cInfo?.supportedLang,
+          };
+          localStorage.setItem('countryResult', JSON.stringify(countryDataLS));
           setValue('country', countryName);
+          if (cInfo) {
+            setValue('language', cInfo.defaultLang[0].value);
+            setSupportedLang(cInfo.supportedLang);
+          }
+          setIpLimit(false);
         })
-        .catch(error => { console.error(error); });
+        .catch(error => {
+          console.error(error);
+          setIpLimit(true);
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (ipLimit && Intl) {
+      const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const tzArr = userTimeZone.split('/');
+      const userCity = tzArr[tzArr.length - 1];
+      const userCountry = timeZones[userCity];
+      const cInfo = getCountryInfo(userCountry);
+      setValue('country', userCountry);
+      if (cInfo) {
+        setValue('language', cInfo.defaultLang[0].value);
+        setSupportedLang(cInfo.supportedLang);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ipLimit]);
 
   return (
     <>
@@ -244,12 +288,12 @@ const Step1 = (p: Wizard.StepProps) => {
             render={({ onChange, value: valueController }) => (
               <WelcomeSelect
                 placeholder={t('main.selectYourLanguage', 'Language')}
-                options={languageData}
+                options={supportedLang}
                 onChange={(e: any) => { onChange(e?.value); }}
                 value={languageData.filter(({ value }) => value === valueController)}
                 className="custom-select"
                 classNamePrefix="custom-select"
-                isDisabled={country === 'Japan'}
+                isDisabled={supportedLang?.length <= 1}
               />
             )}
           />
@@ -266,7 +310,15 @@ const Step1 = (p: Wizard.StepProps) => {
               <WelcomeSelect
                 placeholder={t('main:selectCountry', 'Select country')}
                 options={getOptionsCountry()}
-                onChange={(e: any) => { onChange(e?.value); resetRegion(); }}
+                onChange={(e: any) => {
+                  onChange(e?.value);
+                  resetRegion();
+                  const cInfo = getCountryInfo(e.value);
+                  if (cInfo) {
+                    setSupportedLang(cInfo.supportedLang);
+                    setValue('language', cInfo.defaultLang[0].value);
+                  }
+                }}
                 value={getOptionsCountry().filter(({ value }) => value === valueController)}
                 className="custom-select"
                 classNamePrefix="custom-select"
