@@ -38,6 +38,11 @@ const schemaWithoutPatient = Yup.object({
   pcrTestDate: Yup.date().when('$hasPcr', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
   pcrTestResult: Yup.string().when('$hasPcr', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
   antigenTestDate: Yup.date().when('$hasAntigen', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
+  whatAntigenTestResult: Yup.string().when('$country', {
+    is: 'Japan',
+    then: Yup.string().when('$hasAntigen', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
+    otherwise: Yup.string().notRequired(),
+  }),
   antigenTestResult: Yup.string().when('$hasAntigen', { is: true, then: Yup.string().required(), otherwise: Yup.string() }),
 /* antibodyTestDate: Yup.date().when('$hasAntibody', { is: true, then: Yup.date().required(), otherwise: Yup.date() }),
 antibodyTestResult: Yup.string().when('$hasAntibody', { is: true, then: Yup.string().required(),
@@ -95,6 +100,7 @@ const Step1b = ({
       hasPcr: state['submit-steps']?.testTaken?.includes('pcr') ?? false,
       hasAntigen: state['submit-steps']?.testTaken?.includes('antigen') ?? false,
       // hasAntibody: state['submit-steps'].testTaken.includes('antibody'),
+      country,
     },
     resolver: yupResolver(patientId ? schemaWithPatient : schemaWithoutPatient),
   });
@@ -145,11 +151,15 @@ const Step1b = ({
         pcrTestResult,
         antigenTestDate,
         antigenTestResult,
+        whatAntigenTestResult,
         // antibodyTestDate,
         // antibodyTestResult,
       } = (values as any);
       // if patient
       if (hasPcrTest && (!pcrTestDate || !pcrTestResult)) {
+        return;
+      }
+      if (country === 'Japan' && hasAntigenTest && (!antigenTestDate || !antigenTestResult || !whatAntigenTestResult)) {
         return;
       }
       if (hasAntigenTest && (!antigenTestDate || !antigenTestResult)) {
@@ -331,15 +341,15 @@ const Step1b = ({
                       onChange={v => onChange(v.selected[0])}
                       items={[
                         {
-                          value: 'positive',
+                          value: 'medical',
                           label: t('questionary:whatAntigenTest.options.medical'),
                         },
                         {
-                          value: 'negative',
+                          value: 'research',
                           label: t('questionary:whatAntigenTest.options.research'),
                         },
                         {
-                          value: 'pending',
+                          value: 'unknown',
                           label: t('questionary:whatAntigenTest.options.unknown'),
                         },
                       ]}

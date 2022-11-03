@@ -32,7 +32,17 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  symptomsStartedDate: Yup.string(),
+  symptomsStartedDate: Yup.string().when('$country', {
+    is: 'Japan',
+    then: Yup.string().required(),
+    else: Yup.string().required().test('symptomsStartedDate-invalid', '', value => {
+      let result = true;
+      if (value && !value.match(/^[0-9]+$/)) {
+        result = false;
+      }
+      return result;
+    }),
+  }),
 }).defined();
 
 type Step4bType = Yup.InferType<typeof schema>;
@@ -67,6 +77,9 @@ const Step4b = ({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
+    context: {
+      country,
+    },
   });
   const { errors, isSubmitting, isValid } = formState;
 

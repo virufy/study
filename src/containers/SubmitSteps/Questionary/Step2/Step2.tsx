@@ -117,19 +117,19 @@ const Step2 = ({
     if (country === 'Japan') {
       return [
         {
-          value: '1',
+          value: 'one',
           label: t('questionary:vaccine.options.1'),
         },
         {
-          value: '2',
+          value: 'two',
           label: t('questionary:vaccine.options.2'),
         },
         {
-          value: '3',
+          value: 'three',
           label: t('questionary:vaccine.options.3'),
         },
         {
-          value: '4',
+          value: 'four',
           label: t('questionary:vaccine.options.4'),
         },
         {

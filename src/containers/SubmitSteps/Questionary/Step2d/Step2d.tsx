@@ -30,7 +30,7 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  race: Yup.object().required(),
+  ethnicity: Yup.string(),
 }).defined();
 
 type Step4aType = Yup.InferType<typeof schema>;
@@ -84,7 +84,7 @@ const Step2d = ({
   const onSubmit = async (values: Step4aType) => {
     if (values) {
       const {
-        race,
+        ethnicity,
       } = (values as any);
 
       action(values);
@@ -92,8 +92,8 @@ const Step2d = ({
       let hasSymptom = false;
 
       // eslint-disable-next-line no-plusplus
-      for (let index = 0; index < race.selected?.length; index++) {
-        if (race.selected[index] !== 'none') {
+      for (let index = 0; index < ethnicity.selected?.length; index++) {
+        if (ethnicity.selected[index] !== 'none') {
           hasSymptom = true;
           break;
         }
@@ -120,44 +120,44 @@ const Step2d = ({
         progressBar
       />
       <QuestionText extraSpace first>
-        <Trans i18nKey="questionary:race.question">
+        <Trans i18nKey="questionary:ethnicity.question">
           <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>
       </QuestionText>
-      <QuestionNote>{t('questionary:race.note')}</QuestionNote>
+      <QuestionNote>{t('questionary:ethnicity.note')}</QuestionNote>
       <Controller
         control={control}
-        name="race"
-        defaultValue={{ selected: [], other: '' }}
+        name="ethnicity"
+        defaultValue=""
         render={({ onChange, value }) => (
           <OptionList
-            isCheckbox
-            value={value}
-            onChange={v => onChange(v)}
+            singleSelection
+            value={{ selected: value ? [value] : [] }}
+            onChange={v => onChange(v.selected[0])}
             items={[
               {
                 value: 'asian',
-                label: t('questionary:race.options.asian'),
+                label: t('questionary:ethnicity.options.asian'),
               },
               {
                 value: 'nativeAmericanOrArab',
-                label: t('questionary:race.options.nativeAmericanOrArab'),
+                label: t('questionary:ethnicity.options.nativeAmericanOrArab'),
               },
               {
                 value: 'blackOrAfrican',
-                label: t('questionary:race.options.blackOrAfrican'),
+                label: t('questionary:ethnicity.options.blackOrAfrican'),
               },
               {
                 value: 'hispanicOrLatin',
-                label: t('questionary:race.options.hispanicOrLatin'),
+                label: t('questionary:ethnicity.options.hispanicOrLatin'),
               },
               {
                 value: 'nativeHawaiianOrPacific',
-                label: t('questionary:race.options.nativeHawaiianOrPacific'),
+                label: t('questionary:ethnicity.options.nativeHawaiianOrPacific'),
               },
               {
                 value: 'white',
-                label: t('questionary:race.options.white'),
+                label: t('questionary:ethnicity.options.white'),
               },
             ]}
             excludableValues={['none']}

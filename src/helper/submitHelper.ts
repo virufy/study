@@ -51,11 +51,13 @@ export async function doSubmit({
       pcrTestDate,
       pcrTestResult,
       antigenTestDate,
+      whatAntigenTestResult,
       antigenTestResult,
 
       vaccine,
       ageGroup,
       gender,
+      ethnicity,
       biologicalSex,
 
       smokeLastSixMonths,
@@ -109,6 +111,7 @@ export async function doSubmit({
     if (testTaken.includes('antigen')) {
       body.append('antigenTestDate', antigenTestDate.toISOString());
       body.append('antigenTestResult', antigenTestResult);
+      body.append('whatAntigenTestResult', whatAntigenTestResult);
     }
 
     if (vaccine) {
@@ -120,6 +123,10 @@ export async function doSubmit({
     }
 
     const genderSelected = gender.other || gender.selected[0];
+
+    if (ethnicity) {
+      body.append('ethnicity', ethnicity);
+    }
 
     if (genderSelected) {
       body.append('gender', genderSelected);

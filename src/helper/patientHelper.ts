@@ -41,6 +41,7 @@ export async function doSubmitPatientQuestionnaire({
       vaccine,
       ageGroup,
       gender,
+      ethnicity,
       biologicalSex,
 
       smokeLastSixMonths,
@@ -79,6 +80,10 @@ export async function doSubmitPatientQuestionnaire({
 
     if (genderSelected) {
       body.append('gender', genderSelected);
+    }
+
+    if (ethnicity) {
+      body.append('ethnicity', ethnicity);
     }
 
     if (biologicalSex) {
