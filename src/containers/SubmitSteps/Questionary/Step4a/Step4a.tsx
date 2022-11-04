@@ -29,7 +29,7 @@ import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
 import {
-  QuestionText, MainContainer, QuestionAllApply, TempBeforeSubmitError,
+  QuestionText, MainContainer, QuestionNote, TempBeforeSubmitError,
 } from '../style';
 
 const schema = Yup.object({
@@ -194,7 +194,7 @@ const Step4a = ({
         <Trans i18nKey="questionary:symptoms.question">
           <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>
-        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
+        <QuestionNote>{t('questionary:allThatApply')}</QuestionNote>
       </QuestionText>
       <Controller
         control={control}

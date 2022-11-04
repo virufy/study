@@ -31,7 +31,7 @@ import Recaptcha from 'components/Recaptcha';
 
 // Styles
 import {
-  QuestionText, MainContainer, TempBeforeSubmitError,
+  QuestionText, MainContainer, TempBeforeSubmitError, QuestionAllApply,
 } from '../style';
 
 const schemaWithoutPatient = Yup.object({
@@ -268,10 +268,13 @@ const Step1b = ({
     <MainContainer>
       {(!patientId && hasPcrTest) && (
         <>
-          <QuestionText extraSpace first>
-            {t('questionary:whenPcrTest')}
+          <QuestionText extraSpace first>{t('questionary:whenPcrTest')}
+            {
+              country === 'Japan' && (
+                <QuestionAllApply>{t('questionary:whenPcrTestCaption')}</QuestionAllApply>
+              )
+            }
           </QuestionText>
-
           <Controller
             control={control}
             name="pcrTestDate"
