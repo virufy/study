@@ -281,8 +281,8 @@
         "recordCough": {
             "header": "咳を記録する",
             "title": "手順",
-            "intro1": "他の人から少なくとも<strong>20フィート（6m）</strong>離れた<strong>静かな環境</strong>を見つけ、布やサージカルマスクを着用してください。体調が悪いときは、座ってください。",
-            "intro2Cough": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。咳を強くしすぎないように注意しましょう。",
+            "intro1": "他の人から少なくとも 6 m離れた静かな環境を見つけ、マスクを着用してください。体調が悪いときは座って行ってください。",
+            "intro2Cough": "デバイスを 30-60 cm口から話して持ち、 プラスチックなどでデバイスを覆ったり遮ったり しないようにしてください。咳を強くしすぎないように注意しましょう。",
             "intro2Breath": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しく呼吸したり、強すぎたりしないでください",
             "intro2Speech": "デバイスを<strong>30-60 cm</strong>口から話して持ち、 プラスチックなどでデバイスを覆ったり<strong>遮ったり</strong> しないようにしてください。 激しくまたは強引に話さないでください"
         },
@@ -309,14 +309,14 @@
         "recordSpeech": {
             "header": "スピーチを録音する"
         },
-        "next": "次へ",
+        "next": "続 ける",
         "delete": "削除",
-        "textCough": "録音ボタンをタップして、携帯電話の下部に向かって<strong>意図的に</strong>咳を<strong>3回</strong>してください。終わったら、停止ボタンをタップします。",
-        "textBreath": "録音ボタンをタップし、<strong>深く大声で</ strong>口でスマートフォンの底に<strong> 3回</ strong>息を吹き込み、各呼吸の間にスペースを残します。完了したら、停止ボタンをタップします。",
+        "textCough": "録音ボタンをタップして、携帯電話の下部に向かって咳を3回してください。終わったら、停止ボタンをタップします。",
+        "textBreath": "録音ボタンをタップして、携帯電話の下部に向かって<strong>深く大きな呼吸</strong>を3回してください。終わったら、停止ボタンをタップします。",
         "textSpeech": "下の録音ボタンをタップして深く吸い込み、<strong>少なくとも5秒間「aaaaah」と言い続けます。</ strong>完了したら、停止ボタンをタップします。",
-        "textNext": "続ける」をクリックして次に進みます。",
+        "textNext": "「続ける」をクリックして次に進みます。",
         "textCount": "記録ボタンをクリックし、1から10まではっきりと数えます。完了したら、「続ける」をクリックします。",
-        "upload": "自分のファイルをアップロードする",
+        "upload": "ファイルをアップロードする",
         "record": "記録する",
         "recordStop": "停止する"
     },
@@ -346,25 +346,25 @@
             "intro1": "あなたの声を録音することで、COVIDの音を知ることができます。録音を押して、1から10まではっきりと数えてください。"
         },
         "title": "アップロード完了",
-        "subtitle": "ご自由にお聴きください。",
-        "next": "次へ",
+        "subtitle": "録音した音声をご確認ください。",
+        "next": "データを送信する",
         "retake": "リテイク"
     },
     "questionary": {
         "headerText": "質問",
         "headerQuestions": "質問",
-        "title": "簡単な質問に答えてください。",
-        "caption": "あなたの能力の範囲内でお答えください。",
-        "allThatApply": "(該当するものをすべて選択してください。)",
+        "title": "以下の質問にお答えください。",
+        "caption": "皆様からのご回答は、アルゴリズムの品質向上に役立たせていただきます。",
+        "allThatApply": "(該当するものをすべて選択してください)",
         "testTaken": {
             "title": "コロナ検査",
-            "question": "COVID-19に関する以下のテストのうち、どれを受けましたか？",
+            "question": "コロナウイルス検査のために受けたことがあるのは次のうちどれですか？",
             "options": {
-                "pcr": "PCRベースの検査",
+                "pcr": "PCR検査",
                 "antibody": "抗体検査",
-                "unsure": "わからない",
-                "antigen": "抗原検査(迅速)",
-                "neither": "どちらともいえない"
+                "unsure": "不明",
+                "antigen": "抗原検査（簡易検査",
+                "neither": "検査を受けたことがない"
             }
         },
         "patient": {
@@ -374,9 +374,10 @@
             "resultAntigenTest": "患者さん<1><0>{patientId}</0></1>の迅速抗原COVID-19検査の結果はどうでしたか？"
         },
         "headerText2": "フォローアップ質問",
-        "whenPcrTest": "PCR法によるCOVID-19検査を受けたのはいつですか？わからない場合は推定してください。",
+        "whenPcrTest": "PCR法によるコロナウイルス検査を受けたのはいつですか？",
+        "whenPcrTestCaption": "（不明な場合はおおよその日付を教えてください。）",
         "resultPcrTest": {
-            "question": "PCR法によるCOVID-19検査の結果はどうでしたか？",
+            "question": "PCR検査の結果はどうでしたか？",
             "options": {
                 "positive": "陽性",
                 "negative": "陰性",
@@ -394,7 +395,7 @@
                 "unsure": "わからない"
             }
         },
-        "whenAntigenTest": "COVID-19の抗原検査を受けたのはいつですか？不明な場合は推定値を入力してください。",
+        "whenAntigenTest": "コロナウイルスの抗原検査を受けたのはいつですか？不明な場合は推定値を入力してください。",
         "whatAntigenTest": {
             "question": "どんな抗原検査を受けましたか？",
             "options": {
@@ -414,7 +415,7 @@
         },
         "vaccine": {
             "title": "ワクチン接種",
-            "question": "COVID-19ワクチンを接種しましたか？",
+            "question": "今までにコロナワクチンは何回打ちましたか？",
             "options": {
                 "yes": "はい",
                 "no": "打っていない",
@@ -462,7 +463,7 @@
         "biologicalSex": {
             "title": "生物学的性別",
             "question": "あなたの生物学的性別は何ですか？",
-            "note": "あなたの出生時に割り当てられた性別は、出生証明書の原本では何ですか？この情報は、声の響きが性別によって異なるため、AIがCOVID-19を検出するために重要です。",
+            "note": "この情報は、声の響きが生物学的性別によって異なるため、AIがCOVID-19を検出するために重要です。生物学的性別とは、出生証明書で確認出来る性別のことです。",
             "options": {
                 "male": "男性",
                 "female": "女性",
@@ -471,8 +472,8 @@
         },
         "smokeLastSixMonths": {
             "title": "喫煙",
-            "question": "過去6ヶ月以内に定期的にタバコを吸ったことがありますか？",
-            "note": "これには、タバコ、フッカー、タバコパイプ、マリファナ、ニコチン入りベイプなどが含まれます。",
+            "question": "過去6ヶ月以内に定期的にたばこを吸っていたことがありますか？",
+            "note": "これには、紙煙草、電子煙草、シーシャなど全ての喫煙種類が含まれます。",
             "options": {
                 "yes": "はい",
                 "no": "いいえ"
@@ -480,10 +481,10 @@
         },
         "symptoms": {
             "title": "現在の症状",
-            "question": "<strong>現在、以下のどの症状がありますか</strong>？",
+            "question": "<strong>現在、以下の症状はありますか</strong>？",
             "options": {
                 "bodyAches": "体の痛み",
-                "dryCough": "咳（乾いた咳",
+                "dryCough": "咳（乾いた咳）",
                 "wetCough": "咳（湿った、粘液を伴う",
                 "feverChillsSweating": "発熱、寒気、発汗",
                 "headaches": "頭痛",
@@ -502,7 +503,7 @@
             "addOtherPlaceholder": "その他の症状"
         },
         "symptomsDateTitle": "咳、発熱、息切れ",
-        "symptomsDate": "この症状が始まったのは、およそ何日前ですか？",
+        "symptomsDate": "いつ頃から咳、発熱、息切れなどの症状が出始めましたか？",
         "enterDays": "日数を入力してください",
         "options": {
             "none": "なし",
@@ -527,23 +528,23 @@
             "addOtherPlaceholder": "その他の疾患"
         },
         "medical": {
-            "question": "<strong>現在かかっている病気はどれですか？",
+            "question": "<strong>現在かかっている病気はありますか？？",
             "options": {
                 "allergies": "アレルギー",
                 "asthma": "気管支喘息",
                 "bronchitis": "気管支炎",
                 "congestiveHeart": "うっ血性心不全",
-                "emphysema": "COPD（慢性閉塞性肺疾患）／肺気腫",
+                "emphysema": "COPD（慢性閉塞性肺疾患)/肺気腫",
                 "obesity": "極度の肥満",
                 "heartDisease": "心臓病",
-                "hiv": "HIV、AIDS、または免疫機能の低下",
+                "hiv": "HIV、AIDS等の免疫疾患",
                 "lungCancer": "肺がん",
                 "otherChronic": "その他の慢性肺疾患",
                 "pneumonia": "肺炎",
                 "pulmonary": "肺線維症",
                 "reflux": "ひどい胸焼け(胃食道逆流症)",
                 "sinusitis": "副鼻腔炎",
-                "tuberculosis": "結核(Tuberculosis)",
+                "tuberculosis": "結核",
                 "none": "なし",
                 "other": "その他",
                 "addOther": "+ その他を追加"
@@ -571,12 +572,12 @@
         "result_negative_text": "あなたの声にはCOVID-19の指標がないようです。<strong>引き続き、医療専門家または該 当する規制機関のアドバイスに基づいて適切な措置を講じ、</strong> アプリで毎日自分自身を再評価してください。"
       },
     "thankyou": {
-        "title": "ご応募ありがとうございました。",
-        "paragraph1_cough": "あなたの咳の寄付でVirufyは世界を変えるために一歩近づきます。",
+        "title": "ご協力ありがとうございました",
+        "paragraph1_cough": "あなたの咳の寄付のおかげで Virufyはまた一歩、世界を変える目標へ近づきました",
         "paragraph1_voice": "あなたの咳の寄付でVirufyは世界を変えるために一歩近づきます。",
-        "paragraph2": "あなた専用の投稿ID:<br/><2>{{submissionId}}</2>を入力してください。",
+        "paragraph2": "あなたの患者ID:<br/><2>{{submissionId}}</2>",
         "paragraph2Patient": "あなただけの患者ID:<br/><2>{{patientId}}</2>です。",
-        "paragraph3": "今後、Virufyに匿名化されたデータの削除を依頼する際に必要となりますので、この投稿IDは必ず保管してください。<br/><br/>その後、咳や発熱、息切れなどの症状が出た場合は、再度、最新の咳の音を投稿してください。",
+        "paragraph3": "患者IDは、今後、あなたの匿名化されたデータをVirufyへ削除依頼する際に必要となりますので、必ず保管してください。<br/><br/>その後、咳や発熱、息切れなど新たな症状が出た場合は、再度、最新の咳の音を投稿してください。",
         "downloadApp": "<1>アプリのインストールはこちら</1>。",
         "paragraph4": "アプリケーションの改善のために<1>フィードバック</1>を提供し、<3>Webサイト</3>をチェックしてください。",
         "paragraph5": "<1>ニュース</1>でVirufyについてもっと知ってください!",
@@ -587,16 +588,8 @@
         "message": "何か問題がありますか？エラーを報告する"
     },
     "stayInTouch": {
-        "title": "お問い合わせはこちらから",
+        "title": "お問合せ",
         "cards": [
-            {
-                "title": "寄付をする",
-                "description": "継続的な研究開発費の支援",
-                "cta": {
-                    "label": "今すぐ寄付する",
-                    "link": "https://charity.gofundme.com/o/en/campaign/virufy"
-                }
-            },
             {
                 "title": "もっと詳しく",
                 "description": "Virufyについてもっと知りたい方は、こちらをご覧ください。",
@@ -607,10 +600,18 @@
             },
             {
                 "title": "参加する",
-                "description": "COVID-19との闘いにあなたのスキルを活かしてみませんか？",
+                "description": "コロナウイルスとの闘いに、あなたのスキルを活かしてみませんか？",
                 "cta": {
                     "label": "今すぐ応募する",
                     "link": "https://virufy.org/join"
+                }
+            },
+            {
+                "title": "寄付をする",
+                "description": "継続的な研究開発費の支援",
+                "cta": {
+                    "label": "今すぐ寄付する",
+                    "link": "https://charity.gofundme.com/o/en/campaign/virufy"
                 }
             }
         ]

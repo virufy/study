@@ -10,6 +10,9 @@ import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
 
+// Helpers
+import { getCountry } from 'helper/stepsDefinitions';
+
 // Update Action
 import { updateAction } from 'utils/wizard';
 
@@ -55,6 +58,7 @@ const Step1a = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -112,6 +116,11 @@ const Step1a = ({
   return (
     <MainContainer>
       <TitleBlack>{t('questionary:title')}</TitleBlack>
+      {
+        country === 'Japan' && (
+          <QuestionText bold={false}>{t('questionary:caption')}</QuestionText>
+        )
+      }
       <WomanWithPhone />
       <ProgressIndicator
         currentStep={metadata?.current}

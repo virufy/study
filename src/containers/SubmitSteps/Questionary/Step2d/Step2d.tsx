@@ -75,7 +75,7 @@ const Step2d = ({
 
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:symptoms.title')}`);
+    setTitle(`${t('questionary:ethnicity.title')}`);
     setType('primary');
     setDoGoBack(() => handleDoBack);
   }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
@@ -123,8 +123,8 @@ const Step2d = ({
         <Trans i18nKey="questionary:ethnicity.question">
           <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>
+        <QuestionNote>{t('questionary:ethnicity.note')}</QuestionNote>
       </QuestionText>
-      <QuestionNote>{t('questionary:ethnicity.note')}</QuestionNote>
       <Controller
         control={control}
         name="ethnicity"
