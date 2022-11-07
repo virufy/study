@@ -5,7 +5,7 @@ import { ReactComponent as LogoXoorSVG } from 'assets/images/logo-xoor.svg';
 export const Container = styled.div<{ inline: boolean; mt?: string; }>`
   display: flex;
   justify-content: ${({ inline }) => (inline ? 'center' : 'flex-end')};
-  align-items: ${({ inline }) => (inline ? 'flex-end' : 'center')};
+  align-items: center;
   flex-direction: ${({ inline }) => (inline ? 'row' : 'column')};
   margin-top: ${({ mt }) => mt || '22px'};
   > * {
