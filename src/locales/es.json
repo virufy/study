@@ -367,7 +367,7 @@
       "resultPcrTest": {
         "question": " Cuál fue el resultado del test de COVID-19 basado en PCR del paciente <1><0>{{patientId}}</0></1>?"
       },
-      "resultAntigenTest": "Cuál fue el resultado del test de anticuerpos para COVID-19 del paciente <1><0>{{patientId}}</0></1>?"
+      "resultAntigenTest": "Cuál fue el resultado del test de antígenos para COVID-19 del paciente <1><0>{{patientId}}</0></1>?"
     },
     "headerText2": "Pregunta para ampliar",
     "whenPcrTest": "¿Cuándo se hizo la prueba PCR para detectar la COVID-19? Por favor, haga una aproximación si no está seguro(a).",
