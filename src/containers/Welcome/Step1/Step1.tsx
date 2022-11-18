@@ -277,28 +277,6 @@ const Step1 = (p: Wizard.StepProps) => {
           )}
 
           <BoldBlackText>
-            {t('main:selectYourLanguage', 'Language')}
-          </BoldBlackText>
-
-          {/* Language */}
-          <Controller
-            control={control}
-            name="language"
-            defaultValue={languageData[0].value}
-            render={({ onChange, value: valueController }) => (
-              <WelcomeSelect
-                placeholder={t('main.selectYourLanguage', 'Language')}
-                options={supportedLang}
-                onChange={(e: any) => { onChange(e?.value); }}
-                value={languageData.filter(({ value }) => value === valueController)}
-                className="custom-select"
-                classNamePrefix="custom-select"
-                isDisabled={supportedLang?.length <= 1}
-              />
-            )}
-          />
-
-          <BoldBlackText>
             {t('main:selectLocation', 'Location')}
           </BoldBlackText>
 
@@ -325,6 +303,28 @@ const Step1 = (p: Wizard.StepProps) => {
                 noOptionsMessage={({ inputValue }) => (
                   !inputValue ? `${t('main:noOptionsError')}` : `${t('main:noValueError')}`
                 )}
+              />
+            )}
+          />
+
+          <BoldBlackText>
+            {t('main:selectYourLanguage', 'Language')}
+          </BoldBlackText>
+
+          {/* Language */}
+          <Controller
+            control={control}
+            name="language"
+            defaultValue={languageData[0].value}
+            render={({ onChange, value: valueController }) => (
+              <WelcomeSelect
+                placeholder={t('main.selectYourLanguage', 'Language')}
+                options={supportedLang}
+                onChange={(e: any) => { onChange(e?.value); }}
+                value={languageData.filter(({ value }) => value === valueController)}
+                className="custom-select"
+                classNamePrefix="custom-select"
+                isDisabled={supportedLang?.length <= 1}
               />
             )}
           />
