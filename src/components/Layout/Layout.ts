@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding-bottom: 40px; 
-
+  
   @media screen and (${props => props.theme.breakpoints.tablet}){
     margin: auto;
 

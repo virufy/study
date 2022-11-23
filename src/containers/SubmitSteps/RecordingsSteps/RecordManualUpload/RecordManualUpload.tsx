@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
-import { isSafari } from 'react-device-detect';
+import { isChromium, isSafari } from 'react-device-detect';
 import Yup from 'utils/yup';
 
 // Components
@@ -44,7 +44,7 @@ const audioMinLength: CommonJSON<number> = {
 
 const mimeTypes = 'audio/wav,audio/wave,audio/wav,audio/x-wav,audio/x-pn-wav,audio/mp3,audio/ogg';
 
-mimeTypes.concat(isSafari ? '' : 'audio/flac');
+mimeTypes.concat(isSafari || isChromium ? '' : 'audio/flac');
 
 const schema = Yup.object({
   uploadedFile: Yup.mixed()
