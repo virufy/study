@@ -102,19 +102,18 @@ export const LogoSubtitle = styled.div`
   font-weight: 200;
   font-size: 12px;
   line-height: 20px;
-  color: ${props => props.theme.colors.purple};;
+  color: ${props => props.theme.colors.purple};
   text-align: center; 
 `;
 
-export const WelcomeInput = styled.input`
+export const WelcomeInput = styled.input<{ error?: boolean }>`
   background-color: ${props => props.theme.colors.midGray};
-  border-radius: 4px;
-  border: 0;
   border-radius: 15px;
   color: ${props => props.theme.colors.mineShaft};
   font-family: 'Source Sans Pro';
   margin: auto;
   padding: 12px 15px;
+  border: 2px solid ${props => (props.error ? '#FF0000' : 'transparent')};
 
   height: 48px;
   width: calc(100% - 40px);
