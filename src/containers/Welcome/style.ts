@@ -65,6 +65,14 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
       padding-right: 0px;
     }
   };
+
+  .li-bullet-0 {
+    text-align: left;
+    list-style-position: inside;
+  }
+  .c21 {
+    padding: 0;
+  }
 `;
 
 export const ContainerShapeDown = styled.div<{ isMobile?: boolean }>`
