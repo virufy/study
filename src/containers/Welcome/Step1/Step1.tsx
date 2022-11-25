@@ -46,7 +46,7 @@ declare interface OptionsProps {
 }
 
 let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Germany', 'Pakistan'];
-const clinicCountries = ['India', 'Colombia', 'Pakistan', 'Japan'];
+const clinicCountries = ['Colombia', 'Pakistan', 'Japan'];
 
 if (isClinic) {
   invalidCountries = invalidCountries.filter(a => !clinicCountries.includes(a));
@@ -55,14 +55,14 @@ if (isClinic) {
 const schema = Yup.object().shape({
   country: Yup.string().required().notOneOf(invalidCountries),
   language: Yup.string().required(),
-  region: Yup.string().when('country', {
-    is: (val: string) => countriesWithStates.includes(val),
-    then: Yup.string().required('regionRequired'),
-    else: Yup.string(),
+  region: Yup.string().when(['country', '$isClinical'], {
+    is: (val: string, $isClinical: boolean) => (val === 'Japan' && countriesWithStates.includes(val) && $isClinical) || (!countriesWithStates.includes(val) && $isClinical && val !== 'Japan') || (!countriesWithStates.includes(val) && !$isClinical),
+    then: Yup.string(),
+    otherwise: Yup.string().required('regionRequired'),
   }),
   patientId: Yup.string().when('$isClinical', {
     is: true,
-    then: Yup.string().required(),
+    then: Yup.string().required('enterPatientId'),
     else: Yup.string().notRequired(),
   }),
   hospitalId: Yup.string().when('$isClinical', {
@@ -150,6 +150,7 @@ const Step1 = (p: Wizard.StepProps) => {
 
   const resetRegion = () => {
     setValue('region', '');
+    setValue('patientId', '');
   };
 
   useEffect(() => {
@@ -158,6 +159,7 @@ const Step1 = (p: Wizard.StepProps) => {
     setDoGoBack(null);
     setType('tertiary');
     setLogoSize('big');
+    resetRegion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { t, i18n } = useTranslation();
@@ -330,36 +332,39 @@ const Step1 = (p: Wizard.StepProps) => {
               />
             )}
           />
+          {
+            (!isClinic || (isClinic && country !== 'Japan')) && (
+              <Controller
+                control={control}
+                name="region"
+                defaultValue=""
+                render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
+                  <>
+                    <BoldBlackText>
+                      {t('main:region', 'Region')}
+                    </BoldBlackText>
 
-          <Controller
-            control={control}
-            name="region"
-            defaultValue=""
-            render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
-              <>
-                <BoldBlackText>
-                  {t('main:region', 'Region')}
-                </BoldBlackText>
-
-                <RegionContainer>
-                  <WelcomeSelect
-                    options={regionSelectOptions}
-                    onChange={(e: any) => { onChange(e?.value); }}
-                    value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
-                    className="custom-select"
-                    classNamePrefix="custom-select"
-                    error={errors.region}
-                  />
-                  {errors.region && (
-                    <TextErrorContainer>
-                      <ExclamationSVG />
-                      {t(errors.region.message, 'Please select a region')}
-                    </TextErrorContainer>
-                  )}
-                </RegionContainer>
-              </>
-            ) : <></>)}
-          />
+                    <RegionContainer>
+                      <WelcomeSelect
+                        options={regionSelectOptions}
+                        onChange={(e: any) => { onChange(e?.value); }}
+                        value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
+                        className="custom-select"
+                        classNamePrefix="custom-select"
+                        error={errors.region}
+                      />
+                      {errors.region && (
+                        <TextErrorContainer>
+                          <ExclamationSVG />
+                          {t('main:regionRequired', 'Please select region')}
+                        </TextErrorContainer>
+                      )}
+                    </RegionContainer>
+                  </>
+                ) : <></>)}
+              />
+            )
+          }
           {isClinic && (
             <>
               <BoldBlackText>
@@ -370,13 +375,22 @@ const Step1 = (p: Wizard.StepProps) => {
                 name="patientId"
                 defaultValue=""
                 render={({ onChange, value, name }) => (
-                  <WelcomeInput
-                    name={name}
-                    value={value}
-                    onChange={onChange}
-                    type="text"
-                    autoComplete="Off"
-                  />
+                  <>
+                    <WelcomeInput
+                      name={name}
+                      value={value}
+                      onChange={onChange}
+                      type="text"
+                      autoComplete="Off"
+                      error={errors.patientId}
+                    />
+                    {errors.patientId && (
+                      <TextErrorContainer>
+                        <ExclamationSVG />
+                        {t('main:enterPatientId', 'Enter patient ID')}
+                      </TextErrorContainer>
+                    )}
+                  </>
                 )}
               />
               <BoldBlackText>
