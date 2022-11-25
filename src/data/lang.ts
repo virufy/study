@@ -11,3 +11,5 @@ export const languageData = [
   { value: 'ja', label: '日本語' },
   // { value: 'hi', label: 'हिन्दी' },
 ];
+
+export const notSupportedLangClinic = ['pt', 'tr'];

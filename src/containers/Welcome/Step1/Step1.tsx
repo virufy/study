@@ -24,7 +24,7 @@ import { updateAction, resetStore } from 'utils/wizard';
 import useHeaderContext from 'hooks/useHeaderContext';
 
 // Data
-import { languageData } from 'data/lang';
+import { languageData, notSupportedLangClinic } from 'data/lang';
 import { countryData, countriesWithStates, CountryDataProps } from 'data/country';
 import { getHospitalIdFor } from 'data/hospitalId';
 import { timeZones } from 'data/timeZones';
@@ -319,7 +319,9 @@ const Step1 = (p: Wizard.StepProps) => {
             render={({ onChange, value: valueController }) => (
               <WelcomeSelect
                 placeholder={t('main.selectYourLanguage', 'Language')}
-                options={supportedLang}
+                options={isClinic
+                  ? supportedLang.filter(lg => !notSupportedLangClinic.includes(lg.value))
+                  : supportedLang}
                 onChange={(e: any) => { onChange(e?.value); }}
                 value={languageData.filter(({ value }) => value === valueController)}
                 className="custom-select"
