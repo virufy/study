@@ -354,7 +354,7 @@ const Step1 = (p: Wizard.StepProps) => {
                       {errors.region && (
                         <TextErrorContainer>
                           <ExclamationSVG />
-                          {t(errors.region.message, 'Please select a region')}
+                          {t('main:regionRequired', 'Please select region')}
                         </TextErrorContainer>
                       )}
                     </RegionContainer>
@@ -385,7 +385,7 @@ const Step1 = (p: Wizard.StepProps) => {
                     {errors.patientId && (
                       <TextErrorContainer>
                         <ExclamationSVG />
-                        {t(errors.patientId.message, 'Enter patient ID')}
+                        {t('main:enterPatientId', 'Enter patient ID')}
                       </TextErrorContainer>
                     )}
                   </>
