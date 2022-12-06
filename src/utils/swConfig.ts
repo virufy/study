@@ -3,7 +3,7 @@ export default {
     // eslint-disable-next-line no-restricted-globals, no-alert
     console.info('New version available. Reload');
     registration.unregister().then(() => {
-      window.location.reload();
+      window.location.replace(process.env.PUBLIC_URL);
     });
   },
   onSuccess: (registration: ServiceWorkerRegistration) => {
