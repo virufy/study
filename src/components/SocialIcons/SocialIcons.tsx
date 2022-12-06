@@ -20,7 +20,7 @@ interface SocialIcon {
 
 const icons: SocialIcon[] = [
   {
-    href: 'https://www.instagram.com/virufyorg/',
+    href: 'https://www.instagram.com/virufy/',
     Icon: InstagramSVG,
   },
   {
