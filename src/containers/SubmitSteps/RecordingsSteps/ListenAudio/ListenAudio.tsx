@@ -26,6 +26,7 @@ import { updateAction } from 'utils/wizard';
 import { getPatientId, getCountry, allowSpeechIn } from 'helper/stepsDefinitions';
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmitPatientAudioCollection } from 'helper/patientHelper';
+import { getDuration } from 'helper/getDuration';
 
 // Images
 import PlaySVG from 'assets/icons/play.svg';
@@ -132,25 +133,8 @@ const ListenAudio = ({
     };
 
     const fnLoad = async (e: any) => {
-      const audioDuration: number = await new Promise(resolver => {
-        if (e.target.duration !== Infinity) {
-          resolver(e.target.duration);
-        } else {
-          const tempFn = () => {
-            e.target.pause();
-            e.target.volume = 1;
-            e.target.currentTime = 0;
-            resolver(e.target.duration);
-            e.target.removeEventListener('durationchange', tempFn);
-          };
-
-          e.target.addEventListener('durationchange', tempFn);
-          e.target.volume = 0;
-          e.target.currentTime = 24 * 60 * 60; // Unprobable time
-        }
-      });
-      e.target.volume = 1;
-      setDuration(audioDuration);
+      const recordDuration = await getDuration(e.target);
+      setDuration(recordDuration);
     };
 
     if (refAudio.current) {

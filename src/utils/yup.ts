@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { isSafari } from 'react-device-detect';
+import { getDuration } from '../helper/getDuration';
 
 Yup.addMethod(Yup.mixed, 'validateAudioLength', function validate(maxDuration: number) {
   // @ts-ignore
@@ -11,20 +11,7 @@ Yup.addMethod(Yup.mixed, 'validateAudioLength', function validate(maxDuration: n
       audio.muted = true;
       audio.load();
       await new Promise(resolver => audio.addEventListener('loadedmetadata', resolver));
-      const duration: number = await new Promise(resolver => {
-        if (audio.duration !== Infinity
-          && (!isSafari
-          || (isSafari && audio.duration > 0))) {
-          resolver(audio.duration);
-          return;
-        }
-        audio.addEventListener('durationchange', () => {
-          audio.remove();
-          resolver(audio.duration);
-        });
-        audio.currentTime = 24 * 60 * 60; // Unprobable time
-        audio.play();
-      });
+      const duration = await getDuration(audio);
       return (duration >= maxDuration);
     }
     return !!value;
