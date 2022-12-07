@@ -70,8 +70,13 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
     text-align: left;
     list-style-position: inside;
   }
-  .c21 {
+  .c21,
+  .c11 {
     padding: 0;
+  }
+  .c5,
+  .c12 {
+    text-align: left;
   }
 `;
 
