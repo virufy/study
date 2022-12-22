@@ -187,6 +187,11 @@ const ListenAudio = ({
   }, [history, nextStep]);
 
   const handleDoBack = React.useCallback(() => {
+    if (playing) {
+      if (refAudio.current) {
+        refAudio.current.pause();
+      }
+    }
     setActiveStep(false);
     if (location.state && location.state.from) {
       if (isCoughLogic) {
