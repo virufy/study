@@ -206,7 +206,7 @@ const ListenAudio = ({
     } else {
       history.goBack();
     }
-  }, [location.state, previousStep, history, isCoughLogic, isBreathLogic, isShortAudioCollection]);
+  }, [location.state, previousStep, history, isCoughLogic, isBreathLogic, isShortAudioCollection, playing]);
 
   const handleRemoveFile = React.useCallback(() => {
     if (playing) {
