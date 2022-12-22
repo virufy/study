@@ -154,7 +154,7 @@ const MicRecorder = ({
         audio.load();
         const listenerFn = async () => {
           audio.removeEventListener('loadedmetadata', listenerFn);
-          getDuration(audio).then(result => {
+          getDuration(audio, true).then(result => {
             timerRef.current?.setTime(result * 1000);
           });
         };
