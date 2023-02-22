@@ -15,6 +15,7 @@ interface DoSubmitProps {
   nextStep?: string;
   setActiveStep(status: boolean): void;
   history: H.History;
+  userCookie: string | Blob;
 }
 
 export async function doSubmit({
@@ -25,6 +26,7 @@ export async function doSubmit({
   nextStep,
   setActiveStep,
   history,
+  userCookie,
 }: DoSubmitProps) {
   try {
     setSubmitError(null);
@@ -83,6 +85,10 @@ export async function doSubmit({
 
     if (window.sourceCampaign) {
       body.append('source', window.sourceCampaign);
+    }
+
+    if (userCookie) {
+      body.append('userCookie', userCookie);
     }
 
     body.append('agreedConsentTerms', agreedConsentTerms);
