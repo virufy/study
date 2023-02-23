@@ -15,7 +15,7 @@ interface DoSubmitProps {
   nextStep?: string;
   setActiveStep(status: boolean): void;
   history: H.History;
-  userCookie: string | Blob;
+  userCookie: string;
 }
 
 export async function doSubmit({
