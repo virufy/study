@@ -3,6 +3,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { reboot } from 'styled-reboot';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { CookiesProvider } from 'react-cookie';
 
 // Container
 import App from 'containers/App';
@@ -77,7 +78,9 @@ const Start = () => (
     <Helmet titleTemplate="%s - Virufy" defaultTitle="Virufy" />
     <GlobalStyle />
     <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
-      <App />
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
     </BrowserRouter>
   </ThemeProvider>
 );

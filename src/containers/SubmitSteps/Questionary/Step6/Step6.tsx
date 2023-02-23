@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { Trans, useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -56,6 +57,9 @@ const Step6 = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
   const country = getCountry();
+  const [cookies] = useCookies(['virufy-study-user']);
+
+  const userCookie = cookies['virufy-study-user'];
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -97,6 +101,7 @@ const Step6 = ({
         nextStep,
         setActiveStep,
         history,
+        userCookie,
       });
     }
   };

@@ -3,6 +3,8 @@ import loadable from '@loadable/component';
 import {
   Switch, Route, Redirect, useLocation,
 } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import uuid from 'react-uuid';
 
 // Components
 import FullWidth from 'components/FullWidthDiv';
@@ -29,14 +31,24 @@ declare global {
   }
 }
 
+const userCookie = {
+  mode: uuid(),
+};
+
 const App = () => {
   const { pathname, search } = useLocation();
   const patientId = getPatientId();
 
+  const [cookies, setCookie] = useCookies(['virufy-study-user']);
+
   React.useEffect(() => {
     const params = new URLSearchParams(search);
     window.sourceCampaign = params.get('utm_campaign');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    if (cookies['virufy-study-user']) return;
+
+    setCookie('virufy-study-user', JSON.stringify(userCookie));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Google Analytics
