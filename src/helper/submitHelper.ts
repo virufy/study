@@ -88,7 +88,7 @@ export async function doSubmit({
     }
 
     if (userCookie) {
-      body.append('userCookie', userCookie);
+      body.append('userCookie', JSON.stringify(userCookie));
     }
 
     body.append('agreedConsentTerms', agreedConsentTerms);

@@ -35,6 +35,8 @@ const userCookie = {
   mode: uuid(),
 };
 
+const date = new Date('1/1/2999');
+
 const App = () => {
   const { pathname, search } = useLocation();
   const patientId = getPatientId();
@@ -47,7 +49,9 @@ const App = () => {
 
     if (cookies['virufy-study-user']) return;
 
-    setCookie('virufy-study-user', JSON.stringify(userCookie));
+    setCookie('virufy-study-user', JSON.stringify(userCookie), {
+      expires: date,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
