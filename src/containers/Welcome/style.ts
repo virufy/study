@@ -66,17 +66,29 @@ export const WelcomeContent = styled.div<{ maxWidth?: number; mt?: number; }>`
     }
   };
 
-  .li-bullet-0 {
+  .li-bullet-0,
+  ol,
+  .c1 {
     text-align: left;
     list-style-position: inside;
   }
   .c21,
-  .c11 {
+  .c11,
+  .c1 {
     padding: 0;
   }
   .c5,
-  .c12 {
+  .c12,
+  .c10,
+  .c9,
+  .c31,
+  p {
     text-align: left;
+  }
+
+  .title,
+  .c54 {
+    text-align: center;
   }
 `;
 
