@@ -18,7 +18,6 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
-import { doSubmitPatientShortQuestionnaire } from 'helper/patientHelper';
 import { getCountry } from 'helper/stepsDefinitions';
 
 // Components
@@ -126,24 +125,10 @@ const Step4b = ({
       }
     }
   };
-  const onSubmitPatientShortQuestionnaire = async (values: Step4bType) => {
-    if (values) {
-      action(values);
-      await doSubmitPatientShortQuestionnaire({
-        setSubmitError: s => setSubmitError(!s ? null : t(s)),
-        state: {
-          ...state,
-          'submit-steps': {
-            ...state['submit-steps'],
-            ...values,
-          },
-        },
-        captchaValue,
-        action,
-        nextStep,
-        setActiveStep,
-        history,
-      });
+  const onSubmitPatientShortQuestionnaire = () => {
+    if (nextStep) {
+      setActiveStep(false);
+      history.push(nextStep);
     }
   };
 
