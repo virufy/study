@@ -341,7 +341,7 @@ export const BoldBlackText = styled.h2`
 export const SupportedBy = styled.p`
   color: #4E92CE;
   font-size: 14px; 
-  text-align: center; 
+  text-align: center !important; 
   font-weight: 600; 
 `;
 

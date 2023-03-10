@@ -46,7 +46,7 @@ declare interface OptionsProps {
 }
 
 let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Germany', 'Pakistan'];
-const clinicCountries = ['Colombia', 'Pakistan', 'Japan'];
+const clinicCountries = ['Colombia', 'Pakistan'];
 
 if (isClinic) {
   invalidCountries = invalidCountries.filter(a => !clinicCountries.includes(a));
@@ -56,7 +56,8 @@ const schema = Yup.object().shape({
   country: Yup.string().required().notOneOf(invalidCountries),
   language: Yup.string().required(),
   region: Yup.string().when(['country', '$isClinical'], {
-    is: (val: string, $isClinical: boolean) => (val === 'Japan' && countriesWithStates.includes(val) && $isClinical) || (!countriesWithStates.includes(val) && $isClinical && val !== 'Japan') || (!countriesWithStates.includes(val) && !$isClinical),
+    is: (val: string, $isClinical: boolean) => (!countriesWithStates.includes(val) && $isClinical)
+    || (!countriesWithStates.includes(val) && !$isClinical),
     then: Yup.string(),
     otherwise: Yup.string().required('regionRequired'),
   }),
@@ -332,39 +333,35 @@ const Step1 = (p: Wizard.StepProps) => {
               />
             )}
           />
-          {
-            (!isClinic || (isClinic && country !== 'Japan')) && (
-              <Controller
-                control={control}
-                name="region"
-                defaultValue=""
-                render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
-                  <>
-                    <BoldBlackText>
-                      {t('main:region', 'Region')}
-                    </BoldBlackText>
+          <Controller
+            control={control}
+            name="region"
+            defaultValue=""
+            render={({ onChange, value: valueController }) => (regionSelectOptions.length > 1 ? (
+              <>
+                <BoldBlackText>
+                  {t('main:region', 'Region')}
+                </BoldBlackText>
 
-                    <RegionContainer>
-                      <WelcomeSelect
-                        options={regionSelectOptions}
-                        onChange={(e: any) => { onChange(e?.value); }}
-                        value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
-                        className="custom-select"
-                        classNamePrefix="custom-select"
-                        error={errors.region}
-                      />
-                      {errors.region && (
-                        <TextErrorContainer>
-                          <ExclamationSVG />
-                          {t('main:regionRequired', 'Please select region')}
-                        </TextErrorContainer>
-                      )}
-                    </RegionContainer>
-                  </>
-                ) : <></>)}
-              />
-            )
-          }
+                <RegionContainer>
+                  <WelcomeSelect
+                    options={regionSelectOptions}
+                    onChange={(e: any) => { onChange(e?.value); }}
+                    value={regionSelectOptions.filter(({ value }) => value === valueController) || ''}
+                    className="custom-select"
+                    classNamePrefix="custom-select"
+                    error={errors.region}
+                  />
+                  {errors.region && (
+                    <TextErrorContainer>
+                      <ExclamationSVG />
+                      {t('main:regionRequired', 'Please select region')}
+                    </TextErrorContainer>
+                  )}
+                </RegionContainer>
+              </>
+            ) : <></>)}
+          />
           {isClinic && (
             <>
               <BoldBlackText>
