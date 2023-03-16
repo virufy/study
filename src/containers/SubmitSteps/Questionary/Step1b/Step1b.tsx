@@ -169,11 +169,9 @@ const Step1b = ({
       } */
 
       action(values);
-      if (patientId) {
-        if (nextStep) {
-          setActiveStep(false);
-          history.push(nextStep);
-        }
+      if (nextStep) {
+        setActiveStep(false);
+        history.push(nextStep);
       }
     }
   };
