@@ -15,13 +15,19 @@ import { resetStore } from 'utils/wizard';
 
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
-import { getCountry, getSpeechContext } from 'helper/stepsDefinitions';
+import {
+  // getCountry,
+  getSpeechContext,
+} from 'helper/stepsDefinitions';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
 
 import {
-  BeforeSubmitText, ThankYouLayout, ThankYouTitle, SubmissionIdBox,
+  BeforeSubmitText,
+  ThankYouLayout,
+  ThankYouTitle,
+  // SubmissionIdBox,
 } from './style';
 
 interface ThankYouLocation {
@@ -35,7 +41,7 @@ const ThankYou = (p: Wizard.StepProps) => {
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const country = getCountry();
+  // const country = getCountry();
   const [, setActiveStep] = useState(true);
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const { action } = useStateMachine(resetStore());
@@ -43,7 +49,7 @@ const ThankYou = (p: Wizard.StepProps) => {
   const history = useHistory();
   const location = useLocation<ThankYouLocation>();
 
-  const submissionId = location.state?.submissionId;
+  // const submissionId = location.state?.submissionId;
   const patientId = location.state?.patientId;
 
   React.useEffect(() => {
@@ -75,7 +81,7 @@ const ThankYou = (p: Wizard.StepProps) => {
     <ThankYouLayout>
       <ThankYouTitle>{t('thankyou:title')}</ThankYouTitle>
       {!patientId && <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>}
-      {submissionId && (
+      {/* {submissionId && (
         <SubmissionIdBox>
           {country === 'Colombia' ? (
             <Trans i18nKey="thankyou:paragraph2Patient">
@@ -91,7 +97,7 @@ const ThankYou = (p: Wizard.StepProps) => {
             </Trans>
           )}
         </SubmissionIdBox>
-      )}
+      )} */}
       {!patientId
       && (
         <>

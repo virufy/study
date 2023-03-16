@@ -25,7 +25,6 @@ import { getPatientId, getCountry } from 'helper/stepsDefinitions';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmit } from 'helper/submitHelper';
-import { doSubmitPatientQuestionnaire } from 'helper/patientHelper';
 
 // Styles
 import OptionList from 'components/OptionList';
@@ -106,23 +105,10 @@ const Step6 = ({
     }
   };
 
-  const onSubmitPatientQuestionnaire = async (values: Step6Type) => {
-    if (values) {
-      await doSubmitPatientQuestionnaire({
-        setSubmitError: s => setSubmitError(!s ? null : t(s)),
-        state: {
-          ...state,
-          'submit-steps': {
-            ...state['submit-steps'],
-            ...values,
-          },
-        },
-        captchaValue,
-        action,
-        nextStep,
-        setActiveStep,
-        history,
-      });
+  const onSubmitPatientQuestionnaire = () => {
+    if (nextStep) {
+      setActiveStep(false);
+      history.push(nextStep);
     }
   };
 
