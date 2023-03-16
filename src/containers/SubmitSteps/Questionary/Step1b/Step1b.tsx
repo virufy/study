@@ -12,7 +12,6 @@ import * as Yup from 'yup';
 
 // Helper
 import { getPatientId, getCountry } from 'helper/stepsDefinitions';
-import { doSubmitPatientTestResults } from 'helper/patientHelper';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -171,24 +170,10 @@ const Step1b = ({
 
       action(values);
       if (patientId) {
-        doSubmitPatientTestResults({
-          setSubmitError: s => setSubmitError(!s ? null : t(s)),
-          state: {
-            ...state,
-            'submit-steps': {
-              ...state['submit-steps'],
-              ...values,
-            },
-          },
-          captchaValue,
-          action,
-          nextStep,
-          setActiveStep,
-          history,
-        });
-      } else if (nextStep) {
-        setActiveStep(false);
-        history.push(nextStep);
+        if (nextStep) {
+          setActiveStep(false);
+          history.push(nextStep);
+        }
       }
     }
   };

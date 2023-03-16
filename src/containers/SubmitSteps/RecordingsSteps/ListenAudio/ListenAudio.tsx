@@ -25,7 +25,6 @@ import { updateAction } from 'utils/wizard';
 // Helpers
 import { getPatientId, getCountry, allowSpeechIn } from 'helper/stepsDefinitions';
 import { scrollToTop } from 'helper/scrollHelper';
-import { doSubmitPatientAudioCollection } from 'helper/patientHelper';
 import { getDuration } from 'helper/getDuration';
 
 // Images
@@ -60,7 +59,6 @@ const ListenAudio = ({
   storeKey,
   previousStep,
   nextStep,
-  otherSteps,
   metadata,
 }: Wizard.StepProps) => {
   const isCoughLogic = React.useMemo(
@@ -279,19 +277,10 @@ const ListenAudio = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleDoBack, isCoughLogic, isBreathLogic, setDoGoBack, setTitle, setSubtitle, t]);
 
-  const onSubmitPatientAudioCollection = async (values: AudioType) => {
-    if (values) {
-      await doSubmitPatientAudioCollection({
-        setSubmitError: s => setSubmitError(!s ? null : t(s)),
-        state,
-        captchaValue,
-        action,
-        nextStep,
-        otherSteps,
-        setActiveStep,
-        history,
-        isShortAudioCollection: isShortAudioCollection.toString(),
-      });
+  const onSubmitPatientAudioCollection = () => {
+    if (nextStep) {
+      setActiveStep(false);
+      history.push(nextStep);
     }
   };
 
