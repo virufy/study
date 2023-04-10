@@ -2,6 +2,22 @@
 <html lang="en" translate="no">
 
 <head>
+
+  <!-- Google Tag Manager -->
+  <script>
+    const gaKey = process.env.REACT_APP_GA;
+    const gtmNsUrl = 'https://www.googletagmanager.com/ns.html?id=' + gaKey;
+    document.getElementById('gtnNsUrl').src = gtmNsUrl;
+  </script>
+  <script>
+    (function(w,d,s,l){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+gaKey+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer');
+  </script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="utf-8">
   <meta itemprop="app-version" content="%REACT_APP_VERSION%">
 
@@ -133,6 +149,7 @@
 </head>
 
 <body>
+  <noscript><iframe id="gtnNsUrl" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <!--
@@ -158,6 +175,7 @@
     })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
   </script>
   <!-- End Hotjar -->
+
 </body>
 
 </html>

@@ -57,6 +57,19 @@ const App = () => {
 
   // Google Analytics
   useInitializeGoogleAnalytics();
+
+  // Effects
+  React.useEffect(() => {
+    const gtmDataLayer = (window as any).dataLayer;
+
+    gtmDataLayer.push({
+      event: 'pageview',
+      page: {
+        url: pathname + search,
+      },
+    });
+  }, [pathname, search]);
+
   return (
     <AppContainer>
       <HeaderContextProvider>
