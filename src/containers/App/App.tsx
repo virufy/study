@@ -15,9 +15,6 @@ import FooterInstallAsApp from 'components/FooterInstallAsApp';
 // Helper
 import { getPatientId } from 'helper/stepsDefinitions';
 
-// hooks
-import { useInitializeGoogleAnalytics } from 'hooks/useInitializeGoogleAnalytics';
-
 // Styles
 import { AppContainer } from './style';
 
@@ -54,9 +51,6 @@ const App = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Google Analytics
-  useInitializeGoogleAnalytics();
 
   // Effects
   React.useEffect(() => {
