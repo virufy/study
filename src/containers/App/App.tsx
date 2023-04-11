@@ -56,7 +56,7 @@ const App = () => {
   React.useEffect(() => {
     const gtmDataLayer = (window as any).dataLayer;
 
-    gtmDataLayer.push({
+    gtmDataLayer?.push({
       event: 'pageview',
       page: {
         url: pathname + search,
