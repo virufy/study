@@ -45,7 +45,7 @@ declare interface OptionsProps {
   value: string;
 }
 
-let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Japan', 'Germany'];
+let invalidCountries = ['India', 'France', 'Italy', 'Netherlands', 'Belgium', 'Luxembourg', 'Germany']; // 'Japan',
 const clinicCountries = ['India', 'Colombia'];
 if (isClinic) {
   invalidCountries = invalidCountries.filter(a => !clinicCountries.includes(a));
@@ -124,7 +124,7 @@ const Step1 = (p: Wizard.StepProps) => {
     setLogoSize('big');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(); // ex. t('key'), replace 'key' with translation
 
   const lang = watch('language');
   const country = watch('country');
@@ -138,15 +138,16 @@ const Step1 = (p: Wizard.StepProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
     [country]);
 
+  // get a list of regions of a given country
   const regionSelectOptions = useMemo(() => {
-    const output = [
-      { label: t('main:selectRegion'), value: '' },
+    const output = [ // dropdown options
+      { label: t('main:selectRegion'), value: '' }, // default value
     ];
     if (country) {
       const elem = countryData.find(a => a.value === country);
       if (elem) {
         elem.states.forEach(s => {
-          output.push({ label: s, value: s });
+          output.push({ label: t(`main:regionJP.${s}`, s), value: s });
         });
       }
     }
@@ -157,7 +158,7 @@ const Step1 = (p: Wizard.StepProps) => {
 
   const getOptionsCountry = () => {
     const options = isClinic ? getClinicCountries() : countryData;
-    const formattedOptions = options.reduce((acc: CountryDataProps[], current) => {
+    const formattedOptions = options.reduce((acc: CountryDataProps[], current) => { // current value in options array
       acc.push({ ...current, label: t(`main:countries.${current.value}`) });
       return acc;
     }, []);
@@ -176,10 +177,10 @@ const Step1 = (p: Wizard.StepProps) => {
           </CustomPurpleText>
           {isClinic
           && (
-          <SupportedBy>
-            {t('main:supportedBy', 'Supported by')}
-            <NuevaLogo />
-          </SupportedBy>
+            <SupportedBy>
+              {t('main:supportedBy', 'Supported by')}
+              <NuevaLogo />
+            </SupportedBy>
           )}
 
           <BoldBlackText>
@@ -207,6 +208,7 @@ const Step1 = (p: Wizard.StepProps) => {
             {t('main:selectLocation', 'Location')}
           </BoldBlackText>
 
+          {/* Country */}
           <Controller
             control={control}
             name="country"
@@ -226,6 +228,7 @@ const Step1 = (p: Wizard.StepProps) => {
             )}
           />
 
+          {/* Region */}
           <Controller
             control={control}
             name="region"
@@ -246,10 +249,10 @@ const Step1 = (p: Wizard.StepProps) => {
                     error={errors.region}
                   />
                   {errors.region && (
-                  <TextErrorContainer>
-                    <ExclamationSVG />
-                    {t(errors.region.message, 'Please select a region')}
-                  </TextErrorContainer>
+                    <TextErrorContainer>
+                      <ExclamationSVG />
+                      {t(errors.region.message, 'Please select a region')}
+                    </TextErrorContainer>
                   )}
                 </RegionContainer>
               </>
