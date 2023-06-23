@@ -9,10 +9,12 @@ const useEmbeddedFile = (filePath = '') => {
 
   useEffect(() => {
     setIsLoadingFile(true);
-    fetch(filePath, { mode: 'no-cors' }).then(fetchedFile => fetchedFile.text()).then(result => { setIsLoadingFile(false); setFile(result); });
+    fetch(filePath, { mode: 'no-cors' })
+      .then(fetchedFile => fetchedFile.text())
+      .then(result => { setIsLoadingFile(false); setFile(result); });
   }, [filePath]);
 
-  return { file: DOMPurify.sanitize(file, { ADD_ATTR: ['target'] }), isLoadingFile };
+  return { file: DOMPurify.sanitize(file, { ADD_ATTR: ['target'] }), isLoadingFile };// DOMPurify.sanitize(file, { ADD_ATTR: ['target'] }) is a consentForm
 };
 
 export default useEmbeddedFile;

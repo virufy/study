@@ -252,7 +252,7 @@
     "paragraph3": "Al marcar las casillas de abajo, usted reconoce que ha leído y entendido la política de privacidad de Virufy y que está otorgando su consentimiento explícito, libre e informado a Virufy para recopilar, procesar y compartir su información biométrica y de salud según se indica a continuación.",
     "certifyBrazil": "Certifico que tengo al menos 18 años y acepto los términos de este formulario de consentimiento, autorizando expresamente la recogida y el tratamiento de mis datos personales, biométricos y de salud.",
     "certify": "Certifico que tengo al menos 18 años y estoy de acuerdo con los términos del formulario de consentimiento.",
-    "agree": "He leído, entendido y acepto los términos de la política de privacidad de Virufy.",
+    "agree": "He leído, entendido y acepto los términos de la <1>política de privacidad de Virufy<1>.",
     "collection": " Por la presente doy mi consentimiento expreso a la recogida y tratamiento de mis datos personales, biométricos y de salud.",
     "collectionColombia": "Por la presente doy mi consentimiento expreso a la recolección, tratamiento y transferencia de mis datos personales, biométricos y de salud.",
     "detection": "Por la presente reconozco y acepto que el procesamiento se realizará para los fines indicados anteriormente y, en particular, pero sin limitación, para la investigación y compilación de un conjunto de datos necesarios para el desarrollo de algoritmos de inteligencia artificial para la detección de COVID-19 basada en dispositivos.",

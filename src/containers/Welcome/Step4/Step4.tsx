@@ -16,6 +16,7 @@ import WizardButtons from 'components/WizardButtons';
 import Link from 'components/Link';
 import Checkbox from 'components/Checkbox';
 import { BlackText } from 'components/Texts';
+import LinkPurple from 'components/LinkPurple';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -157,7 +158,7 @@ const Step4 = (p: Wizard.StepProps) => {
             <Trans i18nKey="consent:paragraph1">
               Virufy cares about your privacy and is advised by licensed data privacy experts.
               The information and recordings you provide will only be used for the purposes described in our
-              Privacy Policy and consent form.
+              <LinkPurple to={'https://www.google.com/url?q=https://virufy.org/privacy_policy/&amp;sa=D&amp;source=editors&amp;ust=1677794208477099&amp;usg=AOvVaw29UQOOZ0EuNN2JukEkAXus'} target="_blank">Privacy Policy</LinkPurple> and consent form.
               Please read the consent Form:
             </Trans>
           </BlackText>
@@ -215,7 +216,7 @@ const Step4 = (p: Wizard.StepProps) => {
               id="Step2-PolicyTerms"
               label={(
                 <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:agree">
-                  I have read, understood, and agree to the terms of the Virufy Privacy Policy.
+                  I have read, understood, and agree to the terms of the <LinkPurple to={'https://www.google.com/url?q=https://virufy.org/privacy_policy/&amp;sa=D&amp;source=editors&amp;ust=1677794208477099&amp;usg=AOvVaw29UQOOZ0EuNN2JukEkAXus'} target="_blank">Virufy Privacy Policy</LinkPurple>.
                 </Trans>
               )}
               name="agreedPolicyTerms"
