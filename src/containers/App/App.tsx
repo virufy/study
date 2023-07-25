@@ -85,7 +85,7 @@ const App = () => {
         </FullWidth>
         { patientId && <FooterReportProblems /> }
         {(!patientId && !pathname.includes('/submit-steps/thank-you')) && <FooterReportProblems /> }
-        <FooterInstallAsApp />
+        {/* <FooterInstallAsApp /> */}
       </HeaderContextProvider>
     </AppContainer>
   );
