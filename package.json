@@ -38,7 +38,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow npm",
-    "start": "npm run generate:consent-map && react-scripts --openssl-legacy-provider  start",
+    "start": "npm run generate:consent-map && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
