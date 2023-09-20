@@ -16,7 +16,6 @@ import { resetStore } from 'utils/wizard';
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
 import {
-  // getCountry,
   getSpeechContext,
 } from 'helper/stepsDefinitions';
 
@@ -28,7 +27,6 @@ import {
   SubmissionIdBox,
   ThankYouLayout,
   ThankYouTitle,
-  // SubmissionIdBox,
 } from './style';
 
 interface ThankYouLocation {
@@ -42,7 +40,6 @@ const ThankYou = (p: Wizard.StepProps) => {
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  // const country = getCountry();
   const [, setActiveStep] = useState(true);
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const { action } = useStateMachine(resetStore());
