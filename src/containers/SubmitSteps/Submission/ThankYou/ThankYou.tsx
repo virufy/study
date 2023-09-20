@@ -25,6 +25,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 import {
   BeforeSubmitText,
+  SubmissionIdBox,
   ThankYouLayout,
   ThankYouTitle,
   // SubmissionIdBox,
@@ -49,7 +50,7 @@ const ThankYou = (p: Wizard.StepProps) => {
   const history = useHistory();
   const location = useLocation<ThankYouLocation>();
 
-  // const submissionId = location.state?.submissionId;
+  const submissionId = location.state?.submissionId;
   const patientId = location.state?.patientId;
 
   React.useEffect(() => {
@@ -81,23 +82,15 @@ const ThankYou = (p: Wizard.StepProps) => {
     <ThankYouLayout>
       <ThankYouTitle>{t('thankyou:title')}</ThankYouTitle>
       {!patientId && <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>}
-      {/* {submissionId && (
+      {!patientId && submissionId && (
         <SubmissionIdBox>
-          {country === 'Colombia' ? (
-            <Trans i18nKey="thankyou:paragraph2Patient">
-              Your unique patient ID:
-              <br />
-              <strong>{{ patientId }}</strong>
-            </Trans>
-          ) : (
-            <Trans i18nKey="thankyou:paragraph2">
-              Your unique submission ID:
-              <br />
-              <strong>{{ submissionId }}</strong>
-            </Trans>
-          )}
+          <Trans i18nKey="thankyou:paragraph2">
+            Your unique submission ID:
+            <br />
+            <strong>{{ submissionId }}</strong>
+          </Trans>
         </SubmissionIdBox>
-      )} */}
+      )}
       {!patientId
       && (
         <>
