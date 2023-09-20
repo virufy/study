@@ -92,10 +92,16 @@ const ThankYou = (p: Wizard.StepProps) => {
       && (
         <>
           <BeforeSubmitText>
-            <Trans i18nKey="thankyou:paragraph3">
-              Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized
-              data in future.
-              <br /><br />
+            {
+              submissionId && (
+                <Trans i18nKey="thankyou:paragraph3">
+                  Make sure to safeguard this submission ID, as you will need it
+                  to request Virufy to delete your anonymized data in future.
+                  <br /><br />
+                </Trans>
+              )
+            }
+            <Trans i18nKey="thankyou:paragraph3bis">
               If you later develop symptoms such as cough, fever, or shortness of breath, please come
               back to resubmit your
               latest cough sounds.
