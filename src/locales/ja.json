@@ -358,7 +358,7 @@
         "recordSpeech": {
             "header": "スピーチを録音する"
         },
-        "next": "続 ける",
+        "next": "続ける",
         "delete": "削除",
         "textCough": "録音ボタンをタップして、携帯電話の下部に向かって咳を3回してください。終わったら、停止ボタンをタップします。",
         "textBreath": "録音ボタンをタップして、携帯電話の下部に向かって<strong>深く大きな呼吸</strong>を3回してください。終わったら、停止ボタンをタップします。",
@@ -396,7 +396,7 @@
         },
         "title": "アップロード完了",
         "subtitle": "録音した音声をご確認ください。",
-        "next": "データを送信する",
+        "next": "次へ",
         "retake": "リテイク"
     },
     "questionary": {
@@ -412,7 +412,7 @@
                 "pcr": "PCR検査",
                 "antibody": "抗体検査",
                 "unsure": "不明",
-                "antigen": "抗原検査（簡易検査",
+                "antigen": "抗原検査（簡易検査）",
                 "neither": "検査を受けたことがない"
             }
         },
@@ -430,7 +430,7 @@
             "options": {
                 "positive": "陽性",
                 "negative": "陰性",
-                "pending": "保留",
+                "pending": "結果待ち",
                 "unsure": "不明"
             }
         },
@@ -440,13 +440,13 @@
             "options": {
                 "positive": "陽性",
                 "negative": "陰性",
-                "pending": "保留",
-                "unsure": "わからない"
+                "pending": "結果待ち",
+                "unsure": "不明"
             }
         },
         "whenAntigenTest": "コロナウイルスの抗原検査を受けたのはいつですか？不明な場合は推定値を入力してください。",
         "whatAntigenTest": {
-            "question": "どんな抗原検査を受けましたか？",
+            "question": "どの抗原検査を受けましたか？",
             "options": {
                 "medical": "医療用抗原検査",
                 "research": "研究用抗原検査",
@@ -459,7 +459,7 @@
                 "positive": "陽性",
                 "negative": "陰性",
                 "pending": "保留",
-                "unsure": "わからない"
+                "unsure": "不明"
             }
         },
         "vaccine": {
@@ -512,7 +512,7 @@
         "biologicalSex": {
             "title": "生物学的性別",
             "question": "あなたの生物学的性別は何ですか？",
-            "note": "この情報は、声の響きが生物学的性別によって異なるため、AIがCOVID-19を検出するために重要です。生物学的性別とは、出生証明書で確認出来る性別のことです。",
+            "note": "この情報は、声の響きが生物学的性別によって異なるため、AIがCOVID-19を検出するために重要となります。生物学的性別とは、出生証明書で確認出来る性別のことです。",
             "options": {
                 "male": "男性",
                 "female": "女性",
@@ -534,7 +534,7 @@
             "options": {
                 "bodyAches": "体の痛み",
                 "dryCough": "咳（乾いた咳）",
-                "wetCough": "咳（湿った、粘液を伴う",
+                "wetCough": "咳（湿った、粘液を伴う)",
                 "feverChillsSweating": "発熱、寒気、発汗",
                 "headaches": "頭痛",
                 "lossTasteOrSmell": "味覚や嗅覚の喪失",
@@ -611,7 +611,7 @@
         "submitError": "エラーが発生しました。もう一度お試しください。"
     },
     "predictionResult": { 
-        "important_note": "<strong>重要なお知らせです。</strong> このアプリは、あなたのCOVID-19の状態を予測したり、病気や障害、その他の健康状態を診断するものではありません。Virufyは研究を行っており、提供された情報はその研究のためにのみ使用されます。Virufyは医師の代わりを務めるものではありませんので、医師の診断を受けるのはお客様の責任であることをご理解ください。",
+        "important_note": "<strong>重要なお知らせです。</strong> このアプリは、あなたのCOVID-19の状態を予測したり、病気や障害、その他の健康状態を診断するものではありません。Virufyは研究を行っており、提供された情報はその研究のためにのみ使用されます。Virufyは医師の代わりを務めるものではございませんので、医師の診断を受けるのはお客様の責任であることをご理解ください。",
         "predictionResultTitle": "結果",
         "result_unable": "咳を分析できません",
         "result_unable_text": "私たちのアルゴリズムはあなたのCOVID-19ステータスを決定することができません。<strong>別の咳を提出してください。</strong>",
