@@ -186,7 +186,7 @@ const Step1 = (p: Wizard.StepProps) => {
       const elem = countryData.find(a => a.value === country);
       if (elem) {
         elem.states.forEach(s => {
-          output.push({ label: t(`main:regionJP.${s}`, s), value: s });
+          output.push({ label: t(`main:regionOpt.${s}`, s), value: s });
         });
       }
     }
