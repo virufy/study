@@ -155,8 +155,6 @@ const Step4 = (p: Wizard.StepProps) => {
     }
     return 'es';
   };
-
-  const privacyPolicy = 'https://virufy.org/privacy_policy';
   
   return (
     <WelcomeStyledFormAlternative>
@@ -166,7 +164,7 @@ const Step4 = (p: Wizard.StepProps) => {
             <Trans i18nKey="consent:paragraph1">
               Virufy cares about your privacy and is advised by licensed data privacy experts.
               The information and recordings you provide will only be used for the purposes described in our
-              <LinkPurple to={privacyPolicy} target="_blank">Privacy Policy</LinkPurple> and consent form.
+              <LinkPurple to="https://virufy.org/privacy_policy" target="_blank">Privacy Policy</LinkPurple> and consent form.
               Please read the consent Form:
             </Trans>
           </BlackText>
@@ -224,7 +222,7 @@ const Step4 = (p: Wizard.StepProps) => {
               id="Step2-PolicyTerms"
               label={(
                 <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:agree">
-                  I have read, understood, and agree to the terms of the <LinkPurple to={privacyPolicy} target="_blank">Virufy Privacy Policy</LinkPurple>.
+                  I have read, understood, and agree to the terms of the <LinkPurple to="https://virufy.org/privacy_policy" target="_blank">Virufy Privacy Policy</LinkPurple>.
                 </Trans>
               )}
               name="agreedPolicyTerms"
