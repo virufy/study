@@ -16,6 +16,7 @@ import WizardButtons from 'components/WizardButtons';
 import Link from 'components/Link';
 import Checkbox from 'components/Checkbox';
 import { BlackText } from 'components/Texts';
+import LinkPurple from 'components/LinkPurple';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -43,6 +44,7 @@ import {
   CheckboxTitle,
 } from '../style';
 
+// configuration of the checkboxes
 const schema = Yup.object().shape({
   agreedConsentTerms: Yup.boolean().required().default(false).oneOf([true]),
   agreedPolicyTerms: Yup.boolean().required().default(false).oneOf([true]),
@@ -78,8 +80,10 @@ const Step4 = (p: Wizard.StepProps) => {
   const { setType, setDoGoBack, setSubtitle } = useHeaderContext();
 
   const { state, action } = useStateMachine(updateAction(p.storeKey));
+  // Ex. state = welcome: agreedBiometric: true, agreedConsentTerms: true, ..., country:, region:, language:
 
-  const store = state?.[p.storeKey];
+  const store = state?.[p.storeKey];// p.storeKey = welcome
+  // store = agreedBiometric: true, agreedConsentTerms: true, ..., country:, region:, language:
 
   const currentCountry: PrivacyPolicyCountry = useMemo(() => {
     if (['Argentina', 'Bolivia', 'Colombia', 'Greece', 'Peru', 'Mexico', 'Brazil', 'United States', 'Japan'].includes(state.welcome.country)) {
@@ -104,7 +108,9 @@ const Step4 = (p: Wizard.StepProps) => {
     buildConsentFilePath(currentCountry, state.welcome.language),
   );
 
+  // go to the next page/step
   const onSubmit = async (values: Step3Type) => {
+    // values = agreedBiometric: true, agreedConsentTerms: true...
     if (values) {
       action(values);
       if (p.nextStep) {
@@ -114,6 +120,7 @@ const Step4 = (p: Wizard.StepProps) => {
     }
   };
 
+  // go back to the previous step/page
   const doBack = useCallback(() => {
     if (p.previousStep) {
       setActiveStep(false);
@@ -126,7 +133,7 @@ const Step4 = (p: Wizard.StepProps) => {
 
   const { t } = useTranslation();
 
-  useEffect(() => {
+  useEffect(() => { // when moving the pages, do these
     scrollToTop();
     setDoGoBack(() => doBack);
     setType('secondary');
@@ -148,7 +155,7 @@ const Step4 = (p: Wizard.StepProps) => {
     }
     return 'es';
   };
-
+  
   return (
     <WelcomeStyledFormAlternative>
       <ContainerShapeDown isMobile={isMobile}>
@@ -157,7 +164,7 @@ const Step4 = (p: Wizard.StepProps) => {
             <Trans i18nKey="consent:paragraph1">
               Virufy cares about your privacy and is advised by licensed data privacy experts.
               The information and recordings you provide will only be used for the purposes described in our
-              Privacy Policy and consent form.
+              <LinkPurple to="https://virufy.org/privacy_policy" target="_blank">Privacy Policy</LinkPurple> and consent form.
               Please read the consent Form:
             </Trans>
           </BlackText>
@@ -183,7 +190,7 @@ const Step4 = (p: Wizard.StepProps) => {
         <Controller
           control={control}
           name="agreedConsentTerms"
-          defaultValue={false}
+          defaultValue={false}// default unchecked
           render={({ onChange, value }) => (
             <Checkbox
               id="Step2-ConsentTerms"
@@ -201,7 +208,7 @@ const Step4 = (p: Wizard.StepProps) => {
                 )}
               name="agreedConsentTerms"
               onChange={e => onChange(e.target.checked)}
-              value={value}
+              value={value} // onChange->whatever the parameter is, change it to the other one
             />
           )}
         />
@@ -215,7 +222,7 @@ const Step4 = (p: Wizard.StepProps) => {
               id="Step2-PolicyTerms"
               label={(
                 <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:agree">
-                  I have read, understood, and agree to the terms of the Virufy Privacy Policy.
+                  I have read, understood, and agree to the terms of the <LinkPurple to="https://virufy.org/privacy_policy" target="_blank">Virufy Privacy Policy</LinkPurple>.
                 </Trans>
               )}
               name="agreedPolicyTerms"

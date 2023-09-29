@@ -16,7 +16,6 @@ import { resetStore } from 'utils/wizard';
 // Helper
 import { scrollToTop } from 'helper/scrollHelper';
 import {
-  // getCountry,
   getSpeechContext,
 } from 'helper/stepsDefinitions';
 
@@ -25,9 +24,9 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 import {
   BeforeSubmitText,
+  SubmissionIdBox,
   ThankYouLayout,
   ThankYouTitle,
-  // SubmissionIdBox,
 } from './style';
 
 interface ThankYouLocation {
@@ -41,7 +40,6 @@ const ThankYou = (p: Wizard.StepProps) => {
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  // const country = getCountry();
   const [, setActiveStep] = useState(true);
   const { setDoGoBack, setTitle, setType } = useHeaderContext();
   const { action } = useStateMachine(resetStore());
@@ -49,7 +47,7 @@ const ThankYou = (p: Wizard.StepProps) => {
   const history = useHistory();
   const location = useLocation<ThankYouLocation>();
 
-  // const submissionId = location.state?.submissionId;
+  const submissionId = location.state?.submissionId;
   const patientId = location.state?.patientId;
 
   React.useEffect(() => {
@@ -81,31 +79,29 @@ const ThankYou = (p: Wizard.StepProps) => {
     <ThankYouLayout>
       <ThankYouTitle>{t('thankyou:title')}</ThankYouTitle>
       {!patientId && <BeforeSubmitText>{t('thankyou:paragraph1_cough', { context: getSpeechContext() })}</BeforeSubmitText>}
-      {/* {submissionId && (
+      {!patientId && submissionId && (
         <SubmissionIdBox>
-          {country === 'Colombia' ? (
-            <Trans i18nKey="thankyou:paragraph2Patient">
-              Your unique patient ID:
-              <br />
-              <strong>{{ patientId }}</strong>
-            </Trans>
-          ) : (
-            <Trans i18nKey="thankyou:paragraph2">
-              Your unique submission ID:
-              <br />
-              <strong>{{ submissionId }}</strong>
-            </Trans>
-          )}
+          <Trans i18nKey="thankyou:paragraph2">
+            Your unique submission ID:
+            <br />
+            <strong>{{ submissionId }}</strong>
+          </Trans>
         </SubmissionIdBox>
-      )} */}
+      )}
       {!patientId
       && (
         <>
           <BeforeSubmitText>
-            <Trans i18nKey="thankyou:paragraph3">
-              Make sure to safeguard this submission ID, as you will need it to request Virufy to delete your anonymized
-              data in future.
-              <br /><br />
+            {
+              submissionId && (
+                <Trans i18nKey="thankyou:paragraph3">
+                  Make sure to safeguard this submission ID, as you will need it
+                  to request Virufy to delete your anonymized data in future.
+                  <br /><br />
+                </Trans>
+              )
+            }
+            <Trans i18nKey="thankyou:paragraph3bis">
               If you later develop symptoms such as cough, fever, or shortness of breath, please come
               back to resubmit your
               latest cough sounds.

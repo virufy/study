@@ -2,6 +2,7 @@ import { isClinic } from 'helper/basePathHelper';
 
 // TODO: Improve types
 export function updateAction(storeKey: string): any {
+  // storeKey = "welcome"
   return (state: any, payload: any) => ({
     ...state,
     [storeKey]: {

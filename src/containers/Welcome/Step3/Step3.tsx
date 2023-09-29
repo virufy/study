@@ -82,7 +82,7 @@ const Step3 = (p: Wizard.StepProps) => {
             </p>
             <p>
               Our team includes researchers from over <strong>25 countries</strong>.
-              <LinkPurple to={`https://virufy.org/${i18n.language || 'en'}/our-approach`} target="_blank"> Our research</LinkPurple> has shown that Al technology may be able to identify COVID&apos;s unique coug signature.
+              <LinkPurple to={`https://virufy.org/${i18n.language || 'en'}/our-approach`} target="_blank"> Our research</LinkPurple> has shown that Al technology may be able to identify COVID&apos;s unique cough signature.
             </p>
             <p>
               By collecting <strong>coughs recordings</strong> from people around the world,
