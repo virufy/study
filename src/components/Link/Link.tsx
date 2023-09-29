@@ -3,6 +3,7 @@ import React, { FunctionComponent } from 'react';
 
 import { StyledInternalLink, StyledExternalLink } from './style';
 
+/* makes it Bold, black, and underlined link */
 interface LinkProps {
   children: React.ReactNode
   to: string;

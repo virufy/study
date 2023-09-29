@@ -163,7 +163,7 @@ const Step1 = (p: Wizard.StepProps) => {
     resetRegion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(); // ex. t('key'), replace 'key' with translation
 
   const lang = watch('language');
   const country = watch('country');
@@ -177,6 +177,7 @@ const Step1 = (p: Wizard.StepProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
     [country]);
 
+  // get a list of regions of a given country
   const regionSelectOptions = useMemo(() => {
     const output = [
       { label: t('main:selectRegion'), value: '' },
@@ -185,7 +186,7 @@ const Step1 = (p: Wizard.StepProps) => {
       const elem = countryData.find(a => a.value === country);
       if (elem) {
         elem.states.forEach(s => {
-          output.push({ label: s, value: s });
+          output.push({ label: t(`main:regionOpt.${s}`, s), value: s });
         });
       }
     }
@@ -283,6 +284,7 @@ const Step1 = (p: Wizard.StepProps) => {
             {t('main:selectLocation', 'Location')}
           </BoldBlackText>
 
+          {/* Country */}
           <Controller
             control={control}
             name="country"
@@ -333,6 +335,8 @@ const Step1 = (p: Wizard.StepProps) => {
               />
             )}
           />
+
+          {/* Region */}
           <Controller
             control={control}
             name="region"
