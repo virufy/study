@@ -18,6 +18,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
+import { getCountry } from 'helper/stepsDefinitions';
 
 // Components
 import OptionList from 'components/OptionList';
@@ -26,11 +27,13 @@ import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
 import {
-  QuestionText, MainContainer, QuestionNote,
+  QuestionText, MainContainer, QuestionAllApply,
 } from '../style';
 
 const schema = Yup.object({
-  ethnicity: Yup.string(),
+  ethnicity: Yup.object({
+    selected: Yup.array().required(),
+  }),
 }).defined();
 
 type Step4aType = Yup.InferType<typeof schema>;
@@ -50,6 +53,7 @@ const Step2d = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -112,6 +116,68 @@ const Step2d = ({
     }
   };
 
+  // Memos
+  const ethnicityOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: 'japanese',
+          label: t('questionary:ethnicity.options.japanese'),
+        },
+        {
+          value: 'chinese',
+          label: t('questionary:ethnicity.options.chinese'),
+        },
+        {
+          value: 'vietnamese',
+          label: t('questionary:ethnicity.options.vietnamese'),
+        },
+        {
+          value: 'korean',
+          label: t('questionary:ethnicity.options.korean'),
+        },
+        {
+          value: 'philippines',
+          label: t('questionary:ethnicity.options.philippines'),
+        },
+        {
+          value: 'southAmerica',
+          label: t('questionary:ethnicity.options.southAmerica'),
+        },
+        {
+          value: 'other',
+          label: t('questionary:ethnicity.options.other'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'asian',
+        label: t('questionary:ethnicity.options.asian'),
+      },
+      {
+        value: 'nativeAmericanOrArab',
+        label: t('questionary:ethnicity.options.nativeAmericanOrArab'),
+      },
+      {
+        value: 'blackOrAfrican',
+        label: t('questionary:ethnicity.options.blackOrAfrican'),
+      },
+      {
+        value: 'hispanicOrLatin',
+        label: t('questionary:ethnicity.options.hispanicOrLatin'),
+      },
+      {
+        value: 'nativeHawaiianOrPacific',
+        label: t('questionary:ethnicity.options.nativeHawaiianOrPacific'),
+      },
+      {
+        value: 'white',
+        label: t('questionary:ethnicity.options.white'),
+      },
+    ];
+  }, [country, t]);
+
   return (
     <MainContainer>
       <ProgressIndicator
@@ -123,43 +189,18 @@ const Step2d = ({
         <Trans i18nKey="questionary:ethnicity.question">
           <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>
-        <QuestionNote>{t('questionary:ethnicity.note')}</QuestionNote>
+        <QuestionAllApply>{t('questionary:ethnicity.note')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
         name="ethnicity"
-        defaultValue=""
+        defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
-            singleSelection
-            value={{ selected: value ? [value] : [] }}
-            onChange={v => onChange(v.selected[0])}
-            items={[
-              {
-                value: 'asian',
-                label: t('questionary:ethnicity.options.asian'),
-              },
-              {
-                value: 'nativeAmericanOrArab',
-                label: t('questionary:ethnicity.options.nativeAmericanOrArab'),
-              },
-              {
-                value: 'blackOrAfrican',
-                label: t('questionary:ethnicity.options.blackOrAfrican'),
-              },
-              {
-                value: 'hispanicOrLatin',
-                label: t('questionary:ethnicity.options.hispanicOrLatin'),
-              },
-              {
-                value: 'nativeHawaiianOrPacific',
-                label: t('questionary:ethnicity.options.nativeHawaiianOrPacific'),
-              },
-              {
-                value: 'white',
-                label: t('questionary:ethnicity.options.white'),
-              },
-            ]}
+            isCheckbox
+            value={value}
+            onChange={v => onChange(v)}
+            items={ethnicityOptions}
             excludableValues={['none']}
           />
         )}

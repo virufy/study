@@ -33,6 +33,7 @@ export const colors = {
   red: '#F54E37',
   purple: '#3578DE',
   lightPurple: '#7598F2',
+  berry: '#DB1C6C',
   purple_50: 'rgba(53, 120, 222, 0.5)', // #3578DE 50%
   purple_10: 'rgba(53, 120, 222, 0.1)', // #3578DE 10%
   purple_5: 'rgba(53, 120, 222, 0.05)', // #3578DE 5%

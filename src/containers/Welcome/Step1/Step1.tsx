@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useStateMachine } from 'little-state-machine';
+import usePortal from 'react-useportal';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -13,6 +14,7 @@ import { ReactComponent as ExclamationSVG } from 'assets/icons/exclamationCircle
 
 // Components
 import CreatedBy from 'components/CreatedBy';
+import WizardButtons from 'components/WizardButtons';
 
 // Modals
 import CountryErrorModal from 'modals/CountryErrorModal';
@@ -33,11 +35,31 @@ import { timeZones } from 'data/timeZones';
 import { localstoragePrefix, isClinic } from 'helper/basePathHelper';
 import { scrollToTop } from 'helper/scrollHelper';
 
+// Assets
+import HeaderSplash from 'assets/images/baseLogoSplash.png';
+
 // Styles
 import {
-  WelcomeContent, WelcomeStyledForm, LogoSubtitle,
-  RegionContainer, WelcomeInput, ContainerNextButton, NextButton, ArrowRightSVG,
-  BoldBlackText, CustomPurpleText, SupportedBy, NuevaLogo, WelcomeSelect, TextErrorContainer,
+  BlackText, TermsTitle, BerryTextBold,
+} from 'components/Texts';
+import {
+  WelcomeContent,
+  WelcomeStyledForm,
+  LogoSubtitle,
+  RegionContainer,
+  WelcomeInput,
+  ContainerNextButton,
+  NextButton,
+  ArrowRightSVG,
+  BoldBlackText,
+  CustomPurpleText,
+  SupportedBy,
+  NuevaLogo,
+  WelcomeSelect,
+  TextErrorContainer,
+  HeaderImageContainer,
+  HeaderImage,
+  LogoWhiteBG,
 } from '../style';
 
 declare interface OptionsProps {
@@ -89,17 +111,22 @@ const getCountryInfo = (countryName: string) => {
 };
 
 const Step1 = (p: Wizard.StepProps) => {
-  const [activeStep, setActiveStep] = React.useState(true);
-  const [supportedLang, setSupportedLang] = React.useState<{ value: string; label: string; }[]>([]);
-  const [ipLimit, setIpLimit] = React.useState(false);
-
+  // Hooks
+  const { Portal } = usePortal({
+    bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
+  });
   const {
     setType, setDoGoBack, setLogoSize,
   } = useHeaderContext();
   const resetExecuted = React.useRef(false);
-
   const { state, actions } = useStateMachine({ update: updateAction(p.storeKey), reset: resetStore() });
+  const history = useHistory();
+  const { t, i18n } = useTranslation(); // ex. t('key'), replace 'key' with translation
 
+  // States
+  const [activeStep, setActiveStep] = React.useState(true);
+  const [supportedLang, setSupportedLang] = React.useState<{ value: string; label: string; }[]>([]);
+  const [ipLimit, setIpLimit] = React.useState(false);
   const store = state?.[p.storeKey];
 
   const {
@@ -109,6 +136,7 @@ const Step1 = (p: Wizard.StepProps) => {
     watch,
     setValue,
     reset,
+    getValues,
   } = useForm({
     defaultValues: store,
     context: {
@@ -118,25 +146,14 @@ const Step1 = (p: Wizard.StepProps) => {
     mode: 'onChange',
   });
 
-  const history = useHistory();
   const { isValid, errors } = formState;
 
-  useEffect(() => {
-    if (resetExecuted.current) {
-      resetExecuted.current = false;
-      reset(store);
-    }
-  }, [store, reset]);
+  const lang = watch('language');
+  const country = getValues('country') || watch('country');
 
-  useEffect(() => {
-    if (isClinic) {
-      actions.reset({});
-      resetExecuted.current = true;
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  // Callbacks
   const onSubmit = async (values: Step1Type) => {
+    console.log(p.nextStep);
     if (values) {
       actions.update(values);
       if (values.patientId && p.otherSteps?.nextStepPatient) {
@@ -154,25 +171,50 @@ const Step1 = (p: Wizard.StepProps) => {
     setValue('patientId', '');
   };
 
+  // Effects
+  useEffect(() => {
+    if (resetExecuted.current) {
+      resetExecuted.current = false;
+      reset(store);
+    }
+  }, [store, reset]);
+
+  useEffect(() => {
+    if (isClinic) {
+      actions.reset({});
+      resetExecuted.current = true;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     scrollToTop();
     // Hide back arrow in header if neccesary
     setDoGoBack(null);
-    setType('tertiary');
-    setLogoSize('big');
     resetRegion();
+    if (country === 'Japan') {
+      setLogoSize('regular');
+      setType('none');
+    } else {
+      setType('tertiary');
+      setLogoSize('big');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { t, i18n } = useTranslation(); // ex. t('key'), replace 'key' with translation
-
-  const lang = watch('language');
-  const country = watch('country');
 
   useEffect(() => {
     i18n.changeLanguage(lang);
+    if (country === 'Japan') {
+      setLogoSize('regular');
+      setType('none');
+    } else {
+      setType('tertiary');
+      setLogoSize('big');
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n, lang]);
+  }, [i18n, lang, country]);
 
+  // Memos
   const invalidCountryModal = React.useMemo(() => invalidCountries.includes(country),
   // eslint-disable-next-line react-hooks/exhaustive-deps
     [country]);
@@ -206,6 +248,7 @@ const Step1 = (p: Wizard.StepProps) => {
     return formattedOptions;
   };
 
+  // Effects
   useEffect(() => {
     const localStorageCountry = localStorage.getItem('countryResult');
     const virufyWizard = localStorage.getItem(`${localstoragePrefix}_VirufyWizard`);
@@ -265,13 +308,26 @@ const Step1 = (p: Wizard.StepProps) => {
   return (
     <>
       <WelcomeStyledForm>
-        <LogoSubtitle>
-          {t('main:logoIntro', 'An Independent Nonprofit Research Organization')}
-        </LogoSubtitle>
+        {
+          (country === 'Japan') ? (
+            <HeaderImageContainer>
+              <HeaderImage
+                src={HeaderSplash}
+              />
+              <LogoWhiteBG />
+            </HeaderImageContainer>
+          ) : (
+            <WelcomeContent mt={20}>
+              <LogoSubtitle>
+                {t('main:logoIntro', 'An Independent Nonprofit Research Organization')}
+              </LogoSubtitle>
+              <CustomPurpleText mb={8}>
+                {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
+              </CustomPurpleText>
+            </WelcomeContent>
+          )
+        }
         <WelcomeContent mt={4}>
-          <CustomPurpleText mb={8}>
-            {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
-          </CustomPurpleText>
           {isClinic
           && (
             <SupportedBy>
@@ -300,6 +356,11 @@ const Step1 = (p: Wizard.StepProps) => {
                   if (cInfo) {
                     setSupportedLang(cInfo.supportedLang);
                     setValue('language', cInfo.defaultLang[0].value);
+                  }
+                  if (e?.value === 'Japan') {
+                    actions.update({
+                      country: 'Japan',
+                    });
                   }
                 }}
                 value={getOptionsCountry().filter(({ value }) => value === valueController)}
@@ -424,18 +485,47 @@ const Step1 = (p: Wizard.StepProps) => {
             </>
           )}
           {
+            (country === 'Japan') && (
+              <WelcomeContent maxWidth={470} mt={0}>
+                <BlackText>
+                  <BerryTextBold>
+                    {t('main:servicePurposeTitle', 'Service purpose and positioning')}
+                  </BerryTextBold>
+                  <Trans i18nKey="main:servicePurposeText">
+                    {/* eslint-disable-next-line max-len */}
+                    <p>Virufy is a service that uses artificial intelligence (Al) to analyze voice patterns to determine whether they resemble the coughs of patients suffering from COVID-19. This service is not a medical device, so it only provides information and is not intended for medical advice, diagnosis, treatment, prevention, etc. The Service is not a substitute for a doctor or other medical professional, so please do not make any medical decisions or take or stop any action (such as taking any medication) based on the information we provide. Also, do not use it in life-threatening or emergency situations. This service does not take any responsibility for the disease the user originally suffers from or the consequences of actions taken by the user based on the information provided.
+                    </p>
+                  </Trans>
+                </BlackText>
+                <TermsTitle>
+                  {t('main:terms', 'Terms of Use and Privacy Policy Please use after agreeing to')}
+                </TermsTitle>
+              </WelcomeContent>
+            )
+          }
+          {
             activeStep && (
-              <>
-                <ContainerNextButton>
-                  <NextButton
-                    onClick={handleSubmit(onSubmit)}
-                    isDisable={!isValid}
-                  >
-                    <ArrowRightSVG />
-                  </NextButton>
-                </ContainerNextButton>
-                <CreatedBy inline />
-              </>
+              (country === 'Japan') ? (
+                <Portal>
+                  <WizardButtons
+                    invert
+                    leftLabel={t('main:agree')}
+                    leftHandler={handleSubmit(onSubmit)}
+                  />
+                </Portal>
+              ) : (
+                <>
+                  <ContainerNextButton>
+                    <NextButton
+                      onClick={handleSubmit(onSubmit)}
+                      isDisable={!isValid}
+                    >
+                      <ArrowRightSVG />
+                    </NextButton>
+                  </ContainerNextButton>
+                  <CreatedBy inline />
+                </>
+              )
             )
           }
         </WelcomeContent>

@@ -10,13 +10,11 @@ import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
 
+// Helper
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
+
 // Update Action
 import { updateAction } from 'utils/wizard';
-
-// Components
-import OptionList from 'components/OptionList';
-import WizardButtons from 'components/WizardButtons';
-import ProgressIndicator from 'components/ProgressIndicator';
 
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
@@ -24,20 +22,23 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 
+// Components
+import WizardButtons from 'components/WizardButtons';
+import ProgressIndicator from 'components/ProgressIndicator';
+
 // Styles
 import {
-  QuestionText, MainContainer, QuestionAllApply,
+  QuestionText, MainContainer, QuestionAllApply, QuestionInput,
 } from '../style';
 
-const schema = Yup.object({
-  gender: Yup.object({
-    selected: Yup.array().required(),
-  }),
+const schemaWithoutPatient = Yup.object({
+  covidTimes: Yup.string().required(),
+  lastTimeCovidMonths: Yup.string().notRequired(),
 }).defined();
 
-type Step2Type = Yup.InferType<typeof schema>;
+type Step1eType = Yup.InferType<typeof schemaWithoutPatient>;
 
-const Step2b = ({
+const Step1e = ({
   previousStep,
   nextStep,
   storeKey,
@@ -47,10 +48,14 @@ const Step2b = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle, setType } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setSubtitle, setType,
+  } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const patientId = getPatientId();
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -61,14 +66,14 @@ const Step2b = ({
   } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
-    resolver: yupResolver(schema),
+    context: {
+      country,
+    },
+    resolver: yupResolver(schemaWithoutPatient),
   });
-  const { errors } = formState;
+  const { errors, isValid } = formState;
 
-  const {
-    isValid,
-  } = formState;
-
+  // Callbacks
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     if (previousStep) {
@@ -78,15 +83,25 @@ const Step2b = ({
     }
   }, [history, previousStep]);
 
+  // Effects
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:gender.genderTitle')}`);
-    setType('primary');
+    if (patientId) {
+      setTitle('');
+    } else {
+      setTitle(t('questionary:covidTimesTitle'));
+    }
+    if (patientId) {
+      setType('tertiary');
+    } else {
+      setType('primary');
+    }
+    setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, patientId, t]);
 
   // Handlers
-  const onSubmit = async (values: Step2Type) => {
+  const onSubmit = async (values: Step1eType) => {
     if (values) {
       action(values);
       if (nextStep) {
@@ -96,30 +111,6 @@ const Step2b = ({
     }
   };
 
-  // Memos
-  const genderOptions = React.useMemo(() => [
-    {
-      value: 'female',
-      label: t('questionary:gender.options.female'),
-    },
-    {
-      value: 'male',
-      label: t('questionary:gender.options.male'),
-    },
-    {
-      value: 'transgender',
-      label: t('questionary:gender.options.transgender'),
-    },
-    {
-      value: 'other',
-      label: t('questionary:gender.options.other'),
-    },
-    {
-      value: 'notToSay',
-      label: t('questionary:gender.options.notToSay'),
-    },
-  ], [t]);
-
   return (
     <MainContainer>
       <ProgressIndicator
@@ -127,22 +118,45 @@ const Step2b = ({
         totalSteps={metadata?.total}
         progressBar
       />
-      <QuestionText first>{t('questionary:gender.question')}
-        <QuestionAllApply>{t('questionary:gender.note')}</QuestionAllApply>
+      <QuestionText extraSpace first>
+        {t('questionary:covidTimes')}
       </QuestionText>
       <Controller
         control={control}
-        name="gender"
-        defaultValue={{ selected: [], other: '' }}
-        render={({ onChange, value }) => (
-          <OptionList
-            singleSelection
+        name="covidTimes"
+        defaultValue=""
+        render={({ onChange, value, name }) => (
+          <QuestionInput
+            name={name}
             value={value}
-            onChange={v => onChange(v)}
-            items={genderOptions}
+            onChange={onChange}
+            type="number"
+            placeholder={t('questionary:covidTimesPlaceholder')}
+            autoComplete="Off"
           />
         )}
       />
+
+      <QuestionText extraSpace>
+        {t('questionary:lastTimeCovidMonths')}
+        <QuestionAllApply>{t('questionary:lastTimeCovidMonthsCaption')}</QuestionAllApply>
+      </QuestionText>
+      <Controller
+        control={control}
+        name="lastTimeCovidMonths"
+        defaultValue=""
+        render={({ onChange, value, name }) => (
+          <QuestionInput
+            name={name}
+            value={value}
+            onChange={onChange}
+            type="number"
+            placeholder={t('questionary:lastTimeCovidMonthsPlaceholder')}
+            autoComplete="Off"
+          />
+        )}
+      />
+
       {/* Bottom Buttons */}
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
@@ -159,4 +173,4 @@ const Step2b = ({
   );
 };
 
-export default React.memo(Step2b);
+export default React.memo(Step1e);

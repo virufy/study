@@ -73,18 +73,24 @@ const schema = Yup.object().shape({
 type Step3Type = Yup.InferType<typeof schema>;
 
 const Step4 = (p: Wizard.StepProps) => {
+  // Hooks
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const [activeStep, setActiveStep] = React.useState(true);
-  const { setType, setDoGoBack, setSubtitle } = useHeaderContext();
+  const { t } = useTranslation();
+  const history = useHistory();
 
   const { state, action } = useStateMachine(updateAction(p.storeKey));
   // Ex. state = welcome: agreedBiometric: true, agreedConsentTerms: true, ..., country:, region:, language:
 
+  // States
+  const [activeStep, setActiveStep] = React.useState(true);
+  const { setType, setDoGoBack, setSubtitle } = useHeaderContext();
+
   const store = state?.[p.storeKey];// p.storeKey = welcome
   // store = agreedBiometric: true, agreedConsentTerms: true, ..., country:, region:, language:
 
+  // Memos
   const currentCountry: PrivacyPolicyCountry = useMemo(() => {
     if (['Argentina', 'Bolivia', 'Colombia', 'Greece', 'Peru', 'Mexico', 'Brazil', 'United States', 'Japan'].includes(state.welcome.country)) {
       return state.welcome.country;
@@ -103,11 +109,11 @@ const Step4 = (p: Wizard.StepProps) => {
     mode: 'onChange',
   });
   const { errors, isValid } = formState;
-  const history = useHistory();
   const { isLoadingFile, file: consentFormContent } = useEmbeddedFile(
     buildConsentFilePath(currentCountry, state.welcome.language),
   );
 
+  // Callbacks
   // go to the next page/step
   const onSubmit = async (values: Step3Type) => {
     // values = agreedBiometric: true, agreedConsentTerms: true...
@@ -131,8 +137,7 @@ const Step4 = (p: Wizard.StepProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { t } = useTranslation();
-
+  // Effects
   useEffect(() => { // when moving the pages, do these
     scrollToTop();
     setDoGoBack(() => doBack);
@@ -155,7 +160,7 @@ const Step4 = (p: Wizard.StepProps) => {
     }
     return 'es';
   };
-  
+
   return (
     <WelcomeStyledFormAlternative>
       <ContainerShapeDown isMobile={isMobile}>

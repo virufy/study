@@ -10,6 +10,9 @@ import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
 
+// Helper
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
+
 // Update Action
 import { updateAction } from 'utils/wizard';
 
@@ -20,22 +23,24 @@ import useHeaderContext from 'hooks/useHeaderContext';
 import { scrollToTop } from 'helper/scrollHelper';
 
 // Components
+import OptionList from 'components/OptionList';
+import DatePicker from 'components/DatePicker';
+import WizardButtons from 'components/WizardButtons';
 import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
-import OptionList from 'components/OptionList';
-import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionAllApply, MainContainer,
+  QuestionText, MainContainer, QuestionAllApply,
 } from '../style';
 
-const schema = Yup.object({
-  smokeLastSixMonths: Yup.string().required(),
+const schemaWithoutPatient = Yup.object({
+  antigenTestDate: Yup.date().required(),
+  antigenTestResult: Yup.string().required(),
 }).defined();
 
-type Step3Type = Yup.InferType<typeof schema>;
+type Step1cType = Yup.InferType<typeof schemaWithoutPatient>;
 
-const Step3 = ({
+const Step1c = ({
   previousStep,
   nextStep,
   storeKey,
@@ -45,10 +50,14 @@ const Step3 = ({
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const { setDoGoBack, setTitle, setType } = useHeaderContext();
+  const {
+    setDoGoBack, setTitle, setSubtitle, setType,
+  } = useHeaderContext();
   const history = useHistory();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const patientId = getPatientId();
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -59,14 +68,14 @@ const Step3 = ({
   } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
-    resolver: yupResolver(schema),
+    context: {
+      country,
+    },
+    resolver: yupResolver(schemaWithoutPatient),
   });
-  const { errors } = formState;
+  const { errors, isValid } = formState;
 
-  const {
-    isValid,
-  } = formState;
-
+  // Callbacks
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     if (previousStep) {
@@ -76,16 +85,35 @@ const Step3 = ({
     }
   }, [history, previousStep]);
 
+  // Effects
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:smokeLastSixMonths.title')}`);
-    setType('primary');
+    if (patientId) {
+      setTitle('');
+    } else {
+      setTitle(t('questionary:testTaken.title'));
+    }
+    if (patientId) {
+      setType('tertiary');
+    } else {
+      setType('primary');
+    }
+    setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, patientId, t]);
 
   // Handlers
-  const onSubmit = async (values: Step3Type) => {
+  const onSubmit = async (values: Step1cType) => {
     if (values) {
+      const {
+        antigenTestDate,
+        antigenTestResult,
+      } = (values as any);
+      // if patient
+      if (!antigenTestDate || !antigenTestResult) {
+        return;
+      }
+
       action(values);
       if (nextStep) {
         setActiveStep(false);
@@ -93,6 +121,18 @@ const Step3 = ({
       }
     }
   };
+
+  // Memos
+  const antigenOptions = React.useMemo(() => [
+    {
+      value: 'positive',
+      label: t('questionary:resultAntigenTest.options.positive'),
+    },
+    {
+      value: 'negative',
+      label: t('questionary:resultAntigenTest.options.negative'),
+    },
+  ], [t]);
 
   return (
     <MainContainer>
@@ -102,31 +142,41 @@ const Step3 = ({
         progressBar
       />
       <QuestionText extraSpace first>
-        {t('questionary:smokeLastSixMonths.question')}
-        <QuestionAllApply>{t('questionary:smokeLastSixMonths.note')}</QuestionAllApply>
+        {t('questionary:whenAntigenTest')}
+        <QuestionAllApply>{t('questionary:whenAntigenTestNote')}</QuestionAllApply>
+      </QuestionText>
+
+      <Controller
+        control={control}
+        name="antigenTestDate"
+        defaultValue={undefined}
+        render={({ onChange, value }) => (
+          <DatePicker
+            label="Date"
+            value={value ? new Date(value) : null}
+            locale={i18n.language}
+            onChange={onChange}
+          />
+        )}
+      />
+
+      <QuestionText extraSpace>
+        {t('questionary:resultAntigenTest.question')}
       </QuestionText>
       <Controller
         control={control}
-        name="smokeLastSixMonths"
-        defaultValue=""
+        name="antigenTestResult"
+        defaultValue={undefined}
         render={({ onChange, value }) => (
           <OptionList
             singleSelection
             value={{ selected: value ? [value] : [] }}
             onChange={v => onChange(v.selected[0])}
-            items={[
-              {
-                value: 'true',
-                label: t('questionary:smokeLastSixMonths.options.yes'),
-              },
-              {
-                value: 'false',
-                label: t('questionary:smokeLastSixMonths.options.no'),
-              },
-            ]}
+            items={antigenOptions}
           />
         )}
       />
+
       {/* Bottom Buttons */}
       <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
@@ -143,4 +193,4 @@ const Step3 = ({
   );
 };
 
-export default React.memo(Step3);
+export default React.memo(Step1c);

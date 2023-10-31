@@ -14,10 +14,12 @@ import { BlackText } from 'components/Texts';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { updateAction } from 'utils/wizard';
+import { getCountry } from 'helper/stepsDefinitions';
 
 // Images
 import { ReactComponent as ImageCoughSVG } from 'assets/images/cough-right.svg';
 import { ReactComponent as ImageVoiceSVG } from 'assets/images/voice-right.svg';
+import { ReactComponent as ImageVoiceJASVG } from 'assets/images/voice-right-ja.svg';
 import { ReactComponent as ImageBreathSVG } from 'assets/images/breath-right.svg';
 
 import Record from './Record';
@@ -57,6 +59,7 @@ const Introduction = ({
   const history = useHistory();
   const location = useLocation<{ isShortAudioCollection: boolean }>();
   const { t } = useTranslation();
+  const country = getCountry();
 
   const isShortAudioCollection = location?.state?.isShortAudioCollection || false;
 
@@ -142,7 +145,7 @@ const Introduction = ({
         away from your mouth and <strong>do not obstruct</strong>
         or cover your device with plastic. Do not speak violently or too forcefully.
       </Trans>,
-      <ImageVoiceSVG />,
+      country === 'Japan' ? <ImageVoiceJASVG /> : <ImageVoiceSVG />,
       <Trans i18nKey="recordingsRecord:textSpeech">
         Tap the record button below, inhale deeply, and then
         <strong> say a sustained ‘aaaaah’ for at least 5 seconds.</strong>
@@ -150,7 +153,7 @@ const Introduction = ({
       </Trans>,
 
     ]);
-  }, [isBreathLogic, isCoughLogic]);
+  }, [isBreathLogic, isCoughLogic, country]);
 
   return (
     <MainContainer>
@@ -159,11 +162,21 @@ const Introduction = ({
           <BulletIndicator>1</BulletIndicator>
         </WelcomeBullets>
         <BlackText>
-          <Trans i18nKey="recordingsIntroduction:recordCough.intro1">
-            Find a <strong>quiet environment</strong> at least
-            <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask.
-            If you are feeling ill, please sit down.
-          </Trans>
+          {
+            isBreathLogic || isCoughLogic ? (
+              <Trans i18nKey="recordingsIntroduction:recordCough.intro1">
+                Find a <strong>quiet environment</strong> at least
+                <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask.
+                If you are feeling ill, please sit down.
+              </Trans>
+            ) : (
+              <Trans i18nKey="recordingsIntroduction:recordBreath.intro1">
+                Find a <strong>quiet environment</strong> at least
+                <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask.
+                If you are feeling ill, please sit down.
+              </Trans>
+            )
+          }
         </BlackText>
       </InstructionContainer>
       <SocialDistancing />
@@ -196,16 +209,20 @@ const Introduction = ({
         isShortAudioCollection={isShortAudioCollection}
       />
 
-      <InstructionContainer>
-        <WelcomeBullets>
-          <BulletIndicator>4</BulletIndicator>
-        </WelcomeBullets>
-        <BlackText>
-          <Trans i18nKey="recordingsRecord:textNext">
-            Click continue to proceed.
-          </Trans>
-        </BlackText>
-      </InstructionContainer>
+      {
+        country !== 'Japan' && (
+          <InstructionContainer>
+            <WelcomeBullets>
+              <BulletIndicator>4</BulletIndicator>
+            </WelcomeBullets>
+            <BlackText>
+              <Trans i18nKey="recordingsRecord:textNext">
+                Click continue to proceed.
+              </Trans>
+            </BlackText>
+          </InstructionContainer>
+        )
+      }
 
     </MainContainer>
   );
