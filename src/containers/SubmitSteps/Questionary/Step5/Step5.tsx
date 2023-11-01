@@ -171,7 +171,13 @@ const Step5 = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="currentRespiratoryCondition" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="currentRespiratoryCondition"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

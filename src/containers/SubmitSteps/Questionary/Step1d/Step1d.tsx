@@ -157,7 +157,13 @@ const Step1d = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="pcrTestDate" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="pcrTestDate"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       <QuestionText extraSpace>
         {t('questionary:resultPcrTest.question')}
@@ -175,7 +181,13 @@ const Step1d = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="pcrTestResult" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="pcrTestResult"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

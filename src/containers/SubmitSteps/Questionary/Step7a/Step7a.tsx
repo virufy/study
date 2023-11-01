@@ -149,7 +149,13 @@ const Step7a = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="fluTestDate" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="fluTestDate"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       <QuestionText extraSpace>
         {t('questionary:fluTestResult.question')}
@@ -167,7 +173,13 @@ const Step7a = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="fluTestResult" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="fluTestResult"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

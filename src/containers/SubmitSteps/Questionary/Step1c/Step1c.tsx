@@ -154,7 +154,13 @@ const Step1c = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="antigenTestDate" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="antigenTestDate"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       <QuestionText extraSpace>
         {t('questionary:resultAntigenTest.question')}
@@ -172,7 +178,13 @@ const Step1c = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="antigenTestResult" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="antigenTestResult"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

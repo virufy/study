@@ -145,7 +145,13 @@ const Step7b = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="whenFluShot" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="whenFluShot"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

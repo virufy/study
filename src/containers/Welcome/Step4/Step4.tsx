@@ -217,7 +217,13 @@ const Step4 = (p: Wizard.StepProps) => {
             />
           )}
         />
-        {errors && <p><ErrorMessage errors={errors} name="agreedConsentTerms" /></p>}
+        <ErrorMessage
+          errors={errors}
+          name="agreedConsentTerms"
+          render={({ message }) => (
+            <p>{message}</p>
+          )}
+        />
 
         <Controller
           control={control}
@@ -237,7 +243,13 @@ const Step4 = (p: Wizard.StepProps) => {
             />
           )}
         />
-        {errors && <p><ErrorMessage errors={errors} name="agreedPolicyTerms" /></p>}
+        <ErrorMessage
+          errors={errors}
+          name="agreedPolicyTerms"
+          render={({ message }) => (
+            <p>{message}</p>
+          )}
+        />
 
         {currentCountry !== 'Brazil' && (
           <>
@@ -266,7 +278,13 @@ const Step4 = (p: Wizard.StepProps) => {
                 />
               )}
             />
-            {errors && <p><ErrorMessage errors={errors} name="agreedCovidCollection" /></p>}
+            <ErrorMessage
+              errors={errors}
+              name="agreedCovidCollection"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
           </>
         )}
 
@@ -301,7 +319,13 @@ const Step4 = (p: Wizard.StepProps) => {
                 />
               )}
             />
-            {errors && <p><ErrorMessage errors={errors} name="agreedCovidDetection" /></p>}
+            <ErrorMessage
+              errors={errors}
+              name="agreedCovidDetection"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
           </>
         )}
 
@@ -327,7 +351,13 @@ const Step4 = (p: Wizard.StepProps) => {
                 />
               )}
             />
-            {errors && <p><ErrorMessage errors={errors} name="agreedTrainingArtificial" /></p>}
+            <ErrorMessage
+              errors={errors}
+              name="agreedTrainingArtificial"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
           </>
         )}
 
@@ -353,7 +383,13 @@ const Step4 = (p: Wizard.StepProps) => {
                 />
               )}
             />
-            {errors && <p><ErrorMessage errors={errors} name="agreedBiometric" /></p>}
+            <ErrorMessage
+              errors={errors}
+              name="agreedBiometric"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
           </>
         )}
 

@@ -138,7 +138,13 @@ const Step2a = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="ageGroup" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="ageGroup"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

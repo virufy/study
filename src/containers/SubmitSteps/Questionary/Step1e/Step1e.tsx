@@ -131,7 +131,13 @@ const Step1e = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="covidTimes" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="covidTimes"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       <QuestionText extraSpace>
         {t('questionary:lastTimeCovidMonths')}
@@ -152,7 +158,13 @@ const Step1e = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="lastTimeCovidMonths" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="lastTimeCovidMonths"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

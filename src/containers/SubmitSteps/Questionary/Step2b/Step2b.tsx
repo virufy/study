@@ -143,7 +143,13 @@ const Step2b = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="gender" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="gender"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

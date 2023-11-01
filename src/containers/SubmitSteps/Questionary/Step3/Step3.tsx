@@ -127,7 +127,13 @@ const Step3 = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="smokeLastSixMonths" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="smokeLastSixMonths"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

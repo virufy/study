@@ -271,7 +271,13 @@ const Step1b = ({
               />
             )}
           />
-          {errors && <p><ErrorMessage errors={errors} name="pcrTestDate" /></p>}
+          <ErrorMessage
+            errors={errors}
+            name="pcrTestDate"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
 
           <QuestionText extraSpace>
             {t('questionary:resultPcrTest.question')}
@@ -289,7 +295,13 @@ const Step1b = ({
               />
             )}
           />
-          {errors && <p><ErrorMessage errors={errors} name="pcrTestResult" /></p>}
+          <ErrorMessage
+            errors={errors}
+            name="pcrTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
         </>
       )}
       {(!patientId && hasAntigenTest) && (
@@ -311,7 +323,13 @@ const Step1b = ({
               />
             )}
           />
-          {errors && <p><ErrorMessage errors={errors} name="antigenTestDate" /></p>}
+          <ErrorMessage
+            errors={errors}
+            name="antigenTestDate"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
 
           {
             country === 'Japan' && (
@@ -345,7 +363,13 @@ const Step1b = ({
                     />
                   )}
                 />
-                {errors && <p><ErrorMessage errors={errors} name="whatAntigenTestResult" /></p>}
+                <ErrorMessage
+                  errors={errors}
+                  name="whatAntigenTestResult"
+                  render={({ message }) => (
+                    <p>{message}</p>
+                  )}
+                />
               </>
             )
           }
@@ -366,7 +390,13 @@ const Step1b = ({
               />
             )}
           />
-          {errors && <p><ErrorMessage errors={errors} name="antigenTestResult" /></p>}
+          <ErrorMessage
+            errors={errors}
+            name="antigenTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
         </>
       )}
       {/* {hasAntibodyTest && (
@@ -453,7 +483,13 @@ const Step1b = ({
               />
             )}
           />
-          {errors && <p><ErrorMessage errors={errors} name="patientPcrTestResult" /></p>}
+          <ErrorMessage
+            errors={errors}
+            name="patientPcrTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
 
           <QuestionText extraSpace>
             <Trans i18nKey="questionary:patient:resultAntigenTest">
@@ -482,7 +518,13 @@ const Step1b = ({
               />
             )}
           />
-          {errors && <p><ErrorMessage errors={errors} name="patientAntigenTestResult" /></p>}
+          <ErrorMessage
+            errors={errors}
+            name="patientAntigenTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
         </>
       )}
 

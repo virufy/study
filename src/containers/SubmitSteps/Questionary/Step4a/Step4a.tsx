@@ -256,7 +256,13 @@ const Step4a = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="currentSymptoms" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="currentSymptoms"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (

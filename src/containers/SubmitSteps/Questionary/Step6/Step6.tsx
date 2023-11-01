@@ -310,7 +310,13 @@ const Step6 = ({
           />
         )}
       />
-      {errors && <p><ErrorMessage errors={errors} name="currentMedicalCondition" /></p>}
+      <ErrorMessage
+        errors={errors}
+        name="currentMedicalCondition"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
 
       {/* Bottom Buttons */}
       {activeStep && (
