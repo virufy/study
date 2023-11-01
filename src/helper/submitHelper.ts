@@ -113,14 +113,16 @@ export async function doSubmit({
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
     }
 
-    body.append('testTaken', testTaken.join(','));
+    if (testTaken) {
+      body.append('testTaken', testTaken.join(','));
+    }
 
-    if (testTaken.includes('pcr')) {
+    if (testTaken && testTaken.includes('pcr')) {
       body.append('pcrTestDate', pcrTestDate.toISOString());
       body.append('pcrTestResult', pcrTestResult);
     }
 
-    if (testTaken.includes('antigen')) {
+    if (testTaken && testTaken.includes('antigen')) {
       body.append('antigenTestDate', antigenTestDate.toISOString());
       body.append('antigenTestResult', antigenTestResult);
       body.append('whatAntigenTestResult', whatAntigenTestResult);
@@ -189,7 +191,7 @@ export async function doSubmit({
     }
 
     if (pcrTestDate) {
-      body.append('pcrTestDate', pcrTestDate.toISOString());
+      body.append('pcrTestDate', pcrTestDate);
       body.append('pcrTestResult', pcrTestResult);
     }
 

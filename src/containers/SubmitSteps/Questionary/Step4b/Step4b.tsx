@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -19,6 +20,7 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { getCountry } from 'helper/stepsDefinitions';
+import { doSubmit } from 'helper/submitHelper';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
@@ -51,6 +53,9 @@ const Step4b = ({
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const country = getCountry();
+  const [cookies] = useCookies(['virufy-study-user']);
+
+  const userCookie = cookies['virufy-study-user'];
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -101,7 +106,27 @@ const Step4b = ({
   }, [history, previousStep]);
 
   const onSubmit = async (values: Step4bType) => {
-    if (values) {
+    if (country === 'Japan') {
+      if (values) {
+        await doSubmit({
+          setSubmitError: () => setSubmitError(null),
+          state: {
+            ...state,
+            'submit-steps': {
+              ...state['submit-steps'],
+              ...values,
+            },
+          },
+          captchaValue,
+          action,
+          nextStep,
+          setActiveStep,
+          history,
+          userCookie,
+        });
+      }
+    }
+    if (values && country !== 'Japan') {
       action(values);
       if (nextStep) {
         setActiveStep(false);
@@ -109,6 +134,7 @@ const Step4b = ({
       }
     }
   };
+
   const onSubmitPatientShortQuestionnaire = () => {
     if (nextStep) {
       setActiveStep(false);
