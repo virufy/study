@@ -170,10 +170,9 @@ const Introduction = ({
                 If you are feeling ill, please sit down.
               </Trans>
             ) : (
-              <Trans i18nKey="recordingsIntroduction:recordBreath.intro1">
-                Find a <strong>quiet environment</strong> at least
-                <strong>20 ft (6m)</strong> away from others and wear a cloth or surgical mask.
-                If you are feeling ill, please sit down.
+              <Trans i18nKey="recordingsIntroduction:recordSpeech.intro1">
+                Move to a <strong>quiet environment</strong>, at least <strong>6 meters</strong> away from other people.
+                If you are not feeling well, please sit down.
               </Trans>
             )
           }

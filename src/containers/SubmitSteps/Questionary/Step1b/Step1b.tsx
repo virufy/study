@@ -271,6 +271,7 @@ const Step1b = ({
               />
             )}
           />
+          {errors && <p><ErrorMessage errors={errors} name="pcrTestDate" /></p>}
 
           <QuestionText extraSpace>
             {t('questionary:resultPcrTest.question')}
@@ -288,6 +289,7 @@ const Step1b = ({
               />
             )}
           />
+          {errors && <p><ErrorMessage errors={errors} name="pcrTestResult" /></p>}
         </>
       )}
       {(!patientId && hasAntigenTest) && (
@@ -309,6 +311,7 @@ const Step1b = ({
               />
             )}
           />
+          {errors && <p><ErrorMessage errors={errors} name="antigenTestDate" /></p>}
 
           {
             country === 'Japan' && (
@@ -342,6 +345,7 @@ const Step1b = ({
                     />
                   )}
                 />
+                {errors && <p><ErrorMessage errors={errors} name="whatAntigenTestResult" /></p>}
               </>
             )
           }
@@ -362,6 +366,7 @@ const Step1b = ({
               />
             )}
           />
+          {errors && <p><ErrorMessage errors={errors} name="antigenTestResult" /></p>}
         </>
       )}
       {/* {hasAntibodyTest && (
@@ -448,6 +453,8 @@ const Step1b = ({
               />
             )}
           />
+          {errors && <p><ErrorMessage errors={errors} name="patientPcrTestResult" /></p>}
+
           <QuestionText extraSpace>
             <Trans i18nKey="questionary:patient:resultAntigenTest">
               What was the result of Patient {patientId}&apos;s rapid antigen COVID-19 test?
@@ -475,10 +482,11 @@ const Step1b = ({
               />
             )}
           />
+          {errors && <p><ErrorMessage errors={errors} name="patientAntigenTestResult" /></p>}
         </>
       )}
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           {(() => {

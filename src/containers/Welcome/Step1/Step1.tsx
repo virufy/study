@@ -153,12 +153,14 @@ const Step1 = (p: Wizard.StepProps) => {
 
   // Callbacks
   const onSubmit = async (values: Step1Type) => {
-    console.log(p.nextStep);
     if (values) {
       actions.update(values);
       if (values.patientId && p.otherSteps?.nextStepPatient) {
         setActiveStep(false);
         history.push(p.otherSteps.nextStepPatient);
+      } else if (country === 'Japan' && p.otherSteps?.japanNextStep) {
+        setActiveStep(false);
+        history.push(p.otherSteps?.japanNextStep);
       } else if (p.nextStep) {
         setActiveStep(false);
         history.push(p.nextStep);
@@ -169,6 +171,40 @@ const Step1 = (p: Wizard.StepProps) => {
   const resetRegion = () => {
     setValue('region', '');
     setValue('patientId', '');
+  };
+
+  // Memos
+  const invalidCountryModal = React.useMemo(() => invalidCountries.includes(country),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+    [country]);
+
+  // get a list of regions of a given country
+  const regionSelectOptions = useMemo(() => {
+    const output = [
+      { label: t('main:selectRegion'), value: '' },
+    ];
+    if (country) {
+      const elem = countryData.find(a => a.value === country);
+      if (elem) {
+        elem.states.forEach(s => {
+          output.push({ label: t(`main:regionOpt.${s}`, s), value: s });
+        });
+      }
+    }
+    return output;
+  }, [t, country]);
+
+  const hospitalIdOptions = useMemo(() => getHospitalIdFor(country), [country]);
+
+  const getClinicCountries = () => countryData.filter(item => clinicCountries.includes(item.value));
+
+  const getOptionsCountry = () => {
+    const options = isClinic ? getClinicCountries() : countryData;
+    const formattedOptions = options.reduce((acc: CountryDataProps[], current) => {
+      acc.push({ ...current, label: t(`main:countries.${current.value}`) });
+      return acc;
+    }, []);
+    return formattedOptions;
   };
 
   // Effects
@@ -214,41 +250,6 @@ const Step1 = (p: Wizard.StepProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n, lang, country]);
 
-  // Memos
-  const invalidCountryModal = React.useMemo(() => invalidCountries.includes(country),
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-    [country]);
-
-  // get a list of regions of a given country
-  const regionSelectOptions = useMemo(() => {
-    const output = [
-      { label: t('main:selectRegion'), value: '' },
-    ];
-    if (country) {
-      const elem = countryData.find(a => a.value === country);
-      if (elem) {
-        elem.states.forEach(s => {
-          output.push({ label: t(`main:regionOpt.${s}`, s), value: s });
-        });
-      }
-    }
-    return output;
-  }, [t, country]);
-
-  const hospitalIdOptions = useMemo(() => getHospitalIdFor(country), [country]);
-
-  const getClinicCountries = () => countryData.filter(item => clinicCountries.includes(item.value));
-
-  const getOptionsCountry = () => {
-    const options = isClinic ? getClinicCountries() : countryData;
-    const formattedOptions = options.reduce((acc: CountryDataProps[], current) => {
-      acc.push({ ...current, label: t(`main:countries.${current.value}`) });
-      return acc;
-    }, []);
-    return formattedOptions;
-  };
-
-  // Effects
   useEffect(() => {
     const localStorageCountry = localStorage.getItem('countryResult');
     const virufyWizard = localStorage.getItem(`${localstoragePrefix}_VirufyWizard`);

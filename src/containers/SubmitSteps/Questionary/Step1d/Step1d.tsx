@@ -12,15 +12,13 @@ import * as Yup from 'yup';
 
 // Helper
 import { getPatientId, getCountry } from 'helper/stepsDefinitions';
-
-// Update Action
-import { updateAction } from 'utils/wizard';
-
-// Header Control
-import useHeaderContext from 'hooks/useHeaderContext';
+import { scrollToTop } from 'helper/scrollHelper';
 
 // Utils
-import { scrollToTop } from 'helper/scrollHelper';
+import { updateAction } from 'utils/wizard';
+
+// Hooks
+import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
 import OptionList from 'components/OptionList';
@@ -94,12 +92,9 @@ const Step1d = ({
     scrollToTop();
     if (patientId) {
       setTitle('');
-    } else {
-      setTitle(t('questionary:resultPcrTest.title'));
-    }
-    if (patientId) {
       setType('tertiary');
     } else {
+      setTitle(t('questionary:resultPcrTest.title'));
       setType('primary');
     }
     setSubtitle('');
@@ -162,6 +157,7 @@ const Step1d = ({
           />
         )}
       />
+      {errors && <p><ErrorMessage errors={errors} name="pcrTestDate" /></p>}
 
       <QuestionText extraSpace>
         {t('questionary:resultPcrTest.question')}
@@ -179,9 +175,9 @@ const Step1d = ({
           />
         )}
       />
+      {errors && <p><ErrorMessage errors={errors} name="pcrTestResult" /></p>}
 
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons

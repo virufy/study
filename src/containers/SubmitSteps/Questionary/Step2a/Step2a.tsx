@@ -138,8 +138,9 @@ const Step2a = ({
           />
         )}
       />
+      {errors && <p><ErrorMessage errors={errors} name="ageGroup" /></p>}
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons

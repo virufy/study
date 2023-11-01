@@ -205,8 +205,9 @@ const Step2d = ({
           />
         )}
       />
+      {errors && <p><ErrorMessage errors={errors} name="ethnicity" /></p>}
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons

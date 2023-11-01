@@ -132,7 +132,7 @@ function getBreathSteps(storeKey: string, country: string, patientId?: string) {
             if (patientId) {
               return `${baseUrl}/thank-you`;
             }
-            return country === 'Japan' ? `${baseUrl}/step-record/speech` : `${baseUrl}/questionary/step1a`;
+            return `${baseUrl}/questionary/step1a`;
           }
           return `${baseUrl}/step-record/speech`;
         })(),
@@ -683,6 +683,7 @@ export function getWelcomeStepsWithoutDots(storeKey: string, country: string) {
         storeKey,
         nextStep: country === 'Japan' ? `${welcomeUrl}/step-3` : `${welcomeUrl}/step-2`,
         otherSteps: {
+          japanNextStep: `${welcomeUrl}/step-3`,
           nextStepPatient: `${welcomeUrl}/patientSummary`,
         },
       },

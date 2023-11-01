@@ -127,8 +127,9 @@ const Step3 = ({
           />
         )}
       />
+      {errors && <p><ErrorMessage errors={errors} name="smokeLastSixMonths" /></p>}
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons

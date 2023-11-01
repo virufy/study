@@ -53,7 +53,7 @@ export const BlackText = styled.h2<{ mt?: number; textCenter?: boolean; }>`
   margin-right: auto;
   white-space: pre-wrap;
   
-  ${({ mt }) => mt && `margin-top: ${mt}px !important`};
+  ${({ mt }) => mt && `margin-top: ${mt}px !important;`}
 
   padding-left: 20px;
   padding-right: 20px;

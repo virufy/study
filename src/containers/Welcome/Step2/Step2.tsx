@@ -76,8 +76,6 @@ const Step2 = (p: Wizard.StepProps) => {
 
   const { t } = useTranslation();
 
-  if (country === 'Japan' && p.nextStep) history.push(p.nextStep);
-
   return (
     <WelcomeStyledFormAlternative>
       <HeaderImageContainer>

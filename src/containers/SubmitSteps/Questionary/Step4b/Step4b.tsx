@@ -195,9 +195,9 @@ const Step4b = ({
           />
         )}
       />
+      {errors && <p><ErrorMessage errors={errors} name="symptomsStartedDate" /></p>}
 
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           {renderCaptcha}

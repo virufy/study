@@ -180,8 +180,9 @@ const Step2 = ({
           />
         )}
       />
+      {errors && <p><ErrorMessage errors={errors} name="vaccine" /></p>}
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons
