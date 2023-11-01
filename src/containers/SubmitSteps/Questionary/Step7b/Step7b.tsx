@@ -10,42 +10,36 @@ import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
 
-// Update Action
-import { updateAction } from 'utils/wizard';
-
-// Header Control
-import useHeaderContext from 'hooks/useHeaderContext';
+// Helper
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
+import { scrollToTop } from 'helper/scrollHelper';
 
 // Utils
-import { scrollToTop } from 'helper/scrollHelper';
-import { getPatientId } from 'helper/stepsDefinitions';
+import { updateAction } from 'utils/wizard';
+
+// Hooks
+import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
+import OptionList from 'components/OptionList';
+import WizardButtons from 'components/WizardButtons';
 import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
-import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer, QuestionInput,
+  QuestionText, MainContainer,
 } from '../style';
 
-const schema = Yup.object({
-  ageGroup: Yup.string().required().test('age-invalid', '', value => {
-    let result = true;
-    if (value && !value.match(/^[0-9]+$/)) {
-      result = false;
-    }
-    return result;
-  }),
+const schemaWithoutPatient = Yup.object({
+  whenFluShot: Yup.string().required(),
 }).defined();
 
-type Step2Type = Yup.InferType<typeof schema>;
+type Step7bType = Yup.InferType<typeof schemaWithoutPatient>;
 
-const Step2a = ({
+const Step7b = ({
   previousStep,
   nextStep,
   storeKey,
-  otherSteps,
   metadata,
 }: Wizard.StepProps) => {
   // Hooks
@@ -53,12 +47,13 @@ const Step2a = ({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
   const {
-    setDoGoBack, setTitle, setType, setSubtitle,
+    setDoGoBack, setTitle, setSubtitle, setType,
   } = useHeaderContext();
   const history = useHistory();
   const { t } = useTranslation();
-  const patientId = getPatientId();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const patientId = getPatientId();
+  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -69,42 +64,39 @@ const Step2a = ({
   } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
-    resolver: yupResolver(schema),
+    context: {
+      country,
+    },
+    resolver: yupResolver(schemaWithoutPatient),
   });
-  const { errors } = formState;
+  const { errors, isValid } = formState;
 
+  // Callbacks
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (state['submit-steps'] && !patientId) {
-      const { testTaken } = state['submit-steps'];
-      if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
-        history.push(otherSteps.noTestStep);
-      } else if (previousStep) {
-        history.push(previousStep);
-      } else {
-        history.goBack();
-      }
-    } else if (previousStep) {
+    if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [state, history, otherSteps, previousStep, patientId]);
+  }, [history, previousStep]);
 
-  const {
-    isValid,
-  } = formState;
-
+  // Effects
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:ageTitle')}`);
-    setSubtitle(t(''));
-    setType('primary');
+    if (patientId) {
+      setTitle('');
+      setType('tertiary');
+    } else {
+      setTitle(t('questionary:fluShot.title'));
+      setType('primary');
+    }
+    setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, metadata, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, patientId, t]);
 
   // Handlers
-  const onSubmit = async (values: Step2Type) => {
+  const onSubmit = async (values: Step7bType) => {
     if (values) {
       action(values);
       if (nextStep) {
@@ -114,6 +106,22 @@ const Step2a = ({
     }
   };
 
+  // Memos
+  const fluShotOptions = React.useMemo(() => [
+    {
+      value: 'yes',
+      label: t('questionary:whenFluShot.options.yes'),
+    },
+    {
+      value: 'no',
+      label: t('questionary:whenFluShot.options.no'),
+    },
+    {
+      value: 'noResponse',
+      label: t('questionary:whenFluShot.options.noResponse'),
+    },
+  ], [t]);
+
   return (
     <MainContainer>
       <ProgressIndicator
@@ -121,26 +129,25 @@ const Step2a = ({
         totalSteps={metadata?.total}
         progressBar
       />
-      <QuestionText extraSpace first>{t('questionary:ageGroup')}</QuestionText>
-
+      <QuestionText first>
+        {t('questionary:whenFluShot.question')}
+      </QuestionText>
       <Controller
         control={control}
-        name="ageGroup"
-        defaultValue=""
-        render={({ onChange, value, name }) => (
-          <QuestionInput
-            name={name}
-            value={value}
-            onChange={onChange}
-            type="text"
-            placeholder={t('questionary:enterAge')}
-            autoComplete="Off"
+        name="whenFluShot"
+        defaultValue={undefined}
+        render={({ onChange, value }) => (
+          <OptionList
+            singleSelection
+            value={{ selected: value ? [value] : [] }}
+            onChange={v => onChange(v.selected[0])}
+            items={fluShotOptions}
           />
         )}
       />
       <ErrorMessage
         errors={errors}
-        name="ageGroup"
+        name="whenFluShot"
         render={({ message }) => (
           <p>{message}</p>
         )}
@@ -161,4 +168,4 @@ const Step2a = ({
   );
 };
 
-export default React.memo(Step2a);
+export default React.memo(Step7b);

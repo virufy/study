@@ -34,19 +34,21 @@ import {
 } from '../style';
 
 const Step2 = (p: Wizard.StepProps) => {
+  // Hooks
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeStep, setActiveStep] = useState(true);
   const {
     setType, setDoGoBack, setLogoSize, setSubtitle,
   } = useHeaderContext();
-
   const history = useHistory();
+
+  // States
+  const [activeStep, setActiveStep] = useState(true);
+
   const country = getCountry();
 
+  // Callbacks
   const handleNext = React.useCallback(() => {
     if (p.nextStep) {
       history.push(p.nextStep);
@@ -63,6 +65,7 @@ const Step2 = (p: Wizard.StepProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Effects
   useEffect(() => {
     scrollToTop();
     setDoGoBack(() => doBack);

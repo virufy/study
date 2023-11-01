@@ -9,7 +9,6 @@ import { useStateMachine } from 'little-state-machine';
 import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
-import { getCountry } from 'helper/stepsDefinitions';
 
 // Update Action
 import { updateAction } from 'utils/wizard';
@@ -27,11 +26,13 @@ import { scrollToTop } from 'helper/scrollHelper';
 
 // Styles
 import {
-  QuestionText, MainContainer, QuestionNote,
+  QuestionText, MainContainer, QuestionAllApply,
 } from '../style';
 
 const schema = Yup.object({
-  gender: Yup.object().required(),
+  gender: Yup.object({
+    selected: Yup.array().required(),
+  }),
 }).defined();
 
 type Step2Type = Yup.InferType<typeof schema>;
@@ -50,7 +51,6 @@ const Step2b = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
-  const country = getCountry();
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -97,50 +97,28 @@ const Step2b = ({
   };
 
   // Memos
-  const genderOptions = React.useMemo(() => {
-    if (country === 'Japan') {
-      return [
-        {
-          value: 'female',
-          label: t('questionary:gender.options.female'),
-        },
-        {
-          value: 'male',
-          label: t('questionary:gender.options.male'),
-        },
-        {
-          value: 'transgender',
-          label: t('questionary:gender.options.transgender'),
-        },
-        {
-          value: 'notToSay',
-          label: t('questionary:gender.options.notToSay'),
-        },
-      ];
-    }
-    return [
-      {
-        value: 'female',
-        label: t('questionary:gender.options.female'),
-      },
-      {
-        value: 'male',
-        label: t('questionary:gender.options.male'),
-      },
-      {
-        value: 'transgender',
-        label: t('questionary:gender.options.transgender'),
-      },
-      {
-        value: 'other',
-        label: t('questionary:gender.options.other'),
-      },
-      {
-        value: 'notToSay',
-        label: t('questionary:gender.options.notToSay'),
-      },
-    ];
-  }, [country, t]);
+  const genderOptions = React.useMemo(() => [
+    {
+      value: 'female',
+      label: t('questionary:gender.options.female'),
+    },
+    {
+      value: 'male',
+      label: t('questionary:gender.options.male'),
+    },
+    {
+      value: 'transgender',
+      label: t('questionary:gender.options.transgender'),
+    },
+    {
+      value: 'other',
+      label: t('questionary:gender.options.other'),
+    },
+    {
+      value: 'notToSay',
+      label: t('questionary:gender.options.notToSay'),
+    },
+  ], [t]);
 
   return (
     <MainContainer>
@@ -150,7 +128,7 @@ const Step2b = ({
         progressBar
       />
       <QuestionText first>{t('questionary:gender.question')}
-        <QuestionNote>{t('questionary:gender.note')}</QuestionNote>
+        <QuestionAllApply>{t('questionary:gender.note')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -165,8 +143,15 @@ const Step2b = ({
           />
         )}
       />
+      <ErrorMessage
+        errors={errors}
+        name="gender"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons

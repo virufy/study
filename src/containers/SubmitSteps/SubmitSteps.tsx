@@ -90,7 +90,8 @@ const SubmitSteps = () => {
     };
 
     const problemRoute = checkFileConsistencyProblem(state);
-    if (problemRoute) {
+
+    if (problemRoute && problemRoute !== '/step-record/cough' && getCountry() !== 'Japan') {
       history.push(`/${StoreKey}${problemRoute}`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

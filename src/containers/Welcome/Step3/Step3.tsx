@@ -10,34 +10,38 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Components
 import WizardButtons from 'components/WizardButtons';
 import { BlackText } from 'components/Texts';
-import LinkPurple from 'components/LinkPurple';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
+import { getCountry } from 'helper/stepsDefinitions';
 
 // Styles
 import {
   ContainerShapeDown,
-  WelcomeNote,
   InnerContainerShapeDown,
   WelcomeContent,
   WelcomeStyledFormAlternative,
   AboutUsSVG,
+  BoldBlackText,
 } from '../style';
 
 const Step3 = (p: Wizard.StepProps) => {
+  // Hooks
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeStep, setActiveStep] = useState(true);
+  const history = useHistory();
   const {
     setType, setDoGoBack, setLogoSize, setSubtitle,
   } = useHeaderContext();
+  const { t } = useTranslation();
 
-  const history = useHistory();
+  // States
+  const [activeStep, setActiveStep] = useState(true);
 
+  const country = getCountry();
+
+  // Callbacks
   const handleNext = React.useCallback(() => {
     if (p.nextStep) {
       history.push(p.nextStep);
@@ -45,6 +49,7 @@ const Step3 = (p: Wizard.StepProps) => {
   }, [history, p.nextStep]);
 
   const doBack = useCallback(() => {
+    setType('none');
     if (p.previousStep) {
       setActiveStep(false);
       history.push(p.previousStep);
@@ -54,8 +59,7 @@ const Step3 = (p: Wizard.StepProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { t, i18n } = useTranslation();
-
+  // Effects
   useEffect(() => {
     scrollToTop();
     setDoGoBack(() => doBack);
@@ -72,44 +76,34 @@ const Step3 = (p: Wizard.StepProps) => {
         </InnerContainerShapeDown>
       </ContainerShapeDown>
       <WelcomeContent maxWidth={470} mt={0}>
-        <BlackText>
-          <Trans i18nKey="helpVirufy:aboutParagraph">
+        <BlackText mt={0} textCenter>
+          <Trans i18nKey="helpVirufy:aboutBeforeText">
             <p>
-              Virufy is a <strong>nonprofit organization</strong> that is working
-              to develop the means to use
-              <strong> artificial intelligence (Al) to screen for COVID-19 from cough patterns</strong>
-              rapidly and at no cost through use of a smartphone for the benefit of low-income countries.
-            </p>
-            <p>
-              Our team includes researchers from over <strong>25 countries</strong>.
-              <LinkPurple to={`https://virufy.org/${i18n.language || 'en'}/our-approach`} target="_blank"> Our research</LinkPurple> has shown that Al technology may be able to identify COVID&apos;s unique cough signature.
-            </p>
-            <p>
-              By collecting <strong>coughs recordings</strong> from people around the world,
-              Virufy is improving the robustness of its AI algorithm in recognizing COVID&apos;s
-              unique sound pattern.
-            </p>
-            <p>
-              <strong>You have the power</strong>to help benefit millions of
-              people across the globe by <strong>contributing your cough</strong> in our study.
+              {/* eslint-disable-next-line max-len */}
+              Before we begin, please tell us a little about us and the content of our research. I will explain it in about 5 minutes.
             </p>
           </Trans>
         </BlackText>
-        <WelcomeNote>
-          <Trans i18nKey="main:note">
-            <strong>Please note:</strong> This form is for data collection only. It will not predict your COVID-19
-            status or diagnose any disease, disorder, or other health condition. Virufy is conducting research and
-            will use the information you provide for that research only. Virufy will not take place of a doctor and
-            would like to remind you it is your responsibility to seek medical advice from your doctor.
+        <BoldBlackText mb={0}>
+          {t('helpVirufy:aboutTitle', 'Organization overview')}
+        </BoldBlackText>
+        <BlackText mt={0}>
+          <Trans i18nKey="helpVirufy:aboutParagraph">
+            <p>
+              {/* eslint-disable-next-line max-len */}
+              Virufy, a non-profit organization that develops an artificial intelligence (AI) app that can determine whether cough sounds are similar to those of patients suffering from COVID-19 and seasonal influenza, is We are conducting clinical research to collect cough sounds (audio collection for AI learning) in preparation for the launch of the app in Japan. <br /><br />
+              {/* eslint-disable-next-line max-len */}
+              Virufy is a California nonprofit organization recognized as a tax-exempt public benefit corporation under Section 501(c)(3) of the Internal Revenue Code. We were established in March 2020 as a project of Stanford University&apos;s COVID-19 Innovation Response Lab, and have been active globally, including in Japan. With the help of leading researchers and experts from around the world and more than 50 organizations including medical institutions, law firms, technology companies, university groups, and global NGOs, we have collected over 400,000 cough audio records. We collect samples and develop AI apps based on algorithms we independently built using machine learning.
+            </p>
           </Trans>
-        </WelcomeNote>
+        </BlackText>
       </WelcomeContent>
 
       {activeStep && (
         <Portal>
           <WizardButtons
             invert
-            leftLabel={t('helpVirufy:nextButton')}
+            leftLabel={country === 'Japan' ? t('helpVirufy:followingPage') : t('helpVirufy:nextButton')}
             leftHandler={handleNext}
           />
         </Portal>

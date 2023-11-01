@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -19,29 +20,20 @@ import useHeaderContext from 'hooks/useHeaderContext';
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { getCountry } from 'helper/stepsDefinitions';
+import { doSubmit } from 'helper/submitHelper';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
 import Recaptcha from 'components/Recaptcha';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
-import OptionList from 'components/OptionList';
 import {
   QuestionText, MainContainer, QuestionInput, TempBeforeSubmitError,
 } from '../style';
 
 const schema = Yup.object({
-  symptomsStartedDate: Yup.string().when('$country', {
-    is: 'Japan',
-    then: Yup.string().required(),
-    else: Yup.string().required().test('symptomsStartedDate-invalid', '', value => {
-      let result = true;
-      if (value && !value.match(/^[0-9]+$/)) {
-        result = false;
-      }
-      return result;
-    }),
-  }),
+  symptomsStartedDate: Yup.string().required(),
 }).defined();
 
 type Step4bType = Yup.InferType<typeof schema>;
@@ -61,6 +53,9 @@ const Step4b = ({
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const country = getCountry();
+  const [cookies] = useCookies(['virufy-study-user']);
+
+  const userCookie = cookies['virufy-study-user'];
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -82,14 +77,9 @@ const Step4b = ({
   });
   const { errors, isSubmitting, isValid } = formState;
 
-  useEffect(() => {
-    if (!captchaValue) {
-      setSubmitError(null);
-    }
-  }, [captchaValue]);
-
+  // Memos
   const renderCaptcha = React.useMemo(() => {
-    if (isShortQuestionary && (country !== 'Colombia')) {
+    if (isShortQuestionary || country === 'Japan') {
       if (submitError) {
         return (
           <>
@@ -106,7 +96,6 @@ const Step4b = ({
   }, [country, isShortQuestionary, submitError]);
 
   // Handlers
-
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
     if (previousStep) {
@@ -117,7 +106,27 @@ const Step4b = ({
   }, [history, previousStep]);
 
   const onSubmit = async (values: Step4bType) => {
-    if (values) {
+    if (country === 'Japan') {
+      if (values) {
+        await doSubmit({
+          setSubmitError: () => setSubmitError(null),
+          state: {
+            ...state,
+            'submit-steps': {
+              ...state['submit-steps'],
+              ...values,
+            },
+          },
+          captchaValue,
+          action,
+          nextStep,
+          setActiveStep,
+          history,
+          userCookie,
+        });
+      }
+    }
+    if (values && country !== 'Japan') {
       action(values);
       if (nextStep) {
         setActiveStep(false);
@@ -125,19 +134,13 @@ const Step4b = ({
       }
     }
   };
+
   const onSubmitPatientShortQuestionnaire = () => {
     if (nextStep) {
       setActiveStep(false);
       history.push(nextStep);
     }
   };
-
-  useEffect(() => {
-    scrollToTop();
-    setTitle(t('questionary:symptomsDateTitle'));
-    setType('primary');
-    setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
 
   const getLeftLabel = () => {
     if (isShortQuestionary) {
@@ -149,8 +152,31 @@ const Step4b = ({
     return t('questionary:nextButton');
   };
 
+  // Effects
+  useEffect(() => {
+    if (!captchaValue) {
+      setSubmitError(null);
+    }
+  }, [captchaValue]);
+
+  useEffect(() => {
+    scrollToTop();
+    setTitle(t('questionary:symptomsDateTitle'));
+    setType('primary');
+    setDoGoBack(() => handleDoBack);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
+
   return (
     <MainContainer>
+      {
+        country === 'Japan' && (
+          <ProgressIndicator
+            currentStep={metadata?.current}
+            totalSteps={metadata?.total}
+            progressBar
+          />
+        )
+      }
       <QuestionText extraSpace first>
         {t('questionary:symptomsDate')}
       </QuestionText>
@@ -159,55 +185,32 @@ const Step4b = ({
         name="symptomsStartedDate"
         defaultValue=""
         render={({ onChange, value, name }) => (
-          country === 'Japan' ? (
-            <OptionList
-              singleSelection
-              value={{ selected: value ? [value] : [] }}
-              onChange={v => onChange(v.selected[0])}
-              items={[
-                {
-                  value: 'none',
-                  label: t('questionary:options.none'),
-                },
-                {
-                  value: 'today',
-                  label: t('questionary:options.today'),
-                },
-                {
-                  value: 'days',
-                  label: t('questionary:options.days'),
-                },
-                {
-                  value: 'week',
-                  label: t('questionary:options.week'),
-                },
-                {
-                  value: 'overWeek',
-                  label: t('questionary:options.overWeek'),
-                },
-              ]}
-            />
-          ) : (
-            <QuestionInput
-              name={name}
-              value={value}
-              onChange={onChange}
-              type="text"
-              placeholder={t('questionary:enterDays')}
-              autoComplete="Off"
-            />
-          )
+          <QuestionInput
+            name={name}
+            value={value}
+            onChange={onChange}
+            type="number"
+            placeholder={t('questionary:enterDays')}
+            autoComplete="Off"
+          />
         )}
       />
+      <ErrorMessage
+        errors={errors}
+        name="symptomsStartedDate"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           {renderCaptcha}
           <WizardButtons
             leftLabel={getLeftLabel()}
             leftHandler={isShortQuestionary ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
-            leftDisabled={(isShortQuestionary && (country !== 'Colombia')) ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : !isValid}
+            leftDisabled={isShortQuestionary || country === 'Japan' ? (isSubmitting || (recaptchaAvailable && !captchaValue)) || !isValid : !isValid}
             invert
           />
         </Portal>

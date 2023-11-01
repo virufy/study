@@ -26,11 +26,11 @@ import ProgressIndicator from 'components/ProgressIndicator';
 import OptionList from 'components/OptionList';
 import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, QuestionNote, MainContainer,
+  QuestionText, QuestionAllApply, MainContainer,
 } from '../style';
 
 const schema = Yup.object({
-  smokeLastSixMonths: Yup.string(),
+  smokeLastSixMonths: Yup.string().required(),
 }).defined();
 
 type Step3Type = Yup.InferType<typeof schema>;
@@ -103,7 +103,7 @@ const Step3 = ({
       />
       <QuestionText extraSpace first>
         {t('questionary:smokeLastSixMonths.question')}
-        <QuestionNote>{t('questionary:smokeLastSixMonths.note')}</QuestionNote>
+        <QuestionAllApply>{t('questionary:smokeLastSixMonths.note')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -127,8 +127,15 @@ const Step3 = ({
           />
         )}
       />
+      <ErrorMessage
+        errors={errors}
+        name="smokeLastSixMonths"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons

@@ -166,8 +166,15 @@ const Step1a = ({
           />
         )}
       />
+      <ErrorMessage
+        errors={errors}
+        name="testTaken"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           <WizardButtons

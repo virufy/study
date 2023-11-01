@@ -256,8 +256,15 @@ const Step4a = ({
           />
         )}
       />
+      <ErrorMessage
+        errors={errors}
+        name="currentSymptoms"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           {renderCaptcha}

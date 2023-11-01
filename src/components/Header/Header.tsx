@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, {
+  createContext, useContext, useState,
+} from 'react';
 import { useLocation } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
@@ -13,9 +15,12 @@ import Link from 'components/Link';
 // Texts
 import { TitlePurple, TitleBlack, HeaderTitle } from 'components/Texts';
 
+// Helpers
+import { getCountry } from 'helper/stepsDefinitions';
+
 // Styles
 import {
-  HeaderContainer, ArrowLeft, ArrowLefContainer, LogoSize, LogoImg, TitleContainer, /* CloseLeft, */
+  HeaderContainer, ArrowLeft, ArrowLefContainer, LogoSize, LogoImg, TitleContainer,
 } from './style';
 
 type ContextType = {
@@ -80,8 +85,9 @@ const Header = () => {
     title, subtitle, type, doGoBack, logoSize,
   } = useContext(HeaderContext);
   const location = useLocation();
+  const country = getCountry();
 
-  if (location.pathname === '/welcome/step-2') return null;
+  if (location.pathname === '/welcome/step-2' || (location.pathname === '/welcome' && (type === 'none' || country === 'Japan'))) return null;
 
   return (
     <HeaderContainer type={type} isMobile={isMobile} hasSubtitle={!!subtitle}>

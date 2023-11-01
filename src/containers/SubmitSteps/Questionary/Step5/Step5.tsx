@@ -171,8 +171,15 @@ const Step5 = ({
           />
         )}
       />
+      <ErrorMessage
+        errors={errors}
+        name="currentRespiratoryCondition"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           {(metadata?.current ?? 5) === (metadata?.total ?? 6) && (

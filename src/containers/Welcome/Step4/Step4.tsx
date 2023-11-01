@@ -73,18 +73,24 @@ const schema = Yup.object().shape({
 type Step3Type = Yup.InferType<typeof schema>;
 
 const Step4 = (p: Wizard.StepProps) => {
+  // Hooks
   const { Portal } = usePortal({
     bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
   });
-  const [activeStep, setActiveStep] = React.useState(true);
-  const { setType, setDoGoBack, setSubtitle } = useHeaderContext();
+  const { t } = useTranslation();
+  const history = useHistory();
 
   const { state, action } = useStateMachine(updateAction(p.storeKey));
   // Ex. state = welcome: agreedBiometric: true, agreedConsentTerms: true, ..., country:, region:, language:
 
+  // States
+  const [activeStep, setActiveStep] = React.useState(true);
+  const { setType, setDoGoBack, setSubtitle } = useHeaderContext();
+
   const store = state?.[p.storeKey];// p.storeKey = welcome
   // store = agreedBiometric: true, agreedConsentTerms: true, ..., country:, region:, language:
 
+  // Memos
   const currentCountry: PrivacyPolicyCountry = useMemo(() => {
     if (['Argentina', 'Bolivia', 'Colombia', 'Greece', 'Peru', 'Mexico', 'Brazil', 'United States', 'Japan'].includes(state.welcome.country)) {
       return state.welcome.country;
@@ -103,11 +109,11 @@ const Step4 = (p: Wizard.StepProps) => {
     mode: 'onChange',
   });
   const { errors, isValid } = formState;
-  const history = useHistory();
   const { isLoadingFile, file: consentFormContent } = useEmbeddedFile(
     buildConsentFilePath(currentCountry, state.welcome.language),
   );
 
+  // Callbacks
   // go to the next page/step
   const onSubmit = async (values: Step3Type) => {
     // values = agreedBiometric: true, agreedConsentTerms: true...
@@ -131,8 +137,7 @@ const Step4 = (p: Wizard.StepProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { t } = useTranslation();
-
+  // Effects
   useEffect(() => { // when moving the pages, do these
     scrollToTop();
     setDoGoBack(() => doBack);
@@ -155,7 +160,7 @@ const Step4 = (p: Wizard.StepProps) => {
     }
     return 'es';
   };
-  
+
   return (
     <WelcomeStyledFormAlternative>
       <ContainerShapeDown isMobile={isMobile}>
@@ -212,6 +217,13 @@ const Step4 = (p: Wizard.StepProps) => {
             />
           )}
         />
+        <ErrorMessage
+          errors={errors}
+          name="agreedConsentTerms"
+          render={({ message }) => (
+            <p>{message}</p>
+          )}
+        />
 
         <Controller
           control={control}
@@ -231,114 +243,156 @@ const Step4 = (p: Wizard.StepProps) => {
             />
           )}
         />
+        <ErrorMessage
+          errors={errors}
+          name="agreedPolicyTerms"
+          render={({ message }) => (
+            <p>{message}</p>
+          )}
+        />
 
         {currentCountry !== 'Brazil' && (
-          <Controller
-            control={control}
-            name="agreedCovidCollection"
-            defaultValue={false}
-            render={({ onChange, value, name }) => (
-              <Checkbox
-                id="Step2-CollectionCovid"
-                label={(currentCountry !== 'Colombia')
-                  ? (
-                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collection">
-                      I hereby expressly consent to the collection and
-                      processing of my personal information, biometric information, and health information.
-                    </Trans>
-                  ) : (
-                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collectionColombia">
-                      I hereby expressly consent to the collection, processing and transfer of my personal information,
-                      biometric information, and health information.
-                    </Trans>
-                  )}
-                name={name}
-                onChange={e => onChange(e.target.checked)}
-                value={value}
-              />
-            )}
-          />
+          <>
+            <Controller
+              control={control}
+              name="agreedCovidCollection"
+              defaultValue={false}
+              render={({ onChange, value, name }) => (
+                <Checkbox
+                  id="Step2-CollectionCovid"
+                  label={(currentCountry !== 'Colombia')
+                    ? (
+                      <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collection">
+                        I hereby expressly consent to the collection and
+                        processing of my personal information, biometric information, and health information.
+                      </Trans>
+                    ) : (
+                      <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:collectionColombia">
+                        {/* eslint-disable-next-line max-len */}
+                        I hereby expressly consent to the collection, processing and transfer of my personal information, biometric information, and health information.
+                      </Trans>
+                    )}
+                  name={name}
+                  onChange={e => onChange(e.target.checked)}
+                  value={value}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="agreedCovidCollection"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
+          </>
         )}
 
         {currentCountry !== 'Colombia' && (
-          <Controller
-            control={control}
-            name="agreedCovidDetection"
-            defaultValue={false}
-            render={({ onChange, value, name }) => (
-              <Checkbox
-                id="Step2-DetectionCovid"
-                label={(currentCountry !== 'Brazil')
-                  ? (
-                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:detection">
-                      I hereby acknowledge and agree that processing shall be done for the purposes indicated above
-                      and, in particular but without limitation, for research and compiling a dataset needed for the
-                      development of artificial intelligence algorithms for device-based COVID-19 detection.
-                    </Trans>
-                  ) : (
-                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:detectionBrazil">
-                      I hereby acknowledge and agree that the processing shall be done for the purposes
-                      indicated above, and in particular, but without limitation, for the research and
-                      compilation of a data set necessary for the development of artificial intelligence
-                      algorithms for device-based device-based COVID-19 detection, to train artificial
-                      intelligence algorithms to analyze cough audio recordings to better determine COVID-19 signals.
-                    </Trans>
-                  )}
-                name={name}
-                onChange={e => onChange(e.target.checked)}
-                value={value}
-              />
-            )}
-          />
+          <>
+            <Controller
+              control={control}
+              name="agreedCovidDetection"
+              defaultValue={false}
+              render={({ onChange, value, name }) => (
+                <Checkbox
+                  id="Step2-DetectionCovid"
+                  label={(currentCountry !== 'Brazil')
+                    ? (
+                      <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:detection">
+                        I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                        and, in particular but without limitation, for research and compiling a dataset needed for the
+                        development of artificial intelligence algorithms for device-based COVID-19 detection.
+                      </Trans>
+                    ) : (
+                      <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:detectionBrazil">
+                        I hereby acknowledge and agree that the processing shall be done for the purposes
+                        indicated above, and in particular, but without limitation, for the research and
+                        compilation of a data set necessary for the development of artificial intelligence
+                        algorithms for device-based device-based COVID-19 detection, to train artificial
+                        intelligence algorithms to analyze cough audio recordings to better determine COVID-19 signals.
+                      </Trans>
+                    )}
+                  name={name}
+                  onChange={e => onChange(e.target.checked)}
+                  value={value}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="agreedCovidDetection"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
+          </>
         )}
 
         {((currentCountry !== 'Colombia') && (currentCountry !== 'Brazil')) && (
-          <Controller
-            control={control}
-            name="agreedTrainingArtificial"
-            defaultValue={false}
-            render={({ onChange, value, name }) => (
-              <Checkbox
-                id="Step2-TrainingArtificial"
-                label={(
-                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:signs">
-                    I hereby acknowledge and agree that processing shall be done for the purposes indicated above
-                    and, in particular but without limitation, for training artificial intelligence algorithms to
-                    analyze cough audio recordings to better determine signs of COVID-19.
-                  </Trans>
-                )}
-                name={name}
-                onChange={e => onChange(e.target.checked)}
-                value={value}
-              />
-            )}
-          />
+          <>
+            <Controller
+              control={control}
+              name="agreedTrainingArtificial"
+              defaultValue={false}
+              render={({ onChange, value, name }) => (
+                <Checkbox
+                  id="Step2-TrainingArtificial"
+                  label={(
+                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:signs">
+                      I hereby acknowledge and agree that processing shall be done for the purposes indicated above
+                      and, in particular but without limitation, for training artificial intelligence algorithms to
+                      analyze cough audio recordings to better determine signs of COVID-19.
+                    </Trans>
+                  )}
+                  name={name}
+                  onChange={e => onChange(e.target.checked)}
+                  value={value}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="agreedTrainingArtificial"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
+          </>
         )}
 
         {currentCountry !== 'Colombia' && (
-          <Controller
-            control={control}
-            name="agreedBiometric"
-            defaultValue={false}
-            render={({ onChange, value, name }) => (
-              <Checkbox
-                id="Step2-Biometric"
-                label={(
-                  <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:biometric">
-                    I hereby expressly consent to the sharing of my personal information, biometric information,
-                    and health information with third parties as described in this Consent Form and/or the Virufy
-                    Privacy Policy.
-                  </Trans>
-                )}
-                name={name}
-                onChange={e => onChange(e.target.checked)}
-                value={value}
-              />
-            )}
-          />
+          <>
+            <Controller
+              control={control}
+              name="agreedBiometric"
+              defaultValue={false}
+              render={({ onChange, value, name }) => (
+                <Checkbox
+                  id="Step2-Biometric"
+                  label={(
+                    <Trans tOptions={{ lng: getCurrentCountryCheckbox(currentCountry) }} i18nKey="consent:biometric">
+                      I hereby expressly consent to the sharing of my personal information, biometric information,
+                      and health information with third parties as described in this Consent Form and/or the Virufy
+                      Privacy Policy.
+                    </Trans>
+                  )}
+                  name={name}
+                  onChange={e => onChange(e.target.checked)}
+                  value={value}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="agreedBiometric"
+              render={({ message }) => (
+                <p>{message}</p>
+              )}
+            />
+          </>
         )}
 
-        <p><ErrorMessage errors={errors} name="name" /></p>
         {activeStep && (
           <Portal>
             <WizardButtons

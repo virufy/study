@@ -68,6 +68,12 @@ export async function doSubmit({
       currentRespiratoryCondition,
       currentMedicalCondition,
 
+      covidTimes,
+      lastTimeCovidMonths,
+      fluTestDate,
+      fluTestResult,
+      whenFluShot,
+
     } = state['submit-steps'];
 
     const body = new FormData();
@@ -107,14 +113,16 @@ export async function doSubmit({
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
     }
 
-    body.append('testTaken', testTaken.join(','));
+    if (testTaken) {
+      body.append('testTaken', testTaken.join(','));
+    }
 
-    if (testTaken.includes('pcr')) {
+    if (testTaken && testTaken.includes('pcr')) {
       body.append('pcrTestDate', pcrTestDate.toISOString());
       body.append('pcrTestResult', pcrTestResult);
     }
 
-    if (testTaken.includes('antigen')) {
+    if (testTaken && testTaken.includes('antigen')) {
       body.append('antigenTestDate', antigenTestDate.toISOString());
       body.append('antigenTestResult', antigenTestResult);
       body.append('whatAntigenTestResult', whatAntigenTestResult);
@@ -130,8 +138,8 @@ export async function doSubmit({
 
     const genderSelected = gender.other || gender.selected[0];
 
-    if (ethnicity) {
-      body.append('ethnicity', ethnicity);
+    if (ethnicity?.selected?.length > 0) {
+      body.append('ethnicity', ethnicity.selected.join(','));
     }
 
     if (genderSelected) {
@@ -172,6 +180,39 @@ export async function doSubmit({
 
     if (currentMedicalCondition?.other) {
       body.append('otherMedicalConditions', currentMedicalCondition?.other);
+    }
+
+    if (antigenTestDate) {
+      body.append('antigenTestDate', antigenTestDate);
+    }
+
+    if (antigenTestResult) {
+      body.append('antigenTestResult', antigenTestResult);
+    }
+
+    if (pcrTestDate) {
+      body.append('pcrTestDate', pcrTestDate);
+      body.append('pcrTestResult', pcrTestResult);
+    }
+
+    if (covidTimes) {
+      body.append('covidTimes', covidTimes);
+    }
+
+    if (lastTimeCovidMonths) {
+      body.append('lastTimeCovidMonths', lastTimeCovidMonths);
+    }
+
+    if (fluTestDate) {
+      body.append('fluTestDate', fluTestDate);
+    }
+
+    if (fluTestResult) {
+      body.append('fluTestResult', fluTestResult);
+    }
+
+    if (whenFluShot) {
+      body.append('whenFluShot', whenFluShot);
     }
 
     if (captchaValue) {

@@ -10,39 +10,38 @@ import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
 
-// Update Action
+// Helper
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
+import { scrollToTop } from 'helper/scrollHelper';
+
+// Utils
 import { updateAction } from 'utils/wizard';
+
+// Hooks
+import useHeaderContext from 'hooks/useHeaderContext';
 
 // Components
 import OptionList from 'components/OptionList';
+import DatePicker from 'components/DatePicker';
+import WizardButtons from 'components/WizardButtons';
 import ProgressIndicator from 'components/ProgressIndicator';
 
-// Helper
-import { getCountry, getPatientId } from 'helper/stepsDefinitions';
-
-// Header Control
-import useHeaderContext from 'hooks/useHeaderContext';
-
-// Utils
-import { scrollToTop } from 'helper/scrollHelper';
-
 // Styles
-import WizardButtons from 'components/WizardButtons';
 import {
-  QuestionText, MainContainer,
+  QuestionText, MainContainer, QuestionAllApply,
 } from '../style';
 
-const schema = Yup.object({
-  vaccine: Yup.string(),
+const schemaWithoutPatient = Yup.object({
+  antigenTestDate: Yup.date().required(),
+  antigenTestResult: Yup.string().required(),
 }).defined();
 
-type Step2Type = Yup.InferType<typeof schema>;
+type Step1cType = Yup.InferType<typeof schemaWithoutPatient>;
 
-const Step2 = ({
+const Step1c = ({
   previousStep,
   nextStep,
   storeKey,
-  otherSteps,
   metadata,
 }: Wizard.StepProps) => {
   // Hooks
@@ -53,9 +52,9 @@ const Step2 = ({
     setDoGoBack, setTitle, setSubtitle, setType,
   } = useHeaderContext();
   const history = useHistory();
-  const { t } = useTranslation();
-  const patientId = getPatientId();
+  const { t, i18n } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const patientId = getPatientId();
   const country = getCountry();
 
   // States
@@ -67,43 +66,49 @@ const Step2 = ({
   } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
-    resolver: yupResolver(schema),
+    context: {
+      country,
+    },
+    resolver: yupResolver(schemaWithoutPatient),
   });
-  const { errors } = formState;
+  const { errors, isValid } = formState;
 
+  // Callbacks
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (state['submit-steps'] && !patientId) {
-      const { testTaken } = state['submit-steps'];
-      if ((testTaken.includes('unsure') || testTaken.includes('neither')) && otherSteps) {
-        history.push(otherSteps.noTestStep);
-      } else if (previousStep) {
-        history.push(previousStep);
-      } else {
-        history.goBack();
-      }
-    } else if (previousStep) {
+    if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [state, history, otherSteps, previousStep, patientId]);
+  }, [history, previousStep]);
 
-  const {
-    isValid,
-  } = formState;
-
+  // Effects
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:vaccine.title')}`);
-    setType('primary');
+    if (patientId) {
+      setTitle('');
+      setType('tertiary');
+    } else {
+      setTitle(t('questionary:testTaken.title'));
+      setType('primary');
+    }
     setSubtitle('');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setSubtitle, setType, metadata, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, patientId, t]);
 
   // Handlers
-  const onSubmit = async (values: Step2Type) => {
+  const onSubmit = async (values: Step1cType) => {
     if (values) {
+      const {
+        antigenTestDate,
+        antigenTestResult,
+      } = (values as any);
+      // if patient
+      if (!antigenTestDate || !antigenTestResult) {
+        return;
+      }
+
       action(values);
       if (nextStep) {
         setActiveStep(false);
@@ -113,50 +118,16 @@ const Step2 = ({
   };
 
   // Memos
-  const vaccineOptions = React.useMemo(() => {
-    if (country === 'Japan') {
-      return [
-        {
-          value: 'one',
-          label: t('questionary:vaccine.options.1'),
-        },
-        {
-          value: 'two',
-          label: t('questionary:vaccine.options.2'),
-        },
-        {
-          value: 'three',
-          label: t('questionary:vaccine.options.3'),
-        },
-        {
-          value: 'four',
-          label: t('questionary:vaccine.options.4'),
-        },
-        {
-          value: 'false',
-          label: t('questionary:vaccine.options.no'),
-        },
-        {
-          value: 'decline',
-          label: t('questionary:vaccine.options.decline'),
-        },
-      ];
-    }
-    return [
-      {
-        value: 'true',
-        label: t('questionary:vaccine.options.yes'),
-      },
-      {
-        value: 'false',
-        label: t('questionary:vaccine.options.no'),
-      },
-      {
-        value: 'decline',
-        label: t('questionary:vaccine.options.decline'),
-      },
-    ];
-  }, [country, t]);
+  const antigenOptions = React.useMemo(() => [
+    {
+      value: 'positive',
+      label: t('questionary:resultAntigenTest.options.positive'),
+    },
+    {
+      value: 'negative',
+      label: t('questionary:resultAntigenTest.options.negative'),
+    },
+  ], [t]);
 
   return (
     <MainContainer>
@@ -165,24 +136,51 @@ const Step2 = ({
         totalSteps={metadata?.total}
         progressBar
       />
-      <QuestionText first>{t('questionary:vaccine.question')}
+      <QuestionText extraSpace first>
+        {t('questionary:whenAntigenTest')}
+        <QuestionAllApply>{t('questionary:whenAntigenTestNote')}</QuestionAllApply>
       </QuestionText>
+
       <Controller
         control={control}
-        name="vaccine"
-        defaultValue=""
+        name="antigenTestDate"
+        defaultValue={undefined}
         render={({ onChange, value }) => (
-          <OptionList
-            singleSelection
-            value={{ selected: value ? [value] : [] }}
-            onChange={v => onChange(v.selected[0])}
-            items={vaccineOptions}
+          <DatePicker
+            label="Date"
+            value={value ? new Date(value) : null}
+            locale={i18n.language}
+            onChange={onChange}
           />
         )}
       />
       <ErrorMessage
         errors={errors}
-        name="vaccine"
+        name="antigenTestDate"
+        render={({ message }) => (
+          <p>{message}</p>
+        )}
+      />
+
+      <QuestionText extraSpace>
+        {t('questionary:resultAntigenTest.question')}
+      </QuestionText>
+      <Controller
+        control={control}
+        name="antigenTestResult"
+        defaultValue={undefined}
+        render={({ onChange, value }) => (
+          <OptionList
+            singleSelection
+            value={{ selected: value ? [value] : [] }}
+            onChange={v => onChange(v.selected[0])}
+            items={antigenOptions}
+          />
+        )}
+      />
+      <ErrorMessage
+        errors={errors}
+        name="antigenTestResult"
         render={({ message }) => (
           <p>{message}</p>
         )}
@@ -203,4 +201,4 @@ const Step2 = ({
   );
 };
 
-export default React.memo(Step2);
+export default React.memo(Step1c);

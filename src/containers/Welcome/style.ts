@@ -267,7 +267,7 @@ export const WelcomeSelect = styled(Select)<{ error?: boolean }>`
 `;
 
 export const TextErrorContainer = styled.div`
-  width: 470px;
+  width: calc(100% - 40px);
   margin: 10px auto;
 
   text-align: left;
@@ -317,7 +317,7 @@ export const ArrowRightSVG = styled(ArrowRight)`
     height: 32px;
 `;
 
-export const BoldBlackText = styled.h2`
+export const BoldBlackText = styled.h2<{mb?: number}>`
   font-family: 'Biko';
   font-size: 14px;
   line-height: 20px;
@@ -327,7 +327,7 @@ export const BoldBlackText = styled.h2`
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
-  margin-bottom: 16px;
+  margin-bottom: ${({ mb }) => (mb ? `${mb}px` : '16px')};
   white-space: pre-wrap;
 
   max-width: 320px;

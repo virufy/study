@@ -271,6 +271,13 @@ const Step1b = ({
               />
             )}
           />
+          <ErrorMessage
+            errors={errors}
+            name="pcrTestDate"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
 
           <QuestionText extraSpace>
             {t('questionary:resultPcrTest.question')}
@@ -286,6 +293,13 @@ const Step1b = ({
                 onChange={v => onChange(v.selected[0])}
                 items={pcrOptions}
               />
+            )}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="pcrTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
             )}
           />
         </>
@@ -307,6 +321,13 @@ const Step1b = ({
                 locale={i18n.language}
                 onChange={onChange}
               />
+            )}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="antigenTestDate"
+            render={({ message }) => (
+              <p>{message}</p>
             )}
           />
 
@@ -342,6 +363,13 @@ const Step1b = ({
                     />
                   )}
                 />
+                <ErrorMessage
+                  errors={errors}
+                  name="whatAntigenTestResult"
+                  render={({ message }) => (
+                    <p>{message}</p>
+                  )}
+                />
               </>
             )
           }
@@ -360,6 +388,13 @@ const Step1b = ({
                 onChange={v => onChange(v.selected[0])}
                 items={antigenOptions}
               />
+            )}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="antigenTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
             )}
           />
         </>
@@ -448,6 +483,14 @@ const Step1b = ({
               />
             )}
           />
+          <ErrorMessage
+            errors={errors}
+            name="patientPcrTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
+
           <QuestionText extraSpace>
             <Trans i18nKey="questionary:patient:resultAntigenTest">
               What was the result of Patient {patientId}&apos;s rapid antigen COVID-19 test?
@@ -475,10 +518,17 @@ const Step1b = ({
               />
             )}
           />
+          <ErrorMessage
+            errors={errors}
+            name="patientAntigenTestResult"
+            render={({ message }) => (
+              <p>{message}</p>
+            )}
+          />
         </>
       )}
+
       {/* Bottom Buttons */}
-      <p><ErrorMessage errors={errors} name="name" /></p>
       {activeStep && (
         <Portal>
           {(() => {

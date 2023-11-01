@@ -59,12 +59,13 @@ export const WomanWithPhone = styled(WomanWithPhoneSvg)`
 `;
 
 export const QuestionAllApply = styled.span`
-  color: ${props => props.theme.colors.mineShaft_50};
+  color: ${props => props.theme.colors.mineShaft};
   font-family: "Source Sans Pro";
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 400;
-  margin-left: 5px;
+  margin-left: 0px;
+  display: block;
 `;
 
 export const QuestionText = styled.p<{extraSpace?: boolean; first?: boolean; hasNote?: boolean; rare?: boolean; bold?: boolean; }>`

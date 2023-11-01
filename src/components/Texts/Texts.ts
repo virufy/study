@@ -42,16 +42,18 @@ export const TitleBlack = styled.div`
   text-align: center;
 `;
 
-export const BlackText = styled.h2`
+export const BlackText = styled.h2<{ mt?: number; textCenter?: boolean; }>`
   font-family: 'Source Sans Pro';
   font-size: 0.875rem;
   line-height: 20px;
   color: ${colors.mineShaft};
-  text-align: left;
+  text-align: ${({ textCenter }) => (textCenter ? 'center' : 'left')};
   font-weight: 400;
   margin-left: auto;
   margin-right: auto;
   white-space: pre-wrap;
+  
+  ${({ mt }) => mt && `margin-top: ${mt}px !important;`}
 
   padding-left: 20px;
   padding-right: 20px;
@@ -80,12 +82,39 @@ export const PurpleTextBold = styled.h2`
   text-align: center;
 `;
 
+export const BerryTextBold = styled.h2`
+  font-family: 'Source Sans Pro';
+  font-size: 0.875rem;
+  line-height: 20px;
+  color: ${colors.berry};
+  font-weight: 600;
+  text-align: center;
+`;
+
 export const JapanTitle = styled(BaseTitle)`
   font-size: 16px;
   text-align: left;
   margin-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  
+  @media screen and (${props => props.theme.breakpoints.tablet}){
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+`;
+
+export const TermsTitle = styled(BaseTitle)`
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 280px;
+  padding-left: 20px;
+  padding-right: 20px;
+  line-height: 22px;
+  margin-top: 13px;
   
   @media screen and (${props => props.theme.breakpoints.tablet}){
     padding-left: 0px;
