@@ -49,6 +49,7 @@ export async function doSubmit({
       recordYourBreath,
       recordYourSpeech,
 
+      typeCovidFlu,
       testTaken,
       pcrTestDate,
       pcrTestResult,
@@ -111,6 +112,10 @@ export async function doSubmit({
     if (allowSpeechIn.includes(country)) {
       const voiceFile = recordYourSpeech.recordingFile || recordYourSpeech.uploadedFile;
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
+    }
+
+    if (typeCovidFlu?.selected?.length > 0) {
+      body.append('typeCovidFlu', typeCovidFlu.selected.join(','));
     }
 
     if (testTaken) {

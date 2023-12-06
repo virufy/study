@@ -16,6 +16,9 @@ import { updateAction } from 'utils/wizard';
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
+// Hooks
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
+
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { getCountry } from 'helper/stepsDefinitions';
@@ -28,11 +31,13 @@ import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
 import {
-  QuestionText, MainContainer, QuestionNote, TempBeforeSubmitError,
+  QuestionText, MainContainer, QuestionAllApply, TempBeforeSubmitError,
 } from '../style';
 
 const schema = Yup.object({
-  currentSymptoms: Yup.object().required(),
+  currentSymptoms: Yup.object({
+    selected: Yup.array().required(),
+  }),
 }).defined();
 
 type Step4aType = Yup.InferType<typeof schema>;
@@ -53,6 +58,7 @@ const Step4a = ({
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const country = getCountry();
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -101,7 +107,7 @@ const Step4a = ({
       return <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />;
     }
     return null;
-  }, [isFinalStep, submitError]);
+  }, [isFinalStep, submitError, country]);
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -168,18 +174,160 @@ const Step4a = ({
     return t('questionary:nextButton');
   };
 
+  // Memos
+  const currentSymptomsOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: 'none',
+          label: t('questionary:symptoms.options.none'),
+        },
+        {
+          value: 'bodyAches',
+          label: t('questionary:symptoms.options.bodyAches'),
+        },
+        {
+          value: 'dryCough',
+          label: t('questionary:symptoms.options.dryCough'),
+        },
+        {
+          value: 'wetCough',
+          label: t('questionary:symptoms.options.wetCough'),
+        },
+        {
+          value: 'feverChillsSweating',
+          label: t('questionary:symptoms.options.feverChillsSweating'),
+        },
+        {
+          value: 'headaches',
+          label: t('questionary:symptoms.options.headaches'),
+        },
+        {
+          value: 'lossTasteAndOrSmell',
+          label: t('questionary:symptoms.options.lossTasteOrSmell'),
+        },
+        {
+          value: 'runnyNose',
+          label: t('questionary:symptoms.options.runnyNose'),
+        },
+        {
+          value: 'breathShortness',
+          label: t('questionary:symptoms.options.breathShortness'),
+        },
+        {
+          value: 'soreThroat',
+          label: t('questionary:symptoms.options.soreThroat'),
+        },
+        {
+          value: 'chestTightness',
+          label: t('questionary:symptoms.options.chestTightness'),
+        },
+        {
+          value: 'palpitation',
+          label: t('questionary:symptoms.options.palpitation'),
+        },
+        {
+          value: 'vomitingAndDiarrhea',
+          label: t('questionary:symptoms.options.vomitingAndDiarrhea'),
+        },
+        {
+          value: 'lossAppetite',
+          label: t('questionary:symptoms.options.lossAppetite'),
+        },
+        {
+          value: 'weakness',
+          label: t('questionary:symptoms.options.weakness'),
+        },
+        {
+          value: 'fatigue',
+          label: t('questionary:symptoms.options.fatigue'),
+        },
+        {
+          value: 'rash',
+          label: t('questionary:symptoms.options.rash'),
+        },
+        {
+          value: 'other',
+          label: t('questionary:symptoms.options.other'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'none',
+        label: t('questionary:symptoms.options.none'),
+      },
+      {
+        value: 'bodyAches',
+        label: t('questionary:symptoms.options.bodyAches'),
+      },
+      {
+        value: 'dryCough',
+        label: t('questionary:symptoms.options.dryCough'),
+      },
+      {
+        value: 'wetCough',
+        label: t('questionary:symptoms.options.wetCough'),
+      },
+      {
+        value: 'feverChillsSweating',
+        label: t('questionary:symptoms.options.feverChillsSweating'),
+      },
+      {
+        value: 'headaches',
+        label: t('questionary:symptoms.options.headaches'),
+      },
+      {
+        value: 'lossTasteAndOrSmell',
+        label: t('questionary:symptoms.options.lossTasteOrSmell'),
+      },
+      {
+        value: 'newOrWorseCough',
+        label: t('questionary:symptoms.options.worseCough'),
+      },
+      {
+        value: 'runnyNose',
+        label: t('questionary:symptoms.options.runnyNose'),
+      },
+      {
+        value: 'breathShortness',
+        label: t('questionary:symptoms.options.breathShortness'),
+      },
+      {
+        value: 'soreThroat',
+        label: t('questionary:symptoms.options.soreThroat'),
+      },
+      {
+        value: 'chestTightness',
+        label: t('questionary:symptoms.options.chestTightness'),
+      },
+      {
+        value: 'vomitingAndDiarrhea',
+        label: t('questionary:symptoms.options.vomitingAndDiarrhea'),
+      },
+      {
+        value: 'weakness',
+        label: t('questionary:symptoms.options.weakness'),
+      },
+      {
+        value: 'other',
+        label: t('questionary:symptoms.options.other'),
+      },
+    ];
+  }, [country, t]);
+
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customSteps.current}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>
         <Trans i18nKey="questionary:symptoms.question">
           <strong>Which of the below symptoms do you currently have?</strong>
         </Trans>
-        <QuestionNote>{t('questionary:allThatApply')}</QuestionNote>
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -190,68 +338,7 @@ const Step4a = ({
             isCheckbox
             value={value}
             onChange={v => onChange(v)}
-            items={[
-              {
-                value: 'none',
-                label: t('questionary:symptoms.options.none'),
-              },
-              {
-                value: 'bodyAches',
-                label: t('questionary:symptoms.options.bodyAches'),
-              },
-              {
-                value: 'dryCough',
-                label: t('questionary:symptoms.options.dryCough'),
-              },
-              {
-                value: 'wetCough',
-                label: t('questionary:symptoms.options.wetCough'),
-              },
-              {
-                value: 'feverChillsSweating',
-                label: t('questionary:symptoms.options.feverChillsSweating'),
-              },
-              {
-                value: 'headaches',
-                label: t('questionary:symptoms.options.headaches'),
-              },
-              {
-                value: 'lossTasteAndOrSmell',
-                label: t('questionary:symptoms.options.lossTasteOrSmell'),
-              },
-              {
-                value: 'newOrWorseCough',
-                label: t('questionary:symptoms.options.worseCough'),
-              },
-              {
-                value: 'runnyNose',
-                label: t('questionary:symptoms.options.runnyNose'),
-              },
-              {
-                value: 'breathShortness',
-                label: t('questionary:symptoms.options.breathShortness'),
-              },
-              {
-                value: 'soreThroat',
-                label: t('questionary:symptoms.options.soreThroat'),
-              },
-              {
-                value: 'chestTightness',
-                label: t('questionary:symptoms.options.chestTightness'),
-              },
-              {
-                value: 'vomitingAndDiarrhea',
-                label: t('questionary:symptoms.options.vomitingAndDiarrhea'),
-              },
-              {
-                value: 'weakness',
-                label: t('questionary:symptoms.options.weakness'),
-              },
-              {
-                value: 'other',
-                label: t('questionary:symptoms.options.other'),
-              },
-            ]}
+            items={currentSymptomsOptions}
             excludableValues={['none']}
           />
         )}

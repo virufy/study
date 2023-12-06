@@ -232,17 +232,24 @@
       "Yemen": "Yemen",
       "Zambia": "Zambia",
       "Zimbabwe": "Zimbabwe"
-    }
+    },
+    "agree": "Aceptar",
+    "servicePurposeTitle": "Objetivo y posicionamiento del servicio",
+    "servicePurposeText": "Virufy es un servicio que utiliza inteligencia artificial (Al) para analizar patrones de voz y determinar si se parecen a la tos de pacientes que padecen COVID-19. Este servicio no es un dispositivo médico, por lo que sólo proporciona información y no está destinado a asesoramiento médico, diagnóstico, tratamiento, prevención, etc. El Servicio no sustituye a un médico u otro profesional de la medicina, por lo que le rogamos que no tome ninguna decisión médica ni emprenda o deje de emprender ninguna acción (como tomar algún medicamento) basándose en la información que le proporcionamos. Tampoco lo utilice en situaciones de riesgo vital o de emergencia. Este servicio no se responsabiliza de la enfermedad que el usuario padezca en un principio ni de las consecuencias de las acciones que realice basándose en la información proporcionada.",
+    "terms": "Condiciones de uso y política de privacidad Utilícelo después de aceptar"
   },
   "helpVirufy": {
     "title": "Sobre nosotros",
     "ourSupporters": "Nuestros colaboradores",
     "introParagraph": "Bienvenido a nuestro estudio. Sólo le llevará unos 5 minutos completarlo. Antes de empezar, vamos a discutir lo que vamos a cubrir:",
-    "aboutParagraph": "<0>Virufy es una <strong>organización sin ánimo de lucro</strong> que está trabajando para desarrollar medios que utilicen la <strong>inteligencia artificial (IA) para detectar la COVID-19 a partir de los patrones de tos</strong>, de forma rápida y sin costo alguno, mediante el uso de dispositivos electrónicos en beneficio de los países de bajos ingresos.</0><1>Nuestro equipo incluye investigadores de más de <strong>25 países. </strong> <3>Nuestra investigación</3> ha demostrado que la tecnología de IA puede ser capaz de identificar la firma única de la tos de la COVID.</1><2>Al recopilar <strong>grabaciones de tos</strong> de personas de todo el mundo, Virufy está mejorando la solidez de su algoritmo de IA para reconocer el patrón de sonido único de la COVID. </2><3><strong>En sus manos está el poder</strong> para ayudar a que millones de personas de todo el mundo se beneficien de nuestra investigación <strong>contribuyendo con su tos</strong>.</3>",
+    "aboutParagraph": "<0>Virufy es una <strong>organización sin ánimo de lucro</strong> que está trabajando para desarrollar medios que utilicen la <strong>inteligencia artificial (IA) para detectar la COVID-19 a partir de los patrones de tos</strong>, de forma rápida y sin costo alguno, mediante el uso de dispositivos electrónicos en beneficio de los países de bajos ingresos.</0><0>Nuestro equipo incluye investigadores de más de <strong>25 países. </strong> <0>Nuestra investigación</0> ha demostrado que la tecnología de IA puede ser capaz de identificar la firma única de la tos de la COVID.</0><0>Al recopilar <strong>grabaciones de tos</strong> de personas de todo el mundo, Virufy está mejorando la solidez de su algoritmo de IA para reconocer el patrón de sonido único de la COVID. </0><0><strong>En sus manos está el poder</strong> para ayudar a que millones de personas de todo el mundo se beneficien de nuestra investigación <strong>contribuyendo con su tos</strong>.</0>",
+    "aboutBeforeText": "Antes de empezar, le daremos una explicación de 5 minutos sobre nosotros y nuestra investigación.",
+    "aboutTitle": "Resumen de la organización",
     "bulletsIntro": "<strong>Introducción: </strong>Acerca de nosotros y recordatorios de seguridad",
     "bulletCough": "<strong>Toser en el teléfono</strong>",
     "bulletQuestions": "<strong>Preguntas rápidas de salud</strong>",
-    "nextButton": "Siguiente"
+    "nextButton": "Siguiente",
+    "followingPage": "Siguiente"
   },
   "consent": {
     "title": "Consentimiento para la investigación",
@@ -370,9 +377,10 @@
       "resultAntigenTest": "Cuál fue el resultado del test de antígenos para COVID-19 del paciente <1><0>{{patientId}}</0></1>?"
     },
     "headerText2": "Pregunta para ampliar",
-    "whenPcrTest": "¿Cuándo se hizo la prueba PCR para detectar la COVID-19? Por favor, haga una aproximación si no está seguro(a).",
+    "whenPcrTest": "¿Cuándo se hizo la prueba PCR para detectar la COVID-19?",
     "resultPcrTest": {
       "question": "¿Cuál fue el resultado de su prueba PCR de COVID-19?",
+      "caption": "Por favor, si no está seguro, estime.",
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
@@ -380,7 +388,13 @@
         "unsure": "Inseguro"
       }
     },
-    "whenAntibodyTest": "¿Cuándo se hizo la prueba de anticuerpos para detectar la COVID-19? Por favor, si no está seguro(a), haga una aproximación.",
+    "covidTimesTitle": "Vacunación",
+    "covidTimes": "¿Cuántas veces te has infectado con COVID-19?",
+    "covidTimesPlaceholder": "Introduzca el número de veces",
+    "lastTimeCovidMonths": "¿Hace cuántos meses se vacunó por última vez contra COVID-19?",
+    "lastTimeCovidMonthsCaption": "(Las personas no vacunadas pueden saltárselo)",
+    "lastTimeCovidMonthsPlaceholder": "Introduzca el número de meses transcurridos",
+    "whenAntibodyTest": "¿Cuándo se hizo la prueba de anticuerpos para detectar la COVID-19?",
     "resultAntibodyTest": {
       "question": "¿Cuál fue el resultado de su prueba de anticuerpos de COVID-19?",
       "options": {
@@ -390,7 +404,8 @@
         "unsure": "Inseguro"
       }
     },
-    "whenAntigenTest": "¿Cuándo se hizo el test de antígenos para COVID-19? Por favor, si no está seguro, estime.",
+    "whenAntigenTest": "¿Cuándo se hizo el test de antígenos para COVID-19?",
+    "whenAntigenTestCaption": "Por favor, si no está seguro, estime.",
     "resultAntigenTest": {
       "question": "¿Cuál fue el resultado de su test de antígenos para COVID-19?",
       "options": {
@@ -399,6 +414,30 @@
         "pending": "Pendiente",
         "unsure": "Inseguro"
       }
+    },
+    "fluTest": {
+      "title": "Prueba de la gripe"
+    },
+    "whenFluTest": "¿Cuándo te hiciste la prueba de la gripe?",
+    "whenFluTestCaption": "Por favor, si no está seguro, estime.",
+    "fluTestResult": {
+        "question": "¿Cuál fue el resultado de su prueba de la gripe?",
+        "options": {
+            "negative": "Negativo",
+            "positiveA": "Positivo (Tipo A)",
+            "positiveB": "Positivo (Tipo B)"
+        }
+    },
+    "fluShot": {
+        "title": "Vacunación"
+    },
+    "whenFluShot": {
+        "question": "¿Se ha vacunado contra la gripe esta temporada (en los últimos 3 meses)?",
+        "options": {
+            "yes": "Si",
+            "no": "No",
+            "noResponse": "Ninguna respuesta"
+        }
     },
     "vaccine": {
       "title": "Vacunación",
@@ -428,6 +467,25 @@
         "other": "Otro",
         "transgender": "Transgénero",
         "selfDescribe": "Prefiero autodescribirme"
+      }
+    },
+    "ethnicity": {
+      "title": "Raza/etnicidad",
+      "question": "¿Con qué razas y/o etnias te identificas?",
+      "note": "(seleccione todas las que correspondan)",
+      "options": {
+          "asian": "Asiática/o",
+          "nativeAmericanOrArab": "Nativa americana/o o árabe",
+          "blackOrAfrican": "Negra/o o afroamericana/o",
+          "hispanicOrLatin": "Origen hispano, latino o español",
+          "nativeHawaiianOrPacific": "Nativa/o hawaiana/o o isleña/o del Pacífico",
+          "japanese": "Japonés",
+          "chinese": "China/o",
+          "vietnamese": "Vietnamita",
+          "korean": "Coreana/o",
+          "philippines": "Filipina/o",
+          "southAmerica": "Sudamericana/o",
+          "other": "Otra"
       }
     },
     "biologicalSex": {
@@ -464,9 +522,13 @@
         "breathShortness": "Dificultad para respirar",
         "soreThroat": "Dolor de garganta",
         "chestTightness": "Presión en el pecho",
+        "palpitation": "Palpitación",
         "vomitingAndDiarrhea": "Vómito y diarrea",
         "none": "Ninguno",
         "weakness": "Debilidad",
+        "lossAppetite": "Pérdida de apetito",
+        "fatigue": "Fatiga",
+        "rash": "Erupción",
         "other": "Otro",
         "addOther": "+ Añadir otro"
       },
@@ -491,12 +553,28 @@
         "otherChronic": "Otra enfermedad pulmonar crónica",
         "pneumonia": "Neumonia",
         "tuberculosis": "Tuberculosis",
+        "pulmonaryFibrosis": "Fibrosis pulmonar",
+        "cysticFibrosis": "Fibrosis quística",
+        "chronicRespiratoryDisease": "Enfermedad respiratoria crónica",
+        "chronicLungDiseases": "Enfermedades pulmonares crónicas",
+        "coughOtherConditions": "Tos debido a otras condiciones",
         "none": "Ninguno",
         "addOther": "+ Añadir otro"
       },
       "addOtherPlaceholder": "Otra condición"
     },
+    "typeCovidFlu": {
+      "title": "Responda a las siguientes preguntas.",
+      "question": "¿Cuál de las siguientes pruebas ha realizado?",
+      "options": {
+        "antigenTaken": "Prueba de antígeno COVID-19",
+        "PCRTaken": "COVID-19 Prueba PCR",
+        "fluTaken": "Prueba de la gripe",
+        "none": "Ninguna"
+      }
+    },
     "medical": {
+      "title": "Condiciones médicas",
       "question": "<strong>¿Cuál de las siguientes condiciones médicas tiene usted actualmente?</strong>",
       "options": {
         "allergies": "Alergias",
@@ -514,6 +592,18 @@
         "reflux": "Reflujo Gastroesofágico (GERD)",
         "sinusitis": "Sinusitis",
         "tuberculosis": "Tuberculosis",
+        "respiratorySystem": "Enfermedades del sistema respiratorio",
+        "chronicKidney": "Enfermedad renal crónica (hemodiálisis)",
+        "diabetes": "Diabetes",
+        "highBloodPressure": "Hipertensión",
+        "dislipidemia": "Dislipidemia",
+        "cancer": "Cáncer o tumor",
+        "pregnancy": "Embarazo",
+        "congestiveHeartDisease": "Enfermedad cardíaca congestiva",
+        "cerebrovascular": "Enfermedad cerebrovascular",
+        "valvularHeart": "Enfermedad cardíaca valvular",
+        "immunosuppressiveTherapy": "Terapia inmunosupresora",
+        "immunodeficiency": "Inmunodeficiencia",
         "none": "Ninguna",
         "other": "Otro",
         "addOther": "+ Añadir otra"

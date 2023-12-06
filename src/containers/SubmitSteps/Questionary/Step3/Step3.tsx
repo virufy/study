@@ -10,6 +10,9 @@ import { yupResolver } from '@hookform/resolvers';
 import { ErrorMessage } from '@hookform/error-message';
 import * as Yup from 'yup';
 
+// Hooks
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
+
 // Update Action
 import { updateAction } from 'utils/wizard';
 
@@ -49,6 +52,7 @@ const Step3 = ({
   const history = useHistory();
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -97,8 +101,8 @@ const Step3 = ({
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customSteps.current}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>

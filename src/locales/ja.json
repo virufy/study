@@ -442,6 +442,7 @@
         "resultPcrTest": {
             "title": "コロナPCR検査",
             "question": "コロナPCR検査の結果はどうでしたか？",
+            "caption": "（不明な場合はおおよその日付を入力ください）",
             "options": {
                 "positive": "陽性",
                 "negative": "陰性",
@@ -460,6 +461,7 @@
             }
         },
         "whenAntigenTest": "コロナの抗原検査をいつ受けましたか？",
+        "whenAntigenTestCaption": "（不明な場合はおおよその日付を入力ください）",
         "whenAntigenTestNote": "（不明な場合はおおよその日にちを入力してください）",
         "whatAntigenTest": {
             "question": "どの抗原検査を受けましたか？",
@@ -589,9 +591,13 @@
                 "breathShortness": "息切れ",
                 "soreThroat": "喉の痛み",
                 "chestTightness": "胸の圧迫感",
+                "palpitation": "動悸",
                 "vomitingAndDiarrhea": "嘔吐と下痢",
                 "none": "なし",
                 "weakness": "体力低下",
+                "lossAppetite": "食欲減少",
+                "fatigue": "倦怠感",
+                "rash": "発疹",
                 "other": "その他",
                 "addOther": "+ その他を追加"
             },
@@ -619,11 +625,27 @@
                 "pneumonia": "肺炎",
                 "tuberculosis": "結核(Tuberculosis)",
                 "none": "なし",
+                "pulmonaryFibrosis": "肺線維症",
+                "cysticFibrosis": "嚢胞性線維症",
+                "chronicRespiratoryDisease": "慢性呼吸器疾患",
+                "chronicLungDiseases": "慢性肺疾患",
+                "coughOtherConditions": "他の病状による咳",
                 "addOther": "+ その他を追加"
             },
             "addOtherPlaceholder": "その他の疾患"
         },
+        "typeCovidFlu": {
+            "title": "以下の質問にお答えください。",
+            "question": "次のうちどの検査を受けたことがありますか？",
+            "options": {
+                "antigenTaken": "COVID-19の抗原検査",
+                "PCRTaken": "COVID-19のPCR検査",
+                "fluTaken": "インフルエンザ検査",
+                "none": "なし"
+            }
+        },
         "medical": {
+            "title": "持病・状態",
             "question": "<strong>現在かかっている病気はありますか？？",
             "options": {
                 "allergies": "アレルギー",
@@ -643,7 +665,19 @@
                 "tuberculosis": "結核",
                 "none": "なし",
                 "other": "その他",
-                "addOther": "+ その他を追加"
+                "addOther": "+ その他を追加",
+                "respiratorySystem": "呼吸器系の疾患",
+                "chronicKidney": "慢性腎臓病（透析患者）",
+                "diabetes": "糖尿病",
+                "highBloodPressure": "高血圧",
+                "dislipidemia": "脂質異常症",
+                "cancer": "悪性腫瘍",
+                "pregnancy": "妊娠中",
+                "congestiveHeartDisease": "うっ血性心疾患",
+                "cerebrovascular": "脳血管疾患",
+                "valvularHeart": "心臓弁膜症",
+                "immunosuppressiveTherapy": "免疫抑制療法",
+                "immunodeficiency": "免疫系の障害"
             },
             "addOtherPlaceholder": "その他の症状"
         },

@@ -19,6 +19,7 @@ import { updateAction } from 'utils/wizard';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
 
 // Components
 import OptionList from 'components/OptionList';
@@ -43,6 +44,7 @@ const Step1c = ({
   nextStep,
   storeKey,
   metadata,
+  otherSteps,
 }: Wizard.StepProps) => {
   // Hooks
   const { Portal } = usePortal({
@@ -56,6 +58,7 @@ const Step1c = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
   const country = getCountry();
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -108,9 +111,16 @@ const Step1c = ({
       if (!antigenTestDate || !antigenTestResult) {
         return;
       }
-
       action(values);
-      if (nextStep) {
+      const PCRTaken = state['submit-steps'].typeCovidFlu?.selected.includes('PCRTaken');
+      const fluTaken = state['submit-steps'].typeCovidFlu?.selected.includes('fluTaken');
+      if (PCRTaken && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.PCRTakenStep);
+      } else if (fluTaken && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.fluTakenStep);
+      } else if (nextStep) {
         setActiveStep(false);
         history.push(nextStep);
       }
@@ -133,12 +143,12 @@ const Step1c = ({
     <MainContainer>
       <ProgressIndicator
         currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>
         {t('questionary:whenAntigenTest')}
-        <QuestionAllApply>{t('questionary:whenAntigenTestNote')}</QuestionAllApply>
+        <QuestionAllApply>{t('questionary:whenAntigenTestCaption')}</QuestionAllApply>
       </QuestionText>
 
       <Controller

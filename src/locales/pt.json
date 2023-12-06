@@ -232,17 +232,24 @@
       "Yemen": "Iémen",
       "Zambia": "Zâmbia",
       "Zimbabwe": "Zimbábue"
-    }
+    },
+    "agree": "Aceptar",
+    "servicePurposeTitle": "Objetivo e posicionamento do serviço",
+    "servicePurposeText": "O Virufy é um serviço que utiliza inteligência artificial (IA) para analisar padrões de voz e determinar se estes se assemelham à tosse de doentes que sofrem de COVID-19. Este serviço não é um dispositivo médico, pelo que apenas fornece informações e não se destina a aconselhamento médico, diagnóstico, tratamento, prevenção, etc. O Serviço não substitui um médico ou outro profissional de saúde, pelo que não deve tomar quaisquer decisões médicas nem tomar ou deixar de tomar qualquer medida (como tomar qualquer medicamento) com base nas informações que fornecemos. Além disso, não o utilize em situações de risco de vida ou de emergência. Este serviço não é responsável por qualquer doença de que possa sofrer inicialmente ou pelas consequências de quaisquer acções que tome com base nas informações fornecidas.",
+    "terms": "Termos de utilização e política de privacidade Utilize-o depois de aceitar"
   },
   "helpVirufy": {
     "title": "Sobre Nós",
     "ourSupporters": "Nossos apoiadores",
     "introParagraph": "Bem-vindo ao nosso estudo! Isto deve levar apenas cerca de 5 minutos para ser concluído. Antes de começarmos, vamos discutir o que vamos cobrir:",
-    "aboutParagraph": "<0>Virufy é uma <strong>organização sem fins lucrativos</strong> que está a trabalhar para desenvolver os meios para utilizar <strong> inteligência artificial (Al) para fazer o rastreio para COVID-19 a partir de padrões de tosse</strong> rapidamente e sem custos através da utilização de um smartphone em benefício de países de baixos rendimentos.</0><1> A nossa equipa inclui investigadores de mais de <strong>25 países. </strong> <3>A nossa investigação</3> demonstrou que a tecnologia Al pode ser capaz de identificar a assinatura única de tosse da COVID.</1><2> Ao recolher <strong> gravações de tosse</strong> de pessoas de todo o mundo, a Virufy está a melhorar a robustez do seu algoritmo de IA ao reconhecer o padrão de som único da COVID. </2><3> <strong>Você tem o poder</strong> de ajudar a beneficiar milhões de pessoas em todo o mundo ao <strong> contribuir com a sua tosse</strong> no nosso estudo.</3>",
+    "aboutParagraph": "<0>Virufy é uma <strong>organização sem fins lucrativos</strong> que está a trabalhar para desenvolver os meios para utilizar <strong> inteligência artificial (Al) para fazer o rastreio para COVID-19 a partir de padrões de tosse</strong> rapidamente e sem custos através da utilização de um smartphone em benefício de países de baixos rendimentos.</0><0> A nossa equipa inclui investigadores de mais de <strong>25 países. </strong> <0>A nossa investigação</0> demonstrou que a tecnologia Al pode ser capaz de identificar a assinatura única de tosse da COVID.</0><0> Ao recolher <strong> gravações de tosse</strong> de pessoas de todo o mundo, a Virufy está a melhorar a robustez do seu algoritmo de IA ao reconhecer o padrão de som único da COVID. </0><0> <strong>Você tem o poder</strong> de ajudar a beneficiar milhões de pessoas em todo o mundo ao <strong> contribuir com a sua tosse</strong> no nosso estudo.</0>",
+    "aboutBeforeText": "Antes de começarmos, damos-lhe uma informação de 5 minutos sobre nós e a nossa investigação.",
+    "aboutTitle": "Visão geral da organização",
     "bulletsIntro": "<strong>Introdução: </strong> Sobre nós e Lembretes de Segurança",
     "bulletCough": "<strong>Tosse por telefone</strong>",
     "bulletQuestions": "<strong>Perguntas rápidas de saúde</strong>",
-    "nextButton": "Próximo"
+    "nextButton": "Próximo",
+    "followingPage": "Seguinte"
   },
   "consent": {
     "title": "Consentimento para o estudo",
@@ -370,9 +377,10 @@
       "resultAntigenTest": "Qual foi o resultado do teste COVID-19 do antígeno rápido do paciente <1><0>{{patientId}}</0></1>?"
     },
     "headerText2": "Questão a seguir",
-    "whenPcrTest": "Quando você fez seu teste PCR para COVID-19? Se não tiver certeza, dê uma estimativa.",
+    "whenPcrTest": "Quando você fez seu teste PCR para COVID-19?",
     "resultPcrTest": {
       "question": "Qual foi o resultado do seu exame PCR para COVID-19?\n",
+      "caption": "Se não tiver certeza, dê uma estimativa.",
       "options": {
         "positive": "Positivo",
         "negative": "Negativo",
@@ -380,7 +388,13 @@
         "unsure": "Inseguro"
       }
     },
-    "whenAntibodyTest": "Quando você fez seu teste de anticorpos para COVID-19? Se não tiver certeza, dê uma estimativa.",
+    "covidTimesTitle": "Vacinação",
+    "covidTimes": "Quantas vezes foi infetado com COVID-19?",
+    "covidTimesPlaceholder": "Introduzir o número de vezes",
+    "lastTimeCovidMonths": "Há quantos meses foi a COVID-19 vacinada pela última vez?",
+    "lastTimeCovidMonthsCaption": "(As pessoas não vacinadas podem não o fazer).",
+    "lastTimeCovidMonthsPlaceholder": "Indicar o número de meses decorridos",
+    "whenAntibodyTest": "Quando foi feito o teste de anticorpos para a COVID-19?",
     "resultAntibodyTest": {
       "question": "Qual foi o resultado do seu teste de anticorpos para COVID-19?",
       "options": {
@@ -390,7 +404,8 @@
         "unsure": "Inseguro"
       }
     },
-    "whenAntigenTest": "Quando você fez seu teste de antigénios para COVID-19? Se não tiver certeza, dê uma estimativa.",
+    "whenAntigenTest": "Quando você fez seu teste de antigénios para COVID-19?",
+    "whenAntigenTestCaption": "Se não tiver certeza, dê uma estimativa.",
     "resultAntigenTest": {
       "question": "Qual foi o resultado do seu teste de antigénios para COVID-19?",
       "options": {
@@ -399,6 +414,30 @@
         "pending": "Aguardando",
         "unsure": "Inseguro"
       }
+    },
+    "fluTest": {
+      "title": "Teste da gripe"
+    },
+    "whenFluTest": "Quando é que fez o teste da gripe?",
+    "whenFluTestCaption": "Se não tiver a certeza, faça uma estimativa.",
+    "fluTestResult": {
+        "question": "Qual foi o resultado da sua despistagem da gripe?",
+        "options": {
+            "negative": "Negativo",
+            "positiveA": "Positivo (Tipo A)",
+            "positiveB": "Positivo (Tipo B)"
+        }
+    },
+    "fluShot": {
+        "title": "Vacinação"
+    },
+    "whenFluShot": {
+        "question": "Foi vacinado contra a gripe esta época (nos últimos 3 meses)?",
+        "options": {
+            "yes": "Sim",
+            "no": "Não",
+            "noResponse": "Sem resposta"
+        }
     },
     "vaccine": {
       "title": "Vacinação",
@@ -428,6 +467,25 @@
         "other": "Outro",
         "transgender": "Transgênero",
         "selfDescribe": "Prefiro me descrever"
+      }
+    },
+    "ethnicity": {
+      "title": "Raça/etnia",
+      "question": "Com que raças e/ou etnias se identifica?",
+      "note": "(selecionar todas as opções aplicáveis)",
+      "options": {
+          "asian": "Asiático",
+          "nativeAmericanOrArab": "Nativo americano ou árabe",
+          "blackOrAfrican": "Negro ou afro-americano",
+          "hispanicOrLatin": "Origem hispânica, latina ou espanhola",
+          "nativeHawaiianOrPacific": "Nativo do Havai ou das ilhas do Pacífico",
+          "japanese": "Japonês",
+          "chinese": "China",
+          "vietnamese": "Vietnamita",
+          "korean": "Coreano",
+          "philippines": "Filipino",
+          "southAmerica": "América do Sul",
+          "other": "Otra"
       }
     },
     "biologicalSex": {
@@ -464,9 +522,13 @@
         "breathShortness": "Falta de ar",
         "soreThroat": "Dor de garganta",
         "chestTightness": "Aperto no peito",
+        "palpitation": "Palpitação",
         "vomitingAndDiarrhea": "Vômito ou diarreia",
         "weakness": "Fraqueza",
         "none": "Nenhum",
+        "lossAppetite": "Perda de apetite",
+        "fatigue": "Fadiga",
+        "rash": "Erupção",
         "other": "Outro",
         "addOther": "+ Adicionar outro"
       },
@@ -491,12 +553,28 @@
         "otherChronic": "Outra doença pulmonar crônica",
         "pneumonia": "Pneumonia",
         "tuberculosis": "Tuberculose",
+        "pulmonaryFibrosis": "Fibrose pulmonar",
+        "cysticFibrosis": "Fibrose cística",
+        "chronicRespiratoryDisease": "Doença respiratória crónica",
+        "chronicLungDiseases": "Doenças pulmonares crónicas",
+        "coughOtherConditions": "Tosse devido a outras doenças",
         "none": "Nenhum",
         "addOther": "+ adicionar outra"
       },
       "addOtherPlaceholder": "Outra condição"
     },
+    "typeCovidFlu": {
+      "title": "Responda às seguintes perguntas.",
+      "question": "Quais dos seguintes testes foram efectuados?",
+      "options": {
+        "antigenTaken": "Teste de antigénio da COVID-19",
+        "PCRTaken": "Teste PCR para a COVID-19",
+        "fluTaken": "Teste da gripe",
+        "none": "Nenhum"
+      }
+    },
     "medical": {
+      "title": "Condições médicas",
       "question": "<strong>Qual das condições médicas abaixo você tem atualmente?</strong>",
       "options": {
         "allergies": "Alergias",
@@ -514,7 +592,18 @@
         "reflux": "Refluxo Ácido (GERD)",
         "sinusitis": "Sinusite",
         "tuberculosis": "Tuberculose",
-        "valvularHeart": "Doença cardiovascular",
+        "respiratorySystem": "Doenças do aparelho respiratório",
+        "chronicKidney": "Doença renal crónica (hemodiálise)",
+        "diabetes": "Diabetes",
+        "highBloodPressure": "Hipertensão",
+        "dislipidemia": "Dislipidemia",
+        "cancer": "Cancro ou tumor",
+        "pregnancy": "Gravidez",
+        "congestiveHeartDisease": "Doença cardíaca congestiva",
+        "cerebrovascular": "Doença cerebrovascular",
+        "valvularHeart": "Doença cardíaca valvular",
+        "immunosuppressiveTherapy": "Terapia imunossupressora",
+        "immunodeficiency": "Imunodeficiência",
         "none": "Nenhuma",
         "other": "Outro",
         "addOther": "+ adicionar outra"
@@ -525,7 +614,7 @@
     "stepOf": "de",
     "nextButton": "Próximo",
     "submitting": "submetendo...",
-    "progressBar": "Pregunta {{currentStep}}/{{totalSteps}}"
+    "progressBar": "Questão {{currentStep}}/{{totalSteps}}"
   },
   "beforeSubmit": {
     "submitButton": "Enviar",

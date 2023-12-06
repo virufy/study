@@ -13,6 +13,9 @@ import * as Yup from 'yup';
 // Update Action
 import { updateAction } from 'utils/wizard';
 
+// Hooks
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
+
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
@@ -43,6 +46,7 @@ const Step2d = ({
   nextStep,
   storeKey,
   otherSteps,
+  otherBackSteps,
   metadata,
 }: Wizard.StepProps) => {
   // Hooks
@@ -54,6 +58,7 @@ const Step2d = ({
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const country = getCountry();
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -70,12 +75,21 @@ const Step2d = ({
 
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (previousStep) {
+    const fluTaken = state['submit-steps'].typeCovidFlu?.selected.includes('fluTaken');
+    const antigenTaken = state['submit-steps'].typeCovidFlu?.selected.includes('antigenTaken');
+    const PCRTaken = state['submit-steps'].typeCovidFlu?.selected.includes('PCRTaken');
+    if (fluTaken && otherBackSteps) {
+      history.push(otherBackSteps.fluTakenStep);
+    } else if (PCRTaken && otherBackSteps) {
+      history.push(otherBackSteps.PCRTakenStep);
+    } else if (antigenTaken && otherBackSteps) {
+      history.push(otherBackSteps.antigenTakenStep);
+    } else if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [history, previousStep]);
+  }, [history, otherBackSteps, previousStep, state]);
 
   useEffect(() => {
     scrollToTop();
@@ -181,8 +195,8 @@ const Step2d = ({
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customSteps.current}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>

@@ -231,17 +231,24 @@
       "Yemen": "Yemen",
       "Zambia": "Zambiya",
       "Zimbabwe": "Zimbabve"
-    }
+    },
+    "agree": "Kabul et",
+    "servicePurposeTitle": "Hizmetin amacı ve konumlandırılması",
+    "servicePurposeText": "Virufy, ses kalıplarını analiz etmek ve COVID-19'dan muzdarip hastaların öksürüğüne benzeyip benzemediğini belirlemek için yapay zeka (AI) kullanan bir hizmettir. Bu hizmet tıbbi bir cihaz değildir, bu nedenle yalnızca bilgi sağlar ve tıbbi tavsiye, teşhis, tedavi, önleme vb. amaçlı değildir. Hizmet, bir doktorun veya başka bir tıp uzmanının yerine geçmez, bu nedenle lütfen sağladığımız bilgilere dayanarak herhangi bir tıbbi karar vermeyin veya herhangi bir işlem yapmayın (herhangi bir ilaç almak gibi) veya yapmaktan kaçınmayın. Lütfen hayati tehlike veya acil durumlarda kullanmayın. Bu hizmet, başlangıçta maruz kalabileceğiniz herhangi bir hastalıktan veya sağlanan bilgilere dayanarak yaptığınız herhangi bir eylemin sonuçlarından sorumlu değildir.",
+    "terms": "Kullanım şartları ve gizlilik politikası Kabul ettikten sonra kullanın"
   },
   "helpVirufy": {
     "title": "Hakkımızda",
     "ourSupporters": "Destekçilerimiz",
     "introParagraph": "Çalışmamıza hoş geldiniz! Bu işlemi tamamlamanız yalnızca 5 dakikanızı alacaktır. Başlamadan önce, neleri ele alacağımızı tartışalım:",
-    "aboutParagraph": "<0>Virufy, düşük gelirli ülkelerin yararına, akıllı telefon kullanarak hızlı ve ücretsiz bir şekile öksürük kalıplarından COVID-19'u taramak için, <strong>yapay zekayı (Al) kullanmanın yollarını geliştirmeye çalışan, <strong>kar amacı gütmeyen bir kuruluştur</strong></0><1>Ekibimiz <strong>25'ten fazla ülkenin</strong> araştırmacılardan oluşuyor. <3>Araştırmamız</3 > Al teknolojisinin COVID'in benzersiz öksürük imzasını tanımlayabildiğini göstermiştir.</1><2>Dünyanın dört bir yanındaki insanlardan <strong>öksürük kayıtları</strong> toplayan Virufy, COVID'in benzersiz ses düzenini tanıyarak, yapay zeka algoritmasını şu anda geliştirmeye çalışmaktadır. </2><3><strong>Çalışmamıza <strong>öksürüğünüzle katkıda bulunarak</strong> dünya genelinde milyonlarca insanın faydalanmasına yardımcı olacak güce sahipsiniz</strong>.</strong> 3>",
+    "aboutParagraph": "<0>Virufy, düşük gelirli ülkelerin yararına, akıllı telefon kullanarak hızlı ve ücretsiz bir şekile öksürük kalıplarından COVID-19'u taramak için, <strong>yapay zekayı (Al) kullanmanın yollarını geliştirmeye çalışan, <strong>kar amacı gütmeyen bir kuruluştur</strong></0><0>Ekibimiz <strong>25'ten fazla ülkenin</strong> araştırmacılardan oluşuyor. <0>Araştırmamız</0> Al teknolojisinin COVID'in benzersiz öksürük imzasını tanımlayabildiğini göstermiştir.</0><0>Dünyanın dört bir yanındaki insanlardan <strong>öksürük kayıtları</strong> toplayan Virufy, COVID'in benzersiz ses düzenini tanıyarak, yapay zeka algoritmasını şu anda geliştirmeye çalışmaktadır. </0><0><strong>Çalışmamıza <strong>öksürüğünüzle katkıda bulunarak</strong> dünya genelinde milyonlarca insanın faydalanmasına yardımcı olacak güce sahipsiniz</strong>.</strong> 0>",
+    "aboutBeforeText": "Başlamadan önce size kendimiz ve araştırmamız hakkında 5 dakikalık bir brifing vereceğiz.",
+    "aboutTitle": "Organizasyonel genel bakış",
     "bulletsIntro": "<strong>Giriş: </strong>Hakkımızda ve Güvenlik Hatırlatıcıları",
     "bulletCough": "<strong>Telefona Öksürük</strong>",
     "bulletQuestions": "<strong>Hızlı Sağlık Soruları</strong>",
-    "nextButton": "Sonraki"
+    "nextButton": "Sonraki",
+    "followingPage": "Sonraki"
   },
   "consent": {
     "title": "Onay",
@@ -368,9 +375,10 @@
       "resultAntigenTest": "Hasta <1><0>{{hastaId}}</0></1>'in hızlı antijen COVID-19 testinin sonucu ne oldu?"
     },
     "headerText2": "Takip sorusu",
-    "whenPcrTest": "PCR tabanlı COVID-19 testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+    "whenPcrTest": "PCR tabanlı COVID-19 testinizi ne zaman yaptınız?",
     "resultPcrTest": {
       "question": "PCR tabanlı COVID-19 testinizin sonucu ne oldu?",
+      "caption": "Emin değilseniz lütfen tahmin edin.",
       "options": {
         "positive": "Olumlu",
         "negative": "Olumsuz",
@@ -378,7 +386,13 @@
         "unsure": "Emin değilim"
       }
     },
-    "whenAntibodyTest": "COVID-19 için antikor testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+    "covidTimesTitle": "Aşılama",
+    "covidTimes": "COVID-19 ile kaç kez enfekte oldunuz?",
+    "covidTimesPlaceholder": "Kez sayısını girin",
+    "lastTimeCovidMonths": "COVID-19 en son kaç ay önce aşılanmıştı?",
+    "lastTimeCovidMonthsCaption": "(Aşılanmamış kişiler bunu atlayabilir).",
+    "lastTimeCovidMonthsPlaceholder": "Geçen ay sayısını girin",
+    "whenAntibodyTest": "COVID-19 için antikor testinizi ne zaman yaptınız?",
     "resultAntibodyTest": {
       "question": "COVID-19 için antikor testinizin sonucu ne oldu?",
       "options": {
@@ -388,7 +402,8 @@
         "unsure": "Emin değilim"
       }
     },
-    "whenAntigenTest": "COVID-19 için antijen testinizi ne zaman yaptınız? Emin değilseniz lütfen tahmin edin.",
+    "whenAntigenTest": "COVID-19 için antijen testinizi ne zaman yaptınız?",
+    "whenAntigenTestCaption": "Emin değilseniz lütfen tahmin edin.",
     "resultAntigenTest": {
       "question": "COVID-19 için antijen testinizin sonucu ne oldu?",
       "options": {
@@ -397,6 +412,30 @@
         "pending": "Beklemede",
         "unsure": "Emin değilim"
       }
+    },
+    "fluTest": {
+      "title": "Grip testi"
+    },
+    "whenFluTest": "Ne zaman grip testi yaptırdınız?",
+    "whenFluTestCaption": "Emin değilseniz lütfen tahmin edin.",
+    "fluTestResult": {
+        "question": "Grip testinizin sonucu ne oldu?",
+        "options": {
+            "negative": "Negatif",
+            "positiveA": "Pozitif (Tip A)",
+            "positiveB": "Pozitif (Tip B)"
+        }
+    },
+    "fluShot": {
+        "title": "Aşılama"
+    },
+    "whenFluShot": {
+        "question": "Bu sezon (son 3 ay içinde) grip aşısı yaptırdınız mı?",
+        "options": {
+            "yes": "Evet",
+            "no": "Hayır",
+            "noResponse": "Yanıt yok"
+        }
     },
     "vaccine": {
       "title": "Aşılama",
@@ -426,6 +465,25 @@
         "other": "Diğer",
         "transgender": "Transseksüel",
         "selfDescribe": "Kendini tarif etmeyi tercih et"
+      }
+    },
+    "ethnicity": {
+      "title": "Irk/etnik köken",
+      "question": "Kendinizi hangi ırk ve/veya etnik kökenle tanımlıyorsunuz?",
+      "note": "(geçerli olanların tümünü seçin)",
+      "options": {
+          "asian": "Asya",
+          "nativeAmericanOrArab": "Amerikan yerlisi veya Arap",
+          "blackOrAfrican": "Siyah veya Afrikalı Amerikalı",
+          "hispanicOrLatin": "Hispanik, Latin veya İspanyol kökenli",
+          "nativeHawaiianOrPacific": "Yerli Hawaiili veya Pasifik Adalı",
+          "japanese": "Japonca",
+          "chinese": "Çin",
+          "vietnamese": "Vietnamca",
+          "korean": "Korece",
+          "philippines": "Filipina/o",
+          "southAmerica": "Güney Amerika",
+          "other": "Başka bir"
       }
     },
     "biologicalSex": {
@@ -462,9 +520,13 @@
         "breathShortness": "Nefes darlığı",
         "soreThroat": "Boğaz ağrısı",
         "chestTightness": "Göğüste sıkışma",
+        "palpitation": "Çarpıntı",
         "vomitingAndDiarrhea": "Kusma ve ishal",
         "none": "Yok",
         "weakness": "Zayıflık",
+        "lossAppetite": "Pérdida de apetito",
+        "fatigue": "Yorgunluk",
+        "rash": "Patlama",
         "other": "Diğer",
         "addOther": "+ Başka ekle"
       },
@@ -489,12 +551,28 @@
         "otherChronic": "Diğer kronik akciğer hastalığı",
         "pneumonia": "Zatürree",
         "tuberculosis": "Tüberküloz",
+        "pulmonaryFibrosis": "Pulmoner fibrozis",
+        "cysticFibrosis": "Kistik fibrozis",
+        "chronicRespiratoryDisease": "Kronik solunum yolu hastalığı",
+        "chronicLungDiseases": "Kronik akciğer hastalıkları",
+        "coughOtherConditions": "Diğer durumlara bağlı öksürük",
         "none": "Yok",
         "addOther": "+ Başka ekle"
       },
       "addOtherPlaceholder": "Diğer koşul"
     },
+    "typeCovidFlu": {
+      "title": "Lütfen aşağıdaki soruları yanıtlayınız.",
+      "question": "Aşağıdaki testlerden hangilerini yaptınız?",
+      "options": {
+        "antigenTaken": "COVID-19 antijen testi",
+        "PCRTaken": "COVID-19 PCR testi",
+        "fluTaken": "Grip testi",
+        "none": "Hiçbiri"
+      }
+    },
     "medical": {
+      "title": "Tıbbi durumlar",
       "question": "<strong>Şu anda aşağıdaki tıbbi durumlardan hangilerine sahipsiniz?</strong>",
       "options": {
         "allergies": "Alerjiler",
@@ -512,6 +590,18 @@
         "reflux": "Asit Reflü (GERD)",
         "sinusitis": "Sinüzit",
         "tuberculosis": "Tüberküloz",
+        "respiratorySystem": "Solunum sistemi hastalıkları",
+        "chronicKidney": "Kronik böbrek hastalığı (hemodiyaliz)",
+        "diabetes": "Diyabet",
+        "highBloodPressure": "Hipertansiyon",
+        "dislipidemia": "Dislipidemi",
+        "cancer": "Kanser veya tümör",
+        "pregnancy": "Hamilelik",
+        "congestiveHeartDisease": "Konjestif kalp hastalığı",
+        "cerebrovascular": "Serebrovasküler hastalık",
+        "valvularHeart": "Kalp kapak hastalığı",
+        "immunosuppressiveTherapy": "İmmünsüpresif tedavi",
+        "immunodeficiency": "Bağışıklık Yetmezliği",
         "none": "Yok",
         "other": "Diğer",
         "addOther": "+ Başka ekle"

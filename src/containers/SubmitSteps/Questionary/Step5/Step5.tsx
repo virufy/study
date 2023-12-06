@@ -21,9 +21,13 @@ import ProgressIndicator from 'components/ProgressIndicator';
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
+// Hooks
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
+
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { doSubmit } from 'helper/submitHelper';
+import { getPatientId, getCountry } from 'helper/stepsDefinitions';
 
 // Styles
 import OptionList from 'components/OptionList';
@@ -33,7 +37,9 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  currentRespiratoryCondition: Yup.object().required(),
+  currentRespiratoryCondition: Yup.object({
+    selected: Yup.array().required(),
+  }),
 }).defined();
 
 type Step5Type = Yup.InferType<typeof schema>;
@@ -53,6 +59,9 @@ const Step5 = ({
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const [cookies] = useCookies(['virufy-study-user']);
+  const patientId = getPatientId();
+  const country = getCountry();
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   const userCookie = cookies['virufy-study-user'];
 
@@ -70,7 +79,7 @@ const Step5 = ({
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
-  const { errors } = formState;
+  const { errors, isSubmitting } = formState;
 
   const {
     isValid,
@@ -95,7 +104,7 @@ const Step5 = ({
   // Handlers
   const onSubmit = async (values: Step5Type) => {
     if (values) {
-      if ((metadata?.current ?? 5) === (metadata?.total ?? 6)) {
+      if (((metadata?.current ?? 5) === (metadata?.total ?? 6) || (country === 'Japan' && !patientId))) {
         await doSubmit({
           setSubmitError: s => setSubmitError(!s ? null : t(s)),
           state,
@@ -116,11 +125,104 @@ const Step5 = ({
     }
   };
 
+  const getLeftLabel = React.useCallback(() => {
+    if (country === 'Japan' && !patientId) {
+      if (isSubmitting) {
+        return t('questionary:submitting');
+      }
+      return t('beforeSubmit:submitButton');
+    }
+
+    return t('questionary:nextButton');
+  }, [country, isSubmitting, patientId, t]);
+
+  // Memos
+  const medicalOptions = React.useMemo(() => {
+    if (country === 'Japan') {
+      return [
+        {
+          value: 'none',
+          label: t('questionary:respiration.options.none'),
+        },
+        {
+          value: 'asthma',
+          label: t('questionary:respiration.options.asthma'),
+        },
+        {
+          value: 'pneumonia',
+          label: t('questionary:respiration.options.pneumonia'),
+        },
+        {
+          value: 'tuberculosis',
+          label: t('questionary:respiration.options.tuberculosis'),
+        },
+        {
+          value: 'copdEmphysema',
+          label: t('questionary:respiration.options.emphysema'),
+        },
+        {
+          value: 'pulmonaryFibrosis',
+          label: t('questionary:respiration.options.pulmonaryFibrosis'),
+        },
+        {
+          value: 'cysticFibrosis',
+          label: t('questionary:respiration.options.cysticFibrosis'),
+        },
+        {
+          value: 'chronicRespiratoryDisease',
+          label: t('questionary:respiration.options.chronicRespiratoryDisease'),
+        },
+        {
+          value: 'chronicLungDiseases',
+          label: t('questionary:respiration.options.chronicLungDiseases'),
+        },
+        {
+          value: 'coughOtherConditions',
+          label: t('questionary:respiration.options.coughOtherConditions'),
+        },
+        {
+          value: 'other',
+          label: t('questionary:medical.options.other'),
+        },
+      ];
+    }
+    return [
+      {
+        value: 'none',
+        label: t('questionary:respiration.options.none'),
+      },
+      {
+        value: 'asthma',
+        label: t('questionary:respiration.options.asthma'),
+      },
+      {
+        value: 'bronchitis',
+        label: t('questionary:respiration.options.bronchitis'),
+      },
+      {
+        value: 'copdEmphysema',
+        label: t('questionary:respiration.options.emphysema'),
+      },
+      {
+        value: 'pneumonia',
+        label: t('questionary:respiration.options.pneumonia'),
+      },
+      {
+        value: 'tuberculosis',
+        label: t('questionary:respiration.options.tuberculosis'),
+      },
+      {
+        value: 'other',
+        label: t('questionary:medical.options.other'),
+      },
+    ];
+  }, [country, t]);
+
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customSteps.current}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText bold={false}>
@@ -135,38 +237,10 @@ const Step5 = ({
         defaultValue={{ selected: [], other: '' }}
         render={({ onChange, value }) => (
           <OptionList
+            isCheckbox
             value={value}
             onChange={v => onChange(v)}
-            items={[
-              {
-                value: 'none',
-                label: t('questionary:respiration.options.none'),
-              },
-              {
-                value: 'asthma',
-                label: t('questionary:respiration.options.asthma'),
-              },
-              {
-                value: 'bronchitis',
-                label: t('questionary:respiration.options.bronchitis'),
-              },
-              {
-                value: 'copdEmphysema',
-                label: t('questionary:respiration.options.emphysema'),
-              },
-              {
-                value: 'pneumonia',
-                label: t('questionary:respiration.options.pneumonia'),
-              },
-              {
-                value: 'tuberculosis',
-                label: t('questionary:respiration.options.tuberculosis'),
-              },
-              {
-                value: 'other',
-                label: t('questionary:medical.options.other'),
-              },
-            ]}
+            items={medicalOptions}
             excludableValues={['none']}
           />
         )}
@@ -182,7 +256,7 @@ const Step5 = ({
       {/* Bottom Buttons */}
       {activeStep && (
         <Portal>
-          {(metadata?.current ?? 5) === (metadata?.total ?? 6) && (
+          {((metadata?.current ?? 5) === (metadata?.total ?? 6) || (country === 'Japan' && !patientId)) && (
             <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
           )}
           {submitError && (
@@ -192,9 +266,9 @@ const Step5 = ({
           )}
           <WizardButtons
             invert
-            leftLabel={t('questionary:nextButton')}
+            leftLabel={getLeftLabel()}
             leftHandler={handleSubmit(onSubmit)}
-            leftDisabled={!isValid || !recaptchaAvailable}
+            leftDisabled={country === 'Japan' && !patientId ? (isSubmitting || (recaptchaAvailable && !captchaValue)) || !isValid : !isValid || !recaptchaAvailable}
           />
         </Portal>
       )}
