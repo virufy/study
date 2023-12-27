@@ -264,7 +264,7 @@ const Step1b = ({
             defaultValue={undefined}
             render={({ onChange, value }) => (
               <DatePicker
-                label="Date"
+                label={value ? '' : 'Date'}
                 value={value ? new Date(value) : null}
                 locale={i18n.language}
                 onChange={onChange}
@@ -316,7 +316,7 @@ const Step1b = ({
             defaultValue={undefined}
             render={({ onChange, value }) => (
               <DatePicker
-                label="Date"
+                label={value ? '' : 'Date'}
                 value={value ? new Date(value) : null}
                 locale={i18n.language}
                 onChange={onChange}

@@ -188,7 +188,7 @@ export async function doSubmit({
     }
 
     if (antigenTestDate) {
-      body.append('antigenTestDate', antigenTestDate);
+      body.append('antigenTestDate', antigenTestDate.toISOString());
     }
 
     if (antigenTestResult) {
@@ -196,7 +196,7 @@ export async function doSubmit({
     }
 
     if (pcrTestDate) {
-      body.append('pcrTestDate', pcrTestDate);
+      body.append('pcrTestDate', pcrTestDate.toISOString());
       body.append('pcrTestResult', pcrTestResult);
     }
 
@@ -209,7 +209,7 @@ export async function doSubmit({
     }
 
     if (fluTestDate) {
-      body.append('fluTestDate', fluTestDate);
+      body.append('fluTestDate', fluTestDate.toISOString());
     }
 
     if (fluTestResult) {

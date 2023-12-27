@@ -14,58 +14,64 @@ const useCustomProgressBarSteps = (storeKey: any, metadata: CommonJSON<any> | un
       total: metadata?.total,
       current: metadata?.current,
     };
-    const antigenTaken = state['submit-steps'].typeCovidFlu?.selected.includes('antigenTaken');
-    const PCRTaken = state['submit-steps'].typeCovidFlu?.selected.includes('PCRTaken');
-    const fluTaken = state['submit-steps'].typeCovidFlu?.selected.includes('fluTaken');
-    const antigenTakenScreens = 1;
-    const PCRTakenScreens = 2;
-    const fluTakenScreens = 2;
+    if (state[storeKey]) {
+      const antigenTaken = state['submit-steps']?.typeCovidFlu?.selected.includes('antigenTaken');
+      const PCRTaken = state['submit-steps']?.typeCovidFlu?.selected.includes('PCRTaken');
+      const fluTaken = state['submit-steps']?.typeCovidFlu?.selected.includes('fluTaken');
+      const antigenTakenScreens = 1;
+      const PCRTakenScreens = 2;
+      const fluTakenScreens = 2;
 
-    switch (true) {
-      case antigenTaken && !PCRTaken && !fluTaken:
-        steps.total = metadata?.total - PCRTakenScreens - fluTakenScreens;
-        steps.current = metadata?.current - PCRTakenScreens - fluTakenScreens;
-        break;
+      switch (true) {
+        case antigenTaken && !PCRTaken && !fluTaken:
+          steps.total = metadata?.total - PCRTakenScreens - fluTakenScreens;
+          steps.current = metadata?.current - PCRTakenScreens - fluTakenScreens;
+          break;
 
-      case (antigenTaken && PCRTaken && !fluTaken) || (antigenTaken && !PCRTaken && fluTaken):
-        steps.total = metadata?.total - (PCRTakenScreens || fluTakenScreens);
-        steps.current = metadata?.current - (PCRTakenScreens || fluTakenScreens);
-        break;
+        case (antigenTaken && PCRTaken && !fluTaken) || (antigenTaken && !PCRTaken && fluTaken):
+          steps.total = metadata?.total - (PCRTakenScreens || fluTakenScreens);
+          steps.current = metadata?.current - (PCRTakenScreens || fluTakenScreens);
+          break;
 
-      case !antigenTaken && !PCRTaken && !fluTaken:
-        steps.total = metadata?.total - antigenTakenScreens - PCRTakenScreens - fluTakenScreens;
-        steps.current = metadata?.current - antigenTakenScreens - PCRTakenScreens - fluTakenScreens;
-        break;
+        case !antigenTaken && !PCRTaken && !fluTaken:
+          steps.total = metadata?.total - antigenTakenScreens - PCRTakenScreens - fluTakenScreens;
+          steps.current = metadata?.current - antigenTakenScreens - PCRTakenScreens - fluTakenScreens;
+          break;
 
-      case !antigenTaken && PCRTaken && fluTaken:
-        steps.total = metadata?.total - antigenTakenScreens;
-        steps.current = metadata?.current - antigenTakenScreens;
-        break;
+        case !antigenTaken && PCRTaken && fluTaken:
+          steps.total = metadata?.total - antigenTakenScreens;
+          steps.current = metadata?.current - antigenTakenScreens;
+          break;
 
-      case (!antigenTaken && !PCRTaken && fluTaken)
-      || (!antigenTaken && PCRTaken && !fluTaken):
-        steps.total = metadata?.total - antigenTakenScreens - (fluTakenScreens || PCRTakenScreens);
-        steps.current = metadata?.current - antigenTakenScreens - (fluTakenScreens || PCRTakenScreens);
-        break;
+        case (!antigenTaken && !PCRTaken && fluTaken)
+        || (!antigenTaken && PCRTaken && !fluTaken):
+          steps.total = metadata?.total - antigenTakenScreens - (fluTakenScreens || PCRTakenScreens);
+          steps.current = metadata?.current - antigenTakenScreens - (fluTakenScreens || PCRTakenScreens);
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
     }
 
     return steps;
-  }, [state, metadata]);
+  }, [state, metadata, storeKey]);
 
   // only for PCR test screens
   const customCurrentStepPCR = useMemo(() => {
-    const PCRTaken = state['submit-steps'].typeCovidFlu?.selected.includes('PCRTaken');
-    const antigenTaken = state['submit-steps'].typeCovidFlu?.selected.includes('antigenTaken');
-    const fluTaken = state['submit-steps'].typeCovidFlu?.selected.includes('fluTaken');
+    if (state[storeKey]) {
+      const PCRTaken = state['submit-steps'].typeCovidFlu?.selected.includes('PCRTaken');
+      const antigenTaken = state['submit-steps'].typeCovidFlu?.selected.includes('antigenTaken');
+      const fluTaken = state['submit-steps'].typeCovidFlu?.selected.includes('fluTaken');
 
-    if ((PCRTaken && !antigenTaken && !fluTaken) || (PCRTaken && antigenTaken && !fluTaken)) {
-      return customSteps.current + 2;
+      if ((PCRTaken && !antigenTaken && !fluTaken) || (PCRTaken && antigenTaken && !fluTaken)) {
+        return customSteps.current + 2;
+      }
+      return customSteps.current;
     }
-    return customSteps.current;
-  }, [state, customSteps]);
+
+    return 0;
+  }, [state, storeKey, customSteps]);
 
   return {
     customSteps,

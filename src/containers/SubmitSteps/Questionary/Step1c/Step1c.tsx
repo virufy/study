@@ -28,9 +28,7 @@ import WizardButtons from 'components/WizardButtons';
 import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
-import {
-  QuestionText, MainContainer, QuestionAllApply,
-} from '../style';
+import { QuestionText, MainContainer, QuestionAllApply } from '../style';
 
 const schemaWithoutPatient = Yup.object({
   antigenTestDate: Yup.date().required(),
@@ -48,7 +46,8 @@ const Step1c = ({
 }: Wizard.StepProps) => {
   // Hooks
   const { Portal } = usePortal({
-    bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
+    bindTo:
+      document && (document.getElementById('wizard-buttons') as HTMLDivElement),
   });
   const {
     setDoGoBack, setTitle, setSubtitle, setType,
@@ -64,9 +63,7 @@ const Step1c = ({
   const [activeStep, setActiveStep] = React.useState(true);
 
   // Form
-  const {
-    control, handleSubmit, formState,
-  } = useForm({
+  const { control, handleSubmit, formState } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
     context: {
@@ -103,10 +100,7 @@ const Step1c = ({
   // Handlers
   const onSubmit = async (values: Step1cType) => {
     if (values) {
-      const {
-        antigenTestDate,
-        antigenTestResult,
-      } = (values as any);
+      const { antigenTestDate, antigenTestResult } = values as any;
       // if patient
       if (!antigenTestDate || !antigenTestResult) {
         return;
@@ -128,16 +122,19 @@ const Step1c = ({
   };
 
   // Memos
-  const antigenOptions = React.useMemo(() => [
-    {
-      value: 'positive',
-      label: t('questionary:resultAntigenTest.options.positive'),
-    },
-    {
-      value: 'negative',
-      label: t('questionary:resultAntigenTest.options.negative'),
-    },
-  ], [t]);
+  const antigenOptions = React.useMemo(
+    () => [
+      {
+        value: 'positive',
+        label: t('questionary:resultAntigenTest.options.positive'),
+      },
+      {
+        value: 'negative',
+        label: t('questionary:resultAntigenTest.options.negative'),
+      },
+    ],
+    [t],
+  );
 
   return (
     <MainContainer>
@@ -148,7 +145,9 @@ const Step1c = ({
       />
       <QuestionText extraSpace first>
         {t('questionary:whenAntigenTest')}
-        <QuestionAllApply>{t('questionary:whenAntigenTestCaption')}</QuestionAllApply>
+        <QuestionAllApply>
+          {t('questionary:whenAntigenTestCaption')}
+        </QuestionAllApply>
       </QuestionText>
 
       <Controller
@@ -157,7 +156,7 @@ const Step1c = ({
         defaultValue={undefined}
         render={({ onChange, value }) => (
           <DatePicker
-            label="Date"
+            label={value ? '' : 'Date'}
             value={value ? new Date(value) : null}
             locale={i18n.language}
             onChange={onChange}
@@ -167,9 +166,7 @@ const Step1c = ({
       <ErrorMessage
         errors={errors}
         name="antigenTestDate"
-        render={({ message }) => (
-          <p>{message}</p>
-        )}
+        render={({ message }) => <p>{message}</p>}
       />
 
       <QuestionText extraSpace>
@@ -191,9 +188,7 @@ const Step1c = ({
       <ErrorMessage
         errors={errors}
         name="antigenTestResult"
-        render={({ message }) => (
-          <p>{message}</p>
-        )}
+        render={({ message }) => <p>{message}</p>}
       />
 
       {/* Bottom Buttons */}
