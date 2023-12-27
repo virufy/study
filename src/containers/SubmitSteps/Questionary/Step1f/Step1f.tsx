@@ -88,6 +88,8 @@ const Step1f = ({
   const watchedtypeCovidFlu = watch('typeCovidFlu');
 
   const customTotalSteps = React.useMemo(() => {
+    if (!watchedtypeCovidFlu) return 9;
+
     const { selected } = watchedtypeCovidFlu;
 
     switch (true) {
@@ -132,7 +134,7 @@ const Step1f = ({
   // Handlers
   const onSubmit = async (values: Step1fType) => {
     if (values) {
-      const { typeCovidFlu } = values;
+      const { typeCovidFlu }: CommonJSON = values;
       const antigenTaken = typeCovidFlu?.selected.includes('antigenTaken');
       const PCRTaken = typeCovidFlu?.selected.includes('PCRTaken');
       const fluTaken = typeCovidFlu?.selected.includes('fluTaken');

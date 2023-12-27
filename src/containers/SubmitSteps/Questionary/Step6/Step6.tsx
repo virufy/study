@@ -71,6 +71,7 @@ const Step6 = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
