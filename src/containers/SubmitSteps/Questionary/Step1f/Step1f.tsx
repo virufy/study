@@ -19,25 +19,26 @@ import { updateAction } from 'utils/wizard';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
-import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
 import ProgressIndicator from 'components/ProgressIndicator';
+import OptionList from 'components/OptionList';
 
 // Styles
 import {
-  QuestionText, MainContainer, QuestionAllApply, QuestionInput,
+  QuestionText, MainContainer, QuestionAllApply, WomanWithPhone,
 } from '../style';
 
 const schemaWithoutPatient = Yup.object({
-  covidTimes: Yup.string().required(),
-  lastTimeCovidMonths: Yup.string().notRequired(),
+  typeCovidFlu: Yup.object({
+    selected: Yup.array().required(),
+  }),
 }).defined();
 
-type Step1eType = Yup.InferType<typeof schemaWithoutPatient>;
+type Step1fType = Yup.InferType<typeof schemaWithoutPatient>;
 
-const Step1e = ({
+const Step1f = ({
   previousStep,
   nextStep,
   storeKey,
@@ -56,14 +57,13 @@ const Step1e = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
   const country = getCountry();
-  const { customSteps, customCurrentStepPCR } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
 
   // Form
   const {
-    control, handleSubmit, formState,
+    control, handleSubmit, formState, watch,
   } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
@@ -84,6 +84,39 @@ const Step1e = ({
     }
   }, [history, previousStep]);
 
+  // Memos
+  const watchedtypeCovidFlu = watch('typeCovidFlu');
+
+  const customTotalSteps = React.useMemo(() => {
+    if (!watchedtypeCovidFlu) return 9;
+
+    const { selected } = watchedtypeCovidFlu;
+
+    switch (true) {
+      case ['antigenTaken', 'PCRTaken', 'fluTaken'].every((i: string) => selected.includes(i)):
+        return 14;
+
+      case ['PCRTaken', 'fluTaken'].every((i: string) => selected.includes(i)):
+        return 13;
+
+      case ['antigenTaken', 'PCRTaken'].every((i: string) => selected.includes(i))
+      || ['antigenTaken', 'fluTaken'].every((i: string) => selected.includes(i)):
+        return 12;
+
+      case ['fluTaken', 'PCRTaken'].some((i: string) => selected.includes(i)):
+        return 11;
+
+      case ['antigenTaken'].every((i: string) => selected.includes(i)):
+        return 10;
+
+      case ['none'].every((i: string) => selected.includes(i)):
+        return 9;
+
+      default:
+        return 9;
+    }
+  }, [watchedtypeCovidFlu]);
+
   // Effects
   useEffect(() => {
     scrollToTop();
@@ -91,7 +124,7 @@ const Step1e = ({
       setTitle('');
       setType('tertiary');
     } else {
-      setTitle(t('questionary:covidTimesTitle'));
+      setTitle(t('typeCovidFlu:title'));
       setType('primary');
     }
     setSubtitle('');
@@ -99,11 +132,20 @@ const Step1e = ({
   }, [handleDoBack, setDoGoBack, setTitle, setType, setSubtitle, patientId, t]);
 
   // Handlers
-  const onSubmit = async (values: Step1eType) => {
+  const onSubmit = async (values: Step1fType) => {
     if (values) {
+      const { typeCovidFlu }: CommonJSON = values;
+      const antigenTaken = typeCovidFlu?.selected.includes('antigenTaken');
+      const PCRTaken = typeCovidFlu?.selected.includes('PCRTaken');
+      const fluTaken = typeCovidFlu?.selected.includes('fluTaken');
       action(values);
-      const fluTaken = state['submit-steps'].typeCovidFlu?.selected.includes('fluTaken');
-      if (fluTaken && otherSteps) {
+      if (antigenTaken && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.antigenTakenStep);
+      } else if (PCRTaken && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.PCRTakenStep);
+      } else if (fluTaken && otherSteps) {
         setActiveStep(false);
         history.push(otherSteps.fluTakenStep);
       } else if (nextStep) {
@@ -115,53 +157,48 @@ const Step1e = ({
 
   return (
     <MainContainer>
-      <ProgressIndicator
-        currentStep={customCurrentStepPCR}
-        totalSteps={customSteps.total}
-        progressBar
-      />
       <QuestionText extraSpace first>
-        {t('questionary:covidTimes')}
+        {t('questionary:typeCovidFlu.title')}
       </QuestionText>
-      <Controller
-        control={control}
-        name="covidTimes"
-        defaultValue=""
-        render={({ onChange, value, name }) => (
-          <QuestionInput
-            name={name}
-            value={value}
-            onChange={onChange}
-            type="number"
-            placeholder={t('questionary:covidTimesPlaceholder')}
-            autoComplete="Off"
-          />
-        )}
-      />
-      <ErrorMessage
-        errors={errors}
-        name="covidTimes"
-        render={({ message }) => (
-          <p>{message}</p>
-        )}
+      <WomanWithPhone />
+      <ProgressIndicator
+        currentStep={metadata?.current}
+        totalSteps={customTotalSteps}
+        progressBar
       />
 
       <QuestionText extraSpace>
-        {t('questionary:lastTimeCovidMonths')}
-        <QuestionAllApply>{t('questionary:lastTimeCovidMonthsCaption')}</QuestionAllApply>
+        {t('questionary:typeCovidFlu.question')}
+        <QuestionAllApply>{t('questionary:allThatApply')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
-        name="lastTimeCovidMonths"
-        defaultValue=""
-        render={({ onChange, value, name }) => (
-          <QuestionInput
-            name={name}
+        name="typeCovidFlu"
+        defaultValue={{ selected: [], other: '' }}
+        render={({ onChange, value }) => (
+          <OptionList
+            isCheckbox
             value={value}
-            onChange={onChange}
-            type="number"
-            placeholder={t('questionary:lastTimeCovidMonthsPlaceholder')}
-            autoComplete="Off"
+            onChange={v => onChange(v)}
+            items={[
+              {
+                value: 'antigenTaken',
+                label: t('questionary:typeCovidFlu.options.antigenTaken'),
+              },
+              {
+                value: 'PCRTaken',
+                label: t('questionary:typeCovidFlu.options.PCRTaken'),
+              },
+              {
+                value: 'fluTaken',
+                label: t('questionary:typeCovidFlu.options.fluTaken'),
+              },
+              {
+                value: 'none',
+                label: t('questionary:typeCovidFlu.options.none'),
+              },
+            ]}
+            excludableValues={['none']}
           />
         )}
       />
@@ -188,4 +225,4 @@ const Step1e = ({
   );
 };
 
-export default React.memo(Step1e);
+export default React.memo(Step1f);

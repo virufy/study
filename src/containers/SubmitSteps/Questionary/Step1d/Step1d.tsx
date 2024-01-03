@@ -19,6 +19,7 @@ import { updateAction } from 'utils/wizard';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
 
 // Components
 import OptionList from 'components/OptionList';
@@ -43,6 +44,7 @@ const Step1d = ({
   nextStep,
   storeKey,
   metadata,
+  otherBackSteps,
 }: Wizard.StepProps) => {
   // Hooks
   const { Portal } = usePortal({
@@ -56,6 +58,7 @@ const Step1d = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
   const country = getCountry();
+  const { customSteps, customCurrentStepPCR } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -80,12 +83,15 @@ const Step1d = ({
   // Callbacks
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (previousStep) {
+    const antigenTaken = state['submit-steps'].typeCovidFlu?.selected.includes('antigenTaken');
+    if (antigenTaken && otherBackSteps) {
+      history.push(otherBackSteps.antigenTakenStep);
+    } else if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [history, previousStep]);
+  }, [history, otherBackSteps, previousStep, state]);
 
   // Effects
   useEffect(() => {
@@ -136,13 +142,13 @@ const Step1d = ({
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customCurrentStepPCR}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>
         {t('questionary:whenPcrTest')}
-        <QuestionAllApply>{t('questionary:whenPcrTestCaption')}</QuestionAllApply>
+        <QuestionAllApply>{t('questionary:resultPcrTest.caption')}</QuestionAllApply>
       </QuestionText>
       <Controller
         control={control}
@@ -150,7 +156,7 @@ const Step1d = ({
         defaultValue={undefined}
         render={({ onChange, value }) => (
           <DatePicker
-            label="Date"
+            label={value ? '' : 'Date'}
             value={value ? new Date(value) : null}
             locale={i18n.language}
             onChange={onChange}

@@ -19,6 +19,7 @@ import { updateAction } from 'utils/wizard';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
 
 // Components
 import OptionList from 'components/OptionList';
@@ -54,6 +55,7 @@ const Step7b = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
   const country = getCountry();
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -125,8 +127,8 @@ const Step7b = ({
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customSteps.current}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText first>

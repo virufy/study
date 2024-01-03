@@ -19,6 +19,7 @@ import { updateAction } from 'utils/wizard';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
 
 // Components
 import OptionList from 'components/OptionList';
@@ -43,6 +44,7 @@ const Step7a = ({
   nextStep,
   storeKey,
   metadata,
+  otherBackSteps,
 }: Wizard.StepProps) => {
   // Hooks
   const { Portal } = usePortal({
@@ -56,6 +58,7 @@ const Step7a = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
   const country = getCountry();
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
@@ -76,12 +79,18 @@ const Step7a = ({
   // Callbacks
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
-    if (previousStep) {
+    const PCRTaken = state['submit-steps'].typeCovidFlu?.selected.includes('PCRTaken');
+    const antigenTaken = state['submit-steps'].typeCovidFlu?.selected.includes('antigenTaken');
+    if (PCRTaken && otherBackSteps) {
+      history.push(otherBackSteps.PCRTakenStep);
+    } else if (antigenTaken && otherBackSteps) {
+      history.push(otherBackSteps.antigenTakenStep);
+    } else if (previousStep) {
       history.push(previousStep);
     } else {
       history.goBack();
     }
-  }, [history, previousStep]);
+  }, [state, otherBackSteps, previousStep, history]);
 
   // Effects
   useEffect(() => {
@@ -127,8 +136,8 @@ const Step7a = ({
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customSteps.current}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>
@@ -142,7 +151,7 @@ const Step7a = ({
         defaultValue={undefined}
         render={({ onChange, value }) => (
           <DatePicker
-            label="Date"
+            label={value ? '' : 'Date'}
             value={value ? new Date(value) : null}
             locale={i18n.language}
             onChange={onChange}

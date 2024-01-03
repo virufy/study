@@ -21,6 +21,7 @@ import ProgressIndicator from 'components/ProgressIndicator';
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
 import { getPatientId, getCountry } from 'helper/stepsDefinitions';
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
 
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
@@ -35,7 +36,9 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  currentMedicalCondition: Yup.object(),
+  currentMedicalCondition: Yup.object({
+    selected: Yup.array().required(),
+  }),
 }).defined();
 
 type Step6Type = Yup.InferType<typeof schema>;
@@ -57,6 +60,7 @@ const Step6 = ({
   const patientId = getPatientId();
   const country = getCountry();
   const [cookies] = useCookies(['virufy-study-user']);
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   const userCookie = cookies['virufy-study-user'];
 
@@ -67,10 +71,11 @@ const Step6 = ({
   const {
     control, handleSubmit, formState,
   } = useForm({
+    mode: 'onChange',
     defaultValues: state?.[storeKey],
     resolver: yupResolver(schema),
   });
-  const { errors } = formState;
+  const { errors, isValid } = formState;
 
   /* Delete after Contact info step is re-integrated */
   const [submitError, setSubmitError] = React.useState<string | null>(null);
@@ -85,7 +90,7 @@ const Step6 = ({
   }, [captchaValue]);
 
   const onSubmit = async (values: Step6Type) => {
-    if (values) {
+    if (values && country !== 'Japan') {
       await doSubmit({
         setSubmitError: s => setSubmitError(!s ? null : t(s)),
         state: {
@@ -102,6 +107,14 @@ const Step6 = ({
         history,
         userCookie,
       });
+    }
+
+    if (values) {
+      action(values);
+      if (nextStep) {
+        setActiveStep(false);
+        history.push(nextStep);
+      }
     }
   };
 
@@ -123,12 +136,30 @@ const Step6 = ({
     }
   }, [history, previousStep]);
 
+  const getLeftLabel = React.useCallback(() => {
+    if (country === 'Japan' && !patientId) return t('questionary:nextButton');
+
+    if (isSubmitting) {
+      return t('questionary:submitting');
+    }
+    return t('beforeSubmit:submitButton');
+  }, [country, isSubmitting, patientId, t]);
+
+  const leftDisabled = React.useMemo(() => {
+    if (country === 'Japan' && !patientId) return !isValid;
+
+    if (country !== 'Colombia') {
+      return isSubmitting || (recaptchaAvailable && !captchaValue);
+    }
+    return isSubmitting;
+  }, [captchaValue, country, isSubmitting, patientId, recaptchaAvailable, isValid]);
+
   useEffect(() => {
     scrollToTop();
-    setTitle(`${t('questionary:respiration.title')}`);
+    setTitle(country === 'Japan' ? t('questionary:medical.title') : t('questionary:respiration.title'));
     setType('primary');
     setDoGoBack(() => handleDoBack);
-  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t]);
+  }, [handleDoBack, setDoGoBack, setTitle, setType, metadata, t, country]);
 
   // Handlers
   // const onSubmit = async (values: Step6Type) => {
@@ -150,60 +181,68 @@ const Step6 = ({
           label: t('questionary:medical.options.none'),
         },
         {
-          value: 'allergies',
-          label: t('questionary:medical.options.allergies'),
+          value: 'respiratorySystem',
+          label: t('questionary:medical.options.respiratorySystem'),
         },
         {
-          value: 'asthma',
-          label: t('questionary:medical.options.asthma'),
+          value: 'chronicKidney',
+          label: t('questionary:medical.options.chronicKidney'),
         },
         {
-          value: 'bronchitis',
-          label: t('questionary:medical.options.bronchitis'),
+          value: 'diabetes',
+          label: t('questionary:medical.options.diabetes'),
         },
         {
-          value: 'congestiveHeartFailure',
-          label: t('questionary:medical.options.congestiveHeart'),
+          value: 'highBloodPressure',
+          label: t('questionary:medical.options.highBloodPressure'),
         },
         {
-          value: 'copdEmphysema',
-          label: t('questionary:medical.options.emphysema'),
+          value: 'dislipidemia',
+          label: t('questionary:medical.options.dislipidemia'),
         },
         {
           value: 'extremeObesity',
           label: t('questionary:medical.options.obesity'),
         },
         {
-          value: 'heartDisease',
-          label: t('questionary:medical.options.heartDisease'),
+          value: 'pregnancy',
+          label: t('questionary:medical.options.pregnancy'),
         },
         {
           value: 'hivAidsOrImpairedImmuneSystem',
           label: t('questionary:medical.options.hiv'),
         },
         {
-          value: 'lungCancer',
-          label: t('questionary:medical.options.lungCancer'),
+          value: 'cancer',
+          label: t('questionary:medical.options.cancer'),
         },
         {
-          value: 'otherChronic',
-          label: t('questionary:medical.options.otherChronic'),
+          value: 'congestiveHeartDisease',
+          label: t('questionary:medical.options.congestiveHeartDisease'),
         },
         {
-          value: 'pneumonia',
-          label: t('questionary:medical.options.pneumonia'),
+          value: 'cerebrovascular',
+          label: t('questionary:medical.options.cerebrovascular'),
         },
         {
-          value: 'pulmonaryFibrosis',
-          label: t('questionary:medical.options.pulmonary'),
+          value: 'valvularHeart',
+          label: t('questionary:medical.options.valvularHeart'),
+        },
+        {
+          value: 'congestiveHeart',
+          label: t('questionary:medical.options.congestiveHeart'),
         },
         {
           value: 'sinusitis',
           label: t('questionary:medical.options.sinusitis'),
         },
         {
-          value: 'tuberculosis',
-          label: t('questionary:medical.options.tuberculosis'),
+          value: 'immunosuppressiveTherapy',
+          label: t('questionary:medical.options.immunosuppressiveTherapy'),
+        },
+        {
+          value: 'immunodeficiency',
+          label: t('questionary:medical.options.immunodeficiency'),
         },
         {
           value: 'other',
@@ -286,8 +325,8 @@ const Step6 = ({
   return (
     <MainContainer>
       <ProgressIndicator
-        currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        currentStep={customSteps.current}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>
@@ -322,7 +361,7 @@ const Step6 = ({
       {activeStep && (
         <Portal>
           { /* ReCaptcha  */}
-          {(!patientId || (patientId && (country !== 'Colombia'))) && (
+          {((!patientId || (patientId && (country !== 'Colombia'))) && (!patientId && country !== 'Japan')) && (
             <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
           )}
           {submitError && (
@@ -332,9 +371,8 @@ const Step6 = ({
           )}
           <WizardButtons
             invert
-            // leftLabel={t('questionary:proceedButton')}
-            leftLabel={isSubmitting ? t('questionary:submitting') : t('beforeSubmit:submitButton')}
-            leftDisabled={(country !== 'Colombia') ? (isSubmitting || (recaptchaAvailable && !captchaValue)) : isSubmitting}
+            leftLabel={getLeftLabel()}
+            leftDisabled={leftDisabled}
             leftHandler={patientId ? handleSubmit(onSubmitPatientQuestionnaire) : handleSubmit(onSubmit)}
           />
         </Portal>

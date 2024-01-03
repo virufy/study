@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePortal from 'react-useportal';
 import { useTranslation } from 'react-i18next';
-import { useCookies } from 'react-cookie';
 
 // Form
 import { useForm, Controller } from 'react-hook-form';
@@ -17,19 +16,20 @@ import { updateAction } from 'utils/wizard';
 // Header Control
 import useHeaderContext from 'hooks/useHeaderContext';
 
+// Hooks
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
+
 // Utils
 import { scrollToTop } from 'helper/scrollHelper';
 import { getCountry } from 'helper/stepsDefinitions';
-import { doSubmit } from 'helper/submitHelper';
 
 // Components
 import WizardButtons from 'components/WizardButtons';
-import Recaptcha from 'components/Recaptcha';
 import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
 import {
-  QuestionText, MainContainer, QuestionInput, TempBeforeSubmitError,
+  QuestionText, MainContainer, QuestionInput,
 } from '../style';
 
 const schema = Yup.object({
@@ -53,15 +53,10 @@ const Step4b = ({
   const { t } = useTranslation();
   const { state, action } = useStateMachine(updateAction(storeKey));
   const country = getCountry();
-  const [cookies] = useCookies(['virufy-study-user']);
-
-  const userCookie = cookies['virufy-study-user'];
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
-  const [submitError, setSubmitError] = React.useState<string | null>(null);
-  const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
-  const [recaptchaAvailable, setRecaptchaAvailable] = React.useState(true);
   const isShortQuestionary = metadata?.isShortQuestionary;
 
   // Form
@@ -77,24 +72,6 @@ const Step4b = ({
   });
   const { errors, isSubmitting, isValid } = formState;
 
-  // Memos
-  const renderCaptcha = React.useMemo(() => {
-    if (isShortQuestionary || country === 'Japan') {
-      if (submitError) {
-        return (
-          <>
-            <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />
-            <TempBeforeSubmitError>
-              {submitError}
-            </TempBeforeSubmitError>
-          </>
-        );
-      }
-      return <Recaptcha onChange={setCaptchaValue} setRecaptchaAvailable={setRecaptchaAvailable} />;
-    }
-    return null;
-  }, [country, isShortQuestionary, submitError]);
-
   // Handlers
   const handleDoBack = React.useCallback(() => {
     setActiveStep(false);
@@ -106,27 +83,7 @@ const Step4b = ({
   }, [history, previousStep]);
 
   const onSubmit = async (values: Step4bType) => {
-    if (country === 'Japan') {
-      if (values) {
-        await doSubmit({
-          setSubmitError: () => setSubmitError(null),
-          state: {
-            ...state,
-            'submit-steps': {
-              ...state['submit-steps'],
-              ...values,
-            },
-          },
-          captchaValue,
-          action,
-          nextStep,
-          setActiveStep,
-          history,
-          userCookie,
-        });
-      }
-    }
-    if (values && country !== 'Japan') {
+    if (values) {
       action(values);
       if (nextStep) {
         setActiveStep(false);
@@ -154,14 +111,8 @@ const Step4b = ({
 
   // Effects
   useEffect(() => {
-    if (!captchaValue) {
-      setSubmitError(null);
-    }
-  }, [captchaValue]);
-
-  useEffect(() => {
     scrollToTop();
-    setTitle(t('questionary:symptomsDateTitle'));
+    setTitle(t('questionary:symptoms.title'));
     setType('primary');
     setDoGoBack(() => handleDoBack);
   }, [handleDoBack, setDoGoBack, setTitle, setType, t]);
@@ -171,8 +122,8 @@ const Step4b = ({
       {
         country === 'Japan' && (
           <ProgressIndicator
-            currentStep={metadata?.current}
-            totalSteps={metadata?.total}
+            currentStep={customSteps.current}
+            totalSteps={customSteps.total}
             progressBar
           />
         )
@@ -206,11 +157,10 @@ const Step4b = ({
       {/* Bottom Buttons */}
       {activeStep && (
         <Portal>
-          {renderCaptcha}
           <WizardButtons
             leftLabel={getLeftLabel()}
             leftHandler={isShortQuestionary ? handleSubmit(onSubmitPatientShortQuestionnaire) : handleSubmit(onSubmit)}
-            leftDisabled={isShortQuestionary || country === 'Japan' ? (isSubmitting || (recaptchaAvailable && !captchaValue)) || !isValid : !isValid}
+            leftDisabled={!isValid}
             invert
           />
         </Portal>

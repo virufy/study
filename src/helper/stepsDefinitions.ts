@@ -188,7 +188,7 @@ function getSpeechSteps(storeKey: string, country: string, patientId: string) {
             return `${baseUrl}/thank-you`;
           }
           if (country === 'Japan') {
-            return `${baseUrl}/questionary/step1c`;
+            return `${baseUrl}/questionary/step1f`;
           }
           return `${baseUrl}/questionary/step1a`;
         })(),
@@ -204,7 +204,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
   const baseMetadata = {
     total: (() => {
       if (!removeQuestionaryStep6In.includes(country) && !removeQuestionaryStep2cIn.includes(country) && !patientId && country === 'Japan') {
-        return 10;
+        return 14;
       }
       if (!removeQuestionaryStep6In.includes(country) && !removeQuestionaryStep2cIn.includes(country) && !patientId) {
         return 8;
@@ -239,6 +239,24 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
 
   output.push(
     {
+      path: '/questionary/step1f',
+      componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1f`,
+      props: {
+        storeKey,
+        previousStep: `${baseUrl}/step-record/speech`,
+        nextStep: `${baseUrl}/questionary/step2d`,
+        otherSteps: {
+          antigenTakenStep: `${baseUrl}/questionary/step1c`,
+          PCRTakenStep: `${baseUrl}/questionary/step1d`,
+          fluTakenStep: `${baseUrl}/questionary/step7a`,
+        },
+        metadata: {
+          current: country === 'Japan' ? 3 : 1,
+          ...baseMetadata,
+        },
+      },
+    },
+    {
       path: '/questionary/step1a',
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1a`,
       props: {
@@ -272,10 +290,14 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1c`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/step-record/speech`,
-        nextStep: `${baseUrl}/questionary/step1d`,
+        previousStep: `${baseUrl}/questionary/step1f`,
+        nextStep: `${baseUrl}/questionary/step2d`,
+        otherSteps: {
+          PCRTakenStep: `${baseUrl}/questionary/step1d`,
+          fluTakenStep: `${baseUrl}/questionary/step7a`,
+        },
         metadata: {
-          current: 3,
+          current: country === 'Japan' ? 4 : 2,
           ...baseMetadata,
         },
       },
@@ -285,10 +307,13 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step1d`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/questionary/step1c`,
+        previousStep: `${baseUrl}/questionary/step1f`,
         nextStep: `${baseUrl}/questionary/step1e`,
+        otherBackSteps: {
+          antigenTakenStep: `${baseUrl}/questionary/step1c`,
+        },
         metadata: {
-          current: 4,
+          current: country === 'Japan' ? 5 : 3,
           ...baseMetadata,
         },
       },
@@ -299,9 +324,12 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       props: {
         storeKey,
         previousStep: `${baseUrl}/questionary/step1d`,
-        nextStep: `${baseUrl}/questionary/step7a`,
+        nextStep: `${baseUrl}/questionary/step2d`,
+        otherSteps: {
+          fluTakenStep: `${baseUrl}/questionary/step7a`,
+        },
         metadata: {
-          current: 5,
+          current: country === 'Japan' ? 6 : 4,
           ...baseMetadata,
         },
       },
@@ -311,10 +339,14 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step7a`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/questionary/step1e`,
+        previousStep: `${baseUrl}/questionary/step1f`,
         nextStep: `${baseUrl}/questionary/step7b`,
+        otherBackSteps: {
+          antigenTakenStep: `${baseUrl}/questionary/step1c`,
+          PCRTakenStep: `${baseUrl}/questionary/step1e`,
+        },
         metadata: {
-          current: 6,
+          current: country === 'Japan' ? 7 : 5,
           ...baseMetadata,
         },
       },
@@ -327,7 +359,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
         previousStep: `${baseUrl}/questionary/step7a`,
         nextStep: `${baseUrl}/questionary/step2d`,
         metadata: {
-          current: 7,
+          current: country === 'Japan' ? 8 : 6,
           ...baseMetadata,
         },
       },
@@ -382,15 +414,20 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step2d`,
       props: {
         storeKey,
-        previousStep: country === 'Japan' ? `${baseUrl}/questionary/step7b` : `${baseUrl}/questionary/step2a`,
+        previousStep: country === 'Japan' ? `${baseUrl}/questionary/step1f` : `${baseUrl}/questionary/step2a`,
         nextStep: country === 'Japan' ? `${baseUrl}/questionary/step3` : `${baseUrl}/questionary/step2b`,
+        otherBackSteps: {
+          fluTakenStep: `${baseUrl}/questionary/step7b`,
+          antigenTakenStep: `${baseUrl}/questionary/step1c`,
+          PCRTakenStep: `${baseUrl}/questionary/step1e`,
+        },
         metadata: {
           current: (() => {
             if (patientId) {
               return 3;
             }
             if (country === 'Japan') {
-              return 8;
+              return 9;
             }
             return 4;
           })(),
@@ -465,7 +502,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
           }
           return `${baseUrl}/questionary/step2c`;
         })(),
-        nextStep: country === 'Japan' ? `${baseUrl}/questionary/step4b` : `${baseUrl}/questionary/step4a`,
+        nextStep: `${baseUrl}/questionary/step4a`,
         metadata: {
           current: (() => {
             if ((patientId && !removeQuestionaryStep2cIn.includes(country))
@@ -475,7 +512,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
               return 4;
             }
             if (country === 'Japan') {
-              return 9;
+              return 10;
             }
             return 6;
           })(),
@@ -489,7 +526,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       props: {
         storeKey,
         previousStep: `${baseUrl}/questionary/step3`,
-        nextStep: `${baseUrl}/questionary/step6`,
+        nextStep: country === 'Japan' ? `${baseUrl}/questionary/step4b` : `${baseUrl}/questionary/step6`,
         otherSteps: {
           covidSymptomsStep: `${baseUrl}/questionary/step4b`,
         },
@@ -502,7 +539,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
               return 5;
             }
             if (country === 'Japan') {
-              return 8;
+              return 11;
             }
             return 7;
           })(),
@@ -515,29 +552,29 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step4b`,
       props: {
         storeKey,
-        previousStep: country === 'Japan' ? `${baseUrl}/questionary/step3` : `${baseUrl}/questionary/step4a`,
-        nextStep: country === 'Japan' ? `${baseUrl}/thank-you` : `${baseUrl}/questionary/step6`,
+        previousStep: `${baseUrl}/questionary/step4a`,
+        nextStep: `${baseUrl}/questionary/step6`,
         metadata: {
-          current: 10,
+          current: country === 'Japan' ? 12 : 10,
           ...baseMetadata,
         },
       },
     },
-    /* {
+    {
       path: '/questionary/step5',
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step5`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/questionary/step4a`,
-        nextStep: removeQuestionaryStep6In.includes(country)
+        previousStep: country === 'Japan' ? `${baseUrl}/questionary/step6` : `${baseUrl}/questionary/step4a`,
+        nextStep: removeQuestionaryStep6In.includes(country) || country === 'Japan'
           ? `${baseUrl}/thank-you`
           : `${baseUrl}/questionary/step6`,
         metadata: {
-          current: 8,
+          current: country === 'Japan' ? 14 : 8,
           ...baseMetadata,
         },
       },
-    }, */
+    },
   );
 
   if (!removeQuestionaryStep6In.includes(country)) {
@@ -546,8 +583,8 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
       componentPath: `${baseComponentPath}/${middleComponentPathQuestionary}/Step6`,
       props: {
         storeKey,
-        previousStep: `${baseUrl}/questionary/step4a`,
-        nextStep: `${baseUrl}/thank-you`,
+        previousStep: country === 'Japan' ? `${baseUrl}/questionary/step4b` : `${baseUrl}/questionary/step4a`,
+        nextStep: country === 'Japan' ? `${baseUrl}/questionary/step5` : `${baseUrl}/thank-you`,
         metadata: {
           current: (() => {
             if ((patientId && !removeQuestionaryStep2cIn.includes(country))
@@ -557,7 +594,7 @@ function getQuestionarySteps(storeKey: string, country: string, patientId: strin
               return 6;
             }
             if (country === 'Japan') {
-              return 9;
+              return 13;
             }
             return 8;
           })(),

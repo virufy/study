@@ -4,6 +4,7 @@ namespace Wizard {
     previousStep?: string;
     storeKey: SiteVariant;
     otherSteps?: CommonJSON<any>;
+    otherBackSteps?: CommonJSON<any>;
     metadata?: CommonJSON<any>;
   }
 

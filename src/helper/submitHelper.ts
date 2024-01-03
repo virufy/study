@@ -49,6 +49,7 @@ export async function doSubmit({
       recordYourBreath,
       recordYourSpeech,
 
+      typeCovidFlu,
       testTaken,
       pcrTestDate,
       pcrTestResult,
@@ -111,6 +112,10 @@ export async function doSubmit({
     if (allowSpeechIn.includes(country)) {
       const voiceFile = recordYourSpeech.recordingFile || recordYourSpeech.uploadedFile;
       body.append('voice', voiceFile, voiceFile.name || 'filename_voice.wav');
+    }
+
+    if (typeCovidFlu?.selected?.length > 0) {
+      body.append('typeCovidFlu', typeCovidFlu.selected.join(','));
     }
 
     if (testTaken) {
@@ -183,7 +188,7 @@ export async function doSubmit({
     }
 
     if (antigenTestDate) {
-      body.append('antigenTestDate', antigenTestDate);
+      body.append('antigenTestDate', antigenTestDate.toISOString());
     }
 
     if (antigenTestResult) {
@@ -191,7 +196,7 @@ export async function doSubmit({
     }
 
     if (pcrTestDate) {
-      body.append('pcrTestDate', pcrTestDate);
+      body.append('pcrTestDate', pcrTestDate.toISOString());
       body.append('pcrTestResult', pcrTestResult);
     }
 
@@ -204,7 +209,7 @@ export async function doSubmit({
     }
 
     if (fluTestDate) {
-      body.append('fluTestDate', fluTestDate);
+      body.append('fluTestDate', fluTestDate.toISOString());
     }
 
     if (fluTestResult) {

@@ -19,6 +19,7 @@ import { updateAction } from 'utils/wizard';
 
 // Hooks
 import useHeaderContext from 'hooks/useHeaderContext';
+import useCustomProgressBarSteps from 'hooks/useCustomProgressBarSteps';
 
 // Components
 import OptionList from 'components/OptionList';
@@ -27,9 +28,7 @@ import WizardButtons from 'components/WizardButtons';
 import ProgressIndicator from 'components/ProgressIndicator';
 
 // Styles
-import {
-  QuestionText, MainContainer, QuestionAllApply,
-} from '../style';
+import { QuestionText, MainContainer, QuestionAllApply } from '../style';
 
 const schemaWithoutPatient = Yup.object({
   antigenTestDate: Yup.date().required(),
@@ -43,10 +42,12 @@ const Step1c = ({
   nextStep,
   storeKey,
   metadata,
+  otherSteps,
 }: Wizard.StepProps) => {
   // Hooks
   const { Portal } = usePortal({
-    bindTo: document && document.getElementById('wizard-buttons') as HTMLDivElement,
+    bindTo:
+      document && (document.getElementById('wizard-buttons') as HTMLDivElement),
   });
   const {
     setDoGoBack, setTitle, setSubtitle, setType,
@@ -56,14 +57,13 @@ const Step1c = ({
   const { state, action } = useStateMachine(updateAction(storeKey));
   const patientId = getPatientId();
   const country = getCountry();
+  const { customSteps } = useCustomProgressBarSteps(storeKey, metadata);
 
   // States
   const [activeStep, setActiveStep] = React.useState(true);
 
   // Form
-  const {
-    control, handleSubmit, formState,
-  } = useForm({
+  const { control, handleSubmit, formState } = useForm({
     mode: 'onChange',
     defaultValues: state?.[storeKey],
     context: {
@@ -100,17 +100,21 @@ const Step1c = ({
   // Handlers
   const onSubmit = async (values: Step1cType) => {
     if (values) {
-      const {
-        antigenTestDate,
-        antigenTestResult,
-      } = (values as any);
+      const { antigenTestDate, antigenTestResult } = values as any;
       // if patient
       if (!antigenTestDate || !antigenTestResult) {
         return;
       }
-
       action(values);
-      if (nextStep) {
+      const PCRTaken = state['submit-steps'].typeCovidFlu?.selected.includes('PCRTaken');
+      const fluTaken = state['submit-steps'].typeCovidFlu?.selected.includes('fluTaken');
+      if (PCRTaken && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.PCRTakenStep);
+      } else if (fluTaken && otherSteps) {
+        setActiveStep(false);
+        history.push(otherSteps.fluTakenStep);
+      } else if (nextStep) {
         setActiveStep(false);
         history.push(nextStep);
       }
@@ -118,27 +122,32 @@ const Step1c = ({
   };
 
   // Memos
-  const antigenOptions = React.useMemo(() => [
-    {
-      value: 'positive',
-      label: t('questionary:resultAntigenTest.options.positive'),
-    },
-    {
-      value: 'negative',
-      label: t('questionary:resultAntigenTest.options.negative'),
-    },
-  ], [t]);
+  const antigenOptions = React.useMemo(
+    () => [
+      {
+        value: 'positive',
+        label: t('questionary:resultAntigenTest.options.positive'),
+      },
+      {
+        value: 'negative',
+        label: t('questionary:resultAntigenTest.options.negative'),
+      },
+    ],
+    [t],
+  );
 
   return (
     <MainContainer>
       <ProgressIndicator
         currentStep={metadata?.current}
-        totalSteps={metadata?.total}
+        totalSteps={customSteps.total}
         progressBar
       />
       <QuestionText extraSpace first>
         {t('questionary:whenAntigenTest')}
-        <QuestionAllApply>{t('questionary:whenAntigenTestNote')}</QuestionAllApply>
+        <QuestionAllApply>
+          {t('questionary:whenAntigenTestCaption')}
+        </QuestionAllApply>
       </QuestionText>
 
       <Controller
@@ -147,7 +156,7 @@ const Step1c = ({
         defaultValue={undefined}
         render={({ onChange, value }) => (
           <DatePicker
-            label="Date"
+            label={value ? '' : 'Date'}
             value={value ? new Date(value) : null}
             locale={i18n.language}
             onChange={onChange}
@@ -157,9 +166,7 @@ const Step1c = ({
       <ErrorMessage
         errors={errors}
         name="antigenTestDate"
-        render={({ message }) => (
-          <p>{message}</p>
-        )}
+        render={({ message }) => <p>{message}</p>}
       />
 
       <QuestionText extraSpace>
@@ -181,9 +188,7 @@ const Step1c = ({
       <ErrorMessage
         errors={errors}
         name="antigenTestResult"
-        render={({ message }) => (
-          <p>{message}</p>
-        )}
+        render={({ message }) => <p>{message}</p>}
       />
 
       {/* Bottom Buttons */}

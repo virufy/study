@@ -231,17 +231,24 @@
       "Yemen": "Yemen",
       "Zambia": "Zambia",
       "Zimbabwe": "Zimbabwe"
-    }
+    },
+    "agree": "Agree",
+    "servicePurposeTitle": "Service purpose and positioning",
+    "servicePurposeText": "Virufy is a service that uses artificial intelligence (Al) to analyze voice patterns to determine whether they resemble the coughs of patients suffering from COVID-19. This service is not a medical device, so it only provides information and is not intended for medical advice, diagnosis, treatment, prevention, etc. The Service is not a substitute for a doctor or other medical professional, so please do not make any medical decisions or take or stop any action (such as taking any medication) based on the information we provide. Also, do not use it in life-threatening or emergency situations. This service does not take any responsibility for the disease the user originally suffers from or the consequences of actions taken by the user based on the information provided.",
+    "terms": "Terms of Use and Privacy Policy Please use after agreeing to"
   },
   "helpVirufy": {
     "title": "About Us",
     "ourSupporters": "Our Supporters",
     "introParagraph": "Welcome to our study! This should only take you about 5 minutes to complete. Before we begin, let’s discuss what we will cover:",
-    "aboutParagraph": "<0>Virufy is a <strong>nonprofit organization</strong> that is working to develop the means to use <strong> artificial intelligence (Al) to screen for COVID-19 from cough patterns</strong> rapidly and at no cost through use of a smartphone for the benefit of low-income countries.</0><1>Our team includes researchers from over <strong>25 countries</strong>. <3>Our research</3> has shown that Al technology may be able to identify COVID's unique cough signature.</1><2>By collecting <strong>coughs recordings</strong> from people around the world, Virufy is improving the robustness of its AI algorithm in recognizing COVID's unique sound pattern.</2><3><strong>You have the power</strong> to help benefit millions of people across the globe by <strong>contributing your cough</strong> in our study.</3>",
+    "aboutParagraph": "<0>Virufy is a <strong>nonprofit organization</strong> that is working to develop the means to use <strong> artificial intelligence (Al) to screen for COVID-19 from cough patterns</strong> rapidly and at no cost through use of a smartphone for the benefit of low-income countries.</0><0>Our team includes researchers from over <strong>25 countries</strong>. Our research has shown that Al technology may be able to identify COVID's unique cough signature.</0><0>By collecting <strong>coughs recordings</strong> from people around the world, Virufy is improving the robustness of its AI algorithm in recognizing COVID's unique sound pattern.</0><0><strong>You have the power</strong> to help benefit millions of people across the globe by <strong>contributing your cough</strong> in our study.</0>",
+    "aboutBeforeText": "Before we begin, we will give you a 5 minute explanation about us and our research.",
+    "aboutTitle": "Organization overview",
     "bulletsIntro": "<strong>Intro: </strong>About us and Safety Reminders",
     "bulletCough": "<strong>Cough Into Phone</strong>",
     "bulletQuestions": "<strong>Quick Health Questions</strong>",
-    "nextButton": "Next"
+    "nextButton": "Next",
+    "followingPage": "Following page"
   },
   "consent": {
     "title": "Consent to the Study",
@@ -353,7 +360,7 @@
     "caption": "Please answer to the best of your ability.",
     "allThatApply": "(select all that apply)",
     "testTaken": {
-      "title": "COVID-19 Test",
+      "title": "COVID-19 Antigen Test",
       "question": "Which of the following tests have you taken for COVID-19?",
       "options": {
         "pcr": "PCR-based test",
@@ -370,9 +377,11 @@
       "resultAntigenTest": "What was the result of Patient <1><0>{{patientId}}</0></1>'s rapid antigen COVID-19 test?"
     },
     "headerText2": "Follow-up question",
-    "whenPcrTest": "When did you take your PCR-based COVID-19 test? Please estimate if unsure.",
+    "whenPcrTest": "When did you take your PCR-based COVID-19 test?",
     "resultPcrTest": {
+      "title": "COVID-19 PCR Test",
       "question": "What was the result of your PCR-based COVID-19 test?",
+      "caption": "Please estimate if unsure.",
       "options": {
         "positive": "Positive",
         "negative": "Negative",
@@ -380,6 +389,12 @@
         "unsure": "Unsure"
       }
     },
+    "covidTimesTitle": "Vaccination",
+    "covidTimes": "How many times have you been infected with COVID-19?",
+    "covidTimesPlaceholder": "Please enter the number of times",
+    "lastTimeCovidMonths": "How many months ago did you have your last COVID-19 vaccine?",
+    "lastTimeCovidMonthsCaption": "(Unvaccinated people can skip)",
+    "lastTimeCovidMonthsPlaceholder": "Please enter the number of months ago",
     "whenAntibodyTest": "When did you take your antibody test for COVID-19? Please estimate if unsure.",
     "resultAntibodyTest": {
       "question": "What was the result of your antibody test for COVID-19?",
@@ -390,7 +405,8 @@
         "unsure": "Unsure"
       }
     },
-    "whenAntigenTest": "When did you take your antigen test for COVID-19? Please estimate if unsure.",
+    "whenAntigenTest": "When did you take your antigen test for COVID-19?",
+    "whenAntigenTestCaption": "Please estimate if unsure.",
     "resultAntigenTest": {
       "question": "What was the result of your antigen test for COVID-19?",
       "options": {
@@ -399,6 +415,30 @@
         "pending": "Pending",
         "unsure": "Unsure"
       }
+    },
+    "fluTest": {
+      "title": "Flu Test"
+    },
+    "whenFluTest": "When did you take your flu test?",
+    "whenFluTestCaption": "Please estimate if unsure.",
+    "fluTestResult": {
+        "question": "What was your flu test result?",
+        "options": {
+            "negative": "Negative",
+            "positiveA": "Positive (Type A)",
+            "positiveB": "Positive (Type B)"
+        }
+    },
+    "fluShot": {
+        "title": "Vaccination"
+    },
+    "whenFluShot": {
+        "question": "Have you taken a flu shot for this season (within the past 3 months)?",
+        "options": {
+            "yes": "Yes",
+            "no": "No",
+            "noResponse": "No response"
+        }
     },
     "vaccine": {
       "title": "Vaccination",
@@ -428,6 +468,25 @@
         "other": "Other",
         "transgender": "Transgender",
         "selfDescribe": "Prefer to self-describe"
+      }
+    },
+    "ethnicity": {
+      "title": "Race/ethnicity",
+      "question": "What races and/or ethnicities do you identify with?",
+      "note": "(select all that apply)",
+      "options": {
+          "asian": "Asian",
+          "nativeAmericanOrArab": "Native American or Arab",
+          "blackOrAfrican": "Black or African American",
+          "hispanicOrLatin": "Hispanic, Latino, or Spanish Origin",
+          "nativeHawaiianOrPacific": "Native Hawaiian or Pacific Islander",
+          "japanese": "Japanese",
+          "chinese": "Chinese",
+          "vietnamese": "Vietnamese",
+          "korean": "Korean",
+          "philippines": "Filipino",
+          "southAmerica": "South American",
+          "other": "Other"
       }
     },
     "biologicalSex": {
@@ -464,9 +523,13 @@
         "breathShortness": "Shortness of breath",
         "soreThroat": "Sore throat",
         "chestTightness": "Tightness in chest",
+        "palpitation": "Palpitation",
         "vomitingAndDiarrhea": "Vomiting and diarrhea",
         "none": "None",
         "weakness": "Weakness",
+        "lossAppetite": "Loss of appetite",
+        "fatigue": "Fatigue",
+        "rash": "Rash",
         "other": "Other",
         "addOther": "+ Add other"
       },
@@ -482,7 +545,7 @@
       "overWeek": "Over a week ago"
     },
     "respiration": {
-      "title": "Current diseases",
+      "title": "Respiratory System Diseases",
       "question": "<strong>Which of the below respiratory conditions do you currently have?</strong>",
       "options": {
         "asthma": "Asthma",
@@ -490,13 +553,29 @@
         "emphysema": "COPD/emphysema",
         "otherChronic": "Other chronic lung disease",
         "pneumonia": "Pneumonia",
-        "tuberculosis": "Tuberculosis",
         "none": "None",
+        "tuberculosis": "Tuberculosis",
+        "pulmonaryFibrosis": "Pulmonary Fibrosis",
+        "cysticFibrosis": "Cystic Fibrosis",
+        "chronicRespiratoryDisease": "Chronic respiratory disease",
+        "chronicLungDiseases": "Chronic lung diseases",
+        "coughOtherConditions": "Cough due to other conditions",
         "addOther": "+ Add other"
       },
       "addOtherPlaceholder": "Other condition"
     },
+    "typeCovidFlu": {
+      "title": "Please respond to the below questions.",
+      "question": "Which of the below tests have you taken?",
+      "options": {
+        "antigenTaken": "COVID-19 Antigen Test",
+        "PCRTaken": "COVID-19 PCR Test",
+        "fluTaken": "Flu Test",
+        "none": "None"
+      }
+    },
     "medical": {
+      "title": "Medical Conditions",
       "question": "<strong>Which of the below medical conditions do you currently have?</strong>",
       "options": {
         "allergies": "Allergies",
@@ -504,7 +583,7 @@
         "bronchitis": "Bronchitis",
         "congestiveHeart": "Congestive heart failure",
         "emphysema": "COPD/emphysema",
-        "obesity": "Extreme obesity",
+        "obesity": "Extreme obesity (BMI over 30)",
         "heartDisease": "Heart disease",
         "hiv": "HIV, AIDS, or impaired immune system",
         "lungCancer": "Lung cancer",
@@ -515,8 +594,20 @@
         "sinusitis": "Sinusitis",
         "tuberculosis": "Tuberculosis",
         "none": "None",
-        "other": "Other",
-        "addOther": "+ Add other"
+        "respiratorySystem": "Respiratory system diseases",
+        "chronicKidney": "Chronic kidney disease (hemodialysis)",
+        "diabetes": "Diabetes",
+        "highBloodPressure": "High blood pressure",
+        "dislipidemia": "Dislipidemia",
+        "cancer": "Cancer or tumor",
+        "pregnancy": "Pregnancy",
+        "congestiveHeartDisease": "Congestive heart disease",
+        "cerebrovascular": "Cerebrovascular disease",
+        "valvularHeart": "Valvular Heart Disease",
+        "immunosuppressiveTherapy": "Immunosuppressive therapy",
+        "immunodeficiency": "Immunodeficiency",
+        "addOther": "+ Add other",
+        "other": "Other"
       },
       "addOtherPlaceholder": "Other condition"
     },
