@@ -275,7 +275,7 @@ export const countryData: CountryDataProps[] = [
     label: 'Jamaica', value: 'Jamaica', telephonePrefix: '', states: states.Jamaica, defaultLang: [{ value: 'en', label: 'English' }], supportedLang: languageData,
   },
   {
-    label: 'Japan', value: 'Japan', telephonePrefix: '', states: states.Japan, defaultLang: [{ value: 'ja', label: '日本語' }], supportedLang: [{ value: 'ja', label: '日本語' }],
+    label: 'Japan', value: 'Japan', telephonePrefix: '', states: states.Japan, defaultLang: [{ value: 'ja', label: '日本語' }], supportedLang: languageData,
   },
   {
     label: 'Jordan', value: 'Jordan', telephonePrefix: '', states: [], defaultLang: [{ value: 'en', label: 'English' }], supportedLang: languageData,
