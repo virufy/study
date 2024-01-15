@@ -35,6 +35,7 @@ const schema = Yup.object({
     if (value && !value.match(/^[0-9]+$/)) {
       result = false;
     }
+    if (value && Number(value) <= 0) result = false;
     return result;
   }),
 }).defined();

@@ -243,6 +243,7 @@ const Step1 = (p: Wizard.StepProps) => {
     if (country === 'Japan') {
       setLogoSize('regular');
       setType('none');
+      setValue('region', 'Tokyo');
     } else {
       setType('tertiary');
       setLogoSize('big');

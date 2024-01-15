@@ -33,7 +33,11 @@ import {
 } from '../style';
 
 const schema = Yup.object({
-  symptomsStartedDate: Yup.string().required(),
+  symptomsStartedDate: Yup.string().test('symptomsStartedDate-invalid', '', value => {
+    let result = true;
+    if (value && Number(value) <= 0) result = false;
+    return result;
+  }).required(),
 }).defined();
 
 type Step4bType = Yup.InferType<typeof schema>;
