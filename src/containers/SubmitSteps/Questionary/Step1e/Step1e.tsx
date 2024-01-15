@@ -31,8 +31,16 @@ import {
 } from '../style';
 
 const schemaWithoutPatient = Yup.object({
-  covidTimes: Yup.string().required(),
-  lastTimeCovidMonths: Yup.string().notRequired(),
+  covidTimes: Yup.string().test('covidTimes-invalid', '', value => {
+    let result = true;
+    if (value && Number(value) < 0) result = false;
+    return result;
+  }).required(),
+  lastTimeCovidMonths: Yup.string().test('lastTimeCovidMonths-invalid', '', value => {
+    let result = true;
+    if (value && Number(value) < 0) result = false;
+    return result;
+  }).notRequired(),
 }).defined();
 
 type Step1eType = Yup.InferType<typeof schemaWithoutPatient>;
