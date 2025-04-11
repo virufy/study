@@ -86,7 +86,7 @@ const Step2 = (p: Wizard.StepProps) => {
       </HeaderImageContainer>
       {country && country !== 'Japan' && (
         <CustomPurpleText mb={isClinic ? 5 : 15}>
-          {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
+          {t('main:paragraph2', 'Cough Data Collection Study')}
         </CustomPurpleText>
       ) }
       {isClinic && (

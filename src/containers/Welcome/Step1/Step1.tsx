@@ -324,7 +324,7 @@ const Step1 = (p: Wizard.StepProps) => {
                 {t('main:logoIntro', 'An Independent Nonprofit Research Organization')}
               </LogoSubtitle>
               <CustomPurpleText mb={8}>
-                {t('main:paragraph2', 'Covid-19 Cough Data Collection Study')}
+                {t('main:paragraph2', 'Cough Data Collection Study')}
               </CustomPurpleText>
             </WelcomeContent>
           )
