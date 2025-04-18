@@ -1,6 +1,7 @@
 {
   "name": "virufy-study",
   "version": "1.1.50",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@hookform/error-message": "0.0.4",

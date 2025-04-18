@@ -84,13 +84,17 @@ const Step4a = ({
 
   const watchSymptoms = watch('currentSymptoms');
   const isShortQuestionary = metadata?.isShortQuestionary;
+  const selectedSymptoms = watchSymptoms?.selected;
 
   const isFinalStep = React.useMemo(() => {
-    if (isShortQuestionary && ((watchSymptoms?.selected.length === 0) || watchSymptoms?.selected?.some((item: string) => item === 'none'))) {
+    if (
+      isShortQuestionary
+      && (selectedSymptoms?.length === 0 || selectedSymptoms?.some((item: string) => item === 'none'))
+    ) {
       return true;
     }
     return false;
-  }, [isShortQuestionary, watchSymptoms?.selected]);
+  }, [isShortQuestionary, selectedSymptoms]);
 
   const renderCaptcha = React.useMemo(() => {
     if (isFinalStep && (country !== 'Colombia')) {

@@ -10,7 +10,6 @@ import uuid from 'react-uuid';
 import FullWidth from 'components/FullWidthDiv';
 import Header, { HeaderContextProvider } from 'components/Header';
 import FooterReportProblems from 'components/FooterReportProblems';
-import FooterInstallAsApp from 'components/FooterInstallAsApp';
 
 // Helper
 import { getPatientId } from 'helper/stepsDefinitions';

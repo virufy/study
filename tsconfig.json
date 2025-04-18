@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
+    "outDir": "../virufy.github.io/public/build/dist",
     "rootDir": "src",
     "baseUrl": "src",
     "target": "es5",

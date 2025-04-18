@@ -60,6 +60,7 @@ const Introduction = ({
   const location = useLocation<{ isShortAudioCollection: boolean }>();
   const { t } = useTranslation();
   const country = getCountry();
+  const currentLogic = metadata?.currentLogic;
 
   const isShortAudioCollection = location?.state?.isShortAudioCollection || false;
 
@@ -82,7 +83,7 @@ const Introduction = ({
     values => {
       if (nextStep) {
         action({
-          [metadata?.currentLogic]: {
+          [currentLogic]: {
             recordingFile: values.recordingFile,
             uploadedFile: null,
           },
@@ -90,7 +91,7 @@ const Introduction = ({
         history.push(nextStep, { from: 'step-record', isShortAudioCollection });
       }
     },
-    [nextStep, action, metadata?.currentLogic, history, isShortAudioCollection],
+    [nextStep, action, currentLogic, history, isShortAudioCollection],
   );
 
   // Effects
