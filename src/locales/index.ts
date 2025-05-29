@@ -9,3 +9,4 @@ export { default as th } from './th.json';
 export { default as tr } from './tr.json';
 export { default as ja } from './ja.json';
 export { default as hi } from './hi.json';
+export { default as ar } from './ar.json';
